@@ -7,11 +7,10 @@
     "flow-install": "flow-typed install --overwrite",
     "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
     "test": "mocha \"app/dist/**/*.test.*\" --compilers js:babel-core/register || exit 0",
-    "copy": "cp app/index.html build-develop/index.html",
-    "build": "webpack && npm run copy",
+    "build": "webpack && cp entrance/index.dev.html build-develop/index.html",
     "debug": "npm run build && webpack-dev-server --devtool eval --progress --colors --hot",
     "start": "DEBUG=true npm run debug",
-    "release": "NODE_ENV=production webpack -p --config ./webpack.prov.config.js"
+    "release": "NODE_ENV=production webpack -p --config ./webpack.prov.config.js && cp entrance/index.prov.html build/index.html"
   },
   "author": "",
   "license": "ISC",
