@@ -14,16 +14,19 @@ export default class Style extends React.Component {
 
     render() {
         return (
-            <div>
-                圖片：
-                <div styleName="myImg">
-                    <img styleName="img-responsive img-thumbnail" src={image}/>
+            <div styleName="row">
+                <div styleName="col-sm-6">
+                    圖片：
+                    <div styleName="myImg">
+                        <img styleName="img-responsive img-thumbnail" src={image}/>
+                    </div>
                 </div>
-                自定義樣式：
-                <div styleName="myDiv">
-                    <div styleName="marioMushroom"></div>
+                <div styleName="col-sm-6">
+                    自定義樣式：(來源 - <a href="http://a.singlediv.com/" target="_blank">{`http://a.singlediv.com/`}</a>)
+                    <div styleName="myDiv">
+                        <div styleName="marioMushroom"></div>
+                    </div>
                 </div>
-                來源：<a href="http://a.singlediv.com/" target="_blank">{`http://a.singlediv.com/`}</a>
             </div>
         );
     }
