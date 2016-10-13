@@ -66,10 +66,6 @@ module.exports =
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: `file-loader?name=${assetDir}/fonts/[name].[ext]`,
                 include: path.join(__dirname, 'app/assets/fonts')
-            },
-            {
-                test: /jwplayer.js$/,
-                loader: 'expose?jwplayer'
             }
         ]
     },
