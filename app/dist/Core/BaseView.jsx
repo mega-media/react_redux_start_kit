@@ -58,21 +58,7 @@ export default class BaseView extends React.Component {
      * @returns string
      */
     getPathname():string {
-        return this.props.route.path;
-    }
-
-    /**
-     * 取得路徑麵包屑
-     * @returns Array
-     */
-    getBreadcrumbs():Array<string> {
-        let routes:Array<Object> = this.props.routes;
-        var routesArr:Array<string> = [];
-        routes.reduce((routesArr, obj)=> {
-            routesArr.push(obj.path);
-            return routesArr;
-        }, routesArr);
-        return routesArr;
+        return this.props.location.pathname;
     }
 
     //==============================================================

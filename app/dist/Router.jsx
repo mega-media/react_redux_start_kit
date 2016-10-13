@@ -10,6 +10,11 @@ import {createHistory} from 'history';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {RootReducer, RootRoutes} from './Roots';
 import {promiseMiddleware} from './Middleware';
+
+// Intro
+import IntroView from '~/Containers/00_Intro/View';
+
+
 /* 系統設置 */
 const Constants = require('Config');
 // Socket io ========
@@ -44,6 +49,7 @@ const history = syncHistoryWithStore(
 
 const routes = {
     path: '/',
+    component: IntroView,
     indexRoute: {onEnter: (nextState, replace) => replace('welcome')},
     childRoutes: RootRoutes
 };

@@ -3,7 +3,7 @@
  */
 import React from 'react';
 
-export default class View extends React.Component {
+export default class Hello extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
