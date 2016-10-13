@@ -1,0 +1,26 @@
+{
+  "presets": [
+    "react",
+    "es2015",
+    "stage-0"
+  ],
+  "plugins": [
+    "syntax-flow",
+    "transform-flow-strip-types",
+    "transform-runtime",
+    "transform-decorators-legacy",
+    [
+      "babel-root-import",
+      [
+        {
+          "rootPathPrefix": "~",
+          "rootPathSuffix": "app/dist"
+        },
+        {
+          "rootPathPrefix": "@",
+          "rootPathSuffix": "app/assets"
+        }
+      ]
+    ]
+  ]
+}

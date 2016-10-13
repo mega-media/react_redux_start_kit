@@ -1,0 +1,8 @@
+build/
+build-develop/
+node_modules/
+flow-typed/npm/
+.idea/
+.git/
+.DS_Store
+app/dist/Containers/install.js
