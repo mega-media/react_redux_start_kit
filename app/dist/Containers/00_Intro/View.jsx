@@ -14,27 +14,33 @@ export default class Hello extends BaseView {
         this.pageArray = [
             {
                 route: "welcome",
-                title: "Hello World !"
+                title: "Hello World !",
+                file: "Hello.json"
             },
             {
                 route: "input",
-                title: "Input your name."
+                title: "Input your name.",
+                file: "Input.json"
             },
             {
                 route: "counter",
-                title: "Click counter."
+                title: "Click counter.",
+                file: "Counter.json"
             },
             {
                 route: "btnClick",
-                title: "Buttons click."
+                title: "Buttons click.",
+                file: "Buttons.json"
             },
             {
                 route: "style",
-                title: "Customize styles."
+                title: "Customize styles.",
+                file: "Styles.json"
             },
             {
                 route: "flow",
-                title: "Hello Flow !"
+                title: "Hello Flow !",
+                file: "Flow.json"
             }
         ];
     }
@@ -60,6 +66,8 @@ export default class Hello extends BaseView {
 
         const activeObj = this.pageArray.filter(obj => obj.route === activePage)[0];
 
+        const docJSON = require("./docs/" + activeObj.file);
+
         return (
             <div styleName="container">
                 <div styleName="page-header">
@@ -82,6 +90,26 @@ export default class Hello extends BaseView {
                             </div>
                             <div styleName="panel-body">
                                 {this.props.children}
+                            </div>
+                        </div>
+                        <div styleName="panel panel-default">
+                            <div styleName="panel-heading">
+                                <h3 styleName="panel-title">
+                                    學習指標
+                                </h3>
+                            </div>
+                            <div styleName="panel-body">
+                                {docJSON.target}
+                            </div>
+                        </div>
+                        <div styleName="panel panel-default">
+                            <div styleName="panel-heading">
+                                <h3 styleName="panel-title">
+                                    相關應用與說明
+                                </h3>
+                            </div>
+                            <div styleName="panel-body">
+                                {docJSON.desc}
                             </div>
                         </div>
                     </div>
