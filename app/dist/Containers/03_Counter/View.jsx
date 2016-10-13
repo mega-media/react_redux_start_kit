@@ -2,10 +2,9 @@
  * Created by arShown on 2016/10/13.
  */
 import React from 'react';
-import BaseView, {ApplyStyles, connectToView} from '~/Core/BaseView';
+import BaseView, {connectToView} from '~/Core/BaseView';
 import {click, reset} from './Action';
 
-@ApplyStyles()
 class Counter extends BaseView {
     constructor(props, context) {
         super(props, context);
@@ -27,11 +26,11 @@ class Counter extends BaseView {
                     Clicks : {counterState}
                 </div>
                 <br/>
-                <button styleName="btn btn-primary" onClick={this.clickHandler.bind(this)}>
+                <button onClick={this.clickHandler.bind(this)}>
                     Click the button
                 </button>
                 &nbsp;
-                <button styleName="btn btn-default" onClick={this.resetHandler.bind(this)}>
+                <button onClick={this.resetHandler.bind(this)}>
                     Reset Counter
                 </button>
             </div>

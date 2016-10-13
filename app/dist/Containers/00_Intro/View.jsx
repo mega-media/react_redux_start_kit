@@ -14,33 +14,33 @@ export default class Hello extends BaseView {
         this.pageArray = [
             {
                 route: "welcome",
-                title: "Hello World !",
-                file: "Hello.json"
+                title: "1. Hello World !",
+                file: "Hello.jsx"
             },
             {
                 route: "input",
-                title: "Input your name.",
-                file: "Input.json"
+                title: "2. Input your name.",
+                file: "Input.jsx"
             },
             {
                 route: "counter",
-                title: "Click counter.",
-                file: "Counter.json"
+                title: "3. Click counter.",
+                file: "Counter.jsx"
             },
             {
                 route: "btnClick",
-                title: "Buttons click.",
-                file: "Buttons.json"
+                title: "4. Buttons click.",
+                file: "Buttons.jsx"
             },
             {
                 route: "style",
-                title: "Customize styles.",
-                file: "Styles.json"
+                title: "5. Customize styles.",
+                file: "Styles.jsx"
             },
             {
                 route: "flow",
-                title: "Hello Flow !",
-                file: "Flow.json"
+                title: "6. Hello Flow !",
+                file: "Flow.jsx"
             }
         ];
     }
