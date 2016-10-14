@@ -7,7 +7,7 @@ import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 import {combineStructor} from '~/Core/BaseConfig';
 
-const {reducers, router} = combineStructor.apply({}, Config.map(config => config.default));
+const {reducers, router} = combineStructor.apply(null, Config.map(config => config.default));
 export const RootReducer = combineReducers(Object.assign(reducers, {
     routing: routerReducer
 }));

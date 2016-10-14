@@ -17,33 +17,33 @@ export class Base {
  */
 type Structor ={
     reducers?:Object,
-    router?:Object,
+    router?:Object|Array<Object>
 };
 
 export function combineStructor(structor:Structor = {}, ...arg:Array<Structor>):Base {
-    let returnObject:Base = Object.assign(new Base(), {
-        reducers: structor.reducers || {},
-        router: structor.router instanceof Array ? structor.router : (structor.router ? [structor.router] : [])
-    });
-
-    if (returnObject.reducers instanceof Object === false)
-        throw new Error("reducer 必須為 Object");
+    let returnObject:Base = new Base();
+    if (structor.reducers)
+        returnObject.reducers = Object.assign({}, structor.reducers);
+    if (structor.router)
+        returnObject.router = structor.router instanceof Array ? structor.router.slice(0) : [structor.router];
 
     arg.reduce((returnObject:Base, item:Structor)=> {
         if (item.reducers) {
-            if (item.reducers instanceof Object === false)
-                throw new Error("reducer 必須為 Object");
             Object.keys(item.reducers).forEach((key:string)=> {
                 if (Object.keys(returnObject.reducers).indexOf(key) > -1)
-                    throw new Error("reducer key 不能重複");
-                returnObject.reducers = Object.assign(returnObject.reducers, item.reducers);
+                    throw Error("reducer key 不能重複 :" + key);
             });
+            returnObject.reducers = Object.assign(returnObject.reducers, item.reducers);
         }
-        if (item.router instanceof Array)
-            returnObject.router.concat(item.router);
-        else
-            returnObject.router.push(item.router);
+        if (item.router) {
+            if (item.router instanceof Array)
+                returnObject.router = returnObject.router.concat(item.router);
+            else
+                returnObject.router.push(item.router);
+        }
+
         return returnObject;
     }, returnObject);
+
     return returnObject;
 }
