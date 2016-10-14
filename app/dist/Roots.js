@@ -5,19 +5,10 @@
 import Config from '~/Containers/install';
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
+import {combineStructor} from '~/Core/BaseConfig';
 
-const {reducersObject, childRoutesArr} = Config.reduce((prev, {default: {reducers={}, router}}) => {
-    if (Object.keys(reducers).length) Object.assign(prev['reducersObject'], reducers);
-    let childRoutesArr = prev['childRoutesArr'];
-    if (!Array.isArray(router)) {
-        childRoutesArr.push(router);
-    } else {
-        childRoutesArr = childRoutesArr.concat(router);
-    }
-    return prev
-}, {reducersObject: {}, childRoutesArr: [], rootSagas: {}});
-
-export const RootReducer = combineReducers(Object.assign(reducersObject, {
+const {reducers, router} = combineStructor.apply({}, Config.map(config => config.default));
+export const RootReducer = combineReducers(Object.assign(reducers, {
     routing: routerReducer
 }));
-export const RootRoutes = childRoutesArr;
+export const RootRoutes = router;

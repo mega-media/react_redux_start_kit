@@ -10,7 +10,7 @@ import type {MemberDataType} from '../../Type';
 @ApplyStyles()
 class Form extends BaseView {
     uidIndex:number;
-    state:?MemberDataType;
+    state:MemberDataType;
 
     constructor(props, context) {
         super(props, context);

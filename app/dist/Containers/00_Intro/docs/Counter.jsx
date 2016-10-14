@@ -22,7 +22,7 @@ module.exports = {
                 ...
             </p>
             <h5>☆ 核心檔案 - BaseView</h5>
-            <p>
+            <div>
                 <h6>Action 的呼叫</h6>
                 <p>
                     ...
@@ -31,7 +31,7 @@ module.exports = {
                 <p>
                     ...
                 </p>
-            </p>
+            </div>
 
         </div>
     )
