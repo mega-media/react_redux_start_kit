@@ -74,17 +74,17 @@ export default class BaseView extends React.Component {
     }
 
     /**
-     * @param methods
+     * @param actionReturn
      */
-    dispatch(methods:Object|Promise<any>):void {
+    dispatch(actionReturn:Object|Promise<any>):void {
         if (!("dispatch" in this.props))
             throw new Error("View 必須透過 connectToView 綁定");
 
-        if (typeof methods === "function")
+        if (typeof actionReturn === "function")
             throw new Error("Methods must be plain objects.");
 
         const {dispatch} = this.props;
-        dispatch(methods);
+        dispatch(actionReturn);
     }
 
     /**

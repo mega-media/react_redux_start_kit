@@ -12,6 +12,10 @@ class BtnClass {
     }
 }
 
+/**
+ * 可以使用類別作為 state 內容
+ */
+
 export default function (state = new BtnClass(), action) {
     const {type, btnStyle} = action;
     switch (type) {

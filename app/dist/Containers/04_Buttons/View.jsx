@@ -6,6 +6,10 @@ import BaseView, {ApplyStyles, connectToView} from '~/Core/BaseView';
 import {click, reset} from './Action';
 import Constant from './Constant';
 
+/**
+ * 裝飾方法 ApplyStyles 可套用系統預設樣式
+ * 系統預設樣式包含：Bootstrap / Font Awesome
+ */
 @ApplyStyles()
 class Buttons extends BaseView {
     constructor(props, context) {
@@ -23,6 +27,10 @@ class Buttons extends BaseView {
     render() {
         const counterState = this.getResponse();
         const activeArray = Object.keys(counterState).filter(style => counterState[style]);
+
+        /**
+         * 使用系統預設樣式時，類別名稱為 `styleName`
+         */
         return (
             <div>
                 <div>
