@@ -21,7 +21,7 @@ module.exports =
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules)/,
-                loaders: process.env.DEBUG ? ['react-hot', 'babel?cacheDirectory=true'] : ['babel?cacheDirectory=true'],
+                loaders: process.env.DEBUG ? ['react-hot', 'babel?cacheDirectory=true'] : ['babel?cacheDirectory=true','strip-loader?strip[]=debug,strip[]=console.log,strip[]=console.debug,strip[]=console.error,strip[]=console.info'],
                 include: path.join(__dirname, 'app')
             },
             {
