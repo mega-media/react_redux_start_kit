@@ -11,17 +11,18 @@ module.exports = {
     desc: (
         <div>
             <h5>☆ 套用系統樣式檔</h5>
-            <p>
-                ...
-            </p>
-            <h5>☆ Constant</h5>
-            <p>
-                ...
-            </p>
-            <h5>☆ Store 存取格式</h5>
-            <p>
-                ...
-            </p>
+            <ul>
+                <li>核心檔案 - BaseView 中包含嵌套樣式檔的方法：ApplyStyles()</li>
+                <li>使用 ES7 Decorator 的方式加上符號<label>@</label>標記在 Container/Component 上方</li>
+                <li>
+                    系統預設樣式有：
+                    <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>、
+                    <a href="http://fontawesome.io/" target="_blank">Font Awesome</a>
+                </li>
+                <li>
+                    要套用樣式屬性名稱須為<label>styleName</label>而非className
+                </li>
+            </ul>
         </div>
     )
 };

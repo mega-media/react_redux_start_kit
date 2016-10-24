@@ -48,23 +48,23 @@ module.exports =
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                loaders: [`url-loader?limit=10000&name=${assetDir}/images/[hash].[ext]`, 'img-loader?progressive=true']
+                loaders: [`url-loader?limit=10000&name=${assetDir}images/[hash].[ext]`, 'img-loader?progressive=true']
             },
             {
                 test: /\.ico$/i,
-                loader: `file-loader?name=${assetDir}/images/[name].[ext]`
+                loader: `file-loader?name=${assetDir}images/[name].[ext]`
             },
             {
                 test: /\.(mp4|swf)$/,
-                loader: `file-loader?name=${assetDir}/videos/[name].[ext]`
+                loader: `file-loader?name=${assetDir}videos/[name].[ext]`
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: `url-loader?limit=10000&mimetype=application/font-woff&name=${assetDir}/fonts/[name].[ext]`
+                loader: `url-loader?limit=10000&mimetype=application/font-woff&name=${assetDir}fonts/[name].[ext]`
             },
             {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: `file-loader?name=${assetDir}/fonts/[name].[ext]`,
+                loader: `file-loader?name=${assetDir}fonts/[name].[ext]`,
                 include: path.join(__dirname, 'app/assets/fonts')
             }
         ]

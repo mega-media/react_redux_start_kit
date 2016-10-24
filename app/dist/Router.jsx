@@ -9,7 +9,7 @@ import {Router, useRouterHistory} from 'react-router';
 import {createHistory} from 'history';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {RootReducer, RootRoutes} from './Roots';
-import {promiseMiddleware} from './Middleware';
+import {promiseMiddleware, multiDispatchMiddleware} from './Middleware';
 
 // Intro
 import IntroView from '~/Containers/00_Intro/View';
@@ -25,14 +25,14 @@ if (__DEV__) {
     store = createStore(
         RootReducer,
         compose(
-            applyMiddleware(promiseMiddleware),
+            applyMiddleware(multiDispatchMiddleware, promiseMiddleware),
             DevTools.instrument(),
         )
     );
 } else {
     store = createStore(
         RootReducer,
-        applyMiddleware(promiseMiddleware)
+        applyMiddleware(multiDispatchMiddleware, promiseMiddleware)
     );
 }
 

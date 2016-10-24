@@ -8,6 +8,7 @@ import CSSModules from 'react-css-modules';
 
 import Bootstrap from '@/css/bootstrap.min.css';
 import FontAwesome from '@/css/font-awesome.min.css';
+import Custom from '@/css/custom.css';
 
 type Context = {
     router:Object,
@@ -74,17 +75,24 @@ export default class BaseView extends React.Component {
     }
 
     /**
-     * @param actionReturn
+     * @param methods
      */
-    dispatch(actionReturn:Object|Promise<any>):void {
+    dispatch(methods:Object|Promise<any>|Array<Object|Promise<any>>):void {
         if (!("dispatch" in this.props))
             throw new Error("View 必須透過 connectToView 綁定");
 
-        if (typeof actionReturn === "function")
+        if (typeof methods === "function")
             throw new Error("Methods must be plain objects.");
 
+        if (methods instanceof Array) {
+            methods.forEach((method)=> {
+                if (typeof method === "function")
+                    throw new Error("Method must be plain objects.");
+            })
+        }
+
         const {dispatch} = this.props;
-        dispatch(actionReturn);
+        dispatch(methods);
     }
 
     /**
@@ -128,7 +136,7 @@ export function connectToView(storeKey?:string|Array<string>):any {
 }
 
 export function ApplyStyles(...styles:Array<Object>):CSSModules {
-    let stylesObj:Object = Object.assign({}, Bootstrap, FontAwesome);
+    let stylesObj:Object = Object.assign({}, Bootstrap, FontAwesome, Custom);
     styles.forEach(style => Object.assign(stylesObj, style));
     return CSSModules(stylesObj, {allowMultiple: true, errorWhenNotFound: false});
 }

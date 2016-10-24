@@ -3,8 +3,9 @@
  */
 import React from 'react';
 import BaseView, {ApplyStyles} from '~/Core/BaseView';
+import style from './assets/stylesheets/style.scss'
 
-@ApplyStyles()
+@ApplyStyles(style)
 export default class Hello extends BaseView {
     constructor(props, context) {
         super(props, context);
@@ -98,7 +99,7 @@ export default class Hello extends BaseView {
                                     學習指標
                                 </h3>
                             </div>
-                            <div styleName="panel-body">
+                            <div styleName="panel-body doc">
                                 {docJSON.target}
                             </div>
                         </div>
@@ -108,7 +109,7 @@ export default class Hello extends BaseView {
                                     相關應用與說明
                                 </h3>
                             </div>
-                            <div styleName="panel-body">
+                            <div styleName="panel-body doc">
                                 {docJSON.desc}
                             </div>
                         </div>

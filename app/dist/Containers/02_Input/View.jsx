@@ -29,6 +29,7 @@ export default class Input extends React.Component {
         this.setState({name: this.refs.name.value});
         /**
          * 使用屬性 refs 可取得元件內容
+         * this.refs.XXX  => XXX 則是 element 屬性 ref 定義的內容
          */
     }
 
