@@ -8,6 +8,10 @@ import Constant from '../../Constant';
 import {remove} from '../../Action';
 import type {MemberDataType} from '../../Type';
 
+/**
+ * Table 元件綁定 state 負責監聽資料的異動
+ */
+
 @ApplyStyles()
 class Table extends BaseView {
 
@@ -15,7 +19,7 @@ class Table extends BaseView {
         super(props, context);
     }
 
-    removeHandler(uid) {
+    removeHandler(uid:number):void {
         this.dispatch(remove(uid));
     }
 
@@ -38,7 +42,7 @@ class Table extends BaseView {
             );
         }) : (
             <tr>
-                <td colSpan={6} styleName="text-center text-muted">Empty !</td>
+                <td colSpan={5} styleName="text-center text-muted">Empty !</td>
             </tr>
         );
         return (

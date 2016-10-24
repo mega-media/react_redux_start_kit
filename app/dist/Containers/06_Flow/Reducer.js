@@ -7,10 +7,10 @@ import type {MemberDataType} from './Type';
 
 export default function (state:Array<MemberDataType> = [], action:{
     type:string,
-    id?:number,
+    uid?:number,
     data?:MemberDataType
 }):Array<MemberDataType> {
-    const {type, id, data}= action;
+    const {type, uid, data}= action;
     switch (type) {
         case Constant.FLOW_INSERT:
         {
@@ -23,10 +23,10 @@ export default function (state:Array<MemberDataType> = [], action:{
         }
         case Constant.FLOW_REMOVE:
         {
-            if (!id)
+            if (!uid)
                 return state;
             const newState = state.reduce((array:Array<MemberDataType>, memberObject:MemberDataType) => {
-                if (memberObject.uid !== id)
+                if (memberObject.uid !== uid)
                     array.push(memberObject);
                 return array;
             }, []);

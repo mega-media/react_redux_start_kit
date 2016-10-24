@@ -14,6 +14,9 @@ export default class Flow extends React.Component {
     }
 
     render() {
+        /**
+         * 當結構複雜時可將內容切分並獨立成子元件，易於維護也增加可讀性
+         */
         return (
             <div styleName="row">
                 <div styleName="col-sm-8">
