@@ -29,8 +29,8 @@ npm run install
 npm start
 ````
 
-使用你常用的瀏覽器，並前往 http://127.0.0.1:8888 即可看到執行成果
-> 使用`npm run start`預設執行的模式為develop，假如port 8888已被使用，可至`./config/config.dev.json`變更
+開啟你常用的瀏覽器，並前往 http://127.0.0.1:8888 即可看到執行成果
+> `npm run start`預設執行的模式為develop，假如port 8888已被使用，可至`./config/config.dev.json`變更
 
 
 ### production 版本
