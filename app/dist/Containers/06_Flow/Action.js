@@ -1,7 +1,7 @@
 /**
  * Created by arShown on 2016/10/13.
+ * @flow
  */
-//@flow
 import Constant from './Constant';
 import type {MemberDataType} from './Type';
 

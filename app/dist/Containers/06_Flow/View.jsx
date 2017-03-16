@@ -1,15 +1,26 @@
 /**
  * Created by arShown on 2016/10/13.
+ * @flow
  */
-//@flow
 import React from 'react';
 import TableView from './Containers/Table/View';
 import FormView from './Containers/Form/View';
 import {ApplyStyles} from '~/Core/BaseView';
 
+/* flow type declare
+ DP = DefaultProps
+ S = State
+ P = Props
+ */
+type DP = void;
+type S = void;
+type P = any;
+
 @ApplyStyles()
-export default class Flow extends React.Component {
-    constructor(props:any, context:any) {
+export default class Flow extends React.Component<DP,P,S> {
+    props:P;
+
+    constructor(props:P, context:any) {
         super(props, context);
     }
 
