@@ -2,11 +2,11 @@
  * Created by arShown on 2016/10/13.
  */
 import React from 'react';
-import BaseView, {ApplyStyles} from '~/Core/BaseView';
+import BaseView, {ApplyStyles, connectToView} from '~/Core/BaseView';
 import style from './assets/stylesheets/style.scss'
 
 @ApplyStyles(style)
-export default class Hello extends BaseView {
+export class Hello extends BaseView {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -119,3 +119,5 @@ export default class Hello extends BaseView {
         )
     }
 }
+
+export default connectToView()(Hello);

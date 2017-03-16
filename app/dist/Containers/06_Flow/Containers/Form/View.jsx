@@ -1,7 +1,7 @@
 /**
  * Created by arShown on 2016/10/13.
+ * @flow
  */
-//@flow
 import React from 'react';
 import BaseView, {ApplyStyles, connectToView} from '~/Core/BaseView';
 import {add} from '../../Action';
@@ -10,15 +10,15 @@ import type {MemberDataType} from '../../Type';
 /**
  * Form 元件只負責處理表單操作
  */
-
+    
 @ApplyStyles()
-class Form extends BaseView {
+class Form extends BaseView<void,any,MemberDataType> {
     //資料序號
     uidIndex:number;
     //記錄新增欄位內容
     state:MemberDataType;
 
-    constructor(props, context) {
+    constructor(props:any, context:any) {
         super(props, context);
         this.uidIndex = 1;
         this.state = this.initializeState();
@@ -48,8 +48,7 @@ class Form extends BaseView {
         return true;
     }
 
-    submit(e):void {
-        e.preventDefault();
+    submit():void {
         if (this.state && this.validate()) {
             //執行新增 action
             this.dispatch(add(this.state));

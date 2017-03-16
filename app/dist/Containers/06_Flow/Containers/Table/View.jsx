@@ -1,7 +1,8 @@
 /**
  * Created by arShown on 2016/10/13.
+ * Updated on 2017/3/16
+ * @flow
  */
-//@flow
 import React from 'react';
 import BaseView, {ApplyStyles, connectToView} from '~/Core/BaseView';
 import Constant from '../../Constant';
@@ -13,9 +14,9 @@ import type {MemberDataType} from '../../Type';
  */
 
 @ApplyStyles()
-class Table extends BaseView {
+class Table extends BaseView<void,any,void> {
 
-    constructor(props, context) {
+    constructor(props:any, context:any) {
         super(props, context);
     }
 

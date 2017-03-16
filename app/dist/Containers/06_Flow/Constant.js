@@ -1,7 +1,7 @@
 /**
  * Created by arShown on 2016/10/13.
+ * @flow
  */
-//@flow
 import KeyMirror from 'keymirror';
 const Constant = Object.assign({
         StoreKey: "FlowStore"

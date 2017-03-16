@@ -7,44 +7,45 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import {Router, useRouterHistory} from 'react-router';
 import {createHistory} from 'history';
-import {syncHistoryWithStore} from 'react-router-redux';
+import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import {RootReducer, RootRoutes} from './Roots';
 import {promiseMiddleware, multiDispatchMiddleware} from './Middleware';
 
 // Intro
 import IntroView from '~/Containers/00_Intro/View';
 
-
 /* 系統設置 */
 const Constants = require('Config');
-// Socket io ========
+
+/** Route 設定 **/
+const appHistory = useRouterHistory(createHistory)({
+    basename: Constants.BASE_PATH,
+    queryKey: false
+});
+const routingMiddleware = routerMiddleware(appHistory);
+
 let store = {};
 let DevTools = null;
 if (__DEV__) {
-    DevTools = require('./Utils/devTools');
+    DevTools = require('./Libraries/devTools');
     store = createStore(
         RootReducer,
         compose(
-            applyMiddleware(multiDispatchMiddleware, promiseMiddleware),
+            applyMiddleware(routingMiddleware, multiDispatchMiddleware, promiseMiddleware),
             DevTools.instrument(),
         )
     );
 } else {
     store = createStore(
         RootReducer,
-        applyMiddleware(multiDispatchMiddleware, promiseMiddleware)
+        applyMiddleware(routingMiddleware, multiDispatchMiddleware, promiseMiddleware)
     );
 }
-
-const appHistory = useRouterHistory(createHistory)({
-    basename: Constants.BASE_PATH,
-    queryKey: false
-});
 
 const history = syncHistoryWithStore(
     appHistory,
     store,
-    (state) => state.router
+    (state) => state.routing
 );
 
 const routes = {
