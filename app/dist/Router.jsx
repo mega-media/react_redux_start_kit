@@ -1,7 +1,3 @@
-/**
- * Created by arShown on 2016/6/20.
- * Updated on 2016/10/10.
- */
 import React from 'react';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
@@ -26,7 +22,7 @@ const routingMiddleware = routerMiddleware(appHistory);
 
 let store = {};
 let DevTools = null;
-if (__DEV__) {
+if (process.env.NODE_ENV === "development") {
     DevTools = require('./Libraries/devTools');
     store = createStore(
         RootReducer,
@@ -61,7 +57,7 @@ const RouterFormat =
             <div>
                 <Router history={history} routes={routes}/>
                 {(()=> {
-                    if (__DEV__) {
+                    if (process.env.NODE_ENV === "development") {
                         return <DevTools />
                     }
                 })()}

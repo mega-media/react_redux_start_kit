@@ -1,9 +1,7 @@
-/**
- * Created by arShown on 2016/6/15.
- */
+import 'babel-polyfill';
+import 'es6-promise';
 import React from 'react';
 import {render} from 'react-dom';
-import '@/images/favicon.ico';
 import RouterFormat from './dist/Router';
 
 render(
