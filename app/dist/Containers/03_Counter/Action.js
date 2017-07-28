@@ -3,15 +3,15 @@
  */
 
 export function click() {
-    return {
-        type: "COUNTER_CLICK"
-    }
+  return {
+    type: 'COUNTER_CLICK'
+  };
 }
 
 export function reset() {
-    return {
-        type: "COUNTER_RESET"
-    }
+  return {
+    type: 'COUNTER_RESET'
+  };
 }
 
 /**

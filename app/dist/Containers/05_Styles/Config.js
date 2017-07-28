@@ -4,8 +4,8 @@
 import View from './View';
 
 export default {
-    router: {
-        path: 'style',
-        component: View
-    }
+  router: {
+    path: 'style',
+    component: View
+  }
 };

@@ -4,13 +4,13 @@
 import React from 'react';
 
 export default class Hello extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-    }
+  constructor(props, context) {
+    super(props, context);
+  }
 
-    render() {
-        return <div>Hello World!</div>;
-    }
+  render() {
+    return <div>Hello World!</div>;
+  }
 }
 
 /**

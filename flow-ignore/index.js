@@ -1,3 +1,3 @@
 declare module IgnoreModule {
-    declare var exports: { [key: string]: string };
+  declare var exports: { [key: string]: string };
 }

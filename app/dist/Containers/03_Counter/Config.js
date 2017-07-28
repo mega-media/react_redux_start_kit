@@ -5,13 +5,13 @@ import View from './View';
 import Reducer from './Reducer';
 
 export default {
-    reducers: {
-        "counterStore": Reducer
-    },
-    router: {
-        path: 'counter',
-        component: View
-    }
+  reducers: {
+    counterStore: Reducer
+  },
+  router: {
+    path: 'counter',
+    component: View
+  }
 };
 
 /**

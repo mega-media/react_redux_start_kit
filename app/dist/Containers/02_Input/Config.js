@@ -4,10 +4,10 @@
 import View from './View';
 
 export default {
-    router: {
-        path: 'input',
-        component: View
-    }
+  router: {
+    path: 'input',
+    component: View
+  }
 };
 
 /**

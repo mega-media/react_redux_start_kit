@@ -7,11 +7,11 @@ import Reducer from './Reducer';
 import Constant from './Constant';
 
 export default {
-    reducers: {
-        [Constant.StoreKey]: Reducer
-    },
-    router: {
-        path: 'flow',
-        component: View
-    }
+  reducers: {
+    [Constant.StoreKey]: Reducer
+  },
+  router: {
+    path: 'flow',
+    component: View
+  }
 };
