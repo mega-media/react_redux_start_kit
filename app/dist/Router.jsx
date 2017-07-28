@@ -1,9 +1,15 @@
 import React from 'react';
+/* redux */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+/* 多國語系 */
+import I18n from 'redux-i18n';
+import Locale from './Locale';
+/* router */
 import { Router, useRouterHistory } from 'react-router';
 import { createHistory } from 'history';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
+/* 系統設定 */
 import { RootReducer, RootRoutes } from './Roots';
 import { promiseMiddleware, multiDispatchMiddleware } from './Middleware';
 // Intro
@@ -48,12 +54,20 @@ const routes = {
   indexRoute: { onEnter: (nextState, replace) => replace('welcome') },
   childRoutes: RootRoutes
 };
+/**
+ * I18n opts
+ * translations [語系檔]
+ * initialLang  [預設語系]
+ * fallbackLang [未翻譯文字語言]
+ */
 const RouterFormat = (
   <Provider store={store}>
-    <div>
-      <Router history={history} routes={routes} />
-      {process.env.NODE_ENV === 'development' ? <DevTools /> : null}
-    </div>
+    <I18n translations={Locale} initialLang="zh_tw" fallbackLang="en">
+      <div>
+        <Router history={history} routes={routes} />
+        {DevTools ? <DevTools /> : null}
+      </div>
+    </I18n>
   </Provider>
 );
 export default RouterFormat;

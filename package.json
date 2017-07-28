@@ -7,7 +7,7 @@
     "flow-install": "flow-typed install --overwrite",
     "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
     "test": "mocha \"app/dist/**/*.test.*\" --compilers js:babel-core/register || exit 0",
-    "build-dev": "webpack --config ./webpack.dev.config.js",
+    "build": "webpack --config ./webpack.dev.config.js",
     "start": "webpack-dev-server --devtool eval --progress --colors --hot --config ./webpack.dev.config.js",
     "release": "NODE_ENV=production webpack -p --config ./webpack.prov.config.js",
     "precommit": "lint-staged",
@@ -69,6 +69,7 @@
     "es6-promise": "^3.2.1",
     "events": "^1.1.1",
     "history": "^2.1.2",
+    "i18next": "^8.4.3",
     "keymirror": "^0.1.1",
     "path": "^0.12.7",
     "react": "^15.1.0",
@@ -76,7 +77,8 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.5",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "redux-i18n": "^1.5.3"
   },
   "lint-staged": {
     "*": ["npm run prettier", "git add"]

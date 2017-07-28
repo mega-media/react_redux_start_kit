@@ -4,7 +4,6 @@
 import React from 'react';
 import BaseView, { ApplyStyles, connectToView } from '~/Core/BaseView';
 import style from './assets/stylesheets/style.scss';
-
 @ApplyStyles(style)
 export class Hello extends BaseView {
   constructor(props, context) {
@@ -56,7 +55,6 @@ export class Hello extends BaseView {
 
   render() {
     const { activePage } = this.state;
-
     const navComponents = this.pageArray.map(obj =>
       <a
         key={obj.route}
@@ -68,11 +66,8 @@ export class Hello extends BaseView {
         {obj.title}
       </a>
     );
-
     const activeObj = this.pageArray.filter(obj => obj.route === activePage)[0];
-
     const docJSON = require('./docs/' + activeObj.file);
-
     return (
       <div styleName="container">
         <div styleName="page-header">
@@ -117,5 +112,4 @@ export class Hello extends BaseView {
     );
   }
 }
-
 export default connectToView()(Hello);
