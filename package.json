@@ -6,6 +6,7 @@
   "scripts": {
     "flow-install": "flow-typed install --overwrite",
     "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
+    "flow-test:watch": "npm run flow-test; fswatch -e ./**/* -o 1 | xargs -n1 -I{} sh -c 'tput setaf 6; date \"+\n[%m/%d %H:%M:%S]\";tput sgr0; npm run flow-test'",
     "test": "mocha \"app/dist/**/*.test.*\" --compilers js:babel-core/register || exit 0",
     "build": "webpack --config ./webpack.dev.config.js",
     "start": "webpack-dev-server --devtool eval --progress --colors --hot --config ./webpack.dev.config.js",
@@ -40,6 +41,7 @@
     "file-loader": "^0.11.2",
     "flow-bin": "^0.51.1",
     "flow-typed": "^2.1.5",
+    "growl": "^1.10.2",
     "html-webpack-plugin": "^2.29.0",
     "husky": "^0.14.3",
     "img-loader": "^1.3.1",
@@ -81,6 +83,9 @@
     "redux-i18n": "^1.5.3"
   },
   "lint-staged": {
-    "*.{js,jsx,css,scss,sass}": ["prettier", "git add"]
+    "*.{js,jsx,css,scss,sass}": [
+      "prettier",
+      "git add"
+    ]
   }
 }
