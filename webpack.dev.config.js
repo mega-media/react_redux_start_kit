@@ -39,22 +39,7 @@ module.exports = Object.assign(baseConfig, {
             '&-autoprefixer',
           'postcss-loader',
           'sass-loader'
-        ],
-        include: path.join(__dirname, 'app/assets')
-      },
-      {
-        test: /\.(s)?css$/,
-        loaders: [
-          'style-loader',
-          'css-loader' +
-            '?modules' +
-            '&importLoaders=1' +
-            '&localIdentName=[path][name]-[local]-[hash:base64:5]' +
-            '&-autoprefixer',
-          'postcss-loader',
-          'sass-loader'
-        ],
-        include: path.join(__dirname, 'app/dist')
+        ]
       }
     ])
   },

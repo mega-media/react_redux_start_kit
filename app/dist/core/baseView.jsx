@@ -2,6 +2,7 @@
  * @flow
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push, replace, goBack } from 'react-router-redux';
 /* stylesheets */
@@ -34,8 +35,8 @@ export default class BaseView<D: any, P: any, S: any> extends React.Component<
   props: P;
   context: Context;
   static contextTypes: Context = {
-    store: React.PropTypes.object.isRequired,
-    t: React.PropTypes.func.isRequired
+    store: PropTypes.object.isRequired,
+    t: PropTypes.func.isRequired
   };
   static defaultProps: D;
 

@@ -31,6 +31,16 @@
         "transform-react-constant-elements",
         "transform-react-inline-elements"
       ]
+    },
+    "test": {
+      "plugins": [
+        [
+          "babel-plugin-webpack-alias",
+          {
+            "config": "webpack.test.config.js"
+          }
+        ]
+      ]
     }
   }
 }
