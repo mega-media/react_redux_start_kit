@@ -1,6 +1,3 @@
-/**
- * Created by arShown on 2016/10/13.
- */
 import React from 'react';
 import BaseView, { ApplyStyles, connectToView } from '~/Core/BaseView';
 import { click, reset } from './Action';
@@ -15,13 +12,13 @@ class Buttons extends BaseView {
     super(props, context);
   }
 
-  clickHandler(style) {
+  clickHandler = style => () => {
     this.dispatch(click(style));
-  }
+  };
 
-  resetHandler() {
+  resetHandler = () => {
     this.dispatch(reset());
-  }
+  };
 
   render() {
     const counterState = this.getResponse();
@@ -41,29 +38,27 @@ class Buttons extends BaseView {
           <div styleName="btn-group">
             <button
               styleName="btn btn-primary"
-              onClick={this.clickHandler.bind(this, 'primary')}>
+              onClick={this.clickHandler('primary')}>
               PRIMARY
             </button>
             <button
               styleName="btn btn-success"
-              onClick={this.clickHandler.bind(this, 'success')}>
+              onClick={this.clickHandler('success')}>
               SUCCESS
             </button>
             <button
               styleName="btn btn-warning"
-              onClick={this.clickHandler.bind(this, 'warning')}>
+              onClick={this.clickHandler('warning')}>
               WARNING
             </button>
             <button
               styleName="btn btn-danger"
-              onClick={this.clickHandler.bind(this, 'danger')}>
+              onClick={this.clickHandler('danger')}>
               DANGER
             </button>
           </div>
           <div styleName="btn-group">
-            <button
-              styleName="btn btn-default"
-              onClick={this.resetHandler.bind(this)}>
+            <button styleName="btn btn-default" onClick={this.resetHandler}>
               Reset Counter
             </button>
           </div>

@@ -1,6 +1,3 @@
-/**
- * Created by arShown on 2016/10/13.
- */
 import React from 'react';
 export default class Input extends React.Component {
   constructor(props, context) {
@@ -19,7 +16,7 @@ export default class Input extends React.Component {
     };
   }
 
-  changeHandler() {
+  changeHandler = () => {
     /**
      * setState 可以變更 state 內容
      * 要注意的是：變更 state 會讓畫面重新渲染(會執行render)
@@ -29,7 +26,7 @@ export default class Input extends React.Component {
      * 使用屬性 refs 可取得元件內容
      * this.refs.XXX  => XXX 則是 element 屬性 ref 定義的內容
      */
-  }
+  };
 
   render() {
     /* 取得 state.name */
@@ -46,7 +43,7 @@ export default class Input extends React.Component {
         <input
           ref="name"
           placeholder="input your name..."
-          onChange={this.changeHandler.bind(this)}
+          onChange={this.changeHandler}
         />
         <SayHello name={name} />
       </div>

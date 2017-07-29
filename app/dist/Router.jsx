@@ -2,25 +2,32 @@ import React from 'react';
 /* redux */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+
 /* 多國語系 */
 import I18n from 'redux-i18n';
-import Locale from './Locale';
+import Locales from './Locales';
+
 /* router */
 import { Router, useRouterHistory } from 'react-router';
 import { createHistory } from 'history';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
+
 /* 系統設定 */
 import { RootReducer, RootRoutes } from './Roots';
 import { promiseMiddleware, multiDispatchMiddleware } from './Middleware';
+
 // Intro
 import IntroView from '~/Containers/00_Intro/View';
+
 /* 系統設置 */
 const Constants = require('Config');
+
 /** Route 設定 **/
 const appHistory = useRouterHistory(createHistory)({
   basename: Constants.BASE_PATH,
   queryKey: false
 });
+
 const routingMiddleware = routerMiddleware(appHistory);
 let store = {};
 let DevTools = null;
@@ -47,6 +54,7 @@ if (process.env.NODE_ENV === 'development') {
     )
   );
 }
+
 const history = syncHistoryWithStore(appHistory, store, state => state.routing);
 const routes = {
   path: '/',
@@ -54,6 +62,7 @@ const routes = {
   indexRoute: { onEnter: (nextState, replace) => replace('welcome') },
   childRoutes: RootRoutes
 };
+
 /**
  * I18n opts
  * translations [語系檔]
@@ -62,7 +71,7 @@ const routes = {
  */
 const RouterFormat = (
   <Provider store={store}>
-    <I18n translations={Locale} initialLang="zh_tw" fallbackLang="en">
+    <I18n translations={Locales} initialLang="zh_tw" fallbackLang="en">
       <div>
         <Router history={history} routes={routes} />
         {DevTools ? <DevTools /> : null}

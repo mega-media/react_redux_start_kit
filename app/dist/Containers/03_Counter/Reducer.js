@@ -1,7 +1,3 @@
-/**
- * Created by arShown on 2016/10/13.
- */
-
 export default function(state = 0, action) {
   const { type } = action;
   switch (type) {

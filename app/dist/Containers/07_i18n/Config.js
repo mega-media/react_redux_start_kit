@@ -1,8 +1,11 @@
+/**
+ * @flow
+ */
 import View from './View';
 
 export default {
   router: {
-    path: 'style',
+    path: 'locale',
     component: View
   }
 };

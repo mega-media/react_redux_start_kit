@@ -1,6 +1,4 @@
 /**
- * Created by arShown on 2016/10/13.
- * Updated on 2017/3/16
  * @flow
  */
 import React from 'react';
@@ -19,9 +17,9 @@ class Table extends BaseView<void, any, void> {
     super(props, context);
   }
 
-  removeHandler(uid: number): void {
+  removeHandler = (uid: number): (() => void) => () => {
     this.dispatch(remove(uid));
-  }
+  };
 
   render() {
     const memberStore: Array<MemberDataType> = this.getResponse();
@@ -46,7 +44,7 @@ class Table extends BaseView<void, any, void> {
                 <td>
                   <button
                     styleName="btn btn-danger btn-xs"
-                    onClick={this.removeHandler.bind(this, uid)}>
+                    onClick={this.removeHandler(uid)}>
                     <i styleName="glyphicon glyphicon-trash" />
                   </button>
                 </td>

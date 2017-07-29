@@ -1,6 +1,3 @@
-/**
- * Created by arShown on 2016/10/13.
- */
 import React from 'react';
 import BaseView, { connectToView } from '~/Core/BaseView';
 import { click, reset } from './Action';
@@ -18,7 +15,7 @@ class Counter extends BaseView {
     super(props, context);
   }
 
-  clickHandler() {
+  clickHandler = () => {
     /**
      * 使用 BaseView.dispatch method 將 Action 回傳值丟給 Reducer 處理
      * 因為已繼承 BaseView 因此可直接使用 this 來呼叫
@@ -28,11 +25,11 @@ class Counter extends BaseView {
      * - 傳入的參數必須是 `Action 的執行結果` 而不是 Action 函式本身
      */
     this.dispatch(click());
-  }
+  };
 
-  resetHandler() {
+  resetHandler = () => {
     this.dispatch(reset());
-  }
+  };
 
   render() {
     /**
@@ -43,9 +40,9 @@ class Counter extends BaseView {
       <div>
         <div>Clicks : {counterState}</div>
         <br />
-        <button onClick={this.clickHandler.bind(this)}>Click the button</button>
+        <button onClick={this.clickHandler}>Click the button</button>
         &nbsp;
-        <button onClick={this.resetHandler.bind(this)}>Reset Counter</button>
+        <button onClick={this.resetHandler}>Reset Counter</button>
       </div>
     );
   }

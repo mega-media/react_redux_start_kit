@@ -1,16 +1,13 @@
 /**
- * Created by arShown on 2016/10/13.
  * @flow
  */
 import React from 'react';
 import BaseView, { ApplyStyles, connectToView } from '~/Core/BaseView';
 import { add } from '../Action';
 import type { MemberDataType } from '../Type';
-
 /**
  * Form 元件只負責處理表單操作
  */
-
 @ApplyStyles()
 class Form extends BaseView<void, any, MemberDataType> {
   //資料序號
@@ -24,31 +21,34 @@ class Form extends BaseView<void, any, MemberDataType> {
     this.state = this.initializeState();
   }
 
-  initializeState(): MemberDataType {
+  initializeState = (): MemberDataType => {
     return {
       uid: this.uidIndex,
       name: '',
       gender: 'male',
       married: false
     };
-  }
+  };
 
-  changeHandler(stateKey: string, e: Object): void {
-    //根據欄位更新 state
-    this.setState({
-      [stateKey]:
-        stateKey === 'married' ? e.target.value === 'true' : e.target.value
-    });
-  }
+  changeHandler = (stateKey: string): ((e: Event) => void) => (e: Event) => {
+    const target = e.target;
+    if (target instanceof HTMLInputElement) {
+      //根據欄位更新 state
+      this.setState({
+        [stateKey]:
+          stateKey === 'married' ? target.value === 'true' : target.value
+      });
+    }
+  };
 
-  validate(): boolean {
+  validate = (): boolean => {
     //檢查有沒有輸入 name
     const { name } = this.state;
     if (!name) return false;
     return true;
-  }
+  };
 
-  submit(e: Event): void {
+  submit = (e: Event): void => {
     e.preventDefault();
     if (this.state && this.validate()) {
       //執行新增 action
@@ -58,7 +58,7 @@ class Form extends BaseView<void, any, MemberDataType> {
       //初始化表單
       this.setState(this.initializeState());
     }
-  }
+  };
 
   render() {
     const { name, married, gender } = this.state;
@@ -69,7 +69,7 @@ class Form extends BaseView<void, any, MemberDataType> {
           <input
             type="type"
             value={name}
-            onChange={this.changeHandler.bind(this, 'name')}
+            onChange={this.changeHandler('name')}
             styleName="form-control"
           />
         </div>
@@ -79,7 +79,7 @@ class Form extends BaseView<void, any, MemberDataType> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler.bind(this, 'married')}
+              onChange={this.changeHandler('married')}
               name="marry"
               value="false"
               checked={!married}
@@ -89,7 +89,7 @@ class Form extends BaseView<void, any, MemberDataType> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler.bind(this, 'married')}
+              onChange={this.changeHandler('married')}
               name="marry"
               value="true"
               checked={married}
@@ -103,7 +103,7 @@ class Form extends BaseView<void, any, MemberDataType> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler.bind(this, 'gender')}
+              onChange={this.changeHandler('gender')}
               name="gender"
               value="male"
               checked={gender === 'male'}
@@ -113,7 +113,7 @@ class Form extends BaseView<void, any, MemberDataType> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler.bind(this, 'gender')}
+              onChange={this.changeHandler('gender')}
               name="gender"
               checked={gender === 'female'}
               value="female"
@@ -121,7 +121,7 @@ class Form extends BaseView<void, any, MemberDataType> {
             Female
           </label>
         </div>
-        <button styleName="btn btn-primary" onClick={this.submit.bind(this)}>
+        <button styleName="btn btn-primary" onClick={this.submit}>
           submit
         </button>
       </form>

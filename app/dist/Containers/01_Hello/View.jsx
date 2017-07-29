@@ -1,6 +1,3 @@
-/**
- * Created by arShown on 2016/10/13.
- */
 import React from 'react';
 
 export default class Hello extends React.Component {

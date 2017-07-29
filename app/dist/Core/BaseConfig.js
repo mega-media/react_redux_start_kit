@@ -20,10 +20,10 @@ type Structor = {
   router?: Object | Array<Object>
 };
 
-export function combineStructor(
+export const combineStructor = (
   structor: Structor = {},
   ...arg: Array<Structor>
-): Base {
+): Base => {
   let returnObject: Base = new Base();
   if (structor.reducers)
     returnObject.reducers = Object.assign({}, structor.reducers);
@@ -54,4 +54,4 @@ export function combineStructor(
   }, returnObject);
 
   return returnObject;
-}
+};

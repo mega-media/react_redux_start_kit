@@ -1,6 +1,3 @@
-/**
- * Created by arShown on 2016/10/13.
- */
 import React from 'react';
 import BaseView, { ApplyStyles, connectToView } from '~/Core/BaseView';
 import style from './assets/stylesheets/style.scss';
@@ -41,6 +38,11 @@ export class Hello extends BaseView {
         route: 'flow',
         title: '6. Hello Flow !',
         file: 'Flow.jsx'
+      },
+      {
+        route: 'locale',
+        title: '7. Locales.',
+        file: 'Locales.jsx'
       }
     ];
   }

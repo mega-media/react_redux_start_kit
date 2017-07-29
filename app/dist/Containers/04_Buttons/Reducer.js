@@ -1,6 +1,3 @@
-/**
- * Created by arShown on 2016/10/13.
- */
 import Constant from './Constant';
 
 class BtnClass {

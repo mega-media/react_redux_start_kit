@@ -1,5 +1,4 @@
 /**
- * Created by arShown on 2016/10/13.
  * @flow
  */
 import Constant from './Constant';
