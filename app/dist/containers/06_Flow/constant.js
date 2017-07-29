@@ -4,7 +4,7 @@
 import KeyMirror from 'keymirror';
 const Constant = Object.assign(
   {
-    StoreKey: 'flowStore'
+    storeKey: 'flowStore'
   },
   KeyMirror({
     FLOW_INSERT: null,

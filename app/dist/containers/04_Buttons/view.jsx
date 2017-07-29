@@ -1,12 +1,12 @@
 import React from 'react';
-import BaseView, { ApplyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connectToView } from '~/core/baseView';
 import { click, reset } from './action';
 import Constant from './constant';
 /**
- * 裝飾方法 ApplyStyles 可套用系統預設樣式
+ * 裝飾方法 applyStyles 可套用系統預設樣式
  * 系統預設樣式包含：Bootstrap / Font Awesome
  */
-@ApplyStyles()
+@applyStyles()
 class Buttons extends BaseView {
   constructor(props, context) {
     super(props, context);
@@ -67,4 +67,4 @@ class Buttons extends BaseView {
     );
   }
 }
-export default connectToView(Constant.StoreKey)(Buttons);
+export default connectToView(Constant.storeKey)(Buttons);

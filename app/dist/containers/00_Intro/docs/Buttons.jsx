@@ -12,7 +12,7 @@ module.exports = {
     <div>
       <h5>☆ 套用系統樣式檔</h5>
       <ul>
-        <li>核心檔案 - BaseView 中包含嵌套樣式檔的方法：ApplyStyles()</li>
+        <li>核心檔案 - BaseView 中包含嵌套樣式檔的方法：applyStyles()</li>
         <li>
           使用 ES7 Decorator 的方式加上符號<label>@</label>標記在 Container/Component 上方
         </li>

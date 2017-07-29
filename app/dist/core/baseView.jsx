@@ -194,7 +194,7 @@ export function connectToView<P>(
 /**
  * CSSModules 裝飾用法
  */
-export const ApplyStyles = (...styles: Array<Object>) => {
+export const applyStyles = (...styles: Array<Object>) => {
   let stylesObj: Object = Object.assign({}, Bootstrap, FontAwesome, Custom);
   styles.forEach(style => Object.assign(stylesObj, style));
   return CSSModules(stylesObj, {
@@ -206,7 +206,7 @@ export const ApplyStyles = (...styles: Array<Object>) => {
 /**
  * CSSModules 作為一般方法呼叫
  */
-export function ApplyStylesByFunction<
+export function applyStylesByFunction<
   D,
   P,
   S,

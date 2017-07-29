@@ -13,7 +13,7 @@ module.exports = {
       <div>
         <ul>
           <li>
-            語系檔路徑：<label>./app/dist/Locales/</label>
+            語系檔路徑：<label>./app/dist/locales/</label>
           </li>
           <li styleName="text-danger">語系參數僅支援字串</li>
         </ul>
@@ -60,9 +60,11 @@ module.exports = {
       <div>
         <ul>
           <li>
-            在component（沒有繼承 BaseView）中使用語系，需透過<label>./app/dist/components/localeHoc</label>
+            在component（沒有繼承 BaseView）使用語系，需透過<label>
+              ./app/dist/components/localeHoc
+            </label>
           </li>
-          <li>LocaleHoc 將 BaseView.i18nText 中函式以 props 方式傳入 component</li>
+          <li>LocaleHoc 將 BaseView.i18nText 函式以 props 方式傳入 component</li>
           <li>
             <pre>
               {`//component

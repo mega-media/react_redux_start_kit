@@ -4,7 +4,7 @@
 import React from 'react';
 import TableView from './table/view';
 import FormView from './form/view';
-import { ApplyStyles } from '~/core/baseView';
+import { applyStyles } from '~/core/baseView';
 /* flow type declare
  DP = DefaultProps
  S = State
@@ -13,7 +13,7 @@ import { ApplyStyles } from '~/core/baseView';
 type DP = void;
 type S = void;
 type P = any;
-@ApplyStyles()
+@applyStyles()
 export default class Flow extends React.Component<DP, P, S> {
   props: P;
 

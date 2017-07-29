@@ -2,13 +2,13 @@
  * @flow
  */
 import React from 'react';
-import BaseView, { ApplyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connectToView } from '~/core/baseView';
 import { add } from '../action';
 import type { MemberDataType } from '../type';
 /**
  * Form 元件只負責處理表單操作
  */
-@ApplyStyles()
+@applyStyles()
 class Form extends BaseView<void, any, MemberDataType> {
   //資料序號
   uidIndex: number;

@@ -1,4 +1,4 @@
-import view from './view';
+import View from './view';
 import Reducer from './reducer';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   },
   router: {
     path: 'counter',
-    component: view
+    component: View
   }
 };
 

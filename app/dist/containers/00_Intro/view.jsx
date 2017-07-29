@@ -1,7 +1,7 @@
 import React from 'react';
-import BaseView, { ApplyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connectToView } from '~/core/baseView';
 import style from './assets/stylesheets/style.scss';
-@ApplyStyles(style)
+@applyStyles(style)
 export class Hello extends BaseView {
   constructor(props, context) {
     super(props, context);

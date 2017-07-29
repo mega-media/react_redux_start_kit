@@ -1,8 +1,8 @@
-import view from './view';
+import View from './view';
 
 export default {
   router: {
     path: 'style',
-    component: view
+    component: View
   }
 };

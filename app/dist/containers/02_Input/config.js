@@ -1,9 +1,9 @@
-import view from './view';
+import View from './view';
 
 export default {
   router: {
     path: 'input',
-    component: view
+    component: View
   }
 };
 

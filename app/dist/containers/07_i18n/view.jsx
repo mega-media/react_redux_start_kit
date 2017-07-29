@@ -2,12 +2,12 @@
  * @flow
  */
 import React from 'react';
-import BaseView, { ApplyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connectToView } from '~/core/baseView';
 /* redux-i18n 模組提供的切換語系 action */
 import { setLanguage } from 'redux-i18n';
 import Pure from './pure/index';
 
-@ApplyStyles()
+@applyStyles()
 export class I18N extends BaseView<void, any, void> {
   constructor(props: any, context: any) {
     super(props, context);

@@ -1,15 +1,15 @@
 import React from 'react';
-import { ApplyStyles } from '~/core/baseView';
+import { applyStyles } from '~/core/baseView';
 import image from './assets/images/image.png';
 import styles from './assets/stylesheets/style.scss';
 /**
- * 套用自訂樣式檔案，只需在裝飾方法 ApplyStyles 給予參數(樣式檔)
+ * 套用自訂樣式檔案，只需在裝飾方法 applyStyles 給予參數(樣式檔)
  * 即可使用自定義的 class name
  *
  * 需注意的是：
  * 自定義的 `類別名稱` 將會覆蓋掉與 Bootstrap 或 Font Awesome 重複的類別名稱
  */
-@ApplyStyles(styles)
+@applyStyles(styles)
 export default class Style extends React.Component {
   constructor(props, context) {
     super(props, context);

@@ -2,7 +2,7 @@
  * @flow
  */
 import React from 'react';
-import BaseView, { ApplyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connectToView } from '~/core/baseView';
 import Constant from '../constant';
 import { remove } from '../action';
 import type { MemberDataType } from '../type';
@@ -11,7 +11,7 @@ import type { MemberDataType } from '../type';
  * Table 元件綁定 state 負責監聽資料的異動
  */
 
-@ApplyStyles()
+@applyStyles()
 class Table extends BaseView<void, any, void> {
   constructor(props: any, context: any) {
     super(props, context);
@@ -77,4 +77,4 @@ class Table extends BaseView<void, any, void> {
   }
 }
 
-export default connectToView(Constant.StoreKey)(Table);
+export default connectToView(Constant.storeKey)(Table);

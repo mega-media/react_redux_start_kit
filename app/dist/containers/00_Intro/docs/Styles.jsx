@@ -18,8 +18,8 @@ module.exports = {
               載入樣式檔 <label>{`import customStyle from './styleFile.css'`}</label>
             </li>
             <li>
-              使用 ApplyStyles() 嵌套進元件中{' '}
-              <label>{`@ApplyStyles(customStyle)`}</label>
+              使用 applyStyles() 嵌套進元件中{' '}
+              <label>{`@applyStyles(customStyle)`}</label>
             </li>
           </ol>
         </li>

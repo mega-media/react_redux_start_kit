@@ -1,7 +1,7 @@
 import KeyMirror from 'keymirror';
 const Constant = Object.assign(
   {
-    StoreKey: 'buttonStore'
+    storeKey: 'buttonStore'
   },
   KeyMirror({
     BUTTON_CLICK: null,
