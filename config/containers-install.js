@@ -5,7 +5,7 @@ module.exports = {
   installContent: [],
   build: function() {
     const appRoot = function(params) {
-      return path.resolve(__dirname, '../app/dist/Containers/' + params);
+      return path.resolve(__dirname, '../app/dist/containers/' + params);
     };
 
     const dirs = fs.readdirSync(appRoot(''));
@@ -14,10 +14,10 @@ module.exports = {
       if (!fs.statSync(dirPath).isDirectory()) {
         continue;
       }
-      if (!fs.existsSync(dirPath + '/Config.js')) {
+      if (!fs.existsSync(dirPath + '/config.js')) {
         continue;
       }
-      this.installContent.push("require('./" + dirs[i] + "/Config')");
+      this.installContent.push("require('./" + dirs[i] + "/config')");
     }
     fs.writeFile(
       appRoot('install.js'),

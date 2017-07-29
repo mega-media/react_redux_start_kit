@@ -5,4 +5,4 @@ flow-typed/npm/
 .idea/
 .git/
 .DS_Store
-app/dist/Containers/install.js
+app/dist/containers/install.js
