@@ -17,7 +17,7 @@ describe('BDD', () => {
   });
 
   describe('#sum', () => {
-    it('結果應等於參數加總', () => {
+    it('數值加總', () => {
       expect(instance.sum(2, 3)).to.equal(5);
       expect(instance.sum(10, 21)).to.equal(31);
       const rnd = parseInt(Math.random() * 100 + 1);

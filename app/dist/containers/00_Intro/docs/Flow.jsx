@@ -31,6 +31,12 @@ module.exports = {
           進行檢查：<label>npm run flow-test</label>
         </li>
       </ul>
+      <h5>☆ 持續監聽</h5>
+      <ul>
+        <li>
+          <label>npm run flow-test:watch</label>專案檔案變更，將觸發執行flow test檢查
+        </li>
+      </ul>
     </div>
   )
 };

@@ -43,6 +43,11 @@ export class Hello extends BaseView {
         route: 'locale',
         title: '7. Locales.',
         file: 'Locales.jsx'
+      },
+      {
+        route: 'test',
+        title: '8. Unit test.',
+        file: 'UnitTest.jsx'
       }
     ];
   }

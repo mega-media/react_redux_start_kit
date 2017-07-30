@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config ./webpack.dev.config.js",
-    "start": "webpack-dev-server --devtool eval --progress --colors --hot --config ./webpack.dev.config.js",
+    "build": "NODE_ENV=development webpack --config ./webpack.dev.config.js",
+    "start": "NODE_ENV=development webpack-dev-server --devtool eval --progress --colors --hot --config ./webpack.dev.config.js",
     "release": "NODE_ENV=production webpack -p --config ./webpack.prov.config.js",
     "test": "NODE_ENV=test nyc mocha --opts ./.mochaopts \"app/dist/**/__test__/**/*.test.*\" || exit 0",
-    "coverage-report": "NODE_ENV=test nyc report --reporter=text --reporter=text-summary",
+    "coverage-report": "NODE_ENV=test nyc report --reporter=lcov --reporter=text --reporter=text-summary",
     "flow-install": "flow-typed install --overwrite",
     "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
     "flow-test:watch": "npm run flow-test; fswatch -e ./**/* -o 1 | xargs -n1 -I{} sh -c 'tput setaf 6; date \"+\n[%m/%d %H:%M:%S]\";tput sgr0; npm run flow-test'",
@@ -97,6 +97,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,css,scss,sass}": [
+      "test",
       "prettier",
       "git add"
     ]
