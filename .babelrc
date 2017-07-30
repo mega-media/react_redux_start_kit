@@ -35,6 +35,7 @@
     },
     "test": {
       "plugins": [
+        "istanbul",
         [
           "babel-plugin-webpack-alias",
           {

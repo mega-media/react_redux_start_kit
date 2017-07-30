@@ -199,8 +199,7 @@ export const applyStyles = (...styles: Array<Object>) => {
   let stylesObj: Object = Object.assign({}, Bootstrap, FontAwesome, Custom);
   styles.forEach(style => Object.assign(stylesObj, style));
   return CSSModules(stylesObj, {
-    allowMultiple: true,
-    errorWhenNotFound: false
+    allowMultiple: true
   });
 };
 
@@ -216,7 +215,6 @@ export function applyStylesByFunction<
   let stylesObj: Object = Object.assign({}, Bootstrap, FontAwesome, Custom);
   styles.forEach(style => Object.assign(stylesObj, style));
   return CSSModules(wrapperComponent, stylesObj, {
-    allowMultiple: true,
-    errorWhenNotFound: false
+    allowMultiple: true
   });
 }
