@@ -12,6 +12,6 @@ export default class Demo extends React.Component<void, any, void> {
     this.sum(this.sum(first, second), this.sum(first, second));
 
   render() {
-    return <div styleName="page-header">Demo</div>;
+    return <div>Demo</div>;
   }
 }
