@@ -17,11 +17,11 @@ import {
 } from 'react-router-redux';
 
 /* 系統設定 */
-import { RootReducer, RootRoutes } from './Roots';
-import { promiseMiddleware, multiDispatchMiddleware } from './Middleware';
+import { RootReducer, RootRoutes } from './roots';
+import { promiseMiddleware, multiDispatchMiddleware } from './middleware';
 
 // Intro
-import IntroView from '~/containers/00_Intro/View';
+import IntroView from '~/containers/00_Intro/view';
 
 /* 系統設置 */
 const Constants = require('Config');
@@ -30,7 +30,7 @@ const Constants = require('Config');
  * Router setting
  */
 const history = createHistory();
-const middleware = routerMiddleware(history);
+const routeMiddleware = routerMiddleware(history);
 
 let store = {};
 let DevTools = null;
@@ -39,14 +39,18 @@ if (process.env.NODE_ENV === 'development') {
   store = createStore(
     RootReducer,
     compose(
-      applyMiddleware(multiDispatchMiddleware, promiseMiddleware, middleware),
+      applyMiddleware(
+        multiDispatchMiddleware,
+        promiseMiddleware,
+        routeMiddleware
+      ),
       DevTools.instrument()
     )
   );
 } else {
   store = createStore(
     RootReducer,
-    applyMiddleware(multiDispatchMiddleware, promiseMiddleware, middleware)
+    applyMiddleware(multiDispatchMiddleware, promiseMiddleware, routeMiddleware)
   );
 }
 
