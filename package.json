@@ -14,7 +14,6 @@
     "flow-test:watch": "npm run flow-test; fswatch -e ./**/* -o 1 | xargs -n1 -I{} sh -c 'tput setaf 6; date \"+\n[%m/%d %H:%M:%S]\";tput sgr0; npm run flow-test'",
     "mocha-test:watch": "NODE_ENV=test mocha --watch --opts ./.mochaopts \"app/dist/**/__test__/**/*.test.*\"",
     "precommit": "lint-staged",
-    "prepush": "npm test",
     "prettier": "prettier --single-quote --jsx-bracket-same-line --write \"app/dist/**/*.{js,jsx,css,scss,sass}\""
   },
   "author": "",
