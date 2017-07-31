@@ -96,7 +96,6 @@
     "redux-i18n": "^1.5.3"
   },
   "lint-staged": {
-    "verbose": false,
     "*.{js,jsx,css,scss,sass}": [
       "prettier",
       "git add"
