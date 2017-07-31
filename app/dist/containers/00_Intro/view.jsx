@@ -1,79 +1,94 @@
 import React from 'react';
-import BaseView, { applyStyles, connectToView } from '~/core/baseView';
+import { Link } from 'react-router-dom';
+import { applyStyles } from '~/core/baseView';
 import style from './assets/stylesheets/style.scss';
+
 @applyStyles(style)
-export class Hello extends BaseView {
+export default class Intro extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      activePage: this.getPathname()
+      activePage: props.history.location.pathname
     };
     this.pageArray = [
       {
-        route: 'welcome',
+        route: '/welcome',
         title: '1. Hello World !',
         file: 'Hello.jsx'
       },
       {
-        route: 'input',
+        route: '/input',
         title: '2. Input your name.',
         file: 'Input.jsx'
       },
       {
-        route: 'counter',
+        route: '/counter',
         title: '3. Click counter.',
         file: 'Counter.jsx'
       },
       {
-        route: 'btnClick',
+        route: '/btnClick',
         title: '4. Buttons click.',
         file: 'Buttons.jsx'
       },
       {
-        route: 'style',
+        route: '/style',
         title: '5. Customize styles.',
         file: 'Styles.jsx'
       },
       {
-        route: 'flow',
+        route: '/flow',
         title: '6. Hello Flow !',
         file: 'Flow.jsx'
       },
       {
-        route: 'locale',
+        route: '/locale',
         title: '7. Locales.',
         file: 'Locales.jsx'
       },
       {
-        route: 'test',
+        route: '/test',
         title: '8. Unit test.',
         file: 'UnitTest.jsx'
       }
     ];
   }
 
-  changeHandler(route) {
+  checkRouteLegal = activePage => {
+    this.setState({
+      activePage: this.pageArray.some(obj => obj.route === activePage)
+        ? activePage
+        : '/welcome'
+    });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.checkRouteLegal(nextProps.history.location.pathname);
+  }
+
+  componentWillMount() {
     const { activePage } = this.state;
-    if (activePage !== route) {
-      this.setState({ activePage: route });
-      this.redirectTo(route);
-    }
+    this.checkRouteLegal(activePage);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.activePage !== nextState.activePage;
   }
 
   render() {
+    const { children } = this.props;
     const { activePage } = this.state;
     const navComponents = this.pageArray.map(obj =>
-      <a
+      <Link
         key={obj.route}
-        href="javascript:void(0)"
         styleName={`list-group-item ${obj.route === activePage
           ? 'list-group-item-info'
           : ''}`}
-        onClick={this.changeHandler.bind(this, obj.route)}>
+        to={obj.route}>
         {obj.title}
-      </a>
+      </Link>
     );
-    const activeObj = this.pageArray.filter(obj => obj.route === activePage)[0];
+    const activeObj = this.pageArray.find(obj => obj.route === activePage);
     const docJSON = require('./docs/' + activeObj.file);
     return (
       <div styleName="container">
@@ -94,7 +109,7 @@ export class Hello extends BaseView {
                 </h3>
               </div>
               <div styleName="panel-body">
-                {this.props.children}
+                {children}
               </div>
             </div>
             <div styleName="panel panel-default">
@@ -119,4 +134,3 @@ export class Hello extends BaseView {
     );
   }
 }
-export default connectToView()(Hello);

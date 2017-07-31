@@ -67,7 +67,7 @@ module.exports = {
         <li>
           架構核心檔案之一，<label>Container</label>繼承用，提供常用的基本函式與 Context 資料
         </li>
-        <li>connectToView 方法：綁定 state 與 View</li>
+        <li>connect 方法：綁定 state 與 View</li>
       </ul>
     </div>
   )

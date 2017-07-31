@@ -2,7 +2,7 @@
  * @flow
  */
 import React from 'react';
-import BaseView, { applyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connect } from '~/core/baseView';
 /* redux-i18n 模組提供的切換語系 action */
 import { setLanguage } from 'redux-i18n';
 import Pure from './pure/index';
@@ -61,4 +61,4 @@ export class I18N extends BaseView<void, any, void> {
   }
 }
 
-export default connectToView()(I18N);
+export default connect()(I18N);

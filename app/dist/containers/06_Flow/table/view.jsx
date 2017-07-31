@@ -2,7 +2,7 @@
  * @flow
  */
 import React from 'react';
-import BaseView, { applyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connect } from '~/core/baseView';
 import Constant from '../constant';
 import { remove } from '../action';
 import type { MemberDataType } from '../type';
@@ -77,4 +77,4 @@ class Table extends BaseView<void, any, void> {
   }
 }
 
-export default connectToView(Constant.storeKey)(Table);
+export default connect(Constant.storeKey)(Table);

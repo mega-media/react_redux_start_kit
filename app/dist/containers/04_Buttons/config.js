@@ -7,7 +7,7 @@ export default {
     [Constant.storeKey]: Reducer
   },
   router: {
-    path: 'btnClick',
+    path: '/btnClick',
     component: View
   }
 };

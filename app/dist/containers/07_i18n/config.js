@@ -5,7 +5,7 @@ import View from './view';
 
 export default {
   router: {
-    path: 'locale',
+    path: '/locale',
     component: View
   }
 };

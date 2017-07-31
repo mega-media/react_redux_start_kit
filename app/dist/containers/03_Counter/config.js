@@ -6,7 +6,7 @@ export default {
     counterStore: Reducer
   },
   router: {
-    path: 'counter',
+    path: '/counter',
     component: View
   }
 };
@@ -16,6 +16,6 @@ export default {
  * 參數名稱為 reducers 內容必須為 Object{ [state 名稱] : [Reducer function] }
  * 意思為：Reducer 處理結果儲存進 Store 中的 state
  * 
- * state 與 View 的綁定則使用 connectToView 函式
+ * state 與 View 的綁定則使用 connect 函式
  * 參閱：03_Counter/View.jsx
  */

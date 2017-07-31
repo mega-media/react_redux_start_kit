@@ -2,7 +2,7 @@
  * @flow
  */
 import React from 'react';
-import BaseView, { applyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connect } from '~/core/baseView';
 import { add } from '../action';
 import type { MemberDataType } from '../type';
 /**
@@ -129,4 +129,4 @@ class Form extends BaseView<void, any, MemberDataType> {
   }
 }
 
-export default connectToView()(Form);
+export default connect()(Form);

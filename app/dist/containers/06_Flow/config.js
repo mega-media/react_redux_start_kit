@@ -10,7 +10,7 @@ export default {
     [Constant.storeKey]: Reducer
   },
   router: {
-    path: 'flow',
+    path: '/flow',
     component: View
   }
 };
