@@ -1,0 +1,23 @@
+.doc {
+  label {
+    padding: 1px 3px;
+    margin: 0 3px;
+    border: 1px solid #e0e0e0;
+    background-color: #f8f5f5;
+    border-radius: 4px;
+    color: #dd4442;
+    font-weight: 100;
+  }
+  ul > li {
+    margin: 15px 0;
+  }
+  ol > li {
+    margin: 10px 0;
+  }
+  p {
+    margin: 15px 0;
+  }
+  h5:not(:first-child) {
+    padding-top: 15px;
+  }
+}

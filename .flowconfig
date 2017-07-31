@@ -5,10 +5,10 @@
 
 [libs]
 ./flow-typed
-./ignore.flow.js
+./flow-ignore
 
 [options]
-module.name_mapper='^Config$' -> '<PROJECT_ROOT>/config/config.dev.json'
+module.name_mapper='^Config$' -> '<PROJECT_ROOT>/config/env/dev.js'
 module.name_mapper='^~' -> '<PROJECT_ROOT>/app/dist'
 module.name_mapper='.*\.\(s?css\|jpe?g\|png\|gif\|svg\|ico\|mp4\|swf\)$' -> 'IgnoreModule'
 module.system=haste

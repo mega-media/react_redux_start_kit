@@ -2,6 +2,10 @@
 
 專案開發框架與其環境設定，包含基礎程式範例。
 
+# version
+1. nodeJS v6.3.0
+2. npm v3.10.3
+
 ## 設計核心       
 
 - 多人多工開發模式：    
@@ -21,7 +25,7 @@ git clone git@github.com:mega-media/react_redux_start_kit.git
 ### 安裝
 ````
 cd react_redux_start_kit
-npm run install
+npm install
 ````
 
 ### 執行

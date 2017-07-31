@@ -2,9 +2,12 @@
   "presets": [
     "react",
     "es2015",
-    "stage-0"
+    "stage-0",
+    "env"
   ],
   "plugins": [
+    "lodash",
+    "transform-class-properties",
     "syntax-flow",
     "transform-flow-strip-types",
     "transform-runtime",
@@ -22,5 +25,24 @@
         }
       ]
     ]
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "istanbul",
+        [
+          "babel-plugin-webpack-alias",
+          {
+            "config": "webpack.test.config.js"
+          }
+        ]
+      ]
+    }
+  }
 }
