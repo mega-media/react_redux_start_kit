@@ -2,7 +2,7 @@ import View from './view';
 
 export default {
   router: {
-    path: 'style',
+    path: '/style',
     component: View
   }
 };

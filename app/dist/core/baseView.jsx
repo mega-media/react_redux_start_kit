@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect as reduxConnect } from 'react-redux';
 import { push, replace, goBack } from 'react-router-redux';
 /* stylesheets */
 import CSSModules from 'react-css-modules';
@@ -66,15 +66,6 @@ export default class BaseView<D: any, P: any, S: any> extends React.Component<
   goBack = (): void => {
     this.dispatch(goBack());
   };
-
-  /**
-   * 取得路徑
-   * @returns string
-   */
-  getPathname = (): string => {
-    return this.props.location.pathname;
-  };
-
   //==============================================================
   // 資料處理
   // ==============================================================
@@ -148,12 +139,13 @@ export default class BaseView<D: any, P: any, S: any> extends React.Component<
 
 /**
  * 綁定要監聽的store key，當此store內容改變時，會觸發View做處理
- * @param storeKey <string|array>
+ * @param storeKey <null|string|array>
+ * @param wrapperComponent
  * @returns {(view:P) => P}
  */
 
-export function connectToView<P>(
-  storeKey?: string | Array<string>
+export function connect<P>(
+  storeKey: ?(string | Array<string>)
 ): (view: P) => P {
   const resolveStoreKey: any = (store: Object, storeKey: string) => {
     if (!store) return null;
@@ -166,7 +158,8 @@ export function connectToView<P>(
     } else
       return typeof store[storeKey] === 'undefined' ? null : store[storeKey];
   };
-  const connector: any = connect(
+
+  const connector: any = reduxConnect(
     state => {
       let response = null;
       if (typeof storeKey === 'string')

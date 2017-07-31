@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseView, { applyStyles, connectToView } from '~/core/baseView';
+import BaseView, { applyStyles, connect } from '~/core/baseView';
 import { click, reset } from './action';
 import Constant from './constant';
 /**
@@ -67,4 +67,4 @@ class Buttons extends BaseView {
     );
   }
 }
-export default connectToView(Constant.storeKey)(Buttons);
+export default connect(Constant.storeKey)(Buttons);

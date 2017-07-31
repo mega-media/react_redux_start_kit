@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseView, { connectToView } from '~/core/baseView';
+import BaseView, { connect } from '~/core/baseView';
 import { click, reset } from './action';
 /**
  * 引入 BaseView：使用符號 `~` 可代替指向專案目錄 `app/dist`
@@ -21,7 +21,7 @@ class Counter extends BaseView {
      * 因為已繼承 BaseView 因此可直接使用 this 來呼叫
      *
      * NOTICE :
-     * - 此函式必須有 connectToView 才能使用 (見此頁最下方)
+     * - 此函式必須有 connect 才能使用 (見此頁最下方)
      * - 傳入的參數必須是 `Action 的執行結果` 而不是 Action 函式本身
      */
     this.dispatch(click());
@@ -48,10 +48,10 @@ class Counter extends BaseView {
   }
 }
 /**
- * connectToView 回傳 react-redux 的 connect 函式，
+ * connect 回傳 react-redux 的 connect 函式，
  * 用以綁定在 Configs.reducers 中設定的 state，當 state 內容改變時，會觸發 View 做處理
  *
  * 用法說明如下：
- * connectToView(state 名稱)(Component class name)
+ * connect(state 名稱)(Component class name)
  */
-export default connectToView('counterStore')(Counter);
+export default connect('counterStore')(Counter);

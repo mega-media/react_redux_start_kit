@@ -8,38 +8,41 @@ import I18n from 'redux-i18n';
 import Locales from './Locales';
 
 /* router */
-import { Router, useRouterHistory } from 'react-router';
-import { createHistory } from 'history';
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import {
+  ConnectedRouter,
+  routerReducer,
+  routerMiddleware
+} from 'react-router-redux';
 
 /* 系統設定 */
-import { RootReducer, RootRoutes } from './Roots';
-import { promiseMiddleware, multiDispatchMiddleware } from './Middleware';
+import { RootReducer, RootRoutes } from './roots';
+import { promiseMiddleware, multiDispatchMiddleware } from './middleware';
 
 // Intro
-import IntroView from '~/containers/00_Intro/View';
+import IntroView from '~/containers/00_Intro/view';
 
 /* 系統設置 */
 const Constants = require('Config');
 
-/** Route 設定 **/
-const appHistory = useRouterHistory(createHistory)({
-  basename: Constants.BASE_PATH,
-  queryKey: false
-});
+/**
+ * Router setting
+ */
+const history = createHistory();
+const routeMiddleware = routerMiddleware(history);
 
-const routingMiddleware = routerMiddleware(appHistory);
 let store = {};
 let DevTools = null;
 if (process.env.NODE_ENV === 'development') {
-  DevTools = require('./Libraries/devTools');
+  DevTools = require('./libraries/devTools');
   store = createStore(
     RootReducer,
     compose(
       applyMiddleware(
-        routingMiddleware,
         multiDispatchMiddleware,
-        promiseMiddleware
+        promiseMiddleware,
+        routeMiddleware
       ),
       DevTools.instrument()
     )
@@ -47,21 +50,9 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   store = createStore(
     RootReducer,
-    applyMiddleware(
-      routingMiddleware,
-      multiDispatchMiddleware,
-      promiseMiddleware
-    )
+    applyMiddleware(multiDispatchMiddleware, promiseMiddleware, routeMiddleware)
   );
 }
-
-const history = syncHistoryWithStore(appHistory, store, state => state.routing);
-const routes = {
-  path: '/',
-  component: IntroView,
-  indexRoute: { onEnter: (nextState, replace) => replace('welcome') },
-  childRoutes: RootRoutes
-};
 
 /**
  * I18n opts
@@ -73,7 +64,16 @@ const RouterFormat = (
   <Provider store={store}>
     <I18n translations={Locales} initialLang="zh_tw" fallbackLang="en">
       <div>
-        <Router history={history} routes={routes} />
+        <ConnectedRouter history={history}>
+          <IntroView history={history}>
+            <Switch>
+              {RootRoutes.map(({ path, component }) =>
+                <Route path={path} key={path} component={component} />
+              )}
+              <Redirect path="*" to="/welcome" />
+            </Switch>
+          </IntroView>
+        </ConnectedRouter>
         {DevTools ? <DevTools /> : null}
       </div>
     </I18n>
