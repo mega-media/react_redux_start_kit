@@ -1,4 +1,4 @@
-import Constant from './constant';
+import { BUTTON_CLICK, BUTTON_RESET } from './constant';
 
 class BtnClass {
   constructor() {
@@ -10,18 +10,18 @@ class BtnClass {
 }
 
 /**
- * 可以使用類別作為 state 內容
+ * 可以使用類別(class)作為 state 內容
  */
 
-export default function(state = new BtnClass(), action) {
-  const { type, btnStyle } = action;
+export default (state = new BtnClass(), { type, payload }) => {
   switch (type) {
-    case Constant.BUTTON_CLICK:
+    case BUTTON_CLICK:
+      const { btnStyle } = payload;
       state[btnStyle] = !state[btnStyle];
       return Object.assign(new BtnClass(), state);
-    case Constant.BUTTON_RESET:
+    case BUTTON_RESET:
       return new BtnClass();
     default:
       return state;
   }
-}
+};

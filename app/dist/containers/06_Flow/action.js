@@ -1,31 +1,32 @@
 /**
  * @flow
  */
-import Constant from './constant';
-import type { MemberDataType } from './type';
+import MemberClass from './class';
+import { FLOW_INSERT, FLOW_REMOVE } from './constant';
+import type { InsertAction, RemoveAction } from './type';
 
 /**
  * 新增資料
- * @param data
- * @returns {{type: null, data: MemberDataType}}
+ * @param payload
+ * @returns {{type: FLOW_INSERT, payload: MemberClass}}
  */
-export function add(
-  data: MemberDataType
-): { type: string, data: MemberDataType } {
+export function add(payload: MemberClass): InsertAction {
   return {
-    type: Constant.FLOW_INSERT,
-    data
+    type: FLOW_INSERT,
+    payload
   };
 }
 
 /**
  * 刪除資料
  * @param uid
- * @returns {{type: null, uid: number}}
+ * @returns {{type: FLOW_REMOVE, payload:{uid: number}}}
  */
-export function remove(uid: number): { type: string, uid: number } {
+export function remove(uid: number): RemoveAction {
   return {
-    type: Constant.FLOW_REMOVE,
-    uid
+    type: FLOW_REMOVE,
+    payload: {
+      uid
+    }
   };
 }

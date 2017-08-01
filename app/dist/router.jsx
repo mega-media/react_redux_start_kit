@@ -62,8 +62,8 @@ if (process.env.NODE_ENV === 'development') {
  */
 const RouterFormat = (
   <Provider store={store}>
-    <I18n translations={Locales} initialLang="zh_tw" fallbackLang="en">
-      <div>
+    <div>
+      <I18n translations={Locales} initialLang="zh_tw" fallbackLang="en">
         <ConnectedRouter history={history}>
           <IntroView history={history}>
             <Switch>
@@ -74,9 +74,9 @@ const RouterFormat = (
             </Switch>
           </IntroView>
         </ConnectedRouter>
-        {DevTools ? <DevTools /> : null}
-      </div>
-    </I18n>
+      </I18n>
+      {DevTools ? <DevTools /> : null}
+    </div>
   </Provider>
 );
 export default RouterFormat;

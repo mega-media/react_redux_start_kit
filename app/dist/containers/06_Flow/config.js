@@ -3,11 +3,11 @@
  */
 import View from './view';
 import Reducer from './reducer';
-import Constant from './constant';
+import { storeKey } from './constant';
 
 export default {
   reducers: {
-    [Constant.storeKey]: Reducer
+    [storeKey]: Reducer
   },
   router: {
     path: '/flow',
