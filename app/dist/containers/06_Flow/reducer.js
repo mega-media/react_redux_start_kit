@@ -2,9 +2,9 @@
  * @flow
  */
 import { FLOW_INSERT, FLOW_REMOVE } from './constant';
-import type { Action, State } from './type';
+import type { Action, Store } from './type';
 
-export default (state: State = [], action: Action): State => {
+export default (state: Store = [], action: Action): Store => {
   switch (action.type) {
     /* 新增資料 */
     case FLOW_INSERT:

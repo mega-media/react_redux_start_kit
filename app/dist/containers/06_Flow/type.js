@@ -16,4 +16,4 @@ export type RemoveAction = {
 /**
  * reducer 回傳值
  */
-export type State = Array<MemberClass>;
+export type Store = Array<MemberClass>;
