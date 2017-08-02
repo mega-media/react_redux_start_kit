@@ -60,6 +60,10 @@ module.exports = {
     })
   ],
   entry: {
-    bundle: [path.resolve(__dirname, 'app/main.js')]
+    bundle: [
+      'babel-polyfill',
+      'es6-promise',
+      path.resolve(__dirname, 'app/main.js')
+    ]
   }
 };

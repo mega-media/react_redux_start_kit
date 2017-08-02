@@ -2,19 +2,14 @@ import React from 'react';
 /* redux */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-
 /* 多國語系 */
 import I18n from 'redux-i18n';
-import Locales from './Locales';
+import Locales from './locales';
 
 /* router */
 import createHistory from 'history/createBrowserHistory';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import {
-  ConnectedRouter,
-  routerReducer,
-  routerMiddleware
-} from 'react-router-redux';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 
 /* 系統設定 */
 import { RootReducer, RootRoutes } from './roots';
@@ -31,7 +26,6 @@ const Constants = require('Config');
  */
 const history = createHistory();
 const routeMiddleware = routerMiddleware(history);
-
 let store = {};
 let DevTools = null;
 if (process.env.NODE_ENV === 'development') {

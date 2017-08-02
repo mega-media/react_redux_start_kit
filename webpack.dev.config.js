@@ -3,15 +3,15 @@ const fs = require('fs');
 const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Config = require('./config/env/dev');
+const env = require('./config/env/dev');
 const baseConfig = require('./webpack.base.config');
 //===============================================================
 /* 建置 install.js 檔案 */
 const install = require('./config/containers-install');
 install.build();
 //===============================================================
-const host = Config.host;
-const port = Config.port;
+const host = env.host;
+const port = env.port;
 
 module.exports = Object.assign(baseConfig, {
   output: {
@@ -23,6 +23,7 @@ module.exports = Object.assign(baseConfig, {
     host,
     port,
     hot: true,
+    inline: true,
     contentBase: './build-develop',
     historyApiFallback: true
   },
@@ -44,6 +45,8 @@ module.exports = Object.assign(baseConfig, {
     ])
   },
   plugins: baseConfig.plugins.concat([
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new WebpackNotifierPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
@@ -58,7 +61,7 @@ module.exports = Object.assign(baseConfig, {
       name: 'buffer'
     }),
     new HtmlWebpackPlugin({
-      title: Config.title,
+      title: env.title,
       hash: true,
       cache: true,
       filename: 'index.html',
