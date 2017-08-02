@@ -1,15 +1,20 @@
 /* @flow */
 import MemberClass from './class';
-import { FLOW_INSERT, FLOW_REMOVE } from './constant';
+
+/**
+ * constant type
+ */
+export type INSERT = 'FLOW_INSERT';
+export type REMOVE = 'FLOW_REMOVE';
 
 /**
  * 個別設定 action 回傳
  * 讓 action 與 reducer 使用，進行語法檢查
  */
 export type Action = InsertAction | RemoveAction;
-export type InsertAction = { type: typeof FLOW_INSERT, payload: MemberClass };
+export type InsertAction = { type: INSERT, payload: MemberClass };
 export type RemoveAction = {
-  type: typeof FLOW_REMOVE,
+  type: REMOVE,
   payload: { uid: number }
 };
 

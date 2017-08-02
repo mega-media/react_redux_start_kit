@@ -5,16 +5,11 @@ import React from 'react';
 import BaseView, { applyStyles, connect } from '~/core/baseView';
 import { add } from '../action';
 import MemberClass from '../class';
+import type { State } from './type';
 
 /**
  * Form 元件只負責處理表單操作
  */
-type State = {
-  uid: number,
-  name: string,
-  gender: 'female' | 'male',
-  married: boolean
-};
 @applyStyles()
 class Form extends BaseView<void, any, State> {
   //資料序號

@@ -13,8 +13,7 @@ export default (state: Store = [], action: Action): Store => {
     /* 移除資料 */
     case FLOW_REMOVE:
       const { uid } = action.payload;
-      const newState = [...state];
-      return newState.filter(member => member.uid !== uid);
+      return [...state].filter(member => member.uid !== uid);
 
     default:
       return state;

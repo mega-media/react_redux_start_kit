@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import BaseView, { applyStyles, connect } from '~/core/baseView';
-import { storeKey } from '../constant';
+import { STORE_KEY } from '../constant';
 import { remove } from '../action';
 import MemberClass from '../class';
 import type { Props } from './type';
@@ -84,4 +84,4 @@ class Table extends BaseView<void, Props, void> {
   }
 }
 
-export default connect(storeKey)(Table);
+export default connect(STORE_KEY)(Table);

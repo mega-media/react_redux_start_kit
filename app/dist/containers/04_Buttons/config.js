@@ -1,10 +1,10 @@
 import View from './view';
 import Reducer from './reducer';
-import { storeKey } from './constant';
+import { STORE_KEY } from './constant';
 
 export default {
   reducers: {
-    [storeKey]: Reducer
+    [STORE_KEY]: Reducer
   },
   router: {
     path: '/btnClick',
