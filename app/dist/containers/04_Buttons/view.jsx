@@ -1,7 +1,8 @@
 import React from 'react';
 import BaseView, { applyStyles, connect } from '~/core/baseView';
 import { click, reset } from './action';
-import Constant from './constant';
+import { STORE_KEY } from './constant';
+
 /**
  * 裝飾方法 applyStyles 可套用系統預設樣式
  * 系統預設樣式包含：Bootstrap / Font Awesome
@@ -67,4 +68,4 @@ class Buttons extends BaseView {
     );
   }
 }
-export default connect(Constant.storeKey)(Buttons);
+export default connect(STORE_KEY)(Buttons);

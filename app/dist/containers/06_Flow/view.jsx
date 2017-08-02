@@ -5,19 +5,14 @@ import React from 'react';
 import TableView from './table/view';
 import FormView from './form/view';
 import { applyStyles } from '~/core/baseView';
-/* flow type declare
- DP = DefaultProps
- S = State
- P = Props
- */
-type DP = void;
-type S = void;
-type P = any;
-@applyStyles()
-export default class Flow extends React.Component<DP, P, S> {
-  props: P;
 
-  constructor(props: P, context: any) {
+/**
+ *  flow type declare
+ *  React.Component<DefaultProps, Props, State>
+ */
+@applyStyles()
+export default class Flow extends React.Component<void, void, void> {
+  constructor(props: void, context: any) {
     super(props, context);
   }
 
@@ -30,7 +25,7 @@ export default class Flow extends React.Component<DP, P, S> {
         <p>Personnel Data Sheet</p>
         <FormView />
         <hr />
-        <TableView />
+        <TableView title="Table Title" />
       </div>
     );
   }

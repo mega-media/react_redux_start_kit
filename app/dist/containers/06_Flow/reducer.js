@@ -1,38 +1,21 @@
 /**
  * @flow
  */
-import Constant from './constant';
-import type { MemberDataType } from './type';
+import { FLOW_INSERT, FLOW_REMOVE } from './constant';
+import type { Action, Store } from './type';
 
-export default function(
-  state: Array<MemberDataType> = [],
-  action: {
-    type: string,
-    uid?: number,
-    data?: MemberDataType
-  }
-): Array<MemberDataType> {
-  const { type, uid, data } = action;
-  switch (type) {
-    case Constant.FLOW_INSERT: {
-      if (!data) return state;
-      let newState: Array<MemberDataType> = [];
-      newState = newState.concat(state);
-      newState.push(data);
-      return newState;
-    }
-    case Constant.FLOW_REMOVE: {
-      if (!uid) return state;
-      const newState = state.reduce(
-        (array: Array<MemberDataType>, memberObject: MemberDataType) => {
-          if (memberObject.uid !== uid) array.push(memberObject);
-          return array;
-        },
-        []
-      );
-      return newState;
-    }
+export default (state: Store = [], action: Action): Store => {
+  switch (action.type) {
+    /* 新增資料 */
+    case FLOW_INSERT:
+      return [...state, action.payload];
+
+    /* 移除資料 */
+    case FLOW_REMOVE:
+      const { uid } = action.payload;
+      return [...state].filter(member => member.uid !== uid);
+
     default:
       return state;
   }
-}
+};

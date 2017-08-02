@@ -4,16 +4,18 @@
 import React from 'react';
 import BaseView, { applyStyles, connect } from '~/core/baseView';
 import { add } from '../action';
-import type { MemberDataType } from '../type';
+import MemberClass from '../class';
+import type { State } from './type';
+
 /**
  * Form 元件只負責處理表單操作
  */
 @applyStyles()
-class Form extends BaseView<void, any, MemberDataType> {
+class Form extends BaseView<void, any, State> {
   //資料序號
   uidIndex: number;
   //記錄新增欄位內容
-  state: MemberDataType;
+  state: State;
 
   constructor(props: any, context: any) {
     super(props, context);
@@ -21,7 +23,7 @@ class Form extends BaseView<void, any, MemberDataType> {
     this.state = this.initializeState();
   }
 
-  initializeState = (): MemberDataType => {
+  initializeState = (): State => {
     return {
       uid: this.uidIndex,
       name: '',
@@ -52,7 +54,7 @@ class Form extends BaseView<void, any, MemberDataType> {
     e.preventDefault();
     if (this.state && this.validate()) {
       //執行新增 action
-      this.dispatch(add(this.state));
+      this.dispatch(add(Object.assign(new MemberClass(), this.state)));
       //新增增加 uid 序號
       this.uidIndex += 1;
       //初始化表單
