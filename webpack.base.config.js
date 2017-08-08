@@ -63,6 +63,7 @@ module.exports = {
     bundle: [
       'babel-polyfill',
       'es6-promise',
+      'whatwg-fetch',
       path.resolve(__dirname, 'app/main.js')
     ]
   }

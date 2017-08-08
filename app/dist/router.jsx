@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 /* redux */
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -15,11 +16,18 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import { RootReducer, RootRoutes } from './roots';
 import { promiseMiddleware, multiDispatchMiddleware } from './middleware';
 
+/* saga */
+import createSagaMiddleware from 'redux-saga';
+import sagaFlow from './helpers/saga-flow';
+
 // Intro
 import IntroView from '~/containers/00_Intro/view';
 
 /* 系統設置 */
 const Constants = require('Config');
+
+/* saga */
+const sagaMiddleware = createSagaMiddleware();
 
 /**
  * Router setting
@@ -34,9 +42,10 @@ if (process.env.NODE_ENV === 'development') {
     RootReducer,
     compose(
       applyMiddleware(
+        routeMiddleware,
         multiDispatchMiddleware,
         promiseMiddleware,
-        routeMiddleware
+        sagaMiddleware
       ),
       DevTools.instrument()
     )
@@ -44,9 +53,16 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   store = createStore(
     RootReducer,
-    applyMiddleware(multiDispatchMiddleware, promiseMiddleware, routeMiddleware)
+    applyMiddleware(
+      routeMiddleware,
+      multiDispatchMiddleware,
+      promiseMiddleware,
+      sagaMiddleware
+    )
   );
 }
+/* 執行 saga 監聽 */
+sagaMiddleware.run(sagaFlow);
 
 /**
  * I18n opts
@@ -73,4 +89,5 @@ const RouterFormat = (
     </div>
   </Provider>
 );
+
 export default RouterFormat;

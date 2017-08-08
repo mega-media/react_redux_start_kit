@@ -3,5 +3,6 @@ module.exports = {
   host: '127.0.0.1',
   port: 8888,
   basename: '/',
-  assetsRoot: 'assets/'
+  assetsRoot: 'assets/',
+  apiHost: 'http://jsonplaceholder.typicode.com'
 };

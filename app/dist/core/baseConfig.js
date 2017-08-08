@@ -2,10 +2,12 @@
 export class Base {
   reducers: Object;
   router: Array<Object>;
+  sagas: SagaGroupType;
 
   constructor() {
     this.reducers = {};
     this.router = [];
+    this.sagas = {};
   }
 }
 
@@ -15,10 +17,13 @@ export class Base {
  * @param arg
  * @returns {Base}
  */
-type Structor = {
-  reducers?: Object,
-  router?: Object | Array<Object>
-};
+type Structor =
+  | {
+      reducers?: Object,
+      router?: Object | Array<Object>,
+      sagas?: SagaType | SagaGroupType
+    }
+  | Base;
 
 export const combineStructor = (
   structor: Structor = {},
@@ -32,6 +37,7 @@ export const combineStructor = (
       structor.router instanceof Array
         ? structor.router.slice(0)
         : [structor.router];
+  if (structor.sagas) returnObject.sagas = combineSagas({}, structor.sagas);
 
   arg.reduce((returnObject: Base, item: Structor) => {
     if (item.reducers) {
@@ -50,8 +56,44 @@ export const combineStructor = (
       else returnObject.router.push(item.router);
     }
 
+    if (item.sagas)
+      returnObject.sagas = combineSagas(returnObject.sagas, item.sagas);
+
     return returnObject;
   }, returnObject);
 
   return returnObject;
 };
+
+/**
+ * 合併 sagas
+ * @param sagas Array<object>
+ * @returns {*}
+ */
+type SagaFuncType = (res: any) => () => Generator<any, any, any>;
+type SagaType = {
+  [key: any]: SagaFuncType
+};
+type SagaGroupType = {
+  [key: any]: Array<SagaFuncType>
+};
+
+export function combineSagas(
+  ...sagas: Array<SagaType | SagaGroupType>
+): SagaGroupType {
+  return sagas.reduce(
+    (
+      processObj: SagaGroupType,
+      sagaObj: SagaType | SagaGroupType
+    ): SagaGroupType => {
+      for (let key in sagaObj) {
+        if (!processObj[key]) processObj[key] = [];
+        if (sagaObj[key] instanceof Array)
+          processObj[key] = processObj[key].concat(sagaObj[key]);
+        else processObj[key].push(sagaObj[key]);
+      }
+      return processObj;
+    },
+    {}
+  );
+}

@@ -2,7 +2,8 @@ module.exports = function(Config) {
   const basename = Config.basename,
     assetsRoot = Config.assetsRoot,
     host = Config.host,
-    port = Config.port ? ':' + Config.port : '';
+    port = Config.port ? ':' + Config.port : '',
+    apiHost = Config.apiHost;
 
   const site_url = `http://${host}${port}${basename}`,
     assets_url = site_url + assetsRoot;
@@ -12,6 +13,8 @@ module.exports = function(Config) {
     BASE_PATH: basename,
 
     ASSETS_PATH: assetsRoot,
-    ASSETS_URL: assets_url
+    ASSETS_URL: assets_url,
+
+    API_URL: apiHost
   };
 };
