@@ -34,7 +34,22 @@ module.exports = {
       <h5>☆ 持續監聽</h5>
       <ul>
         <li>
-          <label>npm run flow-test:watch</label>專案檔案變更，將觸發執行flow test檢查
+          專案使用{' '}
+          <a href="https://github.com/emcrisostomo/fswatch" target="_blank">
+            Fswatch
+          </a>{' '}
+          來監聽檔案變更
+        </li>
+        <li>
+          執行前須先{' '}
+          <a
+            href="https://github.com/emcrisostomo/fswatch#getting-fswatch"
+            target="_blank">
+            安裝
+          </a>
+        </li>
+        <li>
+          進行檢查：<label>npm run flow-test:watch</label>
         </li>
       </ul>
     </div>
