@@ -23,7 +23,7 @@ request[TODO_INSERT] = (userId: number, title: string, completed: boolean) => ({
 request[TODO_UPDATE] = (id: number, columns: Object) => ({
   method: 'put',
   url: replace('/todos/{id}', { id }),
-  body: toString({ id, ...columns })
+  body: toString(columns)
 });
 
 request[TODO_DELETE] = (id: number) => ({
