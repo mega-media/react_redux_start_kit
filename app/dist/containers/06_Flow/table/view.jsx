@@ -6,6 +6,7 @@ import BaseView, { applyStyles, connect } from '~/core/baseView';
 import { STORE_KEY } from '../constant';
 import { remove } from '../action';
 import MemberClass from '../class';
+import TableItem from '../tableItem/view';
 import type { Props } from './type';
 /**
  * Table 元件綁定 state 負責監聽資料的異動
@@ -30,27 +31,12 @@ class Table extends BaseView<void, Props, void> {
         ? memberStore.map((item: MemberClass, index: number) => {
             const { uid, name, gender, married } = item;
             return (
-              <tr key={uid}>
-                <td>
-                  {+index + 1}
-                </td>
-                <td>
-                  {name}
-                </td>
-                <td>
-                  {gender === 'female' ? 'F' : 'M'}
-                </td>
-                <td>
-                  {married ? 'YES' : 'NO'}
-                </td>
-                <td>
-                  <button
-                    styleName="btn btn-danger btn-xs"
-                    onClick={this.removeHandler(uid)}>
-                    <i styleName="glyphicon glyphicon-trash" />
-                  </button>
-                </td>
-              </tr>
+              <TableItem
+                key={`item-${uid}`}
+                index={+index + 1}
+                row={item}
+                removeHandler={this.removeHandler(uid)}
+              />
             );
           })
         : <tr>
