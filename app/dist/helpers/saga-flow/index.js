@@ -1,4 +1,4 @@
-import { take, call, fork, race, cancelled } from 'redux-saga/effects';
+import { take, call, fork, race, cancel, takeLatest } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import { SAGA_ACTION, SAGA_CANCEL } from './constant';
 import { RootSagas } from '~/roots';
@@ -31,13 +31,18 @@ export function* watchAsync() {
   try {
     while (true) {
       const { payload } = yield take(SAGA_ACTION);
-      yield race([call(asyncFunc, payload), take(SAGA_CANCEL)]);
+      const task = yield fork(asyncFunc, payload);
+      yield fork(takeLatest, SAGA_CANCEL, cancelQueueSaga, task);
     }
   } finally {
     console.debug('watchAsync terminated');
   }
 }
 
+export function* cancelQueueSaga(task) {
+  yield cancel(task);
+}
+
 export default function*() {
-  yield fork(watchAsync);
+  yield call(watchAsync);
 }
