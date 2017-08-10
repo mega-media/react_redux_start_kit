@@ -1,6 +1,8 @@
-/* @flow */
-import user from './user/request';
-import todo from './todo/request';
-import type { RequestType } from './type';
+const context = require.context('./', true, /\w+\/request\.js/);
 
-export default (Object.assign({}, user, todo): RequestType);
+export default context
+  .keys()
+  .reduce(
+    (files, filename) => Object.assign(files, context(filename)['default']),
+    {}
+  );
