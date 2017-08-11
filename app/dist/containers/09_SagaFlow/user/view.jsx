@@ -1,9 +1,15 @@
 /* @flow */
 import React from 'react';
 import BaseView, { applyStyles, connect } from '~/core/baseView';
+
+/* constant */
+import { STORE_KEY } from './constant';
+
+/* actions */
 import { fetch, changeActive } from './action';
 import { cancelLastAction, fetchByUser } from '../todo/action';
-import { STORE_KEY } from './constant';
+
+/* helper */
 import { ObjectEqual } from '~/helpers/equal';
 
 @applyStyles()
@@ -12,25 +18,35 @@ export class User extends BaseView<void, any, void> {
     super(props, context);
   }
 
+  /**
+   * 改變選擇成員
+   * @param userId
+   */
   changeActive = (userId: number) => () => {
     this.dispatch([
+      /* 變更 active id */
       changeActive(userId),
+      /* 取消佇列中等待回傳的監聽 */
       cancelLastAction(),
+      /* 取得選擇的成員的 todo 列表 */
       fetchByUser(userId)
     ]);
   };
 
   componentWillMount() {
+    /* 渲染前就撈成員資料 */
     this.dispatch(fetch());
   }
 
   shouldComponentUpdate(nextProps: any) {
+    /* 成員資料有變更，回傳 true */
     return !ObjectEqual(this.getResponse(), this.getResponse(nextProps));
   }
 
   componentDidUpdate() {
-    const { users: [firstUser, ...others] } = this.getResponse();
-    if (firstUser) this.changeActive(firstUser.id)();
+    /* 預設撈取第一個成員的 todo list */
+    const { users: [firstUser, ...others], activeUserId } = this.getResponse();
+    if (firstUser && activeUserId === 0) this.changeActive(firstUser.id)();
   }
 
   render() {

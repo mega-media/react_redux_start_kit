@@ -1,11 +1,9 @@
 /* @flow */
 import { USER_GET } from './constant';
 
-const request = {};
-
-request[USER_GET] = () => ({
-  method: 'get',
-  url: '/users'
-});
-
-export default request;
+export default {
+  [USER_GET]: () => ({
+    method: 'get',
+    url: '/users'
+  })
+};

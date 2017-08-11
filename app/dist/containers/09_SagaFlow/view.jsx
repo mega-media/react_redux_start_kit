@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { applyStyles } from '~/core/baseView';
 import User from './user/view';
 import Todo from './todo/view';
 
 @applyStyles()
-export default class SagaFlow extends React.Component {
+export default class SagaFlow extends Component {
   constructor(props, context) {
     super(props, context);
   }

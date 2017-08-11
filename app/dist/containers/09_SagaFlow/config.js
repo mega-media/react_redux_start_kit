@@ -13,3 +13,7 @@ export default combineStructor(
   user,
   todo
 );
+
+/**
+ * core/baseConfig 提供 combineStructor 函式，用來合併兩個以上的 config 設定
+ */

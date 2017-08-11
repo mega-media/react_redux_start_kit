@@ -1,9 +1,18 @@
-/* @flow */
+/**
+ * 產生 saga action 格式內容
+ * @flow 
+ */
 import apiSet from '~/api/request';
 import { API_URL } from 'Config';
 import { SAGA_ACTION } from './saga-flow/constant';
 import type { SagaAction } from './saga-flow/type';
 
+/**
+ * 格式檢查
+ * @param api
+ * @param args
+ * @private
+ */
 export function _validate(api: string, ...args: Array<any>): void {
   if (!apiSet[api]) throw '找不到指定的 api :' + api;
   if (typeof apiSet[api] !== 'function') throw 'api 參數宣告必須為方法 :' + api;
@@ -14,11 +23,18 @@ export function _validate(api: string, ...args: Array<any>): void {
     throw 'method 格式錯誤' + api;
 }
 
+/**
+ * 從設定的 request，帶入 saga action
+ * @param api   [API 代碼]
+ * @param args  [傳入request 的參數]
+ * @returns {{type: ACTION, payload: {api: string, stream: Promise<*>}}}
+ */
 export function fetchApi(api: string, ...args: Array<any>): SagaAction {
   /* 錯誤檢查 */
   _validate(api, ...args);
-  /* fetch */
+  /* 撈出指定的 request */
   const { method, url, body = null } = apiSet[api](...args);
+  /* 產出 saga action 格式 */
   return {
     type: SAGA_ACTION,
     payload: {

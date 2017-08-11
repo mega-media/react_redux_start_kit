@@ -17,24 +17,36 @@ export default class TodoItem extends Component<void, Props, State> {
     };
   }
 
+  /**
+   * input element onKeyPress event
+   */
   eventHandler = (e: Event) => {
     if (e.charCode === 13) {
+      /* 按下 enter 執行 */
       const { updateHandler } = this.props;
       updateHandler({ title: this.input.value });
       this.input.blur();
     }
   };
 
+  /**
+   * completed edit
+   * @param completed {boolean}
+   */
   completeHandler = (completed: boolean) => () => {
     const { updateHandler } = this.props;
     updateHandler({ completed });
   };
 
+  /**
+   * 顯示狀態切換
+   */
   toggleModify = () => {
     this.setState({ modify: !this.state.modify });
   };
 
   componentDidUpdate() {
+    /* 編輯狀態的時候，游標 focus input element */
     if (this.state.modify) this.input.focus();
   }
 

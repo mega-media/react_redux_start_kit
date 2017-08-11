@@ -10,7 +10,7 @@ export type SAVE = 'TODO_SAVE';
 export type Action = { type: SAVE, payload: Array<TodoData> };
 
 /**
- * store type
+ * todo item
  */
 export type TodoData = {
   id: number,
@@ -18,6 +18,10 @@ export type TodoData = {
   title: string,
   completed: boolean
 };
+
+/**
+ * store type
+ */
 export type Store = Array<TodoData>;
 
 /**

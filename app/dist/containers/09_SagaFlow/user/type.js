@@ -11,6 +11,7 @@ export type CHANGE = 'USER_CHANGE';
 export type Action = SaveAction | ChangeAction;
 export type SaveAction = { type: SAVE, payload: Array<UserData> };
 export type ChangeAction = { type: CHANGE, payload: number };
+
 /**
  * store type
  */

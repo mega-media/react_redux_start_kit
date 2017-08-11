@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+/* @flow */
 export function NullEqual(params: ?any, ...others: Array<?any>): boolean {
   if (others.length === 0) return false;
 

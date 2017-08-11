@@ -9,3 +9,7 @@ export default {
   },
   sagas: Saga
 };
+
+/**
+ * 將 saga 檔案寫入 sagas 參數，即可綁定監聽的 API 回傳行為
+ */

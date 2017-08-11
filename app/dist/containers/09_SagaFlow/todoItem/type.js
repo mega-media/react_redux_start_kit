@@ -11,7 +11,10 @@ export type Props = {
     completed?: boolean
   }) => void
 };
-
+/**
+ * view's state type
+ * modify [啟用編輯狀態]
+ */
 export type State = {
   modify: boolean
 };
