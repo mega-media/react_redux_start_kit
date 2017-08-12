@@ -6,7 +6,7 @@ import Reducer from './reducer';
 import { STORE_KEY } from './constant';
 
 export default {
-  reducers: {
+  reducer: {
     [STORE_KEY]: Reducer
   },
   router: {

@@ -7,10 +7,10 @@ import { SAGA_ACTION } from './saga-flow/constant';
 import type { SagaAction } from './saga-flow/type';
 import requests from '../build/request';
 
-const apiSet = Object.assign.apply(null, [
-  {},
-  ...requests.map(req => req.default)
-]);
+const apiSet = requests.reduce(
+  (output, req) => Object.assign(output, req.default),
+  {}
+);
 
 /**
  * 格式檢查

@@ -4,10 +4,10 @@ import Reducer from './reducer';
 import Saga from './saga';
 
 export default {
-  reducers: {
+  reducer: {
     [STORE_KEY]: Reducer
   },
-  sagas: Saga
+  saga: Saga
 };
 
 /**

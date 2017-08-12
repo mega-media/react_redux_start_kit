@@ -1,13 +1,13 @@
 //@flow
 export class Base {
-  reducers: Object;
+  reducer: Object;
   router: Array<Object>;
-  sagas: SagaGroupType;
+  saga: SagaGroupType;
 
   constructor() {
-    this.reducers = {};
+    this.reducer = {};
     this.router = [];
-    this.sagas = {};
+    this.saga = {};
   }
 }
 
@@ -19,9 +19,9 @@ export class Base {
  */
 type Structor =
   | {
-      reducers?: Object,
+      reducer?: Object,
       router?: Object | Array<Object>,
-      sagas?: SagaType | SagaGroupType
+      saga?: SagaType | SagaGroupType | Array<SagaType> | Array<SagaGroupType>
     }
   | Base;
 
@@ -30,34 +30,40 @@ export const combineStructor = (
   ...arg: Array<Structor>
 ): Base => {
   let returnObject: Base = new Base();
-  if (structor.reducers)
-    returnObject.reducers = Object.assign({}, structor.reducers);
+  if (structor.reducer) returnObject.reducer = { ...structor.reducer };
   if (structor.router)
     returnObject.router =
       structor.router instanceof Array
-        ? structor.router.slice(0)
+        ? [...structor.router]
         : [structor.router];
-  if (structor.sagas) returnObject.sagas = combineSagas({}, structor.sagas);
+
+  if (structor.saga)
+    returnObject.saga =
+      structor.saga instanceof Array
+        ? combineSagas.apply(null, [...structor.saga])
+        : { ...structor.saga };
 
   arg.reduce((returnObject: Base, item: Structor) => {
-    if (item.reducers) {
-      Object.keys(item.reducers).forEach((key: string) => {
-        if (Object.keys(returnObject.reducers).indexOf(key) > -1)
+    if (item.reducer) {
+      Object.keys(item.reducer).forEach((key: string) => {
+        if (Object.keys(returnObject.reducer).indexOf(key) > -1)
           throw Error('reducer key 不能重複 :' + key);
       });
-      returnObject.reducers = Object.assign(
-        returnObject.reducers,
-        item.reducers
-      );
-    }
-    if (item.router) {
-      if (item.router instanceof Array)
-        returnObject.router = returnObject.router.concat(item.router);
-      else returnObject.router.push(item.router);
+      returnObject.reducer = Object.assign(returnObject.reducer, item.reducer);
     }
 
-    if (item.sagas)
-      returnObject.sagas = combineSagas(returnObject.sagas, item.sagas);
+    if (item.router)
+      returnObject.router =
+        item.router instanceof Array
+          ? [...returnObject.router, ...item.router]
+          : [...returnObject.router, item.router];
+
+    if (item.saga) {
+      returnObject.saga =
+        item.saga instanceof Array
+          ? combineSagas.apply(null, [returnObject.saga, ...item.saga])
+          : combineSagas(returnObject.saga, item.saga);
+    }
 
     return returnObject;
   }, returnObject);
@@ -70,7 +76,7 @@ export const combineStructor = (
  * @param sagas Array<object>
  * @returns {*}
  */
-type SagaFuncType = (res: any) => () => Generator<any, any, any>;
+type SagaFuncType = (res: any) => Generator<any, any, any>;
 type SagaType = {
   [key: any]: SagaFuncType
 };

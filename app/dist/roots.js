@@ -5,13 +5,13 @@ import { i18nState } from 'redux-i18n';
 import { combineStructor } from '~/core/baseConfig';
 import containers from './build/containers';
 
-const { reducers, router, sagas } = combineStructor.apply(
+const { reducer, router, saga } = combineStructor.apply(
   null,
   containers.map(config => config.default)
 );
 
 export const RootReducer = combineReducers(
-  Object.assign(reducers, {
+  Object.assign(reducer, {
     routing: routerReducer,
     i18nState
   })
@@ -19,10 +19,10 @@ export const RootReducer = combineReducers(
 
 export const RootRoutes = router;
 
-export const RootSagas = Object.keys(sagas).reduce((obj, key) => {
+export const RootSagas = Object.keys(saga).reduce((obj, key) => {
   obj[key] = response =>
     function*() {
-      yield all(sagas[key].map(sagaFunc => call(sagaFunc, response)));
+      yield all(saga[key].map(sagaFunc => call(sagaFunc, response)));
     };
   return obj;
 }, {});
