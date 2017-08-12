@@ -5,8 +5,8 @@ import { RootSagas } from '~/roots';
 
 export function subscribe({ api, stream }) {
   return eventChannel(emit => {
-    /* 收到回傳的處理 */
-    stream.then(response => response.json()).then(res => {
+    /* 發送 api */
+    stream().then(response => response.json()).then(res => {
       /* 查詢有沒有回傳處理 */
       if (!RootSagas[api]) {
         /* 沒有：跳出錯誤 */

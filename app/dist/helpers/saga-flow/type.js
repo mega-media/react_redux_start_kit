@@ -15,7 +15,7 @@ export type SagaAction = {
   type: ACTION,
   payload: {
     api: string,
-    stream: Promise<any>
+    stream: () => Promise<any>
   }
 };
 
