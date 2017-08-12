@@ -1,5 +1,4 @@
-build/
-build-develop/
+output/
 node_modules/
 flow-typed/npm/
 .idea/
@@ -7,4 +6,4 @@ flow-typed/npm/
 .DS_Store
 .nyc_output/
 coverage/
-app/dist/containers/install.js
+app/dist/build/

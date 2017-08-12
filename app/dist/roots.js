@@ -1,13 +1,13 @@
-import install from '~/containers/install';
 import { call, all } from 'redux-saga/effects';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { i18nState } from 'redux-i18n';
 import { combineStructor } from '~/core/baseConfig';
+import containers from './build/containers';
 
 const { reducers, router, sagas } = combineStructor.apply(
   null,
-  install.map(config => config.default)
+  containers.map(config => config.default)
 );
 
 export const RootReducer = combineReducers(

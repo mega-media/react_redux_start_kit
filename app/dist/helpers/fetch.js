@@ -1,11 +1,16 @@
 /**
  * 產生 saga action 格式內容
- * @flow 
+ * @flow
  */
-import apiSet from '~/api/request';
 import { API_URL } from 'Config';
 import { SAGA_ACTION } from './saga-flow/constant';
 import type { SagaAction } from './saga-flow/type';
+import requests from '../build/request';
+
+const apiSet = Object.assign.apply(null, [
+  {},
+  ...requests.map(req => req.default)
+]);
 
 /**
  * 格式檢查
@@ -39,7 +44,7 @@ export function fetchApi(api: string, ...args: Array<any>): SagaAction {
     type: SAGA_ACTION,
     payload: {
       api,
-      stream: fetch(API_URL + url, {
+      stream: fetch.bind(null, API_URL + url, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
