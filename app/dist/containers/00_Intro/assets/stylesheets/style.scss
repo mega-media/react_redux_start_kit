@@ -20,4 +20,9 @@
   h5:not(:first-child) {
     padding-top: 15px;
   }
+  helper {
+    display: block;
+    color: #aaa;
+    line-height: 24px;
+  }
 }

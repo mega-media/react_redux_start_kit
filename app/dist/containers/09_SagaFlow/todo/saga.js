@@ -19,7 +19,7 @@ import type { TodoItem } from '~/api/todo/response';
 export default {
   /* 抓取特定 user 的 todos */
   [TODO_GET_BY_USER]: function*(res: Array<TodoItem>) {
-    /* 寫入取得的資料 */
+    /* 使用 put 來呼叫 action 寫入取得的資料 */
     yield put(save(res));
   },
 
@@ -27,7 +27,7 @@ export default {
   [TODO_INSERT]: function*(res) {
     console.log('todo item insert success.');
     const { userId, title, completed } = res;
-    /* 取得目前store中已儲存的資料內容 */
+    /* select 可取得目前 store 中資料 */
     const todos = yield select(state => state[STORE_KEY]);
     /* 將回傳內容新增至陣列中 */
     yield put(save([...todos, { id: Date.now(), userId, title, completed }]));
