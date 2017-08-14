@@ -1,0 +1,48 @@
+{
+  "presets": [
+    "react",
+    "es2015",
+    "stage-0",
+    "env"
+  ],
+  "plugins": [
+    "lodash",
+    "transform-class-properties",
+    "syntax-flow",
+    "transform-flow-strip-types",
+    "transform-runtime",
+    "transform-decorators-legacy",
+    [
+      "babel-root-import",
+      [
+        {
+          "rootPathPrefix": "~",
+          "rootPathSuffix": "app/dist"
+        },
+        {
+          "rootPathPrefix": "@",
+          "rootPathSuffix": "app/assets"
+        }
+      ]
+    ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-constant-elements",
+        "transform-react-inline-elements"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "istanbul",
+        [
+          "babel-plugin-webpack-alias",
+          {
+            "config": "webpack.test.config.js"
+          }
+        ]
+      ]
+    }
+  }
+}

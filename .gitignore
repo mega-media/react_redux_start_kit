@@ -1,0 +1,9 @@
+output/
+node_modules/
+flow-typed/npm/
+.idea/
+.git/
+.DS_Store
+.nyc_output/
+coverage/
+app/dist/build/
