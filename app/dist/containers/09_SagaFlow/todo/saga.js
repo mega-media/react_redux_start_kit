@@ -14,7 +14,7 @@ import { STORE_KEY } from './constant';
 import { save } from './action';
 
 /* type */
-import type { TodoItem } from '~/api/todo/response';
+import type { TodoItem } from '~/api/todo/type';
 
 export default {
   /* 抓取特定 user 的 todos */
@@ -24,13 +24,12 @@ export default {
   },
 
   /* 寫入一筆 todo */
-  [TODO_INSERT]: function*(res) {
+  [TODO_INSERT]: function*(res: TodoItem) {
     console.log('todo item insert success.');
-    const { userId, title, completed } = res;
     /* select 可取得目前 store 中資料 */
     const todos = yield select(state => state[STORE_KEY]);
     /* 將回傳內容新增至陣列中 */
-    yield put(save([...todos, { id: Date.now(), userId, title, completed }]));
+    yield put(save([...todos, res]));
   },
 
   /* 更新某筆 todo */

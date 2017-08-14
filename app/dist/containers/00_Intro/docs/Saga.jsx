@@ -45,6 +45,7 @@ module.exports = {
           <li>
             同時會額外建立另一個 saga 支線，監聽 action type 為 <label>SAGA_CANCEL</label> 的呼叫
             <helper>* 收到 SAGA_CANCEL 的呼叫，會將所有監聽尚未關閉的 sagas 強制關閉</helper>
+            <helper>* sagas 的強制關閉，只是關閉了回傳的監聽，並不能取消已發送的 API </helper>
           </li>
         </ol>
       </div>
@@ -66,8 +67,7 @@ module.exports = {
                   每筆 API 皆給予一個<b>代碼</b>，作為資料識別
                 </li>
                 <li>
-                  在路徑 <b>app/dist/api/</b> 底下建置專案所有需要的 API 資訊，建議由 api
-                  第一層路由名稱命名資料夾
+                  在路徑 <b>app/dist/api/</b> 底下建置專案所有需要的 API 資訊，建議由第一層路由名稱命名資料夾
                 </li>
                 <li>
                   在每個資料夾底下添加 <label>request.js</label> 檔案，資料格式記錄在{' '}
@@ -75,6 +75,17 @@ module.exports = {
                 </li>
               </ul>
             </div>
+          </li>
+          <li>
+            <b>RESPONSE</b>
+            <ul>
+              <li>作為篩選或轉換 API response 的函式，在傳入 saga 前使用</li>
+              <li>
+                在路徑 <b>app/dist/api/</b> 每個資料夾底下添加 <label>response.js</label>{' '}
+                檔案，資料格式記錄在 <b>app/dist/api/type.js</b>
+              </li>
+              <li>若回傳資料不需經過任何調整則不用宣告</li>
+            </ul>
           </li>
         </ol>
       </div>
@@ -110,7 +121,9 @@ export default {
             </pre>
           </li>
           <li>
-            <b>config.js</b>：設定參數 <lable>saga</lable>，對應上述 saga.js 檔案
+            <b>config.js</b>：設定參數
+            <lable>saga</lable>
+            ，對應上述 saga.js 檔案
             <pre>
               {'//config.js'}
               {`

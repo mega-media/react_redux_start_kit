@@ -2,6 +2,12 @@ import { take, call, fork, race, cancel, takeLatest } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import { SAGA_ACTION, SAGA_CANCEL } from './constant';
 import { RootSagas } from '~/roots';
+import response from '../../build/response';
+
+const responseSet = response.reduce(
+  (output, req) => Object.assign(output, req.default),
+  {}
+);
 
 export function subscribe({ api, stream }) {
   return eventChannel(emit => {
@@ -13,7 +19,10 @@ export function subscribe({ api, stream }) {
         console.error('api not be registered : ' + api);
       } else {
         /* 有：執行處理 */
-        emit(RootSagas[api](res));
+        if (responseSet[api] && typeof responseSet[api] !== 'function')
+          console.error('api response 格式錯誤 : ' + api);
+        /* 過濾 response 資料 */
+        emit(RootSagas[api](responseSet[api] ? responseSet[api](res) : res));
       }
       /* 處理完畢，結束這回合 */
       emit(END);

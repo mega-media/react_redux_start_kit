@@ -1,24 +1,12 @@
 /* @flow */
-export type User = {
-  id: number,
-  name: string,
-  username: string,
-  email: string,
-  address: {
-    street: string,
-    suite: string,
-    city: string,
-    zipcode: string,
-    geo: {
-      lat: string,
-      lng: string
-    }
-  },
-  phone: string,
-  website: string,
-  company: {
-    name: string,
-    catchPhrase: string,
-    bs: string
-  }
+import { USER_GET } from './constant';
+import type { User } from './type';
+
+export default {
+  /* 篩選 id、name */
+  [USER_GET]: (res: Object): Array<User> =>
+    res.map(({ id, name }) => ({
+      id,
+      name
+    }))
 };

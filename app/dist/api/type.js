@@ -10,3 +10,7 @@ export type RequestType = {
     body?: any
   }
 };
+
+export type ResponseType = {
+  [code: string]: (response: any) => any
+};
