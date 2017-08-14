@@ -12,7 +12,7 @@
 模組化程式，開發者僅需維護自己負責的 container
 
 - 簡化的配置：    
-定義設定檔(config.js)快速定義 Reducer 與 Router
+定義設定檔(config.js)快速定義 reducer、router 與 API
 
 ## 開始使用
 
@@ -39,7 +39,6 @@ npm start
 
 ### production 版本
 ````
-npm run release
+npm run production
 ````
 將專案壓縮、編碼並移除註解與console
-
