@@ -49,7 +49,7 @@ class Counter extends BaseView {
 }
 /**
  * connect 回傳 react-redux 的 connect 函式，
- * 用以綁定在 Configs.reducers 中設定的 state，當 state 內容改變時，會觸發 View 做處理
+ * 用以綁定在 configs.reducer 中設定的 state，當 state 內容改變時，會觸發 View 做處理
  *
  * 用法說明如下：
  * connect(state 名稱)(Component class name)

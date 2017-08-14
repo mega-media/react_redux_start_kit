@@ -38,19 +38,11 @@ module.exports = {
           </li>
         </ul>
       </div>
-      <h5>☆ Config 的設定</h5>
+      <h5>☆ config 的設定</h5>
       <div>
         <ul>
-          <li>Config.js 是 Container 的設定檔，可在此設定該 Container 的路徑以及對應檔案</li>
-          <li>專案建置時系統會掃描所有 Containers 的 Config.js 進行合併</li>
-          <li>
-            Router 相關設定語法請參閱：
-            <a
-              target="_blank"
-              href="https://github.com/ReactTraining/react-router/blob/master/docs/guides/RouteConfiguration.md#configuration-with-plain-routes">
-              React Router - Configuration with Plain Routes
-            </a>
-          </li>
+          <li>config.js 是 Container 的設定檔，可在此設定該 Container 的路徑以及對應檔案</li>
+          <li>專案建置時系統會掃描所有 Containers 的 config.js 進行合併</li>
         </ul>
       </div>
     </div>

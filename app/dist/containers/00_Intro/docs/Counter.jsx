@@ -60,7 +60,7 @@ module.exports = {
       </ul>
       <h5>☆ Reducer 的設定</h5>
       <ul>
-        <li>與 Router 設定一同寫在 Config.js 中</li>
+        <li>與 Router 設定一同寫在 config.js 中</li>
       </ul>
       <h5>☆ 核心檔案 - BaseView</h5>
       <ul>

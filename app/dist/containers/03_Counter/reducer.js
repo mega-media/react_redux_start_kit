@@ -21,5 +21,5 @@ export default function(state = 0, action) {
  * 若有改變則會觸發執行 Component 事件
  * 因此，添加 default 可避免觸發非預期中的行為
  * 
- * Reducer 與 state 綁定，請參閱 03_Counter/Config.js
+ * Reducer 與 state 綁定，請參閱 03_Counter/config.js
  */

@@ -5,17 +5,13 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const env = require('./config/env/dev');
 const baseConfig = require('./webpack.base.config');
-//===============================================================
-/* 建置 install.js 檔案 */
-const install = require('./config/containers-install');
-install.build();
-//===============================================================
+
 const host = env.host;
 const port = env.port;
 
 module.exports = Object.assign(baseConfig, {
   output: {
-    path: path.resolve(__dirname, 'build-develop'),
+    path: path.resolve(__dirname, 'output/development'),
     filename: '[name].js',
     publicPath: '/'
   },

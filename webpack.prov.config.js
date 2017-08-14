@@ -5,14 +5,10 @@ const baseConfig = require('./webpack.base.config');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ExtractCSS = new ExtractTextPlugin('styles.css');
 const ExtractPublic = new ExtractTextPlugin('public.css');
-//===============================================================
-/* 寫入 container */
-const install = require('./config/containers-install');
-install.build();
-//===============================================================
+
 module.exports = Object.assign(baseConfig, {
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'output/production'),
     filename: '[name].js',
     publicPath: './'
   },

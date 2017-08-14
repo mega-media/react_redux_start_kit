@@ -50,6 +50,11 @@ export default class Intro extends React.Component {
         route: '/test',
         title: '8. Unit test.',
         file: 'UnitTest.jsx'
+      },
+      {
+        route: '/saga',
+        title: '9. Saga',
+        file: 'Saga.jsx'
       }
     ];
   }

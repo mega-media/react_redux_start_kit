@@ -8,8 +8,8 @@ export default {
 };
 
 /**
- * Config.js 是 Container 的設定檔，在此設定該 Container 的路徑以及對應檔案
- * 專案建置時系統會掃描所有 Containers 的 Config.js 進行合併
+ * config.js 是 Container 的設定檔，在此設定該 Container 的路徑以及對應檔案
+ * 專案建置時系統會掃描所有 Containers 的 config.js 進行合併
  *
  * router 
  * @param path [路徑，需以 / 為開頭]

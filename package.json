@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=development webpack --config ./webpack.dev.config.js",
-    "start": "NODE_ENV=development webpack-dev-server --devtool eval --progress --colors --config ./webpack.dev.config.js",
-    "release": "NODE_ENV=production webpack -p --config ./webpack.prov.config.js",
+    "development": "npm run build; NODE_ENV=development webpack --config ./webpack.dev.config.js",
+    "production": "npm run build; NODE_ENV=production webpack -p --config ./webpack.prov.config.js",
+    "build": "node app/build.js || exit",
+    "start": "npm run build; NODE_ENV=development webpack-dev-server --devtool eval --progress --colors --config ./webpack.dev.config.js",
     "test": "NODE_ENV=test nyc mocha --opts ./.mochaopts \"app/dist/**/__test__/**/*.test.*\" || exit 0",
     "coverage-report": "NODE_ENV=test nyc report --reporter=lcov --reporter=text --reporter=text-summary",
     "flow-install": "flow-typed install --overwrite",
-    "flow-test": "flow; test $? -eq 0 -o $? -eq 2",
+    "flow-test": "flow || notify -t 'Flow Type' -m 'something mistake'",
     "flow-test:watch": "npm run flow-test; fswatch -e ./**/* -o 1 | xargs -n1 -I{} sh -c 'tput setaf 6; date \"+\n[%m/%d %H:%M:%S]\";tput sgr0; npm run flow-test'",
     "mocha-test:watch": "NODE_ENV=test mocha --watch --opts ./.mochaopts \"app/dist/**/__test__/**/*.test.*\"",
     "precommit": "lint-staged",
@@ -44,7 +45,7 @@
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
-    "flow-bin": "^0.51.1",
+    "flow-bin": "^0.52.0",
     "flow-typed": "^2.1.5",
     "growl": "^1.10.2",
     "html-webpack-plugin": "^2.29.0",
@@ -57,6 +58,7 @@
     "lint-staged": "^4.0.2",
     "lodash-webpack-plugin": "^0.11.4",
     "mocha": "^3.4.2",
+    "node-notifier-cli": "^1.0.1",
     "node-sass": "^4.5.3",
     "nyc": "^11.1.0",
     "postcss-loader": "^2.0.6",
@@ -93,7 +95,9 @@
     "react-router-dom": "^4.1.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
-    "redux-i18n": "^1.5.3"
+    "redux-i18n": "^1.5.3",
+    "redux-saga": "^0.15.6",
+    "whatwg-fetch": "^2.0.3"
   },
   "lint-staged": {
     "*.{js,jsx,css,scss,sass}": [
