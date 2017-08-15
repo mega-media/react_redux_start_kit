@@ -107,7 +107,7 @@ export default class BaseView<D: any, P: any, S: any> extends React.Component<
    * @param storeKey string
    * @returns *
    */
-  getState = (storeKey?: string): any => {
+  getStore = (storeKey?: string): any => {
     const states: Object = this.context.store.getState();
     return storeKey ? states[storeKey] || null : states;
   };
