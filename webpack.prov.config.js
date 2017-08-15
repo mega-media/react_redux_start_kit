@@ -3,8 +3,11 @@ const fs = require('fs');
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base.config');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractCSS = new ExtractTextPlugin('styles.css');
 const ExtractPublic = new ExtractTextPlugin('public.css');
+const env = require('./config/env/prov');
+const { PROJECT_NAME } = env;
 
 module.exports = Object.assign(baseConfig, {
   output: {
@@ -67,6 +70,14 @@ module.exports = Object.assign(baseConfig, {
         // 内嵌定义了但是只用到一次的变量
         collapse_vars: true
       }
+    }),
+    new HtmlWebpackPlugin({
+      title: PROJECT_NAME,
+      hash: true,
+      cache: false,
+      filename: 'index.html',
+      favicon: 'app/assets/images/favicon.ico',
+      template: 'entrance/index.html'
     })
   ])
 });

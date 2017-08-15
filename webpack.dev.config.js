@@ -6,18 +6,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const env = require('./config/env/dev');
 const baseConfig = require('./webpack.base.config');
 
-const host = env.host;
-const port = env.port;
+const { PROJECT_NAME, DEVELOP_HOST, DEVELOP_PORT } = env;
 
 module.exports = Object.assign(baseConfig, {
   output: {
     path: path.resolve(__dirname, 'output/development'),
     filename: '[name].js',
-    publicPath: '/'
+    publicPath: './'
   },
   devServer: {
-    host,
-    port,
+    host: DEVELOP_HOST,
+    port: DEVELOP_PORT,
     hot: true,
     inline: true,
     contentBase: './build-develop',
@@ -57,12 +56,12 @@ module.exports = Object.assign(baseConfig, {
       name: 'buffer'
     }),
     new HtmlWebpackPlugin({
-      title: env.title,
+      title: PROJECT_NAME,
       hash: true,
       cache: true,
       filename: 'index.html',
       favicon: 'app/assets/images/favicon.ico',
-      template: 'entrance/index.dev.html'
+      template: 'entrance/index.html'
     })
   ])
 });

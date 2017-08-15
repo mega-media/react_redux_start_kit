@@ -81,7 +81,7 @@ export class Todo extends BaseView<void, any, State> {
     /* 按下 enter 時執行 */
     if (e.charCode === 13) {
       /* 取得目前 user id */
-      const { activeUserId } = this.getState(USER_STORE_KEY);
+      const { activeUserId } = this.getStore(USER_STORE_KEY);
       this.dispatch(insert(activeUserId, this.input.value, false));
       /* 輸入框清空 */
       this.input.value = '';
