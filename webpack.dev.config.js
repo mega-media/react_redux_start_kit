@@ -3,20 +3,23 @@ const fs = require('fs');
 const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const env = require('./config/env/dev');
 const baseConfig = require('./webpack.base.config');
-
-const { PROJECT_NAME, DEVELOP_HOST, DEVELOP_PORT } = env;
+const {
+  PROJECT_NAME,
+  PROJECT_HOST,
+  PROJECT_PORT,
+  BASE_PATH
+} = require('./config/global-constants');
 
 module.exports = Object.assign(baseConfig, {
   output: {
     path: path.resolve(__dirname, 'output/development'),
     filename: '[name].js',
-    publicPath: './'
+    publicPath: BASE_PATH
   },
   devServer: {
-    host: DEVELOP_HOST,
-    port: DEVELOP_PORT,
+    host: PROJECT_HOST,
+    port: PROJECT_PORT,
     hot: true,
     inline: true,
     contentBase: './build-develop',
