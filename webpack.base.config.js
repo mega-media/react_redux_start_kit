@@ -1,9 +1,9 @@
 const path = require('path');
+const url = require('url');
 const webpack = require('webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const Config = require('./config/env.config');
-const defineConstants = require('./config/define-constants');
-const { ASSERTS_DIR } = Config;
+const globalConstants = require('./config/global-constants');
+const { ASSETS_PATH } = globalConstants;
 
 module.exports = {
   cache: true,
@@ -13,35 +13,35 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         loaders: ['babel-loader?cacheDirectory=true'],
-        include: path.join(__dirname, 'app')
+        include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.json$/,
         loaders: ['json-loader'],
-        include: path.join(__dirname, 'app')
+        include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          `url-loader?limit=10000&name=${ASSERTS_DIR}images/[hash].[ext]`,
+          `url-loader?limit=10000&name=${ASSETS_PATH}images/[hash].[ext]`,
           'img-loader?progressive=true'
         ]
       },
       {
         test: /\.ico$/i,
-        loader: `file-loader?name=${ASSERTS_DIR}images/[name].[ext]`
+        loader: `file-loader?name=${ASSETS_PATH}images/[name].[ext]`
       },
       {
         test: /\.(mp4|swf)$/,
-        loader: `file-loader?name=${ASSERTS_DIR}videos/[name].[ext]`
+        loader: `file-loader?name=${ASSETS_PATH}videos/[name].[ext]`
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=${ASSERTS_DIR}fonts/[name].[ext]`
+        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=${ASSETS_PATH}fonts/[name].[ext]`
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `file-loader?name=${ASSERTS_DIR}fonts/[name].[ext]`,
+        loader: `file-loader?name=${ASSETS_PATH}fonts/[name].[ext]`,
         include: path.join(__dirname, 'app/assets/fonts')
       }
     ]
@@ -50,7 +50,7 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   externals: {
-    Config: JSON.stringify(defineConstants(Config))
+    Config: JSON.stringify(globalConstants)
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),

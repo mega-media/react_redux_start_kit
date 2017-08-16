@@ -1,15 +1,24 @@
+/* 專案名稱 */
 const PROJECT_NAME = 'React Redux Start Kit';
-const DEVELOP_HOST = '0.0.0.0';
-const DEVELOP_PORT = 80;
-const PROJECT_ROOT = '/';
-const ASSERTS_DIR = 'assets/';
-const API_HOST = '';
+
+/* 專案環境 */
+const PROJECT_HOST = '0.0.0.0';
+const PROJECT_PORT = 80;
+
+/* 專案路徑 */
+const PROJECT_PATH = '/';
+
+/* 資源路徑 */
+const ASSETS_PATH = 'assets/';
+
+/* api remote */
+const API_URL = 'http://jsonplaceholder.typicode.com';
 
 module.exports = {
   PROJECT_NAME,
-  DEVELOP_HOST,
-  DEVELOP_PORT,
-  PROJECT_ROOT,
-  ASSERTS_DIR,
-  API_HOST
+  PROJECT_HOST,
+  PROJECT_PORT,
+  PROJECT_PATH,
+  ASSETS_PATH,
+  API_URL
 };

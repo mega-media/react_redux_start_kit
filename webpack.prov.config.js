@@ -6,14 +6,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractCSS = new ExtractTextPlugin('styles.css');
 const ExtractPublic = new ExtractTextPlugin('public.css');
-const env = require('./config/env/prov');
-const { PROJECT_NAME } = env;
+const { PROJECT_NAME, BASE_PATH } = require('./config/global-constants');
 
 module.exports = Object.assign(baseConfig, {
   output: {
     path: path.resolve(__dirname, 'output/production'),
     filename: '[name].js',
-    publicPath: './'
+    publicPath: BASE_PATH
   },
   module: {
     loaders: baseConfig.module.loaders.concat([
