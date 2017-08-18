@@ -23,9 +23,6 @@ import sagaFlow from './helpers/saga-flow';
 // Intro
 import IntroView from '~/containers/00_Intro/view';
 
-/* 系統設置 */
-const Constants = require('Config');
-
 /* saga */
 const sagaMiddleware = createSagaMiddleware();
 
