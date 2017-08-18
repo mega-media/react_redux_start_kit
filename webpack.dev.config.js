@@ -22,7 +22,6 @@ module.exports = Object.assign(baseConfig, {
     port: PROJECT_PORT,
     hot: true,
     inline: true,
-    contentBase: './build-develop',
     historyApiFallback: true
   },
   module: {
