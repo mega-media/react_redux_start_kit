@@ -16,10 +16,9 @@ function requireFiles(directory, filename) {
         if (!fs.statSync(dirPath).isDirectory()) {
           continue;
         }
-        if (!fs.existsSync(dirPath + `/${filename}.js`)) {
-          continue;
+        if (fs.existsSync(dirPath + `/${filename}.js`)) {
+          content.push(`require('../${directory}/${rootDir}/${filename}')`);
         }
-        content.push(`require('../${directory}/${rootDir}/${filename}')`);
         const subConfigs = requireLoop(rootDir);
         content = [...content, ...subConfigs];
       }
