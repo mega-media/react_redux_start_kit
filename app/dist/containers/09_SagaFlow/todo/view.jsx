@@ -1,6 +1,7 @@
 /* @flow */
-import React from 'react';
-import BaseView, { applyStyles, connect } from '~/core/baseView';
+import React, { Component } from 'react';
+import { Dispatch, Store } from '../../../core/container/hoc';
+import { applyStyles } from '../../../core/css-module';
 
 /* constants */
 import { STORE_KEY as USER_STORE_KEY } from '../user/constant';
@@ -14,34 +15,32 @@ import TodoItem from '../todoItem/view';
 
 /* helper */
 import { ArrayEqual } from '~/helpers/equal';
+import { compose } from 'ramda';
 
 /* style */
 import style from './assets/todo.scss';
 
 /* type */
-import type { State, TodoData } from './type';
+import type { Props, State, TodoData } from './type';
 
 @applyStyles(style)
-export class Todo extends BaseView<void, any, State> {
+export class Todo extends Component<void, Props, State> {
+  props: Props;
   input: any;
-
-  constructor(props: any, context: any) {
-    super(props, context);
-    this.state = {
-      todos: [],
-      visible: 'all'
-    };
-  }
+  state: State = {
+    todos: [],
+    visible: 'all'
+  };
 
   /**
    * 切換顯示
    * @param visible {enum:'all' | 'active' | 'completed'}
    */
   toggleVisible = (visible: 'all' | 'active' | 'completed') => () => {
-    this.setState({
+    this.setState((prevState, props) => ({
       visible,
-      todos: this.todoFilter(this.getResponse(), visible)
-    });
+      todos: this.todoFilter(props.storeData, visible)
+    }));
   };
 
   /**
@@ -53,8 +52,8 @@ export class Todo extends BaseView<void, any, State> {
     this.setState(({ todos }) => ({
       todos: todos.filter(todo => todo.id !== id)
     }));
-    const todos = this.getResponse();
-    this.dispatch([
+    const todos = this.props.storeData;
+    this.props.dispatch([
       remove(id),
       /* 更新刪除後的資料 */
       save(todos.filter(todo => todo.id !== id))
@@ -70,7 +69,7 @@ export class Todo extends BaseView<void, any, State> {
     title?: string,
     completed?: boolean
   }) => {
-    this.dispatch(update(id, columns));
+    this.props.dispatch(update(id, columns));
   };
 
   /**
@@ -81,8 +80,8 @@ export class Todo extends BaseView<void, any, State> {
     /* 按下 enter 時執行 */
     if (e.charCode === 13) {
       /* 取得目前 user id */
-      const { activeUserId } = this.getStore(USER_STORE_KEY);
-      this.dispatch(insert(activeUserId, this.input.value, false));
+      const { activeUserId } = this.props.storeSelector(USER_STORE_KEY);
+      this.props.dispatch(insert(activeUserId, this.input.value, false));
       /* 輸入框清空 */
       this.input.value = '';
       this.input.blur();
@@ -122,7 +121,7 @@ export class Todo extends BaseView<void, any, State> {
 
   componentWillReceiveProps(nextProps: any) {
     /* 資料有變更的時候更新 */
-    this.saveToState(this.getResponse(nextProps));
+    this.saveToState(nextProps.storeData);
   }
 
   shouldComponentUpdate(nextProps: any, nextState: State) {
@@ -132,7 +131,7 @@ export class Todo extends BaseView<void, any, State> {
 
   componentWillMount() {
     /* 第一次渲染就取出 store 裡面的資料 */
-    this.saveToState(this.getResponse());
+    this.saveToState(this.props.storeData);
   }
 
   render() {
@@ -194,4 +193,4 @@ export class Todo extends BaseView<void, any, State> {
   }
 }
 
-export default connect(STORE_KEY)(Todo);
+export default compose(Dispatch, Store(STORE_KEY))(Todo);

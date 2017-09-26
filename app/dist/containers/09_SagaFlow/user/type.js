@@ -1,4 +1,6 @@
 /* @flow */
+import type { DispatchProps } from '../../../core/container/hoc/dispatch';
+import type { StoreProps } from '../../../core/container/hoc/store';
 /**
  * constant type
  */
@@ -23,3 +25,6 @@ export type Store = {
   activeUserId: number,
   users: Array<UserData>
 };
+
+/* component */
+export type Props = DispatchProps & StoreProps<Store>;

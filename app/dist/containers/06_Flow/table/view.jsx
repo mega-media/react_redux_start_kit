@@ -1,34 +1,32 @@
 /**
  * @flow
  */
-import React from 'react';
-import BaseView, { applyStyles, connect } from '~/core/baseView';
+import React, { PureComponent } from 'react';
+import { Dispatch, Store } from '../../../core/container/hoc';
+import { applyStyles } from '../../../core/css-module';
 import { STORE_KEY } from '../constant';
 import { remove } from '../action';
 import MemberClass from '../class';
 import TableItem from '../tableItem/view';
+import { compose } from 'ramda';
 import type { Props } from './type';
+
 /**
  * Table 元件綁定 state 負責監聽資料的異動
  */
 @applyStyles()
-class Table extends BaseView<void, Props, void> {
+class Table extends PureComponent<void, Props, void> {
   props: Props;
 
-  constructor(props: Props, context: any) {
-    super(props, context);
-  }
-
   removeHandler = (uid: number): (() => void) => () => {
-    this.dispatch(remove(uid));
+    this.props.dispatch(remove(uid));
   };
 
   render() {
-    const { title } = this.props;
-    const memberStore: Array<MemberClass> = this.getResponse();
+    const { title, storeData } = this.props;
     const dataRow: any =
-      memberStore.length > 0
-        ? memberStore.map((item: MemberClass, index: number) => {
+      storeData.length > 0
+        ? storeData.map((item: MemberClass, index: number) => {
             const { uid, name, gender, married } = item;
             return (
               <TableItem
@@ -70,4 +68,4 @@ class Table extends BaseView<void, Props, void> {
   }
 }
 
-export default connect(STORE_KEY)(Table);
+export default compose(Dispatch, Store(STORE_KEY))(Table);

@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import { applyStyles } from '~/core/baseView';
+import React, { PureComponent } from 'react';
+import { applyStyles } from '../../core/css-module';
 import User from './user/view';
 import Todo from './todo/view';
 
 @applyStyles()
-export default class SagaFlow extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
+export default class SagaFlow extends PureComponent {
   render() {
     return (
       <div styleName="row">

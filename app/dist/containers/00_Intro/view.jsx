@@ -1,63 +1,60 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { applyStyles } from '~/core/baseView';
+import { applyStyles } from '../../core/css-module';
 import style from './assets/stylesheets/style.scss';
 
 @applyStyles(style)
-export default class Intro extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      activePage: props.history.location.pathname
-    };
-    this.pageArray = [
-      {
-        route: '/welcome',
-        title: '1. Hello World !',
-        file: 'Hello.jsx'
-      },
-      {
-        route: '/input',
-        title: '2. Input your name.',
-        file: 'Input.jsx'
-      },
-      {
-        route: '/counter',
-        title: '3. Click counter.',
-        file: 'Counter.jsx'
-      },
-      {
-        route: '/btnClick',
-        title: '4. Buttons click.',
-        file: 'Buttons.jsx'
-      },
-      {
-        route: '/style',
-        title: '5. Customize styles.',
-        file: 'Styles.jsx'
-      },
-      {
-        route: '/flow',
-        title: '6. Hello Flow !',
-        file: 'Flow.jsx'
-      },
-      {
-        route: '/locale',
-        title: '7. Locales.',
-        file: 'Locales.jsx'
-      },
-      {
-        route: '/test',
-        title: '8. Unit test.',
-        file: 'UnitTest.jsx'
-      },
-      {
-        route: '/saga',
-        title: '9. Saga',
-        file: 'Saga.jsx'
-      }
-    ];
-  }
+export default class Intro extends PureComponent {
+  state = {
+    activePage: ''
+  };
+  pageArray = [
+    {
+      route: '/welcome',
+      title: '1. Hello World !',
+      file: 'Hello.jsx'
+    },
+    {
+      route: '/input',
+      title: '2. Input your name.',
+      file: 'Input.jsx'
+    },
+    {
+      route: '/counter',
+      title: '3. Click counter.',
+      file: 'Counter.jsx'
+    },
+    {
+      route: '/btnClick',
+      title: '4. Buttons click.',
+      file: 'Buttons.jsx'
+    },
+    {
+      route: '/style',
+      title: '5. Customize styles.',
+      file: 'Styles.jsx'
+    },
+    {
+      route: '/flow',
+      title: '6. Hello Flow !',
+      file: 'Flow.jsx'
+    },
+    {
+      route: '/locale',
+      title: '7. Locales.',
+      file: 'Locales.jsx'
+    },
+    {
+      route: '/test',
+      title: '8. Unit test.',
+      file: 'UnitTest.jsx'
+    },
+    {
+      route: '/saga',
+      title: '9. Saga',
+      file: 'Saga.jsx'
+    }
+  ];
 
   checkRouteLegal = activePage => {
     this.setState({

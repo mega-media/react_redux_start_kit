@@ -1,17 +1,19 @@
 /**
  * @flow
  */
-import React from 'react';
-import BaseView, { applyStyles, connect } from '~/core/baseView';
+import React, { PureComponent } from 'react';
+import Dispatch from '../../../core/container/hoc/dispatch';
+import { applyStyles } from '../../../core/css-module';
 import { add } from '../action';
 import MemberClass from '../class';
-import type { State } from './type';
+import type { Props, State } from './type';
 
 /**
  * Form 元件只負責處理表單操作
  */
 @applyStyles()
-class Form extends BaseView<void, any, State> {
+class Form extends PureComponent<void, Props, State> {
+  props: Props;
   //資料序號
   uidIndex: number;
   //記錄新增欄位內容
@@ -54,7 +56,7 @@ class Form extends BaseView<void, any, State> {
     e.preventDefault();
     if (this.state && this.validate()) {
       //執行新增 action
-      this.dispatch(add(Object.assign(new MemberClass(), this.state)));
+      this.props.dispatch(add(Object.assign(new MemberClass(), this.state)));
       //新增增加 uid 序號
       this.uidIndex += 1;
       //初始化表單
@@ -131,4 +133,4 @@ class Form extends BaseView<void, any, State> {
   }
 }
 
-export default connect()(Form);
+export default Dispatch(Form);

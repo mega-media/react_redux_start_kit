@@ -5,7 +5,7 @@ module.exports = {
   target: (
     <div>
       <h5>☆ 認識 Redux</h5>
-      <h5>☆ 使用 BaseView</h5>
+      <h5>☆ 使用 Container HOC</h5>
     </div>
   ),
   desc: (
@@ -62,12 +62,29 @@ module.exports = {
       <ul>
         <li>與 Router 設定一同寫在 config.js 中</li>
       </ul>
-      <h5>☆ 核心檔案 - BaseView</h5>
+      <h5>☆ Container HOC </h5>
       <ul>
         <li>
-          架構核心檔案之一，<label>Container</label>繼承用，提供常用的基本函式與 Context 資料
+          <b>Dispatch</b>: 元件 dispatch 方法與 store 查詢函式
         </li>
-        <li>connect 方法：綁定 state 與 View</li>
+        <li>
+          <b>Store</b>: store 內容的監聽
+        </li>
+        <li>
+          使用方式
+          <ol>
+            <li>每個 hoc 都是柯里化函式，透過組合的方式將資料賦予給 component </li>
+            <li>
+              使用{' '}
+              <a target="_blank" href="http://ramdajs.com">
+                Ramda
+              </a>{' '}
+              提供的 <label>compose</label> 將元件組合
+              <pre>{`compose(Dispatch, Store(STORE_KEY))(YOUR_COMPONENT)`}</pre>
+            </li>
+            <li>即可在 component 的 props 拿到被賦予的資料</li>
+          </ol>
+        </li>
       </ul>
     </div>
   )

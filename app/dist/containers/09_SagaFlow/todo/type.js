@@ -1,4 +1,6 @@
 /* @flow */
+import type { DispatchProps } from '../../../core/container/hoc/dispatch';
+import type { StoreProps } from '../../../core/container/hoc/store';
 /**
  * constant type
  */
@@ -25,9 +27,11 @@ export type TodoData = {
 export type Store = Array<TodoData>;
 
 /**
- * view's state type
+ * component
  */
 export type State = {
   todos: Array<TodoData>,
   visible: 'all' | 'active' | 'completed'
 };
+
+export type Props = DispatchProps & StoreProps<Store>;
