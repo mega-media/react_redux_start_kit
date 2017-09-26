@@ -41,7 +41,7 @@ export const combineStructor = (
     returnObject.saga =
       structor.saga instanceof Array
         ? combineSagas.apply(null, [...structor.saga])
-        : { ...structor.saga };
+        : combineSagas({ ...structor.saga });
 
   arg.reduce((returnObject: Base, item: Structor) => {
     if (item.reducer) {
