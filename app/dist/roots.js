@@ -2,7 +2,7 @@ import { call, all } from 'redux-saga/effects';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { i18nState } from 'redux-i18n';
-import { combineStructor } from '~/core/baseConfig';
+import { combineStructor } from '~/core/config';
 import containers from './build/containers';
 
 const { reducer, router, saga } = combineStructor.apply(
@@ -17,7 +17,7 @@ export const RootReducer = combineReducers(
   })
 );
 
-export const RootRoutes = router;
+export const RootRoutes = router.sort((a, b) => b.path.length - a.path.length);
 
 export const RootSagas = Object.keys(saga).reduce((obj, key) => {
   obj[key] = response =>
