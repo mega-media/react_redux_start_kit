@@ -1,43 +1,36 @@
 /**
  * @flow
  */
-import React from 'react';
-import BaseView, { applyStyles, connect } from '~/core/baseView';
+import React, { PureComponent } from 'react';
+import { Dispatch, I18n } from '../../core/container/hoc';
+import { applyStyles } from '../../core/css-module';
+import { compose } from 'ramda';
 /* redux-i18n 模組提供的切換語系 action */
 import { setLanguage } from 'redux-i18n';
-import Pure from './pure/index';
 
 @applyStyles()
-export class I18N extends BaseView<void, any, void> {
-  constructor(props: any, context: any) {
-    super(props, context);
-  }
-
-  changeLocale: (lang: string) => () => void = (lang: string) => () =>
-    this.dispatch(setLanguage(lang));
+export class I18N extends PureComponent<void, any, void> {
+  changeLocale = (lang: string) => () => this.props.dispatch(setLanguage(lang));
 
   render() {
+    const { i18nText, i18nLang } = this.props;
     return (
       <div>
         <p>
-          {/* i18nLang() 取得當前使用語系 */}
-          目前使用的語系為：{this.i18nLang()}
+          {/* i18nLang 取得當前使用語系 */}
+          目前使用的語系為：{i18nLang}
         </p>
         <pre>
-          {/* i18nText() 取得語系文字 */}
+          {/* i18nText() 轉換語系文字 */}
           <p>
-            {this.i18nText('hello guest', { user: '泰戈爾' })}
+            {i18nText('hello guest', { user: '泰戈爾' })}
           </p>
           <p>
-            {this.i18nText('i cannot choose the best')}
+            {i18nText('i cannot choose the best')}
           </p>
           <p>
-            {this.i18nText('the best chooses me')}
+            {i18nText('the best chooses me')}
           </p>
-        </pre>
-        locale in component
-        <pre>
-          <Pure />
         </pre>
         <div>
           <div>語系切換</div>
@@ -61,4 +54,4 @@ export class I18N extends BaseView<void, any, void> {
   }
 }
 
-export default connect()(I18N);
+export default compose(Dispatch, I18n)(I18N);

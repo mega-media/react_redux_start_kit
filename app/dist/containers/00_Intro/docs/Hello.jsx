@@ -15,12 +15,9 @@ module.exports = {
           <li>
             <b>Component</b> : React 畫面元件
             <ol>
-              <li>
-                繼承自<label>React.Component</label>
-              </li>
-              <li>
-                類別中除建構子外，至少必須有<label>render function</label>
-              </li>
+              <li>React.Component</li>
+              <li>React.PureComponent</li>
+              <li>Stateless Functional Component</li>
             </ol>
           </li>
           <li>

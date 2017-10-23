@@ -1,38 +1,36 @@
-import React from 'react';
-import BaseView, { applyStyles, connect } from '~/core/baseView';
+import React, { PureComponent } from 'react';
+import { Dispatch, Store } from '../../core/container/hoc';
+import { applyStyles } from '../../core/css-module';
 import { click, reset } from './action';
 import { STORE_KEY } from './constant';
+/* helper */
+import { compose, pickBy, keys, join, pipe } from 'ramda';
 
 /**
  * 裝飾方法 applyStyles 可套用系統預設樣式
  * 系統預設樣式包含：Bootstrap / Font Awesome
  */
 @applyStyles()
-class Buttons extends BaseView {
-  constructor(props, context) {
-    super(props, context);
-  }
-
+class Buttons extends PureComponent {
   clickHandler = style => () => {
-    this.dispatch(click(style));
+    this.props.dispatch(click(style));
   };
 
   resetHandler = () => {
-    this.dispatch(reset());
+    this.props.dispatch(reset());
   };
 
   render() {
-    const counterState = this.getResponse();
-    const activeArray = Object.keys(counterState).filter(
-      style => counterState[style]
-    );
     /**
      * 使用系統預設樣式時，類別名稱為 `styleName`
      */
     return (
       <div>
         <div>
-          You click : {activeArray.join(' , ')}
+          You click :{' '}
+          {pipe(pickBy((val, key) => val), keys, join(', '))(
+            this.props.storeData
+          )}
         </div>
         <br />
         <div styleName="btn-toolbar">
@@ -68,4 +66,5 @@ class Buttons extends BaseView {
     );
   }
 }
-export default connect(STORE_KEY)(Buttons);
+
+export default compose(Dispatch, Store(STORE_KEY))(Buttons);

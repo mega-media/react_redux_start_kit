@@ -11,20 +11,7 @@
     "syntax-flow",
     "transform-flow-strip-types",
     "transform-runtime",
-    "transform-decorators-legacy",
-    [
-      "babel-root-import",
-      [
-        {
-          "rootPathPrefix": "~",
-          "rootPathSuffix": "app/dist"
-        },
-        {
-          "rootPathPrefix": "@",
-          "rootPathSuffix": "app/assets"
-        }
-      ]
-    ]
+    "transform-decorators-legacy"
   ],
   "env": {
     "production": {

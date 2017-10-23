@@ -3,30 +3,44 @@ import { eventChannel, END } from 'redux-saga';
 import { SAGA_ACTION, SAGA_CANCEL } from './constant';
 import { RootSagas } from '~/roots';
 import response from '../../build/response';
-
-const responseSet = response.reduce(
-  (output, req) => Object.assign(output, req.default),
-  {}
-);
+import { isLegal, authResponse, clientTransfer } from './middleware';
 
 export function subscribe({ api, stream }) {
   return eventChannel(emit => {
     /* 發送 api */
-    stream().then(response => response.json()).then(res => {
-      /* 查詢有沒有回傳處理 */
-      if (!RootSagas[api]) {
-        /* 沒有：跳出錯誤 */
-        console.error('api not be registered : ' + api);
-      } else {
-        /* 有：執行處理 */
-        if (responseSet[api] && typeof responseSet[api] !== 'function')
-          console.error('api response 格式錯誤 : ' + api);
-        /* 過濾 response 資料 */
-        emit(RootSagas[api](responseSet[api] ? responseSet[api](res) : res));
-      }
-      /* 處理完畢，結束這回合 */
-      emit(END);
-    });
+    stream()
+      .then(response => response.json())
+      /* 檢查 api */
+      .then(isLegal(api))
+      /* 回傳格式轉換 */
+      .then(clientTransfer(api))
+      /* 重頭戲 */
+      .then(res => {
+        /* 呼叫定義好的處理 */
+        emit(RootSagas[api](res));
+
+        /* 處理完畢，結束這回合 */
+        emit(END);
+      })
+      .catch(err => {
+        /* 例外 */
+        if ('sagaThrowMessage' in err)
+          console.error('[SAGA catch]: ', err['sagaThrowMessage']);
+        else {
+          /* 不在預料中的其他錯誤 */
+          if (!RootSagas[api])
+            emit(
+              RootSagas[api]({
+                code: 0,
+                errorMessage: '伺服器連線錯誤',
+                time: Date.now()
+              })
+            );
+          else console.error('[SAGA catch]: ', err);
+        }
+        /* 處理完畢，結束這回合 */
+        emit(END);
+      });
     /* eventChannel 結束時要回傳一個方法 */
     return () => {
       /* 沒有想做的事情 */

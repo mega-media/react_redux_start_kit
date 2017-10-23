@@ -8,7 +8,6 @@
 ./flow-ignore
 
 [options]
-module.name_mapper='^Config$' -> '<PROJECT_ROOT>/config/global-constants.js'
 module.name_mapper='^~' -> '<PROJECT_ROOT>/app/dist'
 module.name_mapper='.*\.\(s?css\|jpe?g\|png\|gif\|svg\|ico\|mp4\|swf\)$' -> 'IgnoreModule'
 module.name_mapper='redux-saga/effects' -> 'redux-saga/lib/effects'

@@ -1,3 +1,4 @@
+import { assoc } from 'ramda';
 import { BUTTON_CLICK, BUTTON_RESET } from './constant';
 
 class BtnClass {
@@ -17,8 +18,7 @@ export default (state = new BtnClass(), { type, payload }) => {
   switch (type) {
     case BUTTON_CLICK:
       const { btnStyle } = payload;
-      state[btnStyle] = !state[btnStyle];
-      return Object.assign(new BtnClass(), state);
+      return assoc(btnStyle, !state[btnStyle], state);
     case BUTTON_RESET:
       return new BtnClass();
     default:

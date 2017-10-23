@@ -47,7 +47,11 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '~': path.resolve(__dirname, 'app/dist'),
+      '@': path.resolve(__dirname, 'app/assets')
+    }
   },
   externals: {
     Config: JSON.stringify(globalConstants)

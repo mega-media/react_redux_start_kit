@@ -1,11 +1,11 @@
 /* @flow */
-import React, { Component } from 'react';
-import { applyStyles } from '~/core/baseView';
+import React, { PureComponent } from 'react';
+import { applyStyles } from '../../../core/css-module';
 import style from './assets/todoItem.scss';
 import type { Props, State } from './type';
 
 @applyStyles(style)
-export default class TodoItem extends Component<void, Props, State> {
+export default class TodoItem extends PureComponent<void, Props, State> {
   props: Props;
   state: State;
   input: any;

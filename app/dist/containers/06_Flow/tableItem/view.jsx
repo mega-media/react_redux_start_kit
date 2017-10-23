@@ -1,18 +1,14 @@
 /**
  * @flow
  */
-import React, { Component } from 'react';
-import { applyStyles } from '~/core/baseView';
+import React, { PureComponent } from 'react';
+import { applyStyles } from '../../../core/css-module';
 import MemberClass from '../class';
 import type { Props } from './type';
 
 @applyStyles()
-export default class TableItem extends Component<void, Props, void> {
+export default class TableItem extends PureComponent<void, Props, void> {
   props: Props;
-
-  constructor(props: Props, context: any) {
-    super(props, context);
-  }
 
   render() {
     const {
