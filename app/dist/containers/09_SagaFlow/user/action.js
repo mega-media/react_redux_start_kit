@@ -1,6 +1,6 @@
 /* @flow */
 import { USER_GET } from '~/api/user/constant';
-import { fetchApi } from '~/helpers/fetch';
+import { fetch as fetchAPI } from '../../../helpers/saga-flow/effects';
 import { USER_SAVE, USER_CHANGE } from './constant';
 import type { SaveAction, ChangeAction, UserData } from './type';
 
@@ -9,7 +9,7 @@ import type { SaveAction, ChangeAction, UserData } from './type';
  * @returns {*}
  */
 export function fetch() {
-  return fetchApi(USER_GET);
+  return fetchAPI(USER_GET);
 }
 
 /**

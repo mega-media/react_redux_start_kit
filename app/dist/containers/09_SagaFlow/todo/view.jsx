@@ -14,7 +14,7 @@ import { insert, remove, update, save } from './action';
 import TodoItem from '../todoItem/view';
 
 /* helper */
-import { ArrayEqual } from '~/helpers/equal';
+import { arrayEqual } from '~/helpers/equal';
 import { compose } from 'ramda';
 
 /* style */
@@ -126,7 +126,7 @@ export class Todo extends Component<void, Props, State> {
 
   shouldComponentUpdate(nextProps: any, nextState: State) {
     /* 比對 state.todos 資料有沒有改變，有的話回傳 true */
-    return !ArrayEqual(this.state.todos, nextState.todos);
+    return !arrayEqual(this.state.todos, nextState.todos);
   }
 
   componentWillMount() {

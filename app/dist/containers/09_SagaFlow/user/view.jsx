@@ -11,7 +11,6 @@ import { fetch, changeActive } from './action';
 import { cancelLastAction, fetchByUser } from '../todo/action';
 
 /* helper */
-import { ObjectEqual } from '~/helpers/equal';
 import { compose } from 'ramda';
 
 /* type */
