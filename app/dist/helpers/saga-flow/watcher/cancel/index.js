@@ -10,8 +10,10 @@ export function* cancelAllQueueSaga() {
 
 /* 取消 上一筆 api 任務 */
 export function* cancelLatestQueueSaga() {
-  yield cancel(last(taskManager.taskQueue));
-  yield call(taskManager.pop);
+  if (taskManager.taskQueue.length) {
+    yield cancel(last(taskManager.taskQueue));
+    yield call(taskManager.pop);
+  }
 }
 
 export default function*() {
