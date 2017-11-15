@@ -1,4 +1,4 @@
-import response from '../../build/response';
+import response from '~/build/response';
 import { RootSagas } from '~/roots';
 import { memoize } from 'ramda';
 

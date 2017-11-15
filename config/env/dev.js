@@ -12,7 +12,7 @@ const PROJECT_PATH = '/';
 const ASSETS_PATH = 'assets/';
 
 /* api remote */
-const API_URL = 'http://jsonplaceholder.typicode.com';
+const API_HOST = 'jsonplaceholder.typicode.com';
 
 module.exports = {
   PROJECT_NAME,
@@ -20,5 +20,5 @@ module.exports = {
   PROJECT_PORT,
   PROJECT_PATH,
   ASSETS_PATH,
-  API_URL
+  API_HOST
 };

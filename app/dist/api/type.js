@@ -5,8 +5,10 @@ export type RequestType = {
   [code: string]: (
     ...args: Array<any>
   ) => {
+    protocol?: string,
+    host?: string,
     method: MethodEnum,
-    url: string,
+    path: string,
     body?: any
   }
 };
