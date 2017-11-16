@@ -80,7 +80,10 @@ module.exports = {
                 Ramda
               </a>{' '}
               提供的 <label>compose</label> 將元件組合
-              <pre>{`compose(Dispatch, Store(STORE_KEY))(YOUR_COMPONENT)`}</pre>
+              <pre>{`import { Dispatch, Store } from '~/core/container/hoc';
+import { compose } from 'ramda';
+
+export default compose(Dispatch, Store(STORE_KEY))(YOUR_COMPONENT)`}</pre>
             </li>
             <li>即可在 component 的 props 拿到被賦予的資料</li>
           </ol>
