@@ -51,7 +51,7 @@ export default class Intro extends PureComponent {
     },
     {
       route: '/saga',
-      title: '9. Saga',
+      title: '9. Saga effects',
       file: 'Saga.jsx'
     }
   ];

@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import {
   promiseMiddleware,
   multiDispatchMiddleware
-} from '../app/dist/middleware';
+} from '~/core/store/middleware';
 
 export default configureStore([
   multiDispatchMiddleware,
