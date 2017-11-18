@@ -45,5 +45,3 @@ function writeRequire(filename, contentStream) {
 }
 
 writeRequire('containers.js', requireFiles('containers', 'config'));
-writeRequire('request.js', requireFiles('api', 'request'));
-writeRequire('response.js', requireFiles('api', 'response'));

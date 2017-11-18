@@ -5,7 +5,7 @@ import { applyStylesInline } from '../../core/css-module';
 
 export const sagaIntro: any = () =>
   <div>
-    <h4># call(function)></h4>
+    <h4># call(function [, arg1, arg2, ...])</h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>允許包覆一個回傳 action 物件的方法，適合用在 polling 中 payload 需有動態資料的 action</p>
       <pre>{`//每秒刷新當前時間
@@ -68,13 +68,12 @@ dispatch([
       <pre>{`dispatch(delay(5000, { type: 'TYPE_A' }))
 //5 秒後 dispatch TYPE_A`}</pre>
     </div>
-    <h4># fetchAPI(api_alias [, params])</h4>
+    <h4># fetchAPI(api_code , opts)</h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>
-        發送一個 api request，詳細說明參閱 <Link to="/api">10. API connect </Link>
+        發送一個 api request，詳細說明參閱 <Link to="/api">10. Fetch API </Link>
       </p>
-      <pre>{`dispatch(fetchAPI(GET_USER_LIST))
-dispatch(fetchAPI(GET_USER_BY_ID, id))`}</pre>
+      <pre>{`dispatch(fetchAPI(GET_USER_LIST, { method: 'get', path: '/user' }))`}</pre>
     </div>
     <h4># lock()</h4>
     <div style={{ padding: '5px 10px 20px' }}>
@@ -87,6 +86,12 @@ dispatch(fetchAPI(GET_USER_BY_ID, id))`}</pre>
 ])
 //TYPE_A 會被取消，後續呼叫的 effect 不會有反應`}</pre>
     </div>
+    <h4># emit(type, payload)</h4>
+    <div style={{ padding: '5px 10px 20px' }}>
+      <p>柯里化函式，執行一個 action</p>
+      <pre>{`dispatch(emit(TYPE_A, { data: []}))
+//dispatch({ type: TYPE_A, payload:{ data: []}})`}</pre>
+    </div>
     <h4># polling(interval, action)</h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>每隔一段間隔時間，dispatch 傳入的 action</p>
@@ -94,7 +99,7 @@ dispatch(fetchAPI(GET_USER_BY_ID, id))`}</pre>
 //每隔 1 秒，dispatch 一次 TYPE_A`}</pre>
     </div>
     <h4># unlock()</h4>
-    <div style={{ padding: '5px 10px 20px' }}>
+    <div style={{ padding: '5px 10px 0' }}>
       <p>解除所有 effects 的鎖定</p>
       <pre>{`dispatch(unlock())`}</pre>
     </div>

@@ -2,12 +2,12 @@
 export class Base {
   reducer: Object;
   router: Array<Object>;
-  saga: SagaGroupType;
+  subscribe: SagaGroupType;
 
   constructor() {
     this.reducer = {};
     this.router = [];
-    this.saga = {};
+    this.subscribe = {};
   }
 }
 
@@ -21,7 +21,11 @@ type Structor =
   | {
       reducer?: Object,
       router?: Object | Array<Object>,
-      saga?: SagaType | SagaGroupType | Array<SagaType> | Array<SagaGroupType>
+      subscribe?:
+        | SagaType
+        | SagaGroupType
+        | Array<SagaType>
+        | Array<SagaGroupType>
     }
   | Base;
 
@@ -37,11 +41,11 @@ export const combineStructor = (
         ? [...structor.router]
         : [structor.router];
 
-  if (structor.saga)
-    returnObject.saga =
-      structor.saga instanceof Array
-        ? combineSagas.apply(null, [...structor.saga])
-        : combineSagas({ ...structor.saga });
+  if (structor.subscribe)
+    returnObject.subscribe =
+      structor.subscribe instanceof Array
+        ? combineSagas.apply(null, [...structor.subscribe])
+        : combineSagas({ ...structor.subscribe });
 
   arg.reduce((returnObject: Base, item: Structor) => {
     if (item.reducer) {
@@ -58,11 +62,14 @@ export const combineStructor = (
           ? [...returnObject.router, ...item.router]
           : [...returnObject.router, item.router];
 
-    if (item.saga) {
-      returnObject.saga =
-        item.saga instanceof Array
-          ? combineSagas.apply(null, [returnObject.saga, ...item.saga])
-          : combineSagas(returnObject.saga, item.saga);
+    if (item.subscribe) {
+      returnObject.subscribe =
+        item.subscribe instanceof Array
+          ? combineSagas.apply(null, [
+              returnObject.subscribe,
+              ...item.subscribe
+            ])
+          : combineSagas(returnObject.subscribe, item.subscribe);
     }
 
     return returnObject;

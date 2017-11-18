@@ -1,6 +1,7 @@
-module.exports = func => ({
+module.exports = (func, ...params) => ({
   type: 'SAGA_CALL',
   payload: {
-    func
+    func,
+    params
   }
 });

@@ -1,19 +1,16 @@
 import { put, take, call, fork, actionChannel } from 'redux-saga/effects';
 import taskManager from '../task-manager';
 
-let tempPayload = null;
-
-function* callTask({ func, params }) {
-  const action = yield call(func, ...params);
-  yield put(action);
+function* emitTask(payload) {
+  yield put(payload);
 }
 
 export default function*() {
-  const callChannel = yield actionChannel('SAGA_CALL');
+  const callChannel = yield actionChannel('SAGA_EMIT');
   try {
     while (true) {
       let { payload } = yield take(callChannel);
-      const task = yield fork(callTask, payload);
+      const task = yield fork(emitTask, payload);
       yield call(taskManager.append, task);
     }
   } finally {

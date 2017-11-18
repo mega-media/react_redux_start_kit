@@ -11,9 +11,6 @@ const PROJECT_PATH = '/';
 /* 資源路徑 */
 const ASSETS_PATH = 'assets/';
 
-/* api remote */
-const API_HOST = 'jsonplaceholder.typicode.com';
-
 module.exports = {
   PROJECT_NAME,
   PROJECT_HOST,
