@@ -1,7 +1,7 @@
 /**
  * @flow
  */
-import type { INSERT, REMOVE } from './type';
+import type { INSERT, UPDATE, REMOVE } from './type';
 
 /**
  * 儲存在 store 中的 key
@@ -13,3 +13,4 @@ export const STORE_KEY = 'flow';
  */
 export const FLOW_INSERT: INSERT = 'FLOW_INSERT';
 export const FLOW_REMOVE: REMOVE = 'FLOW_REMOVE';
+export const FLOW_UPDATE: UPDATE = 'FLOW_UPDATE';

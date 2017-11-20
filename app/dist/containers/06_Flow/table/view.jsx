@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import { Dispatch, Store } from '../../../core/container/hoc';
 import { applyStyles } from '../../../core/css-module';
 import { STORE_KEY } from '../constant';
-import { remove } from '../action';
+import { update, remove } from '../action';
 import MemberClass from '../class';
 import TableItem from '../tableItem/view';
 import { compose } from 'ramda';
@@ -22,6 +22,10 @@ class Table extends PureComponent<void, Props, void> {
     this.props.dispatch(remove(uid));
   };
 
+  updateHandler = (data: MemberClass) => {
+    this.props.dispatch(update(data));
+  };
+
   render() {
     const { title, storeData } = this.props;
     const dataRow: any =
@@ -34,6 +38,7 @@ class Table extends PureComponent<void, Props, void> {
                 index={+index + 1}
                 row={item}
                 removeHandler={this.removeHandler(uid)}
+                updateHandler={this.updateHandler}
               />
             );
           })
