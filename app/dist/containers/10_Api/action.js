@@ -5,10 +5,7 @@ import type { SaveAction, Item } from '~/containers/10_Api/type';
 
 export function fetch() {
   return fetchAPI(API_USER_LIST, {
-    method: 'get',
-    url: 'http://jsonplaceholder.typicode.com/users',
-    body: null,
-    middleware: []
+    url: 'http://jsonplaceholder.typicode.com/users'
   });
 }
 

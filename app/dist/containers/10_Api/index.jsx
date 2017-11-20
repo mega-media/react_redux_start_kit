@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { STORE_KEY } from './constant';
 import { Dispatch, Store } from '~/core/container/hoc';
-import { fetch } from '~/containers/10_Api/action';
+import { fetch } from './action';
 import { compose } from 'ramda';
 /* style */
 import { applyStylesInline } from '../../core/css-module';
@@ -18,13 +18,14 @@ export class apiIntro extends Component<void, Props, void> {
     const { storeData: { items } } = this.props;
     return (
       <div>
+        <h4 />
         <h4 styleName="text-danger">
           注意：action effect - fetchAPI 使用
           <a
             href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch"
             target="_blank">
             {` Fetch API `}
-          </a>實踐，並不支援非 HTTP 協定的串接
+          </a>實踐，並不支援非 HTTP 協定的串接<br /> (目前僅支援 json 格式)
         </h4>
         <div style={{ padding: '5px 10px 20px' }} />
         <div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import redux_saga from '../assets/images/redux-saga.png';
 
 module.exports = {
   target: (
@@ -15,6 +16,13 @@ module.exports = {
           Redux-Saga
         </a>
       </h5>
+      <div>
+        <img
+          styleName="img-responsive img-rounded"
+          width="100%"
+          src={redux_saga}
+        />
+      </div>
       <div>
         <ul>
           <li>一個用於管理 Redux 非同步操作的 middleware</li>
