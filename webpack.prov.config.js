@@ -8,7 +8,8 @@ const ExtractCSS = new ExtractTextPlugin('styles.css');
 const ExtractPublic = new ExtractTextPlugin('public.css');
 const { PROJECT_NAME, BASE_PATH } = require('./config/global-constants');
 
-module.exports = Object.assign(baseConfig, {
+module.exports = {
+  ...baseConfig,
   output: {
     path: path.resolve(__dirname, 'output/production'),
     filename: '[name].js',
@@ -79,4 +80,4 @@ module.exports = Object.assign(baseConfig, {
       template: 'entrance/index.html'
     })
   ])
-});
+};

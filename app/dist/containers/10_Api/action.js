@@ -1,7 +1,7 @@
 /* @flow */
 import { SAGA_SAVE, API_USER_LIST } from './constant';
 import { fetchAPI } from '~/core/action/effects';
-import type { SaveAction, Item } from '~/containers/10_Api/type';
+import type { SaveAction, Item } from './type';
 
 export function fetch() {
   return fetchAPI(API_USER_LIST, {

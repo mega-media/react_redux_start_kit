@@ -58,11 +58,6 @@ export default class Intro extends PureComponent {
       route: '/api',
       title: '10. Fetch API',
       file: 'Api.jsx'
-    },
-    {
-      route: '/ref',
-      title: '11. API Reference',
-      file: 'Ref.jsx'
     }
   ];
 

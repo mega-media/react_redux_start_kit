@@ -11,7 +11,8 @@ const {
   BASE_PATH
 } = require('./config/global-constants');
 
-module.exports = Object.assign(baseConfig, {
+module.exports = {
+  ...baseConfig,
   output: {
     path: path.resolve(__dirname, 'output/development'),
     filename: '[name].js',
@@ -66,4 +67,4 @@ module.exports = Object.assign(baseConfig, {
       template: 'entrance/index.html'
     })
   ])
-});
+};
