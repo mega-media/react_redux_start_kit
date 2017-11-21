@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { applyStyles } from '../../core/css-module';
+import { applyStyles } from '../../core/container/css-module';
 import image from './assets/images/image.png';
 import styles from './assets/stylesheets/style.scss';
 

@@ -16,6 +16,5 @@ module.exports = {
   PROJECT_HOST,
   PROJECT_PORT,
   PROJECT_PATH,
-  ASSETS_PATH,
-  API_HOST
+  ASSETS_PATH
 };

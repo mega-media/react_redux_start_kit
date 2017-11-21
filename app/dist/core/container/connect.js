@@ -1,5 +1,6 @@
 /* @flow */
 import { connect as reduxConnect } from 'react-redux';
+import { pipe, split, path, __ } from 'ramda';
 /* type */
 import type { Connector } from 'react-redux';
 import type { Dispatch } from 'redux';
@@ -10,14 +11,11 @@ export type ConnectProps = {
   dispatchEvent: Dispatch<any>
 };
 
-export const resolveStoreKey: any = (store: Object, storeKey: string) => {
+export const resolveStoreKey = (store: Object) => (storeKey: string) => {
   if (!store) return null;
   if (storeKey.includes('.')) {
-    const strSplitArr = storeKey.split('.');
-    const firstSplit = strSplitArr.shift();
-    return typeof store[firstSplit] === 'undefined'
-      ? null
-      : resolveStoreKey(store[firstSplit], strSplitArr.join('.'));
+    const res = pipe(split('.'), path((__: any), store))(storeKey);
+    return res === 'undefined' ? null : res;
   } else return typeof store[storeKey] === 'undefined' ? null : store[storeKey];
 };
 
@@ -27,17 +25,26 @@ export const resolveStoreKey: any = (store: Object, storeKey: string) => {
  * @param wrapperComponent
  * @returns {(view:P) => P}
  */
-export const connect = (storeKey: ?(string | Array<string>)) =>
+export const connect = (storeKey?: Array<string>) =>
   reduxConnect(
     state => {
       let response = null;
-      if (typeof storeKey === 'string')
-        response = resolveStoreKey(state, storeKey);
-      else if (Array.isArray(storeKey) || storeKey instanceof Array) {
-        response = storeKey.reduce((returnObj, key) => {
-          returnObj[key] = resolveStoreKey(state, key);
-          return returnObj;
-        }, {});
+      if (storeKey) {
+        switch (storeKey.length) {
+          case 0:
+            response = null;
+            break;
+          case 1:
+            response = resolveStoreKey(state)(storeKey[0]);
+            break;
+          default:
+            const resolveFunc = resolveStoreKey(state);
+            response = storeKey.reduce((returnObj, key) => {
+              returnObj[key] = resolveFunc(key);
+              return returnObj;
+            }, {});
+            break;
+        }
       }
       return { response, i18nLang: state.i18nState.lang };
     },

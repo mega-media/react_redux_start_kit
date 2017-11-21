@@ -3,7 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import Dispatch from '../../../core/container/hoc/dispatch';
-import { applyStyles } from '../../../core/css-module';
+import { applyStyles } from '../../../core/container/css-module';
 import { add } from '../action';
 import MemberClass from '../class';
 import type { Props, State } from './type';

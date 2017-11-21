@@ -2,9 +2,8 @@
  * @flow
  */
 import React, { PureComponent } from 'react';
-import { Dispatch, I18n } from '../../core/container/hoc';
-import { applyStyles } from '../../core/css-module';
-import { compose } from 'ramda';
+import { compose, Dispatch, I18n } from '../../core/container';
+import { applyStyles } from '../../core/container/css-module';
 /* redux-i18n 模組提供的切換語系 action */
 import { setLanguage } from 'redux-i18n';
 

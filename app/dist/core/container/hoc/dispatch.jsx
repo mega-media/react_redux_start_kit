@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from '../connect';
+import { connect, resolveStoreKey } from '../connect';
 /* type */
 import type { ConnectProps } from '../connect';
 /* export */
@@ -38,9 +38,16 @@ export default (WrapperComponent: Class<WrapperComponentProps>) => {
      * @param storeKey string
      * @returns *
      */
-    getStore = (otherStore?: string): any => {
-      const states: Object = this.context.store.getState();
-      return otherStore ? states[otherStore] || null : states;
+    getStore = (...storeKeys: Array<string>) => {
+      switch (storeKeys.length) {
+        case 0:
+          return this.context.store.getState();
+        case 1:
+          return resolveStoreKey(this.context.store.getState())(storeKeys[0]);
+        default:
+          const resolveFunc = resolveStoreKey(this.context.store.getState());
+          return storeKeys.map(key => resolveFunc(key));
+      }
     };
 
     render() {

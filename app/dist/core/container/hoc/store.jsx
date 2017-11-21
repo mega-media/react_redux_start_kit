@@ -1,6 +1,5 @@
 /* @flow */
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from '../connect';
 import type { ConnectProps } from '../connect';
 
@@ -16,7 +15,7 @@ type WrapperComponentProps<S> = React$Component<
   any
 >;
 
-export default (storeKey?: ?(string | Array<string>) = null) => <S>(
+export default (...storeKey: Array<string>) => <S>(
   WrapperComponent: Class<WrapperComponentProps<S>>
 ) => {
   class StoreClass extends PureComponent<void, ConnectProps, void> {

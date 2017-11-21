@@ -2,8 +2,8 @@
  * @flow
  */
 import React, { PureComponent } from 'react';
-import { Dispatch, Store } from '../../../core/container/hoc';
-import { applyStyles } from '../../../core/css-module';
+import { Dispatch, Store } from '../../../core/container';
+import { applyStyles } from '../../../core/container/css-module';
 import { STORE_KEY } from '../constant';
 import { update, remove } from '../action';
 import MemberClass from '../class';

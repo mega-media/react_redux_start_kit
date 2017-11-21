@@ -1,5 +1,6 @@
 import React from 'react';
 import redux_model from '../assets/images/redux_model.png';
+import { Link } from 'react-router-dom';
 
 module.exports = {
   target: (
@@ -65,27 +66,19 @@ module.exports = {
       <h5>☆ Container HOC </h5>
       <ul>
         <li>
-          <b>Dispatch</b>: 元件 dispatch 方法與 store 查詢函式
-        </li>
-        <li>
-          <b>Store</b>: store 內容的監聽
-        </li>
-        <li>
           使用方式
           <ol>
-            <li>每個 hoc 都是柯里化函式，透過組合的方式將資料賦予給 component </li>
+            <li>每個 hoc 都是柯里化函式，透過組合的方式將資料賦予給 component</li>
             <li>
-              使用{' '}
-              <a target="_blank" href="http://ramdajs.com">
-                Ramda
-              </a>{' '}
-              提供的 <label>compose</label> 將元件組合
-              <pre>{`import { Dispatch, Store } from '~/core/container/hoc';
-import { compose } from 'ramda';
+              可使用 <label>compose</label> 將元件組合
+              <pre>{`import { compose, Dispatch, Store } from '~/core/container';
 
 export default compose(Dispatch, Store(STORE_KEY))(YOUR_COMPONENT)`}</pre>
             </li>
             <li>即可在 component 的 props 拿到被賦予的資料</li>
+            <li>
+              更多 hoc 資訊可參閱 <Link to="/hoc">9. Container HOC</Link>
+            </li>
           </ol>
         </li>
       </ul>

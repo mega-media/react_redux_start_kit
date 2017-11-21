@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { STORE_KEY } from './constant';
-import { Dispatch, Store } from '~/core/container/hoc';
+import { compose, Dispatch, Store, Style } from '~/core/container';
 import { fetch } from './action';
-import { compose } from 'ramda';
 /* style */
-import { applyStylesInline } from '../../core/css-module';
 import type { Props } from './type';
 
 export class apiIntro extends Component<void, Props, void> {
@@ -45,6 +43,4 @@ export class apiIntro extends Component<void, Props, void> {
   }
 }
 
-export default compose(Dispatch, Store(STORE_KEY), applyStylesInline())(
-  apiIntro
-);
+export default compose(Dispatch, Store(STORE_KEY), Style())(apiIntro);

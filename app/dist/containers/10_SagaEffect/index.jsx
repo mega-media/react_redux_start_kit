@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 /* style */
-import { applyStylesInline } from '../../core/css-module';
+import Style from '../../core/container/hoc/style';
 
-export const sagaIntro: any = () =>
+export const sagaIntro = () =>
   <div>
     <h4># call(function [, arg1, arg2, ...])</h4>
     <div style={{ padding: '5px 10px 20px' }}>
@@ -27,7 +27,6 @@ export const sagaIntro: any = () =>
           function 傳入值
         </div>
       </div>
-      舉例：
       <pre>{`//每秒刷新當前時間
 dispatch(polling(1000, call(() => ({
   type: 'TYPE',
@@ -37,7 +36,6 @@ dispatch(polling(1000, call(() => ({
     <h4># cancel()</h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消所有執行中的 effects </p>
-      舉例：
       <pre>{`dispatch([
   delay(5000, { type: 'TYPE_A' }),
   delay(1000, { type: 'TYPE_B' }),
@@ -62,7 +60,6 @@ dispatch([
     <h4># cancelLatest()</h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消上一筆發出的 effect </p>
-      舉例：
       <pre>{`dispatch([
   delay(5000, { type: 'TYPE_A' }),
   delay(1000, { type: 'TYPE_B' }),
@@ -105,7 +102,6 @@ dispatch([
           一段時間後被 dispatch 的 action
         </div>
       </div>
-      舉例：
       <pre>{`dispatch(delay(5000, { type: 'TYPE_A' }))
 //5 秒後 dispatch TYPE_A`}</pre>
     </div>
@@ -113,7 +109,7 @@ dispatch([
     <div style={{ padding: '5px 10px 20px' }}>
       <p>
         發送一個 api request，目前支援 json 格式的串接，詳細說明參閱{' '}
-        <Link to="/api">10. Fetch API </Link>
+        <Link to="/api">11. Fetch API </Link>
       </p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
@@ -168,7 +164,6 @@ dispatch([
           </div>
         </div>
       </div>
-      舉例：
       <pre>{`dispatch(fetchAPI(GET_USER_LIST, { method: 'get', path: '/user' }))`}</pre>
     </div>
     <h4># lock()</h4>
@@ -203,7 +198,6 @@ dispatch([
           action 物件的 payload 屬性
         </div>
       </div>
-      舉例：
       <pre>{`dispatch(emit(TYPE_A, { data: []}))
 //就等於 dispatch({ type: TYPE_A, payload:{ data: []}})
 
@@ -233,7 +227,6 @@ dispatch(emit(TYPE_A, null))`}</pre>
           一段時間後被 dispatch 的 action
         </div>
       </div>
-      舉例：
       <pre>{`dispatch(polling(1000, { type: 'TYPE_A' }))
 //每隔 1 秒，dispatch 一次 TYPE_A`}</pre>
     </div>
@@ -244,4 +237,4 @@ dispatch(emit(TYPE_A, null))`}</pre>
     </div>
   </div>;
 
-export default applyStylesInline()(sagaIntro);
+export default Style()(sagaIntro);

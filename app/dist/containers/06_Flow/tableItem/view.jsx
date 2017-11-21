@@ -2,7 +2,7 @@
  * @flow
  */
 import React, { PureComponent } from 'react';
-import { applyStyles } from '../../../core/css-module';
+import { applyStyles } from '../../../core/container/css-module';
 import MemberClass from '../class';
 import type { Props, State } from './type';
 

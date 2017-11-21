@@ -18,7 +18,9 @@ module.exports = {
           <li styleName="text-danger">語系參數僅支援字串</li>
         </ul>
       </div>
-      <h5>☆ container hoc - I18n</h5>
+      <h5>
+        ☆ container hoc - <a href="/hoc#i18n">I18n</a>
+      </h5>
       <div>
         <ul>
           <li>
@@ -62,8 +64,7 @@ export default I18n(Component) `}
           <li>redux-i18n 模組提供的切換語系 action</li>
           <li>
             需要與 Dispatch hoc 元件，搭配使用
-            <pre>{`import { Dispatch, I18n } from '~/core/container/hoc';
-import { compose } from 'ramda';
+            <pre>{`import { compose, Dispatch, I18n } from '~/core/container/hoc';
 
 export default compose(Dispatch, I18n)(YOUR_COMPONENT)`}</pre>
           </li>
