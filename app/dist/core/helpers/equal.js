@@ -22,9 +22,9 @@ export function objectEqual(
       if (Object.keys(object).length !== Object.keys(source).length)
         return false;
       for (let propName in object) {
-        if (object.hasOwnProperty(propName) != source.hasOwnProperty(propName))
+        if (object.hasOwnProperty(propName) !== source.hasOwnProperty(propName))
           return false;
-        else if (typeof source[propName] != typeof object[propName])
+        else if (typeof source[propName] !== typeof object[propName])
           return false;
         if (
           source[propName] instanceof Array &&
@@ -57,10 +57,10 @@ export function arrayEqual(
   for (let index = 0; index < others.length; index++) {
     const sourceArray = !!others[index] ? others[index] : [];
     if (sourceArray instanceof Array && array instanceof Array) {
-      if (sourceArray.length != originArray.length) return false;
+      if (sourceArray.length !== originArray.length) return false;
       for (let i = 0; i < originArray.length; i++) {
         const master = originArray[i];
-        if (typeof master != typeof sourceArray[i]) return false;
+        if (typeof master !== typeof sourceArray[i]) return false;
         if (sourceArray[i] instanceof Array && master instanceof Array) {
           if (!arrayEqual(master, sourceArray[i])) return false;
         } else if (
@@ -73,7 +73,7 @@ export function arrayEqual(
           master instanceof Object
         ) {
           if (!objectEqual(master, sourceArray[i])) return false;
-        } else if (sourceArray[i] != master) return false;
+        } else if (sourceArray[i] !== master) return false;
       }
     } else throw new TypeError('參數必須為陣列');
   }

@@ -1,7 +1,6 @@
 /* @flow */
-import React, { PureComponent } from 'react';
-import { connect } from '../connect';
-import type { ConnectProps } from '../connect';
+import React, { Component } from 'react';
+import { _connect1 } from '../connect';
 
 /* export */
 export type StoreProps<S> = {
@@ -14,18 +13,21 @@ type WrapperComponentProps<S> = React$Component<
   $Subtype<StoreProps<S>>,
   any
 >;
+type ConnectProps = {
+  response: any
+};
 
 export default (...storeKey: Array<string>) => <S>(
   WrapperComponent: Class<WrapperComponentProps<S>>
 ) => {
-  class StoreClass extends PureComponent<void, ConnectProps, void> {
+  class StoreClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
 
     render() {
-      const { dispatchEvent, response, i18nLang, ...others } = this.props;
+      const { response, ...others } = this.props;
       return <WrapperComponent storeData={response} {...others} />;
     }
   }
 
-  return connect(storeKey)(StoreClass);
+  return _connect1(storeKey)(StoreClass);
 };

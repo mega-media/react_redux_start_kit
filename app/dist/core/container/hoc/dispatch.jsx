@@ -1,9 +1,9 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect, resolveStoreKey } from '../connect';
+import { _connect2, resolveStoreKey } from '../connect';
 /* type */
-import type { ConnectProps } from '../connect';
+import type { Dispatch } from 'redux';
 /* export */
 export type DispatchProps = {
   dispatch: (methods: ActionAPI) => void,
@@ -14,13 +14,16 @@ export type DispatchProps = {
 type Context = {
   store: Object
 };
+type ConnectProps = {
+  dispatch: Dispatch<any>
+};
 type Actions = $Subtype<{ type: $Subtype<string> }>;
 type PromiseAction = Promise<Actions>;
 type ActionAPI = Actions | PromiseAction | Array<Actions | PromiseAction>;
 type WrapperComponentProps = React$Component<any, $Subtype<DispatchProps>, any>;
 
 export default (WrapperComponent: Class<WrapperComponentProps>) => {
-  class DispatchClass extends PureComponent<void, ConnectProps, void> {
+  class DispatchClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
     static contextTypes: Context = {
       store: PropTypes.object.isRequired
@@ -30,7 +33,7 @@ export default (WrapperComponent: Class<WrapperComponentProps>) => {
      * @param methods
      */
     dispatch = (methods: ActionAPI) => {
-      this.props.dispatchEvent(methods);
+      this.props.dispatch(methods);
     };
 
     /**
@@ -51,7 +54,7 @@ export default (WrapperComponent: Class<WrapperComponentProps>) => {
     };
 
     render() {
-      const { dispatchEvent, response, i18nLang, ...others } = this.props;
+      const { dispatch, ...others } = this.props;
       return (
         <WrapperComponent
           dispatch={this.dispatch}
@@ -62,5 +65,5 @@ export default (WrapperComponent: Class<WrapperComponentProps>) => {
     }
   }
 
-  return connect()(DispatchClass);
+  return _connect2()(DispatchClass);
 };

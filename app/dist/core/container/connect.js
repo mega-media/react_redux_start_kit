@@ -1,15 +1,5 @@
-/* @flow */
 import { connect as reduxConnect } from 'react-redux';
 import { pipe, split, path, __ } from 'ramda';
-/* type */
-import type { Connector } from 'react-redux';
-import type { Dispatch } from 'redux';
-
-export type ConnectProps = {
-  response: any,
-  i18nLang: string,
-  dispatchEvent: Dispatch<any>
-};
 
 export const resolveStoreKey = (store: Object) => (storeKey: string) => {
   if (!store) return null;
@@ -20,12 +10,12 @@ export const resolveStoreKey = (store: Object) => (storeKey: string) => {
 };
 
 /**
- * 綁定要監聽的store key，當此store內容改變時，會觸發View做處理
- * @param storeKey <null|string|array>
+ * 綁定要監聽的store key，當此store內容改變時，會觸發component做處理
+ * @param storeKey Array<string>
  * @param wrapperComponent
- * @returns {(view:P) => P}
+ * @returns {(component:P) => P}
  */
-export const connect = (storeKey?: Array<string>) =>
+export const _connect1 = (storeKey?: Array<string>) =>
   reduxConnect(
     state => {
       let response = null;
@@ -46,12 +36,53 @@ export const connect = (storeKey?: Array<string>) =>
             break;
         }
       }
-      return { response, i18nLang: state.i18nState.lang };
+      return { response };
     },
-    (dispatch: Dispatch<any>) => ({ dispatchEvent: dispatch }),
+    null,
     (stateProps, dispatchProps, ownProps) => ({
       ...stateProps,
+      ...ownProps
+    }),
+    {
+      pure: true,
+      withRef: false
+    }
+  );
+
+/**
+ * 賦予元件 dispatch 操作
+ * @param storeKey <null|string|array>
+ * @param wrapperComponent
+ * @returns {(component:P) => P}
+ */
+export const _connect2 = (storeKey?: Array<string>) =>
+  reduxConnect(
+    null,
+    dispatch => ({ dispatch }),
+    (stateProps, dispatchProps, ownProps) => ({
       ...dispatchProps,
+      ...ownProps
+    }),
+    {
+      pure: true,
+      withRef: false
+    }
+  );
+
+/**
+ * 多國語系
+ * @param storeKey <null|string|array>
+ * @param wrapperComponent
+ * @returns {(component:P) => P}
+ */
+export const _connect3 = (storeKey?: Array<string>) =>
+  reduxConnect(
+    state => ({
+      i18nLang: state.i18nState.lang
+    }),
+    null,
+    (stateProps, dispatchProps, ownProps) => ({
+      ...stateProps,
       ...ownProps
     }),
     {
