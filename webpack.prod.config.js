@@ -31,6 +31,7 @@ module.exports = Object.assign(baseConfig, {
             'sass-loader'
           ]
         }),
+        exclude: /node_modules/,
         include: path.join(__dirname, 'app/assets')
       },
       {
@@ -48,6 +49,7 @@ module.exports = Object.assign(baseConfig, {
             'sass-loader'
           ]
         }),
+        exclude: /node_modules/,
         include: path.join(__dirname, 'app/dist')
       }
     ])
@@ -69,6 +71,10 @@ module.exports = Object.assign(baseConfig, {
         // 内嵌定义了但是只用到一次的变量
         collapse_vars: true
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: module => /node_modules/.test(module.resource)
     }),
     new HtmlWebpackPlugin({
       title: PROJECT_NAME,

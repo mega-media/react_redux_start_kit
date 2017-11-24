@@ -1,6 +1,6 @@
 const url = require('url');
 const Config = require(process.env.NODE_ENV === 'production'
-  ? './env/prov'
+  ? './env/prod'
   : './env/dev');
 
 const {
@@ -11,9 +11,9 @@ const {
   ASSETS_PATH
 } = Config;
 
-const SITE_URL = `http://${PROJECT_HOST}${PROJECT_PORT
-  ? ':' + PROJECT_PORT
-  : ''}`;
+const SITE_URL = `http://${PROJECT_HOST}${
+  PROJECT_PORT ? ':' + PROJECT_PORT : ''
+}`;
 
 module.exports = {
   PROJECT_NAME,

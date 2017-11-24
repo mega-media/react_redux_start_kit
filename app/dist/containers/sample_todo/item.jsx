@@ -19,33 +19,31 @@ export const states = withStateHandlers(
   }
 );
 
-export const handlers = withHandlers(() => {
-  return {
-    refSelect: () => ref => {
-      if (ref) ref.select();
-    },
+export const handlers = withHandlers(() => ({
+  refSelect: () => ref => {
+    if (ref) ref.select();
+  },
 
-    completedToggle: ({ dispatch, data: { id, title, completed } }) => () => {
-      dispatch(emit(UPDATE_ITEM, { id, title, completed: !completed }));
-    },
+  completedToggle: ({ dispatch, data: { id, title, completed } }) => () => {
+    dispatch(emit(UPDATE_ITEM, { id, title, completed: !completed }));
+  },
 
-    updateHandler: ({
-      dispatch,
-      text,
-      modifyToggle,
-      data: { id, completed }
-    }) => ({ charCode }) => {
-      if (charCode === 13 && !pipe(trim, isEmpty)(text)) {
-        dispatch(emit(UPDATE_ITEM, { id, title: text, completed }));
-        modifyToggle();
-      }
-    },
-
-    removeHandler: ({ dispatch, data: { id } }) => () => {
-      dispatch(emit(REMOVE_ITEM, { id }));
+  updateHandler: ({
+    dispatch,
+    text,
+    modifyToggle,
+    data: { id, completed }
+  }) => ({ charCode }) => {
+    if (charCode === 13 && !pipe(trim, isEmpty)(text)) {
+      dispatch(emit(UPDATE_ITEM, { id, title: text, completed }));
+      modifyToggle();
     }
-  };
-});
+  },
+
+  removeHandler: ({ dispatch, data: { id } }) => () => {
+    dispatch(emit(REMOVE_ITEM, { id }));
+  }
+}));
 
 export const Default = ({
   data: { title, completed },
@@ -95,9 +93,8 @@ export const Modify = ({
 const ModifyTemp = Style(css)(Modify);
 const DefaultTemp = Style(css)(Default);
 
-export const Item = ({ modify, ...others }: Object) => {
-  return modify ? <ModifyTemp {...others} /> : <DefaultTemp {...others} />;
-};
+export const Item = ({ modify, ...others }: Object) =>
+  modify ? <ModifyTemp {...others} /> : <DefaultTemp {...others} />;
 
 export default compose(setDisplayName('Item'), Dispatch, states, handlers)(
   Item

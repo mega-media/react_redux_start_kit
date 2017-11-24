@@ -37,7 +37,9 @@ module.exports = Object.assign(baseConfig, {
             '&-autoprefixer',
           'postcss-loader',
           'sass-loader'
-        ]
+        ],
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
       }
     ])
   },

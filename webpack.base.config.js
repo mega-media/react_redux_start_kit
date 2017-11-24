@@ -3,6 +3,8 @@ const url = require('url');
 const webpack = require('webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const globalConstants = require('./config/global-constants');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 const { ASSETS_PATH } = globalConstants;
 
 module.exports = {
@@ -11,13 +13,14 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules)/,
         loaders: ['babel-loader?cacheDirectory=true'],
+        exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.json$/,
         loaders: ['json-loader'],
+        exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
@@ -25,23 +28,34 @@ module.exports = {
         loaders: [
           `url-loader?limit=10000&name=${ASSETS_PATH}images/[hash].[ext]`,
           'img-loader?progressive=true'
-        ]
+        ],
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.ico$/i,
-        loader: `file-loader?name=${ASSETS_PATH}images/[name].[ext]`
+        loader: `file-loader?name=${ASSETS_PATH}images/[name].[ext]`,
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.(mp4|swf)$/,
-        loader: `file-loader?name=${ASSETS_PATH}videos/[name].[ext]`
+        loader: `file-loader?name=${ASSETS_PATH}videos/[name].[ext]`,
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=${ASSETS_PATH}fonts/[name].[ext]`
+        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=${
+          ASSETS_PATH
+        }fonts/[name].[ext]`,
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: `file-loader?name=${ASSETS_PATH}fonts/[name].[ext]`,
+        exclude: /node_modules/,
         include: path.join(__dirname, 'app/assets/fonts')
       }
     ]
@@ -57,6 +71,16 @@ module.exports = {
     Config: JSON.stringify(globalConstants)
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
+      openAnalyzer: false,
+      generateStatsFile: false,
+      statsOptions: null,
+      logLevel: 'info'
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new LodashModuleReplacementPlugin({
       shorthands: true,
