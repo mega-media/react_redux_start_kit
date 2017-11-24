@@ -47,29 +47,33 @@ export const handlers = withHandlers(() => {
   };
 });
 
-export const Default = setDisplayName('Default')(
-  ({
-    data: { title, completed },
-    completedToggle,
-    removeHandler,
-    modifyToggle
-  }: Object) => (
-    <tr styleName={completed ? 'completed' : ''}>
-      <td styleName="item" onClick={modifyToggle}>
-        {title}
-      </td>
-      <td styleName="complete" onClick={completedToggle}>
-        <i styleName="glyphicon glyphicon-ok" />
-      </td>
-      <td styleName="remove" onClick={removeHandler}>
-        <i styleName="glyphicon glyphicon-trash" />
-      </td>
-    </tr>
-  )
+export const Default = ({
+  data: { title, completed },
+  completedToggle,
+  removeHandler,
+  modifyToggle
+}: Object) => (
+  <tr styleName={completed ? 'completed' : ''}>
+    <td styleName="item" onClick={modifyToggle}>
+      {title}
+    </td>
+    <td styleName="complete" onClick={completedToggle}>
+      <i styleName="glyphicon glyphicon-ok" />
+    </td>
+    <td styleName="remove" onClick={removeHandler}>
+      <i styleName="glyphicon glyphicon-trash" />
+    </td>
+  </tr>
 );
 
-export const Modify = setDisplayName('Modify')(
-  ({ updateHandler, modifyToggle, text, setText, refSelect }: Object) => (
+export const Modify = ({
+  updateHandler,
+  modifyToggle,
+  text,
+  setText,
+  refSelect
+}: Object) => {
+  return (
     <tr>
       <td styleName="item" colSpan={3}>
         <input
@@ -85,16 +89,15 @@ export const Modify = setDisplayName('Modify')(
         </div>
       </td>
     </tr>
-  )
+  );
+};
+
+export const Item = ({ modify, ...others }: Object) => {
+  const ModifyTemp = Style(css)(Modify);
+  const DefaultTemp = Style(css)(Default);
+  return modify ? <ModifyTemp {...others} /> : <DefaultTemp {...others} />;
+};
+
+export default compose(setDisplayName('Item'), Dispatch, states, handlers)(
+  Item
 );
-
-export const Item = ({ modify, ...others }: Object) =>
-  modify ? <Modify {...others} /> : <Default {...others} />;
-
-export default compose(
-  setDisplayName('Item'),
-  Dispatch,
-  states,
-  handlers,
-  Style(css)
-)(Item);

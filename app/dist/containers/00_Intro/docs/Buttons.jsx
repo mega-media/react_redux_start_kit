@@ -30,8 +30,8 @@ module.exports = {
             <li>
               <b>Decorator - applyStyles</b>
               <p>
-                使用 ES7 Decorator 的方式加上符號<label>@</label>標記在 Container/Component
-                上方
+                使用 ES7 Decorator 的方式加上符號<label>@</label>標記在
+                Container/Component 上方
               </p>
               <pre>
                 {`import { applyStyles } from '~/core/container/css-module';
@@ -53,7 +53,10 @@ export class YourComponent extends React.Component { ... }
 export default Style()(YourComponent);
 `}
               </pre>
-              <p>與其他 HOC 組合，需注意的是 css-module 只會轉換第一層元件，因此函式順序必須放在最接近元件的位置</p>
+              <p>
+                與其他 HOC 組合，需注意的是 css-module
+                只會轉換第一層元件，因此函式順序必須放在最接近元件的位置
+              </p>
               <pre>{`import { compose, Dispatch, Store, Style } from '~/core/container';
 
 export class YourComponent extends React.Component { ... }

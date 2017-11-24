@@ -40,9 +40,9 @@ export default (setting = {}) => {
 
   const routes = (
     <Switch>
-      {RootRoutes.map((attr, index) =>
+      {RootRoutes.map((attr, index) => (
         <Route key={`root-route-${index}`} {...attr} />
-      )}
+      ))}
       <Redirect exact path="/" to={router_index} />
       <Redirect path="*" to={router_notFound || router_index} />
     </Switch>

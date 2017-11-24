@@ -2,7 +2,7 @@ import React from 'react';
 /* style */
 import Style from '../../core/container/hoc/style';
 
-export const hocIntro = () =>
+export const hocIntro = () => (
   <div>
     <h4 id="dispatch">
       <a href="#dispatch" style={{ color: '#000' }}>
@@ -54,7 +54,8 @@ export const hocIntro = () =>
         <div styleName="panel-body">
           Type: Function(storeKey?: string) => any
           <p>
-            用來拿其他沒有透過 <a href="#store">Store</a> 綁定的 store 資料，支援同時拿取多筆資料。
+            用來拿其他沒有透過 <a href="#store">Store</a> 綁定的 store
+            資料，支援同時拿取多筆資料。
           </p>
           <div styleName="panel panel-default">
             <div styleName="panel-heading">
@@ -188,7 +189,8 @@ console.log(C); // true
         <div styleName="panel-body">
           Type: string
           <br />
-          store 資料的 key，支援多筆。當監聽的值為多筆，回傳的資料為 Object，並以 storeKeys 作為鍵值
+          store 資料的 key，支援多筆。當監聽的值為多筆，回傳的資料為
+          Object，並以 storeKeys 作為鍵值
         </div>
       </div>
       <div styleName="panel panel-default">
@@ -278,6 +280,7 @@ import scssC from './scss-c.scss';
 export default Style(scssA, scssB, scssC)(YourComponent);
 `}</pre>
     </div>
-  </div>;
+  </div>
+);
 
 export default Style()(hocIntro);

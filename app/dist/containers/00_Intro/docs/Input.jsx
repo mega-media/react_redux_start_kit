@@ -22,7 +22,8 @@ module.exports = {
       <ul>
         <li>Components 傳值的方式</li>
         <li>
-          在 JSX 中使用添加屬性的方式傳遞 props。ex. {`<Tag name="thisIsProps" />`}
+          在 JSX 中使用添加屬性的方式傳遞 props。ex.{' '}
+          {`<Tag name="thisIsProps" />`}
         </li>
         <li>不在 Component 內部變更自己的 props 內容</li>
       </ul>

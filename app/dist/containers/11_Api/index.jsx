@@ -31,13 +31,7 @@ export class apiIntro extends Component<void, Props, void> {
             撈取 user 列表
           </button>
         </div>
-        <div>
-          {items.map(({ id, name }) =>
-            <div key={id}>
-              {name}
-            </div>
-          )}
-        </div>
+        <div>{items.map(({ id, name }) => <div key={id}>{name}</div>)}</div>
       </div>
     );
   }

@@ -74,9 +74,7 @@ export default class TableItem extends PureComponent<void, Props, State> {
       <tr>
         {updateModify
           ? [
-              <td key={`index-edit-${index}`}>
-                {index}
-              </td>,
+              <td key={`index-edit-${index}`}>{index}</td>,
               <td key={`name-edit-${index}`}>
                 <input
                   type="text"
@@ -132,9 +130,7 @@ export default class TableItem extends PureComponent<void, Props, State> {
               </td>
             ]
           : [
-              <td key={`index-${index}`}>
-                {index}
-              </td>,
+              <td key={`index-${index}`}>{index}</td>,
               <td key={`name-${index}`} onClick={this.updateToolToggle}>
                 {name}
               </td>,
@@ -146,30 +142,32 @@ export default class TableItem extends PureComponent<void, Props, State> {
               </td>
             ]}
         <td>
-          {updateModify || removeModify
-            ? <div>
-                <a onClick={this.submit} style={{ cursor: 'pointer' }}>
-                  確定
-                </a>
-                <a
-                  onClick={this.toolsToggle}
-                  style={{ cursor: 'pointer', marginLeft: '10px' }}>
-                  取消
-                </a>
-              </div>
-            : <div>
-                <button
-                  styleName="btn btn-primary btn-xs"
-                  onClick={this.updateToolToggle}>
-                  <i styleName="glyphicon glyphicon-pencil" />
-                </button>
-                <button
-                  styleName="btn btn-danger btn-xs"
-                  style={{ marginLeft: '5px' }}
-                  onClick={this.removeToolToggle}>
-                  <i styleName="glyphicon glyphicon-trash" />
-                </button>
-              </div>}
+          {updateModify || removeModify ? (
+            <div>
+              <a onClick={this.submit} style={{ cursor: 'pointer' }}>
+                確定
+              </a>
+              <a
+                onClick={this.toolsToggle}
+                style={{ cursor: 'pointer', marginLeft: '10px' }}>
+                取消
+              </a>
+            </div>
+          ) : (
+            <div>
+              <button
+                styleName="btn btn-primary btn-xs"
+                onClick={this.updateToolToggle}>
+                <i styleName="glyphicon glyphicon-pencil" />
+              </button>
+              <button
+                styleName="btn btn-danger btn-xs"
+                style={{ marginLeft: '5px' }}
+                onClick={this.removeToolToggle}>
+                <i styleName="glyphicon glyphicon-trash" />
+              </button>
+            </div>
+          )}
         </td>
       </tr>
     );

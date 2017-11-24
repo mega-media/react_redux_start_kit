@@ -21,15 +21,9 @@ export class I18N extends PureComponent<void, any, void> {
         </p>
         <pre>
           {/* i18nText() 轉換語系文字 */}
-          <p>
-            {i18nText('hello guest', { user: '泰戈爾' })}
-          </p>
-          <p>
-            {i18nText('i cannot choose the best')}
-          </p>
-          <p>
-            {i18nText('the best chooses me')}
-          </p>
+          <p>{i18nText('hello guest', { user: '泰戈爾' })}</p>
+          <p>{i18nText('i cannot choose the best')}</p>
+          <p>{i18nText('the best chooses me')}</p>
         </pre>
         <div>
           <div>語系切換</div>

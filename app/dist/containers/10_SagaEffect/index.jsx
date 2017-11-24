@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 /* style */
 import Style from '../../core/container/hoc/style';
 
-export const sagaIntro = () =>
+export const sagaIntro = () => (
   <div>
     <h4># call(function [, arg1, arg2, ...])</h4>
     <div style={{ padding: '5px 10px 20px' }}>
-      <p>允許包覆一個回傳 action 物件的方法，適合用在 polling 中 payload 需有動態資料的 action</p>
+      <p>
+        允許包覆一個回傳 action 物件的方法，適合用在 polling 中 payload
+        需有動態資料的 action
+      </p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>function</b>
@@ -168,7 +171,9 @@ dispatch([
     </div>
     <h4># lock()</h4>
     <div style={{ padding: '5px 10px 20px' }}>
-      <p>鎖定所有 effects 並取消所有執行中的 effects，期間不處理任何 effects 事件</p>
+      <p>
+        鎖定所有 effects 並取消所有執行中的 effects，期間不處理任何 effects 事件
+      </p>
       <pre>{`dispatch([
   delay(5000, { type: 'TYPE_A' }),
   lock(),
@@ -235,6 +240,7 @@ dispatch(emit(TYPE_A, null))`}</pre>
       <p>解除所有 effects 的鎖定</p>
       <pre>{`dispatch(unlock())`}</pre>
     </div>
-  </div>;
+  </div>
+);
 
 export default Style()(sagaIntro);

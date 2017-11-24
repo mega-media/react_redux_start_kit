@@ -108,29 +108,29 @@ export default class Intro extends PureComponent {
         <div styleName="row">
           <div styleName="col-sm-4">
             <ul styleName="list-group">
-              {this.pageArray.map(obj =>
+              {this.pageArray.map(obj => (
                 <Link
                   key={obj.route}
-                  styleName={`list-group-item ${obj.route === activePage
-                    ? 'list-group-item-info'
-                    : ''}`}
+                  styleName={`list-group-item ${
+                    obj.route === activePage ? 'list-group-item-info' : ''
+                  }`}
                   to={obj.route}>
                   {obj.title}
                 </Link>
-              )}
+              ))}
             </ul>
             <ul styleName="list-group">
               <a styleName="list-group-item disabled">進階應用</a>
-              {this.sampleArray.map(obj =>
+              {this.sampleArray.map(obj => (
                 <Link
                   key={obj.route}
-                  styleName={`list-group-item ${obj.route === activePage
-                    ? 'list-group-item-info'
-                    : ''}`}
+                  styleName={`list-group-item ${
+                    obj.route === activePage ? 'list-group-item-info' : ''
+                  }`}
                   to={obj.route}>
                   {obj.title}
                 </Link>
-              )}
+              ))}
             </ul>
           </div>
           <div styleName="col-sm-8">
@@ -144,34 +144,26 @@ export default class Intro extends PureComponent {
                   <div>
                     <div styleName="panel panel-default">
                       <div styleName="panel-heading">
-                        <h3 styleName="panel-title">
-                          {activeObj.title}
-                        </h3>
+                        <h3 styleName="panel-title">{activeObj.title}</h3>
                       </div>
-                      <div styleName="panel-body">
-                        {children}
-                      </div>
+                      <div styleName="panel-body">{children}</div>
                     </div>
-                    {target
-                      ? <div styleName="panel panel-default">
-                          <div styleName="panel-heading">
-                            <h3 styleName="panel-title">學習指標</h3>
-                          </div>
-                          <div styleName="panel-body doc">
-                            {target}
-                          </div>
+                    {target ? (
+                      <div styleName="panel panel-default">
+                        <div styleName="panel-heading">
+                          <h3 styleName="panel-title">學習指標</h3>
                         </div>
-                      : null}
-                    {desc
-                      ? <div styleName="panel panel-default">
-                          <div styleName="panel-heading">
-                            <h3 styleName="panel-title">相關應用與說明</h3>
-                          </div>
-                          <div styleName="panel-body doc">
-                            {desc}
-                          </div>
+                        <div styleName="panel-body doc">{target}</div>
+                      </div>
+                    ) : null}
+                    {desc ? (
+                      <div styleName="panel panel-default">
+                        <div styleName="panel-heading">
+                          <h3 styleName="panel-title">相關應用與說明</h3>
                         </div>
-                      : null}
+                        <div styleName="panel-body doc">{desc}</div>
+                      </div>
+                    ) : null}
                   </div>
                 );
               } else {
@@ -180,9 +172,7 @@ export default class Intro extends PureComponent {
                 return (
                   <div styleName="panel panel-default">
                     <div styleName="panel-heading">
-                      <h3 styleName="panel-title">
-                        {title}
-                      </h3>
+                      <h3 styleName="panel-title">{title}</h3>
                     </div>
                     {children}
                   </div>

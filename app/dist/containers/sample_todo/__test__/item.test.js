@@ -291,6 +291,7 @@ describe('sample-todo item testing', () => {
     describe('modify mode', () => {
       it('show modify template', () => {
         wrapper.setProps({ modify: true });
+        console.log(wrapper);
         expect(wrapper.find('Modify')).to.have.length(1);
         expect(wrapper.find('Default')).to.have.length(0);
       });

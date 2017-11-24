@@ -42,7 +42,10 @@ module.exports = {
       <h5>☆ action effects</h5>
       <div>
         <ul>
-          <li>專案啟動時，開始監聽所有 action effects，透過各自的 effect type 觸發任務執行</li>
+          <li>
+            專案啟動時，開始監聽所有 action effects，透過各自的 effect type
+            觸發任務執行
+          </li>
           <li>每個 effect 都是柯里化函式，回傳值皆是 action 物件</li>
         </ul>
       </div>

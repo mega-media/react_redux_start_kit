@@ -20,6 +20,6 @@ export default function(state = 0, action) {
  * 其用意在於 Redux 會判斷 View 綁定的 state 是否改變
  * 若有改變則會觸發執行 Component 事件
  * 因此，添加 default 可避免觸發非預期中的行為
- * 
+ *
  * Reducer 與 state 綁定，請參閱 03_Counter/config.js
  */

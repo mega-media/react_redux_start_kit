@@ -33,7 +33,7 @@ module.exports = Object.assign(baseConfig, {
           'css-loader' +
             '?modules' +
             '&importLoaders=1' +
-            '&localIdentName=[path][name]-[local]-[hash:base64:5]' +
+            '&localIdentName=[path][name]/[local]/[hash:base64:5]' +
             '&-autoprefixer',
           'postcss-loader',
           'sass-loader'
