@@ -17,9 +17,7 @@ type ConnectProps = {
   response: any
 };
 
-export default (...storeKey: Array<string>) => <S>(
-  WrapperComponent: Class<WrapperComponentProps<S>>
-) => {
+export default (...storeKey: Array<string>) => (WrapperComponent: any) => {
   class StoreClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
 

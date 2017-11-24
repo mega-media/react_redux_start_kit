@@ -20,9 +20,8 @@ type ConnectProps = {
 type Actions = $Subtype<{ type: $Subtype<string> }>;
 type PromiseAction = Promise<Actions>;
 type ActionAPI = Actions | PromiseAction | Array<Actions | PromiseAction>;
-type WrapperComponentProps = React$Component<any, $Subtype<DispatchProps>, any>;
 
-export default (WrapperComponent: Class<WrapperComponentProps>) => {
+export default (WrapperComponent: any) => {
   class DispatchClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
     static contextTypes: Context = {

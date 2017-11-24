@@ -15,9 +15,8 @@ type Context = {
 type ConnectProps = {
   i18nLang: string
 };
-type WrapperComponentProps = React$Component<any, $Subtype<I18nProps>, any>;
 
-export default (WrapperComponent: Class<WrapperComponentProps>) => {
+export default (WrapperComponent: any) => {
   class I18nClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
     static contextTypes: Context = {

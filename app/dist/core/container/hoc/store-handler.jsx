@@ -9,11 +9,6 @@ export type StoreProps<S> = {
 };
 
 /* private */
-type WrapperComponentProps<S> = React$Component<
-  any,
-  $Subtype<StoreProps<S>>,
-  any
->;
 type ConnectProps = {
   response: any
 };
@@ -21,7 +16,7 @@ type ConnectProps = {
 export default (
   storeKey: string,
   handler: (ownProps: Object) => (response: any) => void
-) => <S>(WrapperComponent: Class<WrapperComponentProps<S>>) => {
+) => (WrapperComponent: any) => {
   class StoreHandler extends Component<void, ConnectProps, void> {
     props: ConnectProps;
 

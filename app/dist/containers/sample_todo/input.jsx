@@ -1,39 +1,43 @@
 /* @flow */
 import React from 'react';
 import { fetchAPI, emit } from '~/core/action/effects';
-import { APPEND_ITEM } from '~/containers/sample_todo/constant';
+import { APPEND_ITEM, API_FETCH_LIST } from '~/containers/sample_todo/constant';
 import { compose, Dispatch, Style } from '../../core/container';
-import { withHandlers, withStateHandlers } from 'recompose';
+import { withHandlers, withStateHandlers, setDisplayName } from 'recompose';
 import { pipe, trim, isEmpty } from 'ramda';
 import css from './todo.scss';
 
-export default compose(
-  Dispatch,
-  withStateHandlers(
-    { input: '' },
-    {
-      setInput: () => ({ target: { value } }) => ({ input: value }),
-      resetInput: () => () => ({ input: '' })
-    }
-  ),
-  withHandlers({
-    loadTodoList: ({ dispatch }) => () => {
-      dispatch(
-        fetchAPI('SAVE_LIST', {
-          url: 'http://jsonplaceholder.typicode.com/todos?userId=1'
-        })
-      );
-    },
+export const states = withStateHandlers(
+  { input: '' },
+  {
+    setInput: () => ({ target: { value } }) => ({ input: value }),
+    resetInput: () => () => ({ input: '' })
+  }
+);
 
-    keyPressHandler: ({ dispatch, input, resetInput }) => ({ charCode }) => {
-      if (charCode === 13 && !pipe(trim, isEmpty)(input)) {
-        dispatch(emit(APPEND_ITEM, { title: input }));
-        resetInput();
-      }
+export const handlers = withHandlers({
+  loadTodoList: ({ dispatch }) => () => {
+    dispatch(
+      fetchAPI(API_FETCH_LIST, {
+        url: 'http://jsonplaceholder.typicode.com/todos?userId=1'
+      })
+    );
+  },
+
+  keyPressHandler: ({ dispatch, input, resetInput }) => ({ charCode }) => {
+    if (charCode === 13 && !pipe(trim, isEmpty)(input)) {
+      dispatch(emit(APPEND_ITEM, { title: input }));
+      resetInput();
     }
-  }),
-  Style(css)
-)(({ input, setInput, loadTodoList, keyPressHandler }) =>
+  }
+});
+
+export const Input = ({
+  input,
+  setInput,
+  loadTodoList,
+  keyPressHandler
+}: Object) => (
   <div styleName="input-group">
     <input
       type="text"
@@ -50,3 +54,11 @@ export default compose(
     </span>
   </div>
 );
+
+export default compose(
+  setDisplayName('Input'),
+  Dispatch,
+  states,
+  handlers,
+  Style(css)
+)(Input);
