@@ -86,7 +86,7 @@ dispatch([
     </div>
     <h4># delay(duration, action)</h4>
     <div style={{ padding: '5px 10px 20px' }}>
-      <p>延遲傳入的 action 被 dispatch 時間 </p>
+      <p>柯里化函式，延遲傳入的 action 被 dispatch 時間 </p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>duration</b>
@@ -107,6 +107,35 @@ dispatch([
       </div>
       <pre>{`dispatch(delay(5000, { type: 'TYPE_A' }))
 //5 秒後 dispatch TYPE_A`}</pre>
+    </div>
+    <h4># emit(type, payload)</h4>
+    <div style={{ padding: '5px 10px 20px' }}>
+      <p>柯里化函式，執行一個 action</p>
+      <div styleName="panel panel-default">
+        <div styleName="panel-heading">
+          <b>type</b>
+        </div>
+        <div styleName="panel-body">
+          Type: string <br />
+          action 物件的 type 屬性
+        </div>
+      </div>
+      <div styleName="panel panel-default">
+        <div styleName="panel-heading">
+          <b>payload</b>
+        </div>
+        <div styleName="panel-body">
+          Type: any <br />
+          action 物件的 payload 屬性
+        </div>
+      </div>
+      <pre>{`dispatch(emit(TYPE_A, { data: []}))
+//就等於 dispatch({ type: TYPE_A, payload:{ data: []}})
+
+//沒有 payload 時：
+dispatch(emit(TYPE_A)())
+//或者
+dispatch(emit(TYPE_A, null))`}</pre>
     </div>
     <h4># fetchAPI(api_code , opts)</h4>
     <div style={{ padding: '5px 10px 20px' }}>
@@ -182,38 +211,9 @@ dispatch([
 ])
 //TYPE_A 會被取消，後續呼叫的 effect 不會有反應`}</pre>
     </div>
-    <h4># emit(type, payload)</h4>
-    <div style={{ padding: '5px 10px 20px' }}>
-      <p>柯里化函式，執行一個 action</p>
-      <div styleName="panel panel-default">
-        <div styleName="panel-heading">
-          <b>type</b>
-        </div>
-        <div styleName="panel-body">
-          Type: string <br />
-          action 物件的 type 屬性
-        </div>
-      </div>
-      <div styleName="panel panel-default">
-        <div styleName="panel-heading">
-          <b>payload</b>
-        </div>
-        <div styleName="panel-body">
-          Type: any <br />
-          action 物件的 payload 屬性
-        </div>
-      </div>
-      <pre>{`dispatch(emit(TYPE_A, { data: []}))
-//就等於 dispatch({ type: TYPE_A, payload:{ data: []}})
-
-//沒有 payload 時：
-dispatch(emit(TYPE_A)())
-//或者
-dispatch(emit(TYPE_A, null))`}</pre>
-    </div>
     <h4># polling(interval, action)</h4>
     <div style={{ padding: '5px 10px 20px' }}>
-      <p>每隔一段間隔時間，dispatch 傳入的 action</p>
+      <p>柯里化函式，每隔一段間隔時間，dispatch 傳入的 action</p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>interval</b>

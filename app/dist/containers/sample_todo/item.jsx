@@ -92,9 +92,10 @@ export const Modify = ({
   );
 };
 
+const ModifyTemp = Style(css)(Modify);
+const DefaultTemp = Style(css)(Default);
+
 export const Item = ({ modify, ...others }: Object) => {
-  const ModifyTemp = Style(css)(Modify);
-  const DefaultTemp = Style(css)(Default);
   return modify ? <ModifyTemp {...others} /> : <DefaultTemp {...others} />;
 };
 

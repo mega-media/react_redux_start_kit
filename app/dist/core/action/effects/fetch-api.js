@@ -1,6 +1,6 @@
-import { curry, toUpper, toLower } from 'ramda';
+import { toUpper, toLower } from 'ramda';
 
-module.exports = curry((apiCode, opts) => {
+module.exports = (apiCode, opts) => {
   /* 撈出指定的 request */
   const { method = 'get', url, body = null, middleware = [] } = opts;
 
@@ -21,6 +21,12 @@ module.exports = curry((apiCode, opts) => {
         body: upperMethod === 'GET' || upperMethod === 'HEAD' ? null : body
       }),
       middleware: middleware instanceof Array ? [...middleware] : [middleware]
+    },
+    meta: {
+      method,
+      url,
+      body,
+      middlewareLens: middleware.length
     }
   };
-});
+};

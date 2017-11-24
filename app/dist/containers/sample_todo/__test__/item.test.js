@@ -92,7 +92,7 @@ describe('sample-todo item testing', () => {
 
       it('click toggle', () => {
         completedToggle();
-        const { payload: { type, payload } } = dispatchSpy.getCall(0).args[0];
+        const { type, payload } = dispatchSpy.getCall(0).args[0];
         expect(dispatchSpy.calledOnce).to.be.true;
         expect(type).to.be.equal('UPDATE_ITEM');
         expect(payload).to.be.deep.equal({
@@ -116,7 +116,7 @@ describe('sample-todo item testing', () => {
       });
       it('remove item', () => {
         removeHandler();
-        const { payload: { type, payload } } = dispatchSpy.getCall(0).args[0];
+        const { type, payload } = dispatchSpy.getCall(0).args[0];
         expect(dispatchSpy.calledOnce).to.be.true;
         expect(type).to.be.equal('REMOVE_ITEM');
         expect(payload).to.be.deep.equal({ id: 1 });
@@ -151,7 +151,7 @@ describe('sample-todo item testing', () => {
 
         expect(dispatchSpy.calledOnce).to.be.true;
         expect(toggleSpy.calledOnce).to.be.true;
-        const { payload: { type, payload } } = dispatchSpy.getCall(0).args[0];
+        const { type, payload } = dispatchSpy.getCall(0).args[0];
         expect(type).to.be.equal('UPDATE_ITEM');
         expect(payload).to.be.deep.equal({
           id: 1,
@@ -291,7 +291,6 @@ describe('sample-todo item testing', () => {
     describe('modify mode', () => {
       it('show modify template', () => {
         wrapper.setProps({ modify: true });
-        console.log(wrapper);
         expect(wrapper.find('Modify')).to.have.length(1);
         expect(wrapper.find('Default')).to.have.length(0);
       });

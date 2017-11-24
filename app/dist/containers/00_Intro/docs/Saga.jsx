@@ -22,14 +22,16 @@ module.exports = {
           width="100%"
           src={redux_saga}
         />
+        <div styleName="text-right">
+          (圖片來源：<a
+            href="https://github.com/markerikson/react-redux-links/blob/master/redux-side-effects.md"
+            target="_blank">
+            react-redux-links
+          </a>)
+        </div>
       </div>
       <div>
         <ul>
-          <li>一個用於管理 Redux 非同步操作的 middleware</li>
-          <li>
-            透過建立 <b>Sagas</b> 將所有非同步操作邏輯在一個地方集中處理
-          </li>
-          <li>應用在此專案中，用來管理 API 的發送與接收行為</li>
           <li>
             <b>Saga: </b>透過{' '}
             <a href="http://es6.ruanyifeng.com/#docs/generator" target="_blank">
@@ -43,10 +45,15 @@ module.exports = {
       <div>
         <ul>
           <li>
-            專案啟動時，開始監聽所有 action effects，透過各自的 effect type
+            專案啟動時，系統開始監聽所有 action effects，透過各自的 effect type
             觸發任務執行
           </li>
-          <li>每個 effect 都是柯里化函式，回傳值皆是 action 物件</li>
+          <li>每個 effect 回傳值皆是 action 物件</li>
+          <li>
+            簡單來說就是對「執行動作」進行包裝，當它被 dispatch 會先檢查包裝的
+            type 值。接著，負責處理的 action effects
+            就會接手運行「執行動作」囉！
+          </li>
         </ul>
       </div>
     </div>

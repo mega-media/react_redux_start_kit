@@ -2,6 +2,7 @@ import React from 'react';
 import { spy } from 'sinon';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import { fetchAPI } from '!/effects';
 import { Input, states, handlers } from '../input';
 
 describe('sample-todo input testing', () => {
@@ -65,9 +66,11 @@ describe('sample-todo input testing', () => {
       it('fetch remote', () => {
         const loadTodoList = wrapper.prop('loadTodoList');
         loadTodoList();
-        const { payload: { apiCode } } = dispatchSpy.getCall(0).args[0];
-        expect(dispatchSpy.calledOnce).to.be.true;
-        expect(apiCode).to.be.equal('API_FETCH_LIST');
+        expect(
+          fetchAPI('API_FETCH_LIST', {
+            url: 'http://jsonplaceholder.typicode.com/todos?userId=1'
+          })(dispatchSpy.getCall(0).args[0])
+        ).to.be.true;
       });
     });
 
@@ -98,9 +101,10 @@ describe('sample-todo input testing', () => {
 
         expect(dispatchSpy.calledOnce).to.be.true;
         expect(resetSpy.calledOnce).to.be.true;
-        const { payload: { type, payload } } = dispatchSpy.getCall(0).args[0];
-        expect(type).to.be.equal('APPEND_ITEM');
-        expect(payload).to.be.deep.equal({ title: 'foo' });
+        expect(dispatchSpy.getCall(0).args[0]).to.deep.equal({
+          type: 'APPEND_ITEM',
+          payload: { title: 'foo' }
+        });
       });
 
       it('其他情況', () => {

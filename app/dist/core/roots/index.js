@@ -5,10 +5,7 @@ import { i18nState } from 'redux-i18n';
 import { combineStructor } from './combine';
 import containers from '~/build/containers';
 
-const { reducer, router, subscribe } = combineStructor.apply(
-  null,
-  containers.map(config => config.default)
-);
+const { reducer, router, subscribe } = combineStructor.apply(null, containers);
 
 export const RootReducer = combineReducers({
   ...reducer,

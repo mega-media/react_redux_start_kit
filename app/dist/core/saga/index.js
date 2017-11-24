@@ -4,7 +4,6 @@ import asyncWatch from './watcher/async';
 import callWatch from './watcher/call';
 import cancelWatch from './watcher/cancel';
 import delayWatch from './watcher/delay';
-import emitWatch from './watcher/emit';
 import lockWatch from './watcher/lock';
 import pollingWatch from './watcher/polling';
 
@@ -12,7 +11,6 @@ export default function* startWatch() {
   const tasks = yield all([
     fork(delayWatch),
     fork(callWatch),
-    fork(emitWatch),
     fork(asyncWatch),
     fork(pollingWatch),
     fork(cancelWatch)
