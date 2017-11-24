@@ -10,7 +10,7 @@
 export const STORE_KEY = 'button';
 
 /**
- * action type 
+ * action type
  */
 export const BUTTON_CLICK = 'BUTTON_CLICK';
 export const BUTTON_RESET = 'BUTTON_RESET';

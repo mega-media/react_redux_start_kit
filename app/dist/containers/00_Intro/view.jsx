@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { applyStyles } from '../../core/css-module';
+import { applyStyles } from '../../core/container/css-module';
 import style from './assets/stylesheets/style.scss';
 
 @applyStyles(style)
 export default class Intro extends PureComponent {
   state = {
-    activePage: ''
+    activePage: '',
+    samplePage: false
   };
   pageArray = [
     {
@@ -50,17 +51,35 @@ export default class Intro extends PureComponent {
       file: 'UnitTest.jsx'
     },
     {
+      route: '/hoc',
+      title: '9. Container HOC',
+      file: 'Hoc.jsx'
+    },
+    {
       route: '/saga',
-      title: '9. Saga',
+      title: '10. Saga effects',
       file: 'Saga.jsx'
+    },
+    {
+      route: '/api',
+      title: '11. Fetch API',
+      file: 'Api.jsx'
+    }
+  ];
+
+  sampleArray = [
+    {
+      route: '/todo',
+      title: 'TODO'
     }
   ];
 
   checkRouteLegal = activePage => {
+    const isSample = this.sampleArray.some(obj => obj.route === activePage);
+    const isLegal = this.pageArray.some(obj => obj.route === activePage);
     this.setState({
-      activePage: this.pageArray.some(obj => obj.route === activePage)
-        ? activePage
-        : '/welcome'
+      activePage: isLegal || isSample ? activePage : '/welcome',
+      samplePage: isSample
     });
   };
 
@@ -79,19 +98,8 @@ export default class Intro extends PureComponent {
 
   render() {
     const { children } = this.props;
-    const { activePage } = this.state;
-    const navComponents = this.pageArray.map(obj =>
-      <Link
-        key={obj.route}
-        styleName={`list-group-item ${obj.route === activePage
-          ? 'list-group-item-info'
-          : ''}`}
-        to={obj.route}>
-        {obj.title}
-      </Link>
-    );
-    const activeObj = this.pageArray.find(obj => obj.route === activePage);
-    const docJSON = require('./docs/' + activeObj.file);
+    const { activePage, samplePage } = this.state;
+
     return (
       <div styleName="container">
         <div styleName="page-header">
@@ -100,36 +108,77 @@ export default class Intro extends PureComponent {
         <div styleName="row">
           <div styleName="col-sm-4">
             <ul styleName="list-group">
-              {navComponents}
+              {this.pageArray.map(obj => (
+                <Link
+                  key={obj.route}
+                  styleName={`list-group-item ${
+                    obj.route === activePage ? 'list-group-item-info' : ''
+                  }`}
+                  to={obj.route}>
+                  {obj.title}
+                </Link>
+              ))}
+            </ul>
+            <ul styleName="list-group">
+              <a styleName="list-group-item disabled">進階應用</a>
+              {this.sampleArray.map(obj => (
+                <Link
+                  key={obj.route}
+                  styleName={`list-group-item ${
+                    obj.route === activePage ? 'list-group-item-info' : ''
+                  }`}
+                  to={obj.route}>
+                  {obj.title}
+                </Link>
+              ))}
             </ul>
           </div>
           <div styleName="col-sm-8">
-            <div styleName="panel panel-default">
-              <div styleName="panel-heading">
-                <h3 styleName="panel-title">
-                  {activeObj.title}
-                </h3>
-              </div>
-              <div styleName="panel-body">
-                {children}
-              </div>
-            </div>
-            <div styleName="panel panel-default">
-              <div styleName="panel-heading">
-                <h3 styleName="panel-title">學習指標</h3>
-              </div>
-              <div styleName="panel-body doc">
-                {docJSON.target}
-              </div>
-            </div>
-            <div styleName="panel panel-default">
-              <div styleName="panel-heading">
-                <h3 styleName="panel-title">相關應用與說明</h3>
-              </div>
-              <div styleName="panel-body doc">
-                {docJSON.desc}
-              </div>
-            </div>
+            {(() => {
+              if (!samplePage) {
+                const activeObj = this.pageArray.find(
+                  obj => obj.route === activePage
+                );
+                const { target, desc } = require('./docs/' + activeObj.file);
+                return (
+                  <div>
+                    <div styleName="panel panel-default">
+                      <div styleName="panel-heading">
+                        <h3 styleName="panel-title">{activeObj.title}</h3>
+                      </div>
+                      <div styleName="panel-body">{children}</div>
+                    </div>
+                    {target ? (
+                      <div styleName="panel panel-default">
+                        <div styleName="panel-heading">
+                          <h3 styleName="panel-title">學習指標</h3>
+                        </div>
+                        <div styleName="panel-body doc">{target}</div>
+                      </div>
+                    ) : null}
+                    {desc ? (
+                      <div styleName="panel panel-default">
+                        <div styleName="panel-heading">
+                          <h3 styleName="panel-title">相關應用與說明</h3>
+                        </div>
+                        <div styleName="panel-body doc">{desc}</div>
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              } else {
+                const { title = 'unknown' } =
+                  this.sampleArray.find(obj => obj.route === activePage) || {};
+                return (
+                  <div styleName="panel panel-default">
+                    <div styleName="panel-heading">
+                      <h3 styleName="panel-title">{title}</h3>
+                    </div>
+                    {children}
+                  </div>
+                );
+              }
+            })()}
           </div>
         </div>
       </div>

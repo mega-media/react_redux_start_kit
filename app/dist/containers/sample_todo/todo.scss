@@ -1,0 +1,53 @@
+.todo-table {
+  margin-bottom: 0;
+}
+.item {
+  text-indent: 5px;
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    background: #f5f5f5;
+  }
+  .completed & {
+    text-decoration: line-through;
+  }
+}
+.input {
+  padding: 5px;
+}
+%btnShared {
+  width: 40px;
+  text-align: center;
+  border-left: 1px solid #ccc;
+  cursor: pointer;
+  color: #aaa;
+  vertical-align: middle;
+}
+.complete {
+  @extend %btnShared;
+  .completed & {
+    color: #3c763d;
+    background: #dff0d8;
+  }
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+.remove {
+  @extend %btnShared;
+  &:hover {
+    color: #ce4844;
+    background: #f5f5f5;
+  }
+}
+.modify-cancel {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  cursor: pointer;
+  color: #ccc;
+  display: inline-block;
+  &:hover {
+    color: #aaa;
+  }
+}

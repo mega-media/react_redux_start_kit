@@ -1,8 +1,7 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from '../connect';
-import type { ConnectProps } from '../connect';
+import { _connect3 } from '../connect';
 /* export */
 export type I18nProps = {
   i18nText: (alias: string, params?: Object) => string,
@@ -13,10 +12,12 @@ export type I18nProps = {
 type Context = {
   t: (...params: any) => any
 };
-type WrapperComponentProps = React$Component<any, $Subtype<I18nProps>, any>;
+type ConnectProps = {
+  i18nLang: string
+};
 
-export default (WrapperComponent: Class<WrapperComponentProps>) => {
-  class I18nClass extends PureComponent<void, ConnectProps, void> {
+export default (WrapperComponent: any) => {
+  class I18nClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
     static contextTypes: Context = {
       t: PropTypes.func.isRequired
@@ -33,7 +34,7 @@ export default (WrapperComponent: Class<WrapperComponentProps>) => {
     };
 
     render() {
-      const { dispatchEvent, response, i18nLang, ...others } = this.props;
+      const { i18nLang, ...others } = this.props;
       return (
         <WrapperComponent
           i18nText={this.i18nText}
@@ -44,5 +45,5 @@ export default (WrapperComponent: Class<WrapperComponentProps>) => {
     }
   }
 
-  return connect()(I18nClass);
+  return _connect3()(I18nClass);
 };

@@ -2,6 +2,7 @@
 --growl
 --require jsdom-global/register
 --require babel-polyfill
+--require isomorphic-fetch
 --require ignore-styles
 --compilers js:babel-core/register
 --compilers jsx:babel-core/register

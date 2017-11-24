@@ -1,50 +1,88 @@
-/* @flow */
 import { connect as reduxConnect } from 'react-redux';
-/* type */
-import type { Connector } from 'react-redux';
-import type { Dispatch } from 'redux';
+import { pipe, split, path, __ } from 'ramda';
 
-export type ConnectProps = {
-  response: any,
-  i18nLang: string,
-  dispatchEvent: Dispatch<any>
-};
-
-export const resolveStoreKey: any = (store: Object, storeKey: string) => {
+export const resolveStoreKey = (store: Object) => (storeKey: string) => {
   if (!store) return null;
   if (storeKey.includes('.')) {
-    const strSplitArr = storeKey.split('.');
-    const firstSplit = strSplitArr.shift();
-    return typeof store[firstSplit] === 'undefined'
-      ? null
-      : resolveStoreKey(store[firstSplit], strSplitArr.join('.'));
+    const res = pipe(split('.'), path((__: any), store))(storeKey);
+    return res === 'undefined' ? null : res;
   } else return typeof store[storeKey] === 'undefined' ? null : store[storeKey];
 };
 
 /**
- * 綁定要監聽的store key，當此store內容改變時，會觸發View做處理
- * @param storeKey <null|string|array>
+ * 綁定要監聽的store key，當此store內容改變時，會觸發component做處理
+ * @param storeKey Array<string>
  * @param wrapperComponent
- * @returns {(view:P) => P}
+ * @returns {(component:P) => P}
  */
-export const connect = (storeKey: ?(string | Array<string>)) =>
+export const _connect1 = (storeKey?: Array<string>) =>
   reduxConnect(
     state => {
       let response = null;
-      if (typeof storeKey === 'string')
-        response = resolveStoreKey(state, storeKey);
-      else if (Array.isArray(storeKey) || storeKey instanceof Array) {
-        response = storeKey.reduce((returnObj, key) => {
-          returnObj[key] = resolveStoreKey(state, key);
-          return returnObj;
-        }, {});
+      if (storeKey) {
+        switch (storeKey.length) {
+          case 0:
+            response = null;
+            break;
+          case 1:
+            response = resolveStoreKey(state)(storeKey[0]);
+            break;
+          default:
+            const resolveFunc = resolveStoreKey(state);
+            response = storeKey.reduce((returnObj, key) => {
+              returnObj[key] = resolveFunc(key);
+              return returnObj;
+            }, {});
+            break;
+        }
       }
-      return { response, i18nLang: state.i18nState.lang };
+      return { response };
     },
-    (dispatch: Dispatch<any>) => ({ dispatchEvent: dispatch }),
+    null,
     (stateProps, dispatchProps, ownProps) => ({
       ...stateProps,
+      ...ownProps
+    }),
+    {
+      pure: true,
+      withRef: false
+    }
+  );
+
+/**
+ * 賦予元件 dispatch 操作
+ * @param storeKey <null|string|array>
+ * @param wrapperComponent
+ * @returns {(component:P) => P}
+ */
+export const _connect2 = (storeKey?: Array<string>) =>
+  reduxConnect(
+    null,
+    dispatch => ({ dispatch }),
+    (stateProps, dispatchProps, ownProps) => ({
       ...dispatchProps,
+      ...ownProps
+    }),
+    {
+      pure: true,
+      withRef: false
+    }
+  );
+
+/**
+ * 多國語系
+ * @param storeKey <null|string|array>
+ * @param wrapperComponent
+ * @returns {(component:P) => P}
+ */
+export const _connect3 = (storeKey?: Array<string>) =>
+  reduxConnect(
+    state => ({
+      i18nLang: state.i18nState.lang
+    }),
+    null,
+    (stateProps, dispatchProps, ownProps) => ({
+      ...stateProps,
       ...ownProps
     }),
     {

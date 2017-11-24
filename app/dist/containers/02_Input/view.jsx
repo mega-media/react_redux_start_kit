@@ -5,10 +5,10 @@ export default class Input extends PureComponent {
    * 設定 state 預設值
    * The ES5 way
    * getInitialState: function() {
-     *   return {
-     *      name: null
-     *   };
-     * }
+   *   return {
+   *      name: null
+   *   };
+   * }
    */
   state = {
     name: null
@@ -61,10 +61,6 @@ class SayHello extends PureComponent {
      * 或直接在渲染時取出 props 值
      */
     const { name } = this.props;
-    return (
-      <div>
-        Hello ! {name}
-      </div>
-    );
+    return <div>Hello ! {name}</div>;
   }
 }

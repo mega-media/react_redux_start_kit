@@ -10,30 +10,37 @@ module.exports = {
   desc: (
     <div>
       <h5>☆ 套用自訂樣式檔</h5>
-      <ul>
+      <ol>
         <li>
-          方式如下：
-          <ol>
-            <li>
-              載入樣式檔 <label>{`import customStyle from './styleFile.css'`}</label>
-            </li>
-            <li>
-              使用 applyStyles 嵌套進元件中 <label>{`@applyStyles(customStyle)`}</label>
-            </li>
-            <li>
-              使用 applyStylesInline 嵌套進元件中{' '}
-              <label>{`applyStylesInline(customStyle)(Component)`}</label>
-            </li>
-          </ol>
+          載入樣式檔
+          <pre>{`import customStyle from './styleFile.css'`}</pre>
         </li>
-      </ul>
+        <li>
+          使用 applyStyles 嵌套進元件中
+          <pre>{`import { applyStyles } from '~/core/container/css-module';
+
+@applyStyles(customStyle)
+export default class YourComponent extends React.Component { ... }
+`}</pre>
+        </li>
+        <li>
+          使用 hoc - Style 嵌套進元件中
+          <pre>{`import Style from '~/core/container/hoc/style';
+
+export class YourComponent extends React.Component { ... }
+export default Style(customStyle)(YourComponent);
+`}</pre>
+        </li>
+      </ol>
       <h5>☆ 使用外部檔案 - 以圖片為例</h5>
       <ul>
         <li>
-          載入外部檔案與載入系統檔案方式相同：<label>{`import imageUrl from './imageFile.jpg'`}</label>
+          載入外部檔案與載入系統檔案方式相同
+          <pre>{`import imageUrl from './imageFile.jpg'`}</pre>
         </li>
         <li>
-          使用：<label>{`<img src={imageUrl} />`}</label>
+          使用：
+          <pre>{`<img src={imageUrl} />`}</pre>
         </li>
         <li>
           支援載入的外部檔案副檔名包含：

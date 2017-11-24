@@ -3,7 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import Dispatch from '../../../core/container/hoc/dispatch';
-import { applyStyles } from '../../../core/css-module';
+import { applyStyles } from '../../../core/container/css-module';
 import { add } from '../action';
 import MemberClass from '../class';
 import type { Props, State } from './type';
@@ -15,46 +15,38 @@ import type { Props, State } from './type';
 class Form extends PureComponent<void, Props, State> {
   props: Props;
   //資料序號
-  uidIndex: number;
+  uidIndex: number = 1;
   //記錄新增欄位內容
   state: State;
 
-  constructor(props: any, context: any) {
-    super(props, context);
-    this.uidIndex = 1;
+  constructor(props: Props) {
+    super(props);
     this.state = this.initializeState();
   }
 
-  initializeState = (): State => {
-    return {
-      uid: this.uidIndex,
-      name: '',
-      gender: 'male',
-      married: false
-    };
-  };
+  initializeState = (): State => ({
+    uid: this.uidIndex,
+    name: '',
+    gender: 'male',
+    married: false
+  });
 
-  changeHandler = (stateKey: string): ((e: Event) => void) => (e: Event) => {
-    const target = e.target;
-    if (target instanceof HTMLInputElement) {
-      //根據欄位更新 state
-      this.setState({
-        [stateKey]:
-          stateKey === 'married' ? target.value === 'true' : target.value
-      });
-    }
+  changeHandler = ({ target: { name, value } }: any) => {
+    //根據欄位更新 state
+    this.setState({
+      [name]: name === 'married' ? value === 'true' : value
+    });
   };
 
   validate = (): boolean => {
     //檢查有沒有輸入 name
     const { name } = this.state;
-    if (!name) return false;
-    return true;
+    return !!name;
   };
 
   submit = (e: Event): void => {
     e.preventDefault();
-    if (this.state && this.validate()) {
+    if (this.validate()) {
       //執行新增 action
       this.props.dispatch(add(Object.assign(new MemberClass(), this.state)));
       //新增增加 uid 序號
@@ -71,9 +63,10 @@ class Form extends PureComponent<void, Props, State> {
         <div styleName="form-group">
           <label>Name (*)</label>
           <input
-            type="type"
+            type="text"
             value={name}
-            onChange={this.changeHandler('name')}
+            name="name"
+            onChange={this.changeHandler}
             styleName="form-control"
           />
         </div>
@@ -83,8 +76,8 @@ class Form extends PureComponent<void, Props, State> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler('married')}
-              name="marry"
+              onChange={this.changeHandler}
+              name="married"
               value="false"
               checked={!married}
             />
@@ -93,8 +86,8 @@ class Form extends PureComponent<void, Props, State> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler('married')}
-              name="marry"
+              onChange={this.changeHandler}
+              name="married"
               value="true"
               checked={married}
             />
@@ -107,7 +100,7 @@ class Form extends PureComponent<void, Props, State> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler('gender')}
+              onChange={this.changeHandler}
               name="gender"
               value="male"
               checked={gender === 'male'}
@@ -117,7 +110,7 @@ class Form extends PureComponent<void, Props, State> {
           <label styleName="radio-inline">
             <input
               type="radio"
-              onChange={this.changeHandler('gender')}
+              onChange={this.changeHandler}
               name="gender"
               checked={gender === 'female'}
               value="female"

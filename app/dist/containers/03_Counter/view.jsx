@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
 /* 使用符號 `~` 可代替指向專案目錄 `app/dist` */
-import { Dispatch, Store } from '~/core/container/hoc';
+import { compose, Dispatch, Store } from '~/core/container';
 
 /* actions */
 import { click, reset } from './action';
-
-/* helper */
-import { compose } from 'ramda';
 
 class Counter extends PureComponent {
   clickHandler = () => {

@@ -1,5 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import routerFormat from './dist/router';
+import router from '~/core/router';
+// Intro
+import IntroView from '~/containers/00_Intro/view';
 
-render(routerFormat, document.getElementById('container'));
+render(
+  router({
+    master_component: IntroView,
+    router_index: '/welcome'
+  }),
+  document.getElementById('container')
+);

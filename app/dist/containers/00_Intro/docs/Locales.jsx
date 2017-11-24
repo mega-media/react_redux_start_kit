@@ -18,10 +18,18 @@ module.exports = {
           <li styleName="text-danger">語系參數僅支援字串</li>
         </ul>
       </div>
-      <h5>☆ container hoc - I18n</h5>
+      <h5>
+        ☆ container hoc - <a href="/hoc#i18n">I18n</a>
+      </h5>
       <div>
         <ul>
-          <li>將語系函式以 props 方式傳入 component</li>
+          <li>
+            使用 hoc 將語系函式以 props 方式傳入 component
+            <pre>
+              {`import I18n from '~/core/container/hoc/i18n';
+export default I18n(Component) `}
+            </pre>
+          </li>
           <li>
             舉例
             <pre>
@@ -55,9 +63,12 @@ module.exports = {
         <ul>
           <li>redux-i18n 模組提供的切換語系 action</li>
           <li>
-            在繼承自 BaseView 的 container 中，使用
-            this.dispatch(setLanguage('en'))，即可切換語系
+            需要與 Dispatch hoc 元件，搭配使用
+            <pre>{`import { compose, Dispatch, I18n } from '~/core/container/hoc';
+
+export default compose(Dispatch, I18n)(YOUR_COMPONENT)`}</pre>
           </li>
+          <li>this.props.dispatch(setLanguage('en'))，即可切換語系</li>
         </ul>
       </div>
     </div>

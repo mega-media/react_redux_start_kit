@@ -9,6 +9,7 @@ export default (
   let state = initState;
   return {
     getState: () => state,
+    setState: (mockState: Object) => (state = mockState),
     dispatch: (action: Object) => (state = Reducer(state, action)),
     restore: () => (state = initState)
   };

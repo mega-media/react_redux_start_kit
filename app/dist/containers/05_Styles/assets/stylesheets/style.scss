@@ -20,16 +20,8 @@
     ),
     linear-gradient(30deg, rgba(0, 0, 0, 0.4) 10%, rgba(0, 0, 0, 0) 20%),
     radial-gradient(circle at 50% 33%, #f8f6f7 32%, rgba(255, 255, 255, 0) 32%),
-    radial-gradient(
-      circle at -13% 55%,
-      #f8f6f7 20%,
-      rgba(255, 255, 255, 0) 20%
-    ),
-    radial-gradient(
-      circle at 113% 55%,
-      #f8f6f7 20%,
-      rgba(255, 255, 255, 0) 20%
-    ),
+    radial-gradient(circle at -13% 55%, #f8f6f7 20%, rgba(255, 255, 255, 0) 20%),
+    radial-gradient(circle at 113% 55%, #f8f6f7 20%, rgba(255, 255, 255, 0) 20%),
     linear-gradient(to bottom, #ef0015 20%, #b2000c 100%);
   border-radius: 140px 140px 80px 80px;
   &:before {

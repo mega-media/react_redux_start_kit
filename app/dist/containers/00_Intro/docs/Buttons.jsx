@@ -28,22 +28,40 @@ module.exports = {
           嵌套方式包含
           <ol>
             <li>
-              <b>applyStyles</b>
+              <b>Decorator - applyStyles</b>
               <p>
-                使用 ES7 Decorator 的方式加上符號<label>@</label>標記在 Container/Component
-                上方
+                使用 ES7 Decorator 的方式加上符號<label>@</label>標記在
+                Container/Component 上方
               </p>
+              <pre>
+                {`import { applyStyles } from '~/core/container/css-module';
+
+@applyStyles()
+export default class YourComponent extends React.Component { ... }
+`}
+              </pre>
             </li>
             <li>
-              <b>applyStylesInline</b>
-              <p>嵌套方式如下</p>
+              <b>
+                HOC - <a href="/hoc#style">Style</a>
+              </b>
+              <p>使用 HOC 嵌套，將樣式檔帶入元件中</p>
               <pre>
-                {`applyStylesInline()(Component)`}
+                {`import Style from '~/core/container/hoc/style';
+
+export class YourComponent extends React.Component { ... }
+export default Style()(YourComponent);
+`}
               </pre>
-              <p>亦可與 container hoc 組合</p>
-              <pre>
-                {`compose(Dispatch, applyStylesInline())(Component)`}
-              </pre>
+              <p>
+                與其他 HOC 組合，需注意的是 css-module
+                只會轉換第一層元件，因此函式順序必須放在最接近元件的位置
+              </p>
+              <pre>{`import { compose, Dispatch, Store, Style } from '~/core/container';
+
+export class YourComponent extends React.Component { ... }
+export default compose(Dispatch, Store, Style())(YourComponent);
+`}</pre>
             </li>
           </ol>
         </li>
