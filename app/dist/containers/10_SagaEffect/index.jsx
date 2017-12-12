@@ -36,13 +36,45 @@ dispatch(polling(1000, call(() => ({
   payload: { now: new Date().toLocaleTimeString() }
 }))))`}</pre>
     </div>
-    <h4># cancel()</h4>
+    <h4># cancel(action)</h4>
+    <div style={{ padding: '5px 10px 20px' }}>
+      <p>取消特定 effects，適合搭配 delay、polling 使用</p>
+      <div styleName="panel panel-default">
+        <div styleName="panel-heading">
+          <b>action</b>
+        </div>
+        <div styleName="panel-body">
+          Type: Action <br />
+          取消之前已註冊的 action effects
+        </div>
+      </div>
+      <pre>{`/* delay */
+//設定延遲函式：7 秒後 dispatch TYPE_A
+const timeout = delay(7000, { type: 'TYPE_A' });
+
+//開始執行
+dispatch(timeout);
+
+//取消執行延遲行為
+dispatch(cancel(timeout));`}</pre>
+      <pre>{`/* polling */
+//宣告輪詢函式：每秒 dispatch TYPE_A
+const loop = polling(1000, { type: 'TYPE_A' });
+
+//開始執行
+dispatch(loop);
+
+//中斷輪詢
+dispatch(cancel(loop));
+`}</pre>
+    </div>
+    <h4># cancelAll()</h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消所有執行中的 effects </p>
       <pre>{`dispatch([
   delay(5000, { type: 'TYPE_A' }),
   delay(1000, { type: 'TYPE_B' }),
-  cancel(),
+  cancelAll(),
   delay(4000, { type: 'TYPE_C' }),
   delay(2000, { type: 'TYPE_D' })
 ])
@@ -52,7 +84,7 @@ dispatch(polling(1000, call(() => ({
 dispatch([
   delay(5000, { type: 'TYPE_A' }),
   delay(1000, { type: 'TYPE_B' }),
-  delay(3000, cancel()),
+  delay(3000, cancelAll()),
   delay(4000, { type: 'TYPE_C' }),
   delay(2000, { type: 'TYPE_D' })
 ])

@@ -16,6 +16,7 @@ export function* pollingTask(payload) {
 
 export function subscribe({ action, interval }) {
   return eventChannel(emit => {
+    emit(action);
     let timer = setInterval(() => {
       emit(action);
     }, interval);
@@ -27,9 +28,10 @@ export function subscribe({ action, interval }) {
 
 export default function*() {
   while (true) {
-    const { payload, payload: { action } } = yield take('SAGA_POLLING');
+    let action = yield take('SAGA_POLLING');
+    const { payload } = action;
     const task = yield fork(pollingTask, payload);
-    yield put(action);
+    action.task = task;
     yield call(taskManager.append, task);
   }
 }

@@ -1,5 +1,6 @@
 export const call = require('./call');
 export const cancel = require('./cancel');
+export const cancelAll = require('./cancel-all');
 export const cancelLatest = require('./cancel-latest');
 export const delay = require('./delay');
 export const emit = require('./emit');

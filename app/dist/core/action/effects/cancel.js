@@ -1,7 +1,10 @@
 /**
- * 取消所有 API 發送與監聽
+ * 取消特定 effect
  * @return {{type: SAGA_CANCEL}}
  */
-module.exports = () => ({
-  type: 'SAGA_CANCEL'
+module.exports = action => ({
+  type: 'SAGA_CANCEL',
+  payload: {
+    action
+  }
 });

@@ -53,9 +53,11 @@ export function subscribe({ apiCode, stream, middleware }) {
 export default function*() {
   while (true) {
     /* 取得 action 發送的 payload */
-    const { payload } = yield take('SAGA_ASYNC');
+    let action = yield take('SAGA_ASYNC');
+    const { payload } = action;
     /* 開始 api 流程。使用 fork 可將每次呼叫各別獨立處理 */
     const task = yield fork(asyncTask, payload);
+    action.task = task;
     yield call(taskManager.append, task);
   }
 }

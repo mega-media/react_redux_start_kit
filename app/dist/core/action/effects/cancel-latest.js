@@ -1,5 +1,5 @@
 /**
- * 取消最後一筆 API 發送與監聽
+ * 取消最後一筆 effects
  * @return {{type: SAGA_CANCEL_LATEST}}
  */
 module.exports = () => ({

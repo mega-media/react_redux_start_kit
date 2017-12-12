@@ -11,8 +11,10 @@ export default function*() {
   const delayChannel = yield actionChannel('SAGA_DELAY');
   try {
     while (true) {
-      let { payload } = yield take(delayChannel);
+      let action = yield take(delayChannel);
+      const { payload } = action;
       const task = yield fork(delayTask, payload);
+      action.task = task;
       yield call(taskManager.append, task);
     }
   } finally {

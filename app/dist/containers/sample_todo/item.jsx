@@ -70,25 +70,23 @@ export const Modify = ({
   text,
   setText,
   refSelect
-}: Object) => {
-  return (
-    <tr>
-      <td styleName="item" colSpan={3}>
-        <input
-          type="text"
-          ref={refSelect}
-          styleName="form-control"
-          value={text}
-          onChange={setText}
-          onKeyPress={updateHandler}
-        />
-        <div styleName="modify-cancel" onClick={modifyToggle}>
-          <i styleName="glyphicon glyphicon-remove" />
-        </div>
-      </td>
-    </tr>
-  );
-};
+}: Object) => (
+  <tr>
+    <td styleName="item" colSpan={3}>
+      <input
+        type="text"
+        ref={refSelect}
+        styleName="form-control"
+        value={text}
+        onChange={setText}
+        onKeyPress={updateHandler}
+      />
+      <div styleName="modify-cancel" onClick={modifyToggle}>
+        <i styleName="glyphicon glyphicon-remove" />
+      </div>
+    </td>
+  </tr>
+);
 
 const ModifyTemp = Style(css)(Modify);
 const DefaultTemp = Style(css)(Default);

@@ -14,11 +14,12 @@ import {
 export const taskManager = {
   taskQueue: [],
 
+  find: (prop: string, target: any) =>
+    findIndex(propEq(prop, target))(taskManager.taskQueue),
+
   append: (task: any) => {
     task.done.then(() => {
-      const index: number = findIndex((propEq('id', task.id): any))(
-        taskManager.taskQueue
-      );
+      const index: number = taskManager.find('id', task.id);
       if (index > -1) taskManager.remove(index);
     });
     taskManager.taskQueue = ap(task, taskManager.taskQueue);
