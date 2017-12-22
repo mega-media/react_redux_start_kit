@@ -10,6 +10,7 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 /* 系統設定 */
 import { RootReducer, RootRoutes } from '../roots';
 import { promiseMiddleware, multiDispatchMiddleware } from './middleware';
+import { BASE_PATH } from 'Config';
 
 /* saga */
 import createSagaMiddleware from 'redux-saga';
@@ -21,7 +22,7 @@ const sagaMiddleware = createSagaMiddleware();
 /**
  * Router setting
  */
-const history = createHistory();
+const history = createHistory({ basename: BASE_PATH });
 const routeMiddleware = routerMiddleware(history);
 let store = {};
 let DevTools = null;
