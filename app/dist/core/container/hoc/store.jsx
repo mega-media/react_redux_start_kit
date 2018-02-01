@@ -22,13 +22,13 @@ export default (...storeKey: Array<string>) => (WrapperComponent: any) => {
   class StoreClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
 
-    shouldComponentUpdate({ response }: ConnectProps) {
-      return !objectEqual({ response: this.props.response }, { response });
+    shouldComponentUpdate(nextProps: ConnectProps) {
+      return !objectEqual(nextProps, this.props);
     }
 
     render() {
-      const { response, ...others } = this.props;
-      return <WrapperComponent storeData={response} {...others} />;
+      const { CONNECT_RES, ...others } = this.props;
+      return <WrapperComponent storeData={CONNECT_RES} {...others} />;
     }
   }
 
