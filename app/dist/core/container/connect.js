@@ -5,16 +5,11 @@ export const resolveStoreKey = (store: Object) => (
   storeKey: string | Object
 ) => {
   if (!store) return null;
-  if (storeKey instanceof Object) {
-    const [objKey, objPath] = head(toPairs(storeKey));
-    return path([objKey, ...objPath])(store);
-  } else {
-    if (storeKey.includes('.')) {
-      const res = pipe(split('.'), path((__: any), store))(storeKey);
-      return res === 'undefined' ? null : res;
-    } else
-      return typeof store[storeKey] === 'undefined' ? null : store[storeKey];
-  }
+
+  if (storeKey.includes('.')) {
+    const res = pipe(split('.'), path((__: any), store))(storeKey);
+    return res === 'undefined' ? null : res;
+  } else return typeof store[storeKey] === 'undefined' ? null : store[storeKey];
 };
 
 /**
@@ -38,10 +33,7 @@ export const _connect1 = (storeKey?: Array<string>) =>
           default:
             const resolveFunc = resolveStoreKey(state);
             response = storeKey.reduce((returnObj, key) => {
-              if (key instanceof Object) {
-                const [objKey, objPath] = head(toPairs(key));
-                returnObj[join('.', [objKey, ...objPath])] = resolveFunc(key);
-              } else returnObj[key] = resolveFunc(key);
+              returnObj[key] = resolveFunc(key);
               return returnObj;
             }, {});
             break;

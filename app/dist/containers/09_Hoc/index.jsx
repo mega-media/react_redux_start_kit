@@ -238,13 +238,8 @@ console.log(storeData); // { keyA: [1, 2, 3], keyC: true }
 const { storeData } = this.props;
 console.log(storeData); // 100
 
-/* 取得某個路徑內容 */
-//Store({ keyD: ['baz', 0, 'qux'] })(YourComponent)
-const { storeData } = this.props;
-console.log(storeData); // 300
-
 /* 綁定多個 store */
-//Store('keyB.foo', keyC, { keyD: ['baz', 0, 'qux'] })(YourComponent)
+//Store('keyB.foo', keyC, 'keyD.baz.0.qux')(YourComponent)
 const { storeData } = this.props;
 console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 }
 `}</pre>
