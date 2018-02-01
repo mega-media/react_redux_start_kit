@@ -39,7 +39,7 @@ export const _connect1 = (storeKey?: Array<string>) =>
             break;
         }
       }
-      return { response };
+      return { CONNECT_RES: response };
     },
     null,
     (stateProps, dispatchProps, ownProps) => ({
