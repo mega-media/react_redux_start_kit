@@ -1,8 +1,11 @@
 import { connect as reduxConnect } from 'react-redux';
-import { pipe, split, path, __ } from 'ramda';
+import { pipe, split, path, __, toPairs, keys, head, join } from 'ramda';
 
-export const resolveStoreKey = (store: Object) => (storeKey: string) => {
+export const resolveStoreKey = (store: Object) => (
+  storeKey: string | Object
+) => {
   if (!store) return null;
+
   if (storeKey.includes('.')) {
     const res = pipe(split('.'), path((__: any), store))(storeKey);
     return res === 'undefined' ? null : res;
@@ -44,7 +47,7 @@ export const _connect1 = (storeKey?: Array<string>) =>
       ...ownProps
     }),
     {
-      pure: true,
+      pure: false,
       withRef: false
     }
   );
