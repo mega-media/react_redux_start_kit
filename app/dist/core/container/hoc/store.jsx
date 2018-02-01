@@ -1,6 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { _connect1 } from '../connect';
+import { objectEqual } from '~/core/helpers/equal';
 
 /* export */
 export type StoreProps<S> = {
@@ -20,6 +21,10 @@ type ConnectProps = {
 export default (...storeKey: Array<string>) => (WrapperComponent: any) => {
   class StoreClass extends Component<void, ConnectProps, void> {
     props: ConnectProps;
+
+    shouldComponentUpdate({ response }: ConnectProps) {
+      return !objectEqual({ response: this.props.response }, { response });
+    }
 
     render() {
       const { response, ...others } = this.props;

@@ -189,8 +189,7 @@ console.log(C); // true
         <div styleName="panel-body">
           Type: string
           <br />
-          store 資料的 key，支援多筆。當監聽的值為多筆，回傳的資料為
-          Object，並以 storeKeys 作為鍵值
+          store 資料的 key，支援多筆。當監聽的值為多筆，回傳的資料為 Object
         </div>
       </div>
       <div styleName="panel panel-default">
@@ -220,7 +219,8 @@ store = {
     foo: 100,
     bar: 200
   },
-  keyC: true
+  keyC: true,
+  keyD: { baz: [{ qux: 300 }] }
 }
 
 /* 綁定單一個 store */
@@ -238,10 +238,15 @@ console.log(storeData); // { keyA: [1, 2, 3], keyC: true }
 const { storeData } = this.props;
 console.log(storeData); // 100
 
-/* 綁定多個 store */
-//Store('keyB.foo', keyC)(YourComponent)
+/* 取得某個路徑內容 */
+//Store({ keyD: ['baz', 0, 'qux'] })(YourComponent)
 const { storeData } = this.props;
-console.log(storeData); // { 'keyB.foo': 100, keyC: true }
+console.log(storeData); // 300
+
+/* 綁定多個 store */
+//Store('keyB.foo', keyC, { keyD: ['baz', 0, 'qux'] })(YourComponent)
+const { storeData } = this.props;
+console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 }
 `}</pre>
         </div>
       </div>

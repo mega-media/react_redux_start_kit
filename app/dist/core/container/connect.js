@@ -1,12 +1,20 @@
 import { connect as reduxConnect } from 'react-redux';
-import { pipe, split, path, __ } from 'ramda';
+import { pipe, split, path, __, toPairs, keys, head, join } from 'ramda';
 
-export const resolveStoreKey = (store: Object) => (storeKey: string) => {
+export const resolveStoreKey = (store: Object) => (
+  storeKey: string | Object
+) => {
   if (!store) return null;
-  if (storeKey.includes('.')) {
-    const res = pipe(split('.'), path((__: any), store))(storeKey);
-    return res === 'undefined' ? null : res;
-  } else return typeof store[storeKey] === 'undefined' ? null : store[storeKey];
+  if (storeKey instanceof Object) {
+    const [objKey, objPath] = head(toPairs(storeKey));
+    return path([objKey, ...objPath])(store);
+  } else {
+    if (storeKey.includes('.')) {
+      const res = pipe(split('.'), path((__: any), store))(storeKey);
+      return res === 'undefined' ? null : res;
+    } else
+      return typeof store[storeKey] === 'undefined' ? null : store[storeKey];
+  }
 };
 
 /**
@@ -30,7 +38,10 @@ export const _connect1 = (storeKey?: Array<string>) =>
           default:
             const resolveFunc = resolveStoreKey(state);
             response = storeKey.reduce((returnObj, key) => {
-              returnObj[key] = resolveFunc(key);
+              if (key instanceof Object) {
+                const [objKey, objPath] = head(toPairs(key));
+                returnObj[join('.', [objKey, ...objPath])] = resolveFunc(key);
+              } else returnObj[key] = resolveFunc(key);
               return returnObj;
             }, {});
             break;
@@ -44,7 +55,7 @@ export const _connect1 = (storeKey?: Array<string>) =>
       ...ownProps
     }),
     {
-      pure: true,
+      pure: false,
       withRef: false
     }
   );
