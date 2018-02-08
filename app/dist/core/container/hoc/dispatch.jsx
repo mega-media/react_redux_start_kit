@@ -19,7 +19,10 @@ type ConnectProps = {
 };
 type Actions = $Subtype<{ type: $Subtype<string> }>;
 type PromiseAction = Promise<Actions>;
-type ActionAPI = Actions | PromiseAction | Array<Actions | PromiseAction>;
+export type ActionAPI =
+  | Actions
+  | PromiseAction
+  | Array<Actions | PromiseAction>;
 
 export default (WrapperComponent: any) => {
   class DispatchClass extends Component<void, ConnectProps, void> {

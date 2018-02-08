@@ -1,7 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
+import { setLanguage } from 'redux-i18n';
 import PropTypes from 'prop-types';
 import { _connect3 } from '../connect';
+import type { ActionAPI } from './dispatch';
+
 /* export */
 export type I18nProps = {
   i18nText: (alias: string, params?: Object) => string,
@@ -21,6 +24,14 @@ export default (WrapperComponent: any) => {
     props: ConnectProps;
     static contextTypes: Context = {
       t: PropTypes.func.isRequired
+    };
+
+    /**
+     * 改變語系
+     * @param dispatch
+     */
+    setLang = (dispatch: ActionAPI => void) => (lang: string) => {
+      dispatch(setLanguage(lang));
     };
 
     /**

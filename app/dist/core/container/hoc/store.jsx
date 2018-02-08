@@ -15,7 +15,7 @@ type WrapperComponentProps<S> = React$Component<
   any
 >;
 type ConnectProps = {
-  response: any
+  CONNECT_RES: any
 };
 
 export default (...storeKey: Array<string>) => (WrapperComponent: any) => {
