@@ -253,7 +253,11 @@ console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>
-        用法與 store 相同，但是會多實作 shouldComponentUpdate 的 props 比對。{' '}
+        用法與{' '}
+        <a href="#store" style={{ color: '#000' }}>
+          # Store
+        </a>{' '}
+        相同，但是會多實作 shouldComponentUpdate 的 props 比對。{' '}
       </p>
     </div>
     <h4 id="style">
