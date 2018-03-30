@@ -6,3 +6,4 @@
 --require ignore-styles
 --compilers js:babel-core/register
 --compilers jsx:babel-core/register
+app/dist/**/__test__/**/*.test.*

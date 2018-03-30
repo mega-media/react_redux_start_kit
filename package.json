@@ -1,6 +1,6 @@
 {
   "name": "mega",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
     "production": "npm run build; NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
     "build": "node app/build.js || exit",
     "start": "npm run build; NODE_ENV=development webpack-dev-server --devtool eval --progress --colors --config ./webpack.dev.config.js",
-    "test": "NODE_ENV=test nyc mocha --opts ./.mochaopts \"app/dist/**/__test__/**/*.test.*\" || exit 0",
+    "test": "NODE_ENV=test nyc mocha --opts ./.mochaopts",
     "coverage-report": "NODE_ENV=test nyc report --reporter=lcov --reporter=text --reporter=text-summary",
     "flow-install": "flow-typed install --overwrite",
     "flow-test": "flow || notify -t 'Flow Type' -m 'something mistake'",
     "flow-test:watch": "npm run flow-test; fswatch -e ./**/* -o 1 | xargs -n1 -I{} sh -c 'tput setaf 6; date \"+\n[%m/%d %H:%M:%S]\";tput sgr0; npm run flow-test'",
-    "mocha-test:watch": "NODE_ENV=test mocha --watch --opts ./.mochaopts \"app/dist/**/__test__/**/*.test.*\"",
+    "mocha-test:watch": "NODE_ENV=test mocha --watch --opts ./.mochaopts",
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote --jsx-bracket-same-line --write \"app/dist/**/*.{js,jsx,css,scss,sass}\""
+    "prettier": "prettier --write \"app/dist/**/*.{js,jsx,css,scss,sass}\""
   },
   "author": "",
   "license": "ISC",
