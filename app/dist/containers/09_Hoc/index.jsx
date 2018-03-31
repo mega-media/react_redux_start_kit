@@ -246,6 +246,20 @@ console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 
         </div>
       </div>
     </div>
+    <h4 id="store">
+      <a href="#store" style={{ color: '#000' }}>
+        # PureStore(...storeKeys)(component)
+      </a>
+    </h4>
+    <div style={{ padding: '5px 10px 20px' }}>
+      <p>
+        用法與{' '}
+        <a href="#store" style={{ color: '#000' }}>
+          # Store
+        </a>{' '}
+        相同，但是會多實作 shouldComponentUpdate 的 props 比對。{' '}
+      </p>
+    </div>
     <h4 id="style">
       <a href="#style" style={{ color: '#000' }}>
         # Style(...css)(component)
