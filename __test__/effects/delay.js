@@ -1,2 +1,2 @@
-module.exports = correctDuration => ({ type, payload: { duration } }) =>
+export default correctDuration => ({ type, payload: { duration } }) =>
   type === 'SAGA_DELAY' && correctDuration === duration;

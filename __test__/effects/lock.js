@@ -1,1 +1,1 @@
-module.exports = () => ({ type }) => type === 'SAGA_LOCK';
+export default () => ({ type }) => type === 'SAGA_LOCK';

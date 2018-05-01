@@ -1,6 +1,6 @@
 import { toUpper, toLower } from 'ramda';
 
-module.exports = (apiCode, opts) => {
+const fetchApi = (apiCode, opts) => {
   /* 撈出指定的 request */
   const { method = 'get', url, body = null, middleware = [] } = opts;
 
@@ -30,3 +30,5 @@ module.exports = (apiCode, opts) => {
     }
   };
 };
+
+export default fetchApi;
