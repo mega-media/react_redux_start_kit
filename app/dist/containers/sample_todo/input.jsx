@@ -2,7 +2,7 @@
 import React from 'react';
 import { fetchAPI, emit } from '~/core/action/effects';
 import { APPEND_ITEM, API_FETCH_LIST } from '~/containers/sample_todo/constant';
-import { compose, Dispatch, Style } from '../../core/container';
+import { compose, withDispatch, withStyle } from '../../core/container';
 import { withHandlers, withStateHandlers, setDisplayName } from 'recompose';
 import { pipe, trim, isEmpty } from 'ramda';
 import css from './todo.scss';
@@ -57,8 +57,8 @@ export const Input = ({
 
 export default compose(
   setDisplayName('Input'),
-  Dispatch,
+  withDispatch,
   states,
   handlers,
-  Style(css)
+  withStyle(css)
 )(Input);

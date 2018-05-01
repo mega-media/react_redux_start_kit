@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { applyStyles } from '../../core/container/css-module';
+import { applyStyles } from '~/core/container';
 import style from './assets/stylesheets/style.scss';
 
 @applyStyles(style)
@@ -70,7 +70,7 @@ export default class Intro extends PureComponent {
   sampleArray = [
     {
       route: '/todo',
-      title: 'TODO'
+      title: 'TODO (use recompose)'
     }
   ];
 

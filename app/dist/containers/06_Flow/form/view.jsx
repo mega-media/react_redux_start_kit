@@ -2,8 +2,7 @@
  * @flow
  */
 import React, { PureComponent } from 'react';
-import Dispatch from '../../../core/container/hoc/dispatch';
-import { applyStyles } from '../../../core/container/css-module';
+import { withDispatch, applyStyles } from '~/core/container';
 import { add } from '../action';
 import MemberClass from '../class';
 import type { Props, State } from './type';
@@ -12,7 +11,7 @@ import type { Props, State } from './type';
  * Form 元件只負責處理表單操作
  */
 @applyStyles()
-class Form extends PureComponent<void, Props, State> {
+class Form extends PureComponent<Props, State> {
   props: Props;
   //資料序號
   uidIndex: number = 1;
@@ -126,4 +125,4 @@ class Form extends PureComponent<void, Props, State> {
   }
 }
 
-export default Dispatch(Form);
+export default withDispatch(Form);

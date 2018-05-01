@@ -1,11 +1,12 @@
+/* @flow */
 import React, { Component } from 'react';
 import { STORE_KEY } from './constant';
-import { compose, Dispatch, Store, Style } from '~/core/container';
+import { compose, withDispatch, withStore, withStyle } from '~/core/container';
 import { fetch } from './action';
 /* style */
 import type { Props } from './type';
 
-export class apiIntro extends Component<void, Props, void> {
+export class apiIntro extends Component<Props, void> {
   props: Props;
 
   fetchHandler = () => {
@@ -37,4 +38,6 @@ export class apiIntro extends Component<void, Props, void> {
   }
 }
 
-export default compose(Dispatch, Store(STORE_KEY), Style())(apiIntro);
+export default compose(withDispatch, withStore(STORE_KEY), withStyle())(
+  apiIntro
+);

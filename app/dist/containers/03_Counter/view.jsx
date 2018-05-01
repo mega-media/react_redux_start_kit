@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 /* 使用符號 `~` 可代替指向專案目錄 `app/dist` */
-import { compose, Dispatch, Store } from '~/core/container';
+import { compose, withDispatch, withStore } from '~/core/container';
 
 /* actions */
 import { click, reset } from './action';
@@ -40,4 +40,4 @@ class Counter extends PureComponent {
 /**
  * containers hoc 元件的順序並不影響最終結果
  */
-export default compose(Dispatch, Store('counterStore'))(Counter);
+export default compose(withDispatch, withStore('counterStore'))(Counter);

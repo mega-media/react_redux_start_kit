@@ -2,8 +2,7 @@
  * @flow
  */
 import React, { PureComponent } from 'react';
-import { Dispatch, Store } from '../../../core/container';
-import { applyStyles } from '../../../core/container/css-module';
+import { withDispatch, withStore, applyStyles } from '../../../core/container';
 import { STORE_KEY } from '../constant';
 import { update, remove } from '../action';
 import MemberClass from '../class';
@@ -15,7 +14,7 @@ import type { Props } from './type';
  * Table 元件綁定 state 負責監聽資料的異動
  */
 @applyStyles()
-class Table extends PureComponent<void, Props, void> {
+class Table extends PureComponent<Props, void> {
   props: Props;
 
   removeHandler = (uid: number): (() => void) => () => {
@@ -71,4 +70,4 @@ class Table extends PureComponent<void, Props, void> {
   }
 }
 
-export default compose(Dispatch, Store(STORE_KEY))(Table);
+export default compose(withDispatch, withStore(STORE_KEY))(Table);

@@ -1,12 +1,12 @@
 import React from 'react';
 /* style */
-import Style from '../../core/container/hoc/style';
+import { withStyle } from '../../core/container';
 
 export const hocIntro = () => (
   <div>
-    <h4 id="dispatch">
-      <a href="#dispatch" style={{ color: '#000' }}>
-        # Dispatch(component)
+    <h4 id="withDispatch">
+      <a href="#withDispatch" style={{ color: '#000' }}>
+        # withDispatch(component)
       </a>
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
@@ -21,7 +21,7 @@ export const hocIntro = () => (
           元件，React.Component 或者 Stateless Functional Component
         </div>
       </div>
-      <pre>{`export default Dispatch(YourComponent);`}</pre>
+      <pre>export default withDispatch(YourComponent)</pre>
       <b>props：</b>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
@@ -49,13 +49,13 @@ export const hocIntro = () => (
       </div>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
-          <b>storeSelector([storeKey])</b>
+          <b>storeSelector([ storeKey ])</b>
         </div>
         <div styleName="panel-body">
           Type: Function(storeKey?: string) => any
           <p>
-            用來拿其他沒有透過 <a href="#store">Store</a> 綁定的 store
-            資料，支援同時拿取多筆資料。
+            用來拿其他沒有透過 <a href="#withStore">withStore</a>{' '}
+            綁定的資料，支援同時拿取多筆資料。
           </p>
           <div styleName="panel panel-default">
             <div styleName="panel-heading">
@@ -91,9 +91,9 @@ console.log(C); // true
         </div>
       </div>
     </div>
-    <h4 id="i18n">
-      <a href="#i18n" style={{ color: '#000' }}>
-        # I18n(component)
+    <h4 id="withI18n">
+      <a href="#withI18n" style={{ color: '#000' }}>
+        # withI18n(component)
       </a>
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
@@ -108,7 +108,7 @@ console.log(C); // true
           元件，React.Component 或者 Stateless Functional Component
         </div>
       </div>
-      <pre>{`export default I18n(YourComponent);`}</pre>
+      <pre>export default withI18n(YourComponent)</pre>
       <b>props：</b>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
@@ -175,9 +175,9 @@ console.log(C); // true
         </div>
       </div>
     </div>
-    <h4 id="store">
-      <a href="#store" style={{ color: '#000' }}>
-        # Store(...storeKeys)(component)
+    <h4 id="withStore">
+      <a href="#withStore" style={{ color: '#000' }}>
+        # withStore(...storeKeys)(component)
       </a>
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
@@ -202,7 +202,7 @@ console.log(C); // true
           元件，React.Component 或者 Stateless Functional Component
         </div>
       </div>
-      <pre>{`export default Store(keyA, keyB, keyC)(YourComponent);`}</pre>
+      <pre>export default withStore(keyA, keyB, keyC)(YourComponent);</pre>
       <b>props：</b>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
@@ -246,23 +246,20 @@ console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 
         </div>
       </div>
     </div>
-    <h4 id="store">
-      <a href="#store" style={{ color: '#000' }}>
-        # PureStore(...storeKeys)(component)
+    <h4 id="withPureStore">
+      <a href="#withPureStore" style={{ color: '#000' }}>
+        # withPureStore(...storeKeys)(component)
       </a>
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>
-        用法與{' '}
-        <a href="#store" style={{ color: '#000' }}>
-          # Store
-        </a>{' '}
-        相同，但是會多實作 shouldComponentUpdate 的 props 比對。{' '}
+        用法與 <a href="#withStore">withStore</a> 相同，但是會多實作
+        shouldComponentUpdate 的 props 比對。
       </p>
     </div>
-    <h4 id="style">
-      <a href="#style" style={{ color: '#000' }}>
-        # Style(...css)(component)
+    <h4 id="withStyle">
+      <a href="#withStyle" style={{ color: '#000' }}>
+        # withStyle(...css)(component)
       </a>
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
@@ -291,10 +288,10 @@ console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 
 import scssB from './scss-b.scss';
 import scssC from './scss-c.scss';
 
-export default Style(scssA, scssB, scssC)(YourComponent);
+export default withStyle(scssA, scssB, scssC)(YourComponent);
 `}</pre>
     </div>
   </div>
 );
 
-export default Style()(hocIntro);
+export default withStyle()(hocIntro);

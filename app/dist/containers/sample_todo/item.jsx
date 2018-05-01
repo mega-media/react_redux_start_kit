@@ -2,7 +2,7 @@
 import React from 'react';
 import { emit } from '~/core/action/effects';
 import { REMOVE_ITEM, UPDATE_ITEM } from '~/containers/sample_todo/constant';
-import { compose, Dispatch, Style } from '../../core/container';
+import { compose, withDispatch, withStyle } from '~/core/container';
 import { withStateHandlers, withHandlers, setDisplayName } from 'recompose';
 import { pipe, trim, isEmpty } from 'ramda';
 import Input from './input';
@@ -88,12 +88,12 @@ export const Modify = ({
   </tr>
 );
 
-const ModifyTemp = Style(css)(Modify);
-const DefaultTemp = Style(css)(Default);
+const ModifyTemp = withStyle(css)(Modify);
+const DefaultTemp = withStyle(css)(Default);
 
 export const Item = ({ modify, ...others }: Object) =>
   modify ? <ModifyTemp {...others} /> : <DefaultTemp {...others} />;
 
-export default compose(setDisplayName('Item'), Dispatch, states, handlers)(
+export default compose(setDisplayName('Item'), withDispatch, states, handlers)(
   Item
 );
