@@ -17,18 +17,18 @@ module.exports = {
         </li>
         <li>
           使用 applyStyles 嵌套進元件中
-          <pre>{`import { applyStyles } from '~/core/container/css-module';
+          <pre>{`import { applyStyles } from '~/core/container';
 
 @applyStyles(customStyle)
 export default class YourComponent extends React.Component { ... }
 `}</pre>
         </li>
         <li>
-          使用 hoc - Style 嵌套進元件中
-          <pre>{`import Style from '~/core/container/hoc/style';
+          使用 hoc - withStyle 嵌套進元件中
+          <pre>{`import withStyle from '~/core/container';
 
 export class YourComponent extends React.Component { ... }
-export default Style(customStyle)(YourComponent);
+export default withStyle(customStyle)(YourComponent);
 `}</pre>
         </li>
       </ol>
