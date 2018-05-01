@@ -1,1 +1,1 @@
-export const reducerCreator = require('./reducer-creator');
+export { default as reducerCreator } from './reducer-creator';
