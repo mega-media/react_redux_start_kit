@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { STORE_KEY } from './constant';
-import { compose, Store, Style } from '../../core/container';
+import { compose, withStore, withStyle } from '../../core/container';
 import Input from './input';
 import Item from './item';
 import css from './todo.scss';
@@ -18,4 +18,4 @@ export const Index = ({ storeData: { todos } }: Object) => (
   </div>
 );
 
-export default compose(Store(STORE_KEY), Style(css))(Index);
+export default compose(withStore(STORE_KEY), withStyle(css))(Index);

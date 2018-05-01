@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Dispatch, Store } from '../../core/container';
-import { applyStyles } from '../../core/container/css-module';
+import { withDispatch, withStore, applyStyles } from '~/core/container';
 import { click, reset } from './action';
 import { STORE_KEY } from './constant';
 /* helper */
@@ -67,4 +66,4 @@ class Buttons extends PureComponent {
   }
 }
 
-export default compose(Dispatch, Store(STORE_KEY))(Buttons);
+export default compose(withDispatch, withStore(STORE_KEY))(Buttons);

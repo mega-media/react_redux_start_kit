@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 /* style */
-import Style from '../../core/container/hoc/style';
+import { withStyle } from '../../core/container';
 
 export const sagaIntro = () => (
   <div>
-    <h4># call(function [, arg1, arg2, ...])</h4>
+    <h4 id="call">
+      <a href="#call" style={{ color: '#000' }}>
+        # call(function [, arg1, arg2, ...])
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>
         允許包覆一個回傳 action 物件的方法，適合用在 polling 中 payload
@@ -36,7 +40,11 @@ dispatch(polling(1000, call(() => ({
   payload: { now: new Date().toLocaleTimeString() }
 }))))`}</pre>
     </div>
-    <h4># cancel(action)</h4>
+    <h4 id="cancel">
+      <a href="#cancel" style={{ color: '#000' }}>
+        # cancel(action)
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消特定 effects，適合搭配 delay、polling 使用</p>
       <div styleName="panel panel-default">
@@ -68,7 +76,11 @@ dispatch(loop);
 dispatch(cancel(loop));
 `}</pre>
     </div>
-    <h4># cancelAll()</h4>
+    <h4 id="cancelAll">
+      <a href="#cancelAll" style={{ color: '#000' }}>
+        # cancelAll()
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消所有執行中的 effects </p>
       <pre>{`dispatch([
@@ -92,7 +104,11 @@ dispatch([
 //TYPE_B、TYPE_D 會被執行
 `}</pre>
     </div>
-    <h4># cancelLatest()</h4>
+    <h4 id="cancelLatest">
+      <a href="#cancelLatest" style={{ color: '#000' }}>
+        # cancelLatest()
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消上一筆發出的 effect </p>
       <pre>{`dispatch([
@@ -116,9 +132,13 @@ dispatch([
 //TYPE_A、TYPE_B、TYPE_D 會被執行
 `}</pre>
     </div>
-    <h4># delay(duration, action)</h4>
+    <h4 id="delay">
+      <a href="#delay" style={{ color: '#000' }}>
+        # delay(duration, action)
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
-      <p>柯里化函式，延遲傳入的 action 被 dispatch 時間 </p>
+      <p>延遲傳入的 action 被 dispatch 時間 </p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>duration</b>
@@ -140,9 +160,13 @@ dispatch([
       <pre>{`dispatch(delay(5000, { type: 'TYPE_A' }))
 //5 秒後 dispatch TYPE_A`}</pre>
     </div>
-    <h4># emit(type, payload)</h4>
+    <h4 id="emit">
+      <a href="#emit" style={{ color: '#000' }}>
+        # emit(type[, payload])
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
-      <p>柯里化函式，執行一個 action</p>
+      <p>執行一個 action</p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>type</b>
@@ -164,12 +188,15 @@ dispatch([
       <pre>{`dispatch(emit(TYPE_A, { data: []}))
 //就等於 dispatch({ type: TYPE_A, payload:{ data: []}})
 
-//沒有 payload 時：
-dispatch(emit(TYPE_A)())
-//或者
-dispatch(emit(TYPE_A, null))`}</pre>
+//沒有 payload 時允許空值：
+dispatch(emit(TYPE_A))
+`}</pre>
     </div>
-    <h4># fetchAPI(api_code , opts)</h4>
+    <h4 id="fetchAPI">
+      <a href="#fetchAPI" style={{ color: '#000' }}>
+        # fetchAPI(api_code, opts)
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>
         發送一個 api request，目前支援 json 格式的串接，詳細說明參閱{' '}
@@ -230,7 +257,11 @@ dispatch(emit(TYPE_A, null))`}</pre>
       </div>
       <pre>{`dispatch(fetchAPI(GET_USER_LIST, { method: 'get', path: '/user' }))`}</pre>
     </div>
-    <h4># lock()</h4>
+    <h4 id="lock">
+      <a href="#lock" style={{ color: '#000' }}>
+        # lock()
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>
         鎖定所有 effects 並取消所有執行中的 effects，期間不處理任何 effects 事件
@@ -243,9 +274,13 @@ dispatch(emit(TYPE_A, null))`}</pre>
 ])
 //TYPE_A 會被取消，後續呼叫的 effect 不會有反應`}</pre>
     </div>
-    <h4># polling(interval, action)</h4>
+    <h4 id="polling">
+      <a href="#polling" style={{ color: '#000' }}>
+        # polling(interval, action)
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 20px' }}>
-      <p>柯里化函式，每隔一段間隔時間，dispatch 傳入的 action</p>
+      <p>每隔一段間隔時間，dispatch 傳入的 action</p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>interval</b>
@@ -267,7 +302,11 @@ dispatch(emit(TYPE_A, null))`}</pre>
       <pre>{`dispatch(polling(1000, { type: 'TYPE_A' }))
 //每隔 1 秒，dispatch 一次 TYPE_A`}</pre>
     </div>
-    <h4># unlock()</h4>
+    <h4 id="unlock">
+      <a href="#unlock" style={{ color: '#000' }}>
+        # unlock()
+      </a>
+    </h4>
     <div style={{ padding: '5px 10px 0' }}>
       <p>解除所有 effects 的鎖定</p>
       <pre>{`dispatch(unlock())`}</pre>
@@ -275,4 +314,4 @@ dispatch(emit(TYPE_A, null))`}</pre>
   </div>
 );
 
-export default Style()(sagaIntro);
+export default withStyle()(sagaIntro);

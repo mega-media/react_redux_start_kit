@@ -1,7 +1,4 @@
 /* @flow */
-import type { DispatchProps } from '~/core/container/hoc/dispatch';
-import type { StoreProps } from '~/core/container/hoc/store';
-
 /**
  * constant type
  */
@@ -44,4 +41,8 @@ export type Store = {
 /**
  * component
  */
-export type Props = DispatchProps & StoreProps<Store>;
+export type Props = {
+  dispatch: (action: Object | Array<Object>) => void,
+  storeSelector: (...storeKey: Array<string>) => any,
+  storeData: Store
+};

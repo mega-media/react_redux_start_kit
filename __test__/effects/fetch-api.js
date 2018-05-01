@@ -1,6 +1,6 @@
 import { objectEqual } from '~/core/helpers/equal';
 
-module.exports = (apiCode, opts) => action => {
+export default (apiCode, opts) => action => {
   const { type: fetchType, payload: { apiCode: actionCode }, meta } = action;
   if (fetchType !== 'SAGA_ASYNC') return false;
 

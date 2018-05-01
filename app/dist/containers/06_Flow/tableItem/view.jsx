@@ -2,12 +2,12 @@
  * @flow
  */
 import React, { PureComponent } from 'react';
-import { applyStyles } from '../../../core/container/css-module';
+import { applyStyles } from '~/core/container';
 import MemberClass from '../class';
 import type { Props, State } from './type';
 
 @applyStyles()
-export default class TableItem extends PureComponent<void, Props, State> {
+export default class TableItem extends PureComponent<Props, State> {
   props: Props;
   state: State = {
     data: this.props.row,
@@ -15,13 +15,16 @@ export default class TableItem extends PureComponent<void, Props, State> {
     updateModify: false
   };
 
-  changeHandler = ({ target: { type, name, value } }: any) => {
-    this.setState(({ data }) => ({
-      data: {
-        ...data,
-        [name]: name === 'married' ? value === 'true' : value
-      }
-    }));
+  changeHandler = ({ target: { type, name, value } }: Object) => {
+    this.setState(({ data }) => {
+      const member = new MemberClass();
+      return {
+        data: Object.assign(member, {
+          ...data,
+          [name]: name === 'married' ? value === 'true' : value
+        })
+      };
+    });
   };
 
   removeToolToggle = () => {

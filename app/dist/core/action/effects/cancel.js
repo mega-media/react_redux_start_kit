@@ -2,9 +2,11 @@
  * 取消特定 effect
  * @return {{type: SAGA_CANCEL}}
  */
-module.exports = action => ({
+const cancel = action => ({
   type: 'SAGA_CANCEL',
   payload: {
     action
   }
 });
+
+export default cancel;

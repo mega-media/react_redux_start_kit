@@ -10,9 +10,3 @@ export const styleCombine = (...styles: Array<Object>) => ({
   ...Shared,
   ...styles.reduce((obj, style) => ({ ...obj, ...style }), {})
 });
-
-/**
- * CSSModules 裝飾用法
- */
-export const applyStyles = (...styles: Array<Object>) =>
-  CSSModules(styleCombine(...styles), { allowMultiple: true });

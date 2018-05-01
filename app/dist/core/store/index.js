@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
   DevTools = require('../libraries/devTools');
   store = createStore(
     RootReducer,
-    compose(
+    (compose(
       applyMiddleware(
         routeMiddleware,
         multiDispatchMiddleware,
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
         sagaMiddleware
       ),
       DevTools.instrument()
-    )
+    ): any)
   );
 } else {
   store = createStore(

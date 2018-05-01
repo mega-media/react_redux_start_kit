@@ -1,7 +1,8 @@
 /* @flow */
-import type { DispatchProps } from '../../../core/container/hoc/dispatch';
-
-export type Props = DispatchProps;
+export type Props = {
+  dispatch: (action: Object | Array<Object>) => void,
+  storeSelector: (...storeKey: Array<string>) => any
+};
 
 export type State = {
   uid: number,

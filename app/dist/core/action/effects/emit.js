@@ -1,6 +1,6 @@
-import { curry } from 'ramda';
-
-module.exports = curry((type, payload) => ({
+const emit = (type, payload = null) => ({
   type,
   payload
-}));
+});
+
+export default emit;

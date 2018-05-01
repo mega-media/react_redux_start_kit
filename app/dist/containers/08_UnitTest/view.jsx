@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 
-export default class Demo extends React.Component<void, any, void> {
+export default class Demo extends React.Component<any, void> {
   sum = (first: number, second: number): number => first + second;
 
   doubleSum = (first: number, second: number): number =>

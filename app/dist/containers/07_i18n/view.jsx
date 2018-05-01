@@ -2,13 +2,12 @@
  * @flow
  */
 import React, { PureComponent } from 'react';
-import { compose, Dispatch, I18n } from '../../core/container';
-import { applyStyles } from '../../core/container/css-module';
+import { compose, withDispatch, withI18n, applyStyles } from '~/core/container';
 /* redux-i18n 模組提供的切換語系 action */
 import { setLanguage } from 'redux-i18n';
 
 @applyStyles()
-export class I18N extends PureComponent<void, any, void> {
+export class I18N extends PureComponent<any, void> {
   changeLocale = (lang: string) => () => this.props.dispatch(setLanguage(lang));
 
   render() {
@@ -47,4 +46,4 @@ export class I18N extends PureComponent<void, any, void> {
   }
 }
 
-export default compose(Dispatch, I18n)(I18N);
+export default compose(withDispatch, withI18n)(I18N);

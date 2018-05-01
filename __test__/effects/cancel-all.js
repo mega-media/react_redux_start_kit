@@ -1,1 +1,1 @@
-module.exports = () => ({ type }) => type === 'SAGA_CANCEL_ALL';
+export default () => ({ type }) => type === 'SAGA_CANCEL_ALL';

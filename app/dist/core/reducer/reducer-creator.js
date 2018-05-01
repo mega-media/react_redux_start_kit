@@ -1,6 +1,8 @@
 import { has } from 'ramda';
 
-module.exports = (initState, actionMaps) => (
+const reducerCreator = (initState, actionMaps) => (
   state = initState,
   { type, payload }
 ) => (has(type)(actionMaps) ? actionMaps[type](state, payload) : state);
+
+export default reducerCreator;
