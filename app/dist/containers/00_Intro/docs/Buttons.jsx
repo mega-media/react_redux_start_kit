@@ -34,33 +34,36 @@ module.exports = {
                 Container/Component 上方
               </p>
               <pre>
-                {`import { applyStyles } from '~/core/container/css-module';
+                {`import { applyStyles } from '~/core/container';
 
 @applyStyles()
-export default class YourComponent extends React.Component { ... }
-`}
+export default class YourComponent extends React.Component { ... }`}
               </pre>
             </li>
             <li>
               <b>
-                HOC - <a href="/hoc#style">Style</a>
+                HOC - <a href="/hoc#withStyle">withStyle</a>
               </b>
               <p>使用 HOC 嵌套，將樣式檔帶入元件中</p>
               <pre>
-                {`import Style from '~/core/container/hoc/style';
+                {`import { withStyle } from '~/core/container';
 
 export class YourComponent extends React.Component { ... }
-export default Style()(YourComponent);
+export default withStyle()(YourComponent);
 `}
               </pre>
               <p>
                 與其他 HOC 組合，需注意的是 css-module
                 只會轉換第一層元件，因此函式順序必須放在最接近元件的位置
               </p>
-              <pre>{`import { compose, Dispatch, Store, Style } from '~/core/container';
+              <pre>{`import { compose, withDispatch, withStore, withStyle } from '~/core/container';
 
 export class YourComponent extends React.Component { ... }
-export default compose(Dispatch, Store, Style())(YourComponent);
+export default compose(
+  withDispatch,
+  withStore(STORE_KEY),
+  withStyle()
+)(YourComponent);
 `}</pre>
             </li>
           </ol>

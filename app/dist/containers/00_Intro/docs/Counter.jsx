@@ -81,9 +81,9 @@ module.exports = {
             </li>
             <li>
               可使用 <label>compose</label> 將元件組合
-              <pre>{`import { compose, Dispatch, Store } from '~/core/container';
+              <pre>{`import { compose, withDispatch, withStore } from '~/core/container';
 
-export default compose(Dispatch, Store(STORE_KEY))(YOUR_COMPONENT)`}</pre>
+export default compose(withDispatch, withStore(STORE_KEY))(YOUR_COMPONENT)`}</pre>
             </li>
             <li>即可在 component 的 props 拿到被賦予的資料</li>
             <li>

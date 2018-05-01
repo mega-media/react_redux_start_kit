@@ -7,7 +7,7 @@ import FormView from './form/view';
 
 /**
  *  flow type declare
- *  Component<DefaultProps, Props, State>
+ *  Component<Props, State>
  */
 export default class Flow extends PureComponent<void, void> {
   render() {

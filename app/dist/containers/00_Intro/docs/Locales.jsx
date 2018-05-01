@@ -19,15 +19,15 @@ module.exports = {
         </ul>
       </div>
       <h5>
-        ☆ container hoc - <a href="/hoc#i18n">I18n</a>
+        ☆ container hoc - <a href="/hoc#withI18n">withI18n</a>
       </h5>
       <div>
         <ul>
           <li>
             使用 hoc 將語系函式以 props 方式傳入 component
             <pre>
-              {`import I18n from '~/core/container/hoc/i18n';
-export default I18n(Component) `}
+              {`import { withI18n } from '~/core/container';
+export default withI18n(Component) `}
             </pre>
           </li>
           <li>
@@ -63,10 +63,10 @@ export default I18n(Component) `}
         <ul>
           <li>redux-i18n 模組提供的切換語系 action</li>
           <li>
-            需要與 Dispatch hoc 元件，搭配使用
-            <pre>{`import { compose, Dispatch, I18n } from '~/core/container/hoc';
+            需要與 withDispatch hoc 元件，搭配使用
+            <pre>{`import { compose, withDispatch, withI18n } from '~/core/container/hoc';
 
-export default compose(Dispatch, I18n)(YOUR_COMPONENT)`}</pre>
+export default compose(withDispatch, withI18n)(YOUR_COMPONENT)`}</pre>
           </li>
           <li>this.props.dispatch(setLanguage('en'))，即可切換語系</li>
         </ul>
