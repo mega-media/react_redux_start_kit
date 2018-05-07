@@ -47,7 +47,7 @@ export const _connect1 = (storeKey?: Array<string>) =>
       ...ownProps
     }),
     {
-      pure: false,
+      pure: true,
       withRef: false
     }
   );
@@ -67,7 +67,7 @@ export const _connect2 = (storeKey?: Array<string>) =>
       ...ownProps
     }),
     {
-      pure: false,
+      pure: true,
       withRef: false
     }
   );
@@ -89,7 +89,7 @@ export const _connect3 = (storeKey?: Array<string>) =>
       ...ownProps
     }),
     {
-      pure: false,
+      pure: true,
       withRef: false
     }
   );
