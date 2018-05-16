@@ -25,14 +25,14 @@ module.exports = {
         <ul>
           <li>
             使用 hoc 將語系函式以 props 方式傳入 component
-            <pre>
+            <pre className="prettyprint">
               {`import { withI18n } from '~/core/container';
 export default withI18n(Component) `}
             </pre>
           </li>
           <li>
             舉例
-            <pre>
+            <pre className="prettyprint">
               {`//語系檔`}
               <br />
               {`en: { 'hello': "Hello" }`}
@@ -45,7 +45,7 @@ export default withI18n(Component) `}
           </li>
           <li>
             動態參數
-            <pre>
+            <pre className="prettyprint">
               {`//語系檔`}
               <br />
               {`zh_tw: { 'number less': "輸入數值不能超過 {max}" }`}
@@ -64,7 +64,7 @@ export default withI18n(Component) `}
           <li>redux-i18n 模組提供的切換語系 action</li>
           <li>
             需要與 withDispatch hoc 元件，搭配使用
-            <pre>{`import { compose, withDispatch, withI18n } from '~/core/container/hoc';
+            <pre className="prettyprint">{`import { compose, withDispatch, withI18n } from '~/core/container/hoc';
 
 export default compose(withDispatch, withI18n)(YOUR_COMPONENT)`}</pre>
           </li>

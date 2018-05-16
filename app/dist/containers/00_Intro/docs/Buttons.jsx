@@ -33,7 +33,7 @@ module.exports = {
                 使用 ES7 Decorator 的方式加上符號<label>@</label>標記在
                 Container/Component 上方
               </p>
-              <pre>
+              <pre className="prettyprint">
                 {`import { applyStyles } from '~/core/container';
 
 @applyStyles()
@@ -45,7 +45,7 @@ export default class YourComponent extends React.Component { ... }`}
                 HOC - <a href="/hoc#withStyle">withStyle</a>
               </b>
               <p>使用 HOC 嵌套，將樣式檔帶入元件中</p>
-              <pre>
+              <pre className="prettyprint">
                 {`import { withStyle } from '~/core/container';
 
 export class YourComponent extends React.Component { ... }
@@ -56,7 +56,7 @@ export default withStyle()(YourComponent);
                 與其他 HOC 組合，需注意的是 css-module
                 只會轉換第一層元件，因此函式順序必須放在最接近元件的位置
               </p>
-              <pre>{`import { compose, withDispatch, withStore, withStyle } from '~/core/container';
+              <pre className="prettyprint">{`import { compose, withDispatch, withStore, withStyle } from '~/core/container';
 
 export class YourComponent extends React.Component { ... }
 export default compose(

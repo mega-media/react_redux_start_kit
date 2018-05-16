@@ -16,29 +16,31 @@ export const hocIntro = () => (
           <b>component</b>
         </div>
         <div styleName="panel-body">
-          Type: Component
+          Type: <label>Component</label>
           <br />
           元件，React.Component 或者 Stateless Functional Component
         </div>
       </div>
-      <pre>export default withDispatch(YourComponent)</pre>
+      <pre className="prettyprint">
+        export default withDispatch(YourComponent)
+      </pre>
       <b>props：</b>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>dispatch(action)</b>
         </div>
         <div styleName="panel-body">
-          Type: Function(action: Action) => void
+          Type: <label>Function(action: Action) => void</label>
           <p>改變 store 資料內容的重要函式。由 react-redux connect 給予。</p>
           <div styleName="panel panel-default">
             <div styleName="panel-heading">
               <b>action</b>
             </div>
             <div styleName="panel-body">
-              Type: Action
+              Type: <label>Action</label>
               <br />
               一個包含 type、payload 兩個鍵值的物件
-              <pre>
+              <pre className="prettyprint">
                 {`//component`}
                 <br />
                 {`this.props.dispatch({ type: 'typeA', payload: { foo: true } })`}
@@ -52,7 +54,7 @@ export const hocIntro = () => (
           <b>storeSelector([ storeKey ])</b>
         </div>
         <div styleName="panel-body">
-          Type: Function(storeKey?: string) => any
+          Type: <label>Function(storeKey?: string) => any</label>
           <p>
             用來拿其他沒有透過 <a href="#withStore">withStore</a>{' '}
             綁定的資料，支援同時拿取多筆資料。
@@ -62,8 +64,8 @@ export const hocIntro = () => (
               <b>storeKey</b>
             </div>
             <div styleName="panel-body">
-              Type: string
-              <pre>{`//假設 store 長這樣
+              Type: <label>string</label>
+              <pre className="prettyprint">{`//假設 store 長這樣
 store = {
   keyA: [1, 2, 3],
   keyB: {
@@ -103,29 +105,30 @@ console.log(C); // true
           <b>component</b>
         </div>
         <div styleName="panel-body">
-          Type: Component
+          Type: <label>Component</label>
           <br />
           元件，React.Component 或者 Stateless Functional Component
         </div>
       </div>
-      <pre>export default withI18n(YourComponent)</pre>
+      <pre className="prettyprint">export default withI18n(YourComponent)</pre>
       <b>props：</b>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>i18nText(alias[, params])</b>
         </div>
         <div styleName="panel-body">
-          Type: Function(alias: string, params?: Object) => string
+          Type:{' '}
+          <label>Function(alias: string, params?: Object) => string</label>
           <p>轉換語系的函式，回傳為轉換後的結果。僅支援文字格式的轉換。</p>
           <div styleName="panel panel-default">
             <div styleName="panel-heading">
               <b>alias</b>
             </div>
             <div styleName="panel-body">
-              Type: string
+              Type: <label>string</label>
               <br />
               語系檔鍵值，即是該文字對應的別名。
-              <pre>
+              <pre className="prettyprint">
                 {`//語系檔`}
                 <br />
                 {`en: { 'hello': "Hello" }`}
@@ -142,17 +145,13 @@ console.log(C); // true
               <b>params</b>
             </div>
             <div styleName="panel-body">
-              Type: Object
+              Type: <label>Object</label>
               <br />
               支援動態運算，可帶入替換的文字。
-              <pre>
-                {`//語系檔`}
-                <br />
-                {`zh_tw: { 'number less': "輸入數值不能超過 {max}" }`}
-                <br />
-                <br />
-                {`//component`}
-                <br />
+              <pre className="prettyprint">
+                {`//語系檔\n`}
+                {`zh_tw: { 'number less': "輸入數值不能超過 {max}" }\n\n`}
+                {`//component\n`}
                 {`this.props.i18nText('number less', { max: 5 }) // === "輸入數值不能超過 5" `}
               </pre>
             </div>
@@ -164,10 +163,10 @@ console.log(C); // true
           <b>i18nLang</b>
         </div>
         <div styleName="panel-body">
-          Type: string
+          Type: <label>string</label>
           <br />
           取得當前使用語系
-          <pre>
+          <pre className="prettyprint">
             {`//component`}
             <br />
             {`this.props.i18nLang // === "zh_tw" `}
@@ -187,7 +186,7 @@ console.log(C); // true
           <b>storeKeys</b>
         </div>
         <div styleName="panel-body">
-          Type: string
+          Type: <label>string</label>
           <br />
           store 資料的 key，支援多筆。當監聽的值為多筆，回傳的資料為 Object
         </div>
@@ -197,22 +196,24 @@ console.log(C); // true
           <b>component</b>
         </div>
         <div styleName="panel-body">
-          Type: Component
+          Type: <label>Component</label>
           <br />
           元件，React.Component 或者 Stateless Functional Component
         </div>
       </div>
-      <pre>export default withStore(keyA, keyB, keyC)(YourComponent);</pre>
+      <pre className="prettyprint">
+        export default withStore(keyA, keyB, keyC)(YourComponent);
+      </pre>
       <b>props：</b>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
           <b>storeData</b>
         </div>
         <div styleName="panel-body">
-          Type: any
+          Type: <label>any</label>
           <br />
           監聽的 store 資料，依照監聽的 storeKeys 會有不同的格式。
-          <pre>{`//假設 store 長這樣
+          <pre className="prettyprint">{`//假設 store 長這樣
 store = {
   keyA: [1, 2, 3],
   keyB: {
@@ -269,7 +270,7 @@ console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 
           <b>css</b>
         </div>
         <div styleName="panel-body">
-          Type: Object
+          Type: <label>Object</label>
           <br />
           元件要套用的樣式檔，支援多筆。需注意的是，若命名相同的類別名稱，後面引入的樣式檔案會蓋掉前者。
         </div>
@@ -279,17 +280,12 @@ console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 
           <b>component</b>
         </div>
         <div styleName="panel-body">
-          Type: Component
+          Type: <label>Component</label>
           <br />
           元件，React.Component 或者 Stateless Functional Component
         </div>
       </div>
-      <pre>{`import scssA from './scss-a.scss';
-import scssB from './scss-b.scss';
-import scssC from './scss-c.scss';
-
-export default withStyle(scssA, scssB, scssC)(YourComponent);
-`}</pre>
+      <pre className="prettyprint">{`import scssA from './scss-a.scss';\nimport scssB from './scss-b.scss';\nimport scssC from './scss-c.scss';\n\nexport default withStyle(scssA, scssB, scssC)(YourComponent);`}</pre>
     </div>
   </div>
 );

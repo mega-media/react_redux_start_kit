@@ -13,11 +13,11 @@ module.exports = {
       <ol>
         <li>
           載入樣式檔
-          <pre>{`import customStyle from './styleFile.css'`}</pre>
+          <pre className="prettyprint">{`import customStyle from './styleFile.css'`}</pre>
         </li>
         <li>
           使用 applyStyles 嵌套進元件中
-          <pre>{`import { applyStyles } from '~/core/container';
+          <pre className="prettyprint">{`import { applyStyles } from '~/core/container';
 
 @applyStyles(customStyle)
 export default class YourComponent extends React.Component { ... }
@@ -25,7 +25,7 @@ export default class YourComponent extends React.Component { ... }
         </li>
         <li>
           使用 hoc - withStyle 嵌套進元件中
-          <pre>{`import withStyle from '~/core/container';
+          <pre className="prettyprint">{`import withStyle from '~/core/container';
 
 export class YourComponent extends React.Component { ... }
 export default withStyle(customStyle)(YourComponent);
@@ -36,11 +36,11 @@ export default withStyle(customStyle)(YourComponent);
       <ul>
         <li>
           載入外部檔案與載入系統檔案方式相同
-          <pre>{`import imageUrl from './imageFile.jpg'`}</pre>
+          <pre className="prettyprint">{`import imageUrl from './imageFile.jpg'`}</pre>
         </li>
         <li>
           使用：
-          <pre>{`<img src={imageUrl} />`}</pre>
+          <pre className="prettyprint">{`<img src={imageUrl} />`}</pre>
         </li>
         <li>
           支援載入的外部檔案副檔名包含：

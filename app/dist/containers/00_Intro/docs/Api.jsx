@@ -59,7 +59,7 @@ module.exports = {
           </li>
           <li>
             <b>Request</b> : 使用 action effect - fetchAPI
-            <pre>{`//action.js
+            <pre className="prettyprint">{`//action.js
 export function fetchAction = fetchAPI('API_USERS_LIST', {
   url: 'http://jsonplaceholder.typicode.com/users'
 });
@@ -70,7 +70,7 @@ this.props.dispatch(fetchAction);
           </li>
           <li>
             <b>Response</b> : 定義在 config.js 裡，subscribe 屬性值
-            <pre>{`//config.js
+            <pre className="prettyprint">{`//config.js
 export default {
   ...
   subscribe: {

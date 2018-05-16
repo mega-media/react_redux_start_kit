@@ -81,7 +81,7 @@ module.exports = {
             </li>
             <li>
               可使用 <label>compose</label> 將元件組合
-              <pre>{`import { compose, withDispatch, withStore } from '~/core/container';
+              <pre className="prettyprint">{`import { compose, withDispatch, withStore } from '~/core/container';
 
 export default compose(withDispatch, withStore(STORE_KEY))(YOUR_COMPONENT)`}</pre>
             </li>
