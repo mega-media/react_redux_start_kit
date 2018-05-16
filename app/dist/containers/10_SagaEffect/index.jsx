@@ -20,7 +20,7 @@ export const sagaIntro = () => (
           <b>function</b>
         </div>
         <div styleName="panel-body">
-          Type: {`Function(...args:Array<any>) => Action`}
+          Type: <label>{`Function(...args:Array<any>) => Action`}</label>
           <br />
           回傳一個帶有 type、payload 屬性的物件
         </div>
@@ -30,11 +30,11 @@ export const sagaIntro = () => (
           <b>arg</b>
         </div>
         <div styleName="panel-body">
-          Type: any <br />
+          Type: <label>any</label> <br />
           function 傳入值
         </div>
       </div>
-      <pre>{`//每秒刷新當前時間
+      <pre className="prettyprint">{`//每秒刷新當前時間
 dispatch(polling(1000, call(() => ({
   type: 'TYPE',
   payload: { now: new Date().toLocaleTimeString() }
@@ -52,11 +52,11 @@ dispatch(polling(1000, call(() => ({
           <b>action</b>
         </div>
         <div styleName="panel-body">
-          Type: Action <br />
+          Type: <label>Action</label> <br />
           取消之前已註冊的 action effects
         </div>
       </div>
-      <pre>{`/* delay */
+      <pre className="prettyprint">{`/* delay */
 //設定延遲函式：7 秒後 dispatch TYPE_A
 const timeout = delay(7000, { type: 'TYPE_A' });
 
@@ -65,7 +65,7 @@ dispatch(timeout);
 
 //取消執行延遲行為
 dispatch(cancel(timeout));`}</pre>
-      <pre>{`/* polling */
+      <pre className="prettyprint">{`/* polling */
 //宣告輪詢函式：每秒 dispatch TYPE_A
 const loop = polling(1000, { type: 'TYPE_A' });
 
@@ -83,7 +83,7 @@ dispatch(cancel(loop));
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消所有執行中的 effects </p>
-      <pre>{`dispatch([
+      <pre className="prettyprint">{`dispatch([
   delay(5000, { type: 'TYPE_A' }),
   delay(1000, { type: 'TYPE_B' }),
   cancelAll(),
@@ -111,7 +111,7 @@ dispatch([
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>取消上一筆發出的 effect </p>
-      <pre>{`dispatch([
+      <pre className="prettyprint">{`dispatch([
   delay(5000, { type: 'TYPE_A' }),
   delay(1000, { type: 'TYPE_B' }),
   cancelLatest(),
@@ -144,7 +144,7 @@ dispatch([
           <b>duration</b>
         </div>
         <div styleName="panel-body">
-          Type: number <br />
+          Type: <label>number</label> <br />
           延遲時間，單位為毫秒(milliseconds)
         </div>
       </div>
@@ -153,11 +153,11 @@ dispatch([
           <b>action</b>
         </div>
         <div styleName="panel-body">
-          Type: Action <br />
+          Type: <label>Action</label> <br />
           一段時間後被 dispatch 的 action
         </div>
       </div>
-      <pre>{`dispatch(delay(5000, { type: 'TYPE_A' }))
+      <pre className="prettyprint">{`dispatch(delay(5000, { type: 'TYPE_A' }))
 //5 秒後 dispatch TYPE_A`}</pre>
     </div>
     <h4 id="emit">
@@ -172,7 +172,7 @@ dispatch([
           <b>type</b>
         </div>
         <div styleName="panel-body">
-          Type: string <br />
+          Type: <label>string</label> <br />
           action 物件的 type 屬性
         </div>
       </div>
@@ -181,11 +181,11 @@ dispatch([
           <b>payload</b>
         </div>
         <div styleName="panel-body">
-          Type: any <br />
+          Type: <label>any</label> <br />
           action 物件的 payload 屬性
         </div>
       </div>
-      <pre>{`dispatch(emit(TYPE_A, { data: []}))
+      <pre className="prettyprint">{`dispatch(emit(TYPE_A, { data: []}))
 //就等於 dispatch({ type: TYPE_A, payload:{ data: []}})
 
 //沒有 payload 時允許空值：
@@ -207,7 +207,7 @@ dispatch(emit(TYPE_A))
           <b>api_code</b>
         </div>
         <div styleName="panel-body">
-          Type: string <br />
+          Type: <label>string</label> <br />
           API 別名，作為發送(request)與(response)行為之間的聯繫
         </div>
       </div>
@@ -216,13 +216,13 @@ dispatch(emit(TYPE_A))
           <b>opts</b>
         </div>
         <div styleName="panel-body">
-          Type: Object
+          Type: <label>Object</label>
           <div styleName="panel panel-default">
             <div styleName="panel-heading">
               <b>body</b>
             </div>
             <div styleName="panel-body">
-              Type: string | FormData <br />
+              Type: <label>string</label> | <label>FormData</label> <br />
               加到 request 中的內容資料。當 method 為 get、head 時不使用這個值。
             </div>
           </div>
@@ -231,7 +231,7 @@ dispatch(emit(TYPE_A))
               <b>method</b>
             </div>
             <div styleName="panel-body">
-              Type: string <br />
+              Type: <label>string</label> <br />
               request 的方法，包含：GET、POST、PUT、DELETE、HEAD
             </div>
           </div>
@@ -240,7 +240,7 @@ dispatch(emit(TYPE_A))
               <b>middleware</b>
             </div>
             <div styleName="panel-body">
-              Type: {`Function | Array<Function>`} <br />
+              Type: <label>{`Function | Array<Function>`}</label> <br />
               非必填，放在 response.json() 後執行的中介函式，
             </div>
           </div>
@@ -249,13 +249,13 @@ dispatch(emit(TYPE_A))
               <b>url</b>
             </div>
             <div styleName="panel-body">
-              Type: string <br />
+              Type: <label>string</label> <br />
               請求的網址
             </div>
           </div>
         </div>
       </div>
-      <pre>{`dispatch(fetchAPI(GET_USER_LIST, { method: 'get', path: '/user' }))`}</pre>
+      <pre className="prettyprint">{`dispatch(fetchAPI(GET_USER_LIST, { method: 'get', path: '/user' }))`}</pre>
     </div>
     <h4 id="lock">
       <a href="#lock" style={{ color: '#000' }}>
@@ -266,7 +266,7 @@ dispatch(emit(TYPE_A))
       <p>
         鎖定所有 effects 並取消所有執行中的 effects，期間不處理任何 effects 事件
       </p>
-      <pre>{`dispatch([
+      <pre className="prettyprint">{`dispatch([
   delay(5000, { type: 'TYPE_A' }),
   lock(),
   fetchAPI(GET_USER_LIST),
@@ -286,7 +286,7 @@ dispatch(emit(TYPE_A))
           <b>interval</b>
         </div>
         <div styleName="panel-body">
-          Type: number <br />
+          Type: <label>number</label> <br />
           間隔時間，單位為毫秒(milliseconds)
         </div>
       </div>
@@ -295,11 +295,11 @@ dispatch(emit(TYPE_A))
           <b>action</b>
         </div>
         <div styleName="panel-body">
-          Type: Action <br />
+          Type: <label>Action</label> <br />
           一段時間後被 dispatch 的 action
         </div>
       </div>
-      <pre>{`dispatch(polling(1000, { type: 'TYPE_A' }))
+      <pre className="prettyprint">{`dispatch(polling(1000, { type: 'TYPE_A' }))
 //每隔 1 秒，dispatch 一次 TYPE_A`}</pre>
     </div>
     <h4 id="unlock">
@@ -309,7 +309,7 @@ dispatch(emit(TYPE_A))
     </h4>
     <div style={{ padding: '5px 10px 0' }}>
       <p>解除所有 effects 的鎖定</p>
-      <pre>{`dispatch(unlock())`}</pre>
+      <pre className="prettyprint">{`dispatch(unlock())`}</pre>
     </div>
   </div>
 );

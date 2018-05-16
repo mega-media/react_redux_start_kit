@@ -77,10 +77,15 @@ export default class Intro extends PureComponent {
   checkRouteLegal = activePage => {
     const isSample = this.sampleArray.some(obj => obj.route === activePage);
     const isLegal = this.pageArray.some(obj => obj.route === activePage);
-    this.setState({
-      activePage: isLegal || isSample ? activePage : '/welcome',
-      samplePage: isSample
-    });
+    this.setState(
+      {
+        activePage: isLegal || isSample ? activePage : '/welcome',
+        samplePage: isSample
+      },
+      () => {
+        PR.prettyPrint();
+      }
+    );
   };
 
   componentWillReceiveProps(nextProps) {

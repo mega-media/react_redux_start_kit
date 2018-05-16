@@ -6,7 +6,7 @@ const PROJECT_HOST = '0.0.0.0';
 const PROJECT_PORT = 80;
 
 /* 專案路徑 */
-const PROJECT_PATH = '/';
+const PROJECT_PATH = '/startkit/';
 
 /* 資源路徑 */
 const ASSETS_PATH = 'assets/';
