@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         test: /\.(mp4|swf)$/,
-        loader: `file-loader?name=${ASSETS_PATH}videos/[name].[ext]`,
+        loader: `file-loader?name=${ASSETS_PATH}media/[name].[ext]`,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
