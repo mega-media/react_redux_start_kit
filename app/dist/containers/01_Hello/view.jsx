@@ -35,6 +35,6 @@ export class HelloPure extends PureComponent {
 
 /**
  * 3. Stateless Functional Component
- * 這種寫法沒有 state，也不能使用 component lifecycle，透過相同的 props傳入，產出相同的結果
+ * 這種寫法沒有 state，也不能使用 component lifecycle，透過相同的 props 傳入，產出相同的結果
  */
 export const HelloFunctional = props => <div>Hello World!</div>;

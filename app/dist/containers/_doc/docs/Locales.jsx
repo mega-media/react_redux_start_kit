@@ -9,7 +9,12 @@ module.exports = {
   ),
   desc: (
     <div>
-      <h5>☆ 多國語系套件: redux-i18n</h5>
+      <h5>
+        ☆ 多國語系套件:{' '}
+        <a href="https://github.com/APSL/redux-i18n" target="_blank">
+          redux-i18n
+        </a>
+      </h5>
       <div>
         <ul>
           <li>
