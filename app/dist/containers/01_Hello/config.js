@@ -2,14 +2,14 @@ import View from './view';
 
 export default {
   router: {
-    path: '/welcome',
+    path: '/hello',
     component: View
   }
 };
 
 /**
- * config.js 是 Container 的設定檔，在此設定該 Container 的路徑以及對應檔案
- * 專案建置時系統會掃描所有 Containers 的 config.js 進行合併
+ * config.js 是 container 的設定檔，在此設定該 container 的路徑以及對應檔案
+ * 專案建置時系統會掃描所有 containers 的 config.js 進行合併
  *
  * router
  * @param path [路徑，需以 / 為開頭]

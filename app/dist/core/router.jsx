@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createFactory } from 'react';
 /* redux */
 import { Provider } from 'react-redux';
 /* 多國語系 */
@@ -14,37 +14,64 @@ import { store, history, DevTools } from './store';
 import { merge } from 'ramda';
 
 /**
- * i18n_init  [預設語系，預設為 zh_tw]
- * i18n_fallback [未翻譯文字語言，預設為 en]
- * master_component [外框架]
- * router_index [預設頁面]
- * router_notFound [not found]
+ * i18nInit  [預設語系，預設為 zh_tw]
+ * i18nFallback [未翻譯文字語言，預設為 en]
+ * masterComponent [外框架]
+ * routerIndex [預設頁面路徑]
+ * routerNotFound [not found 路徑，沒有填寫就是預設路徑]
+ * routerMiddleware [路由要處理的 middleware]
  */
 export default (setting = {}) => {
   const {
-    i18n_init,
-    i18n_fallback,
-    master_component: Master,
-    router_index,
-    router_notFound
+    i18nInit,
+    i18nFallback,
+    masterComponent: Master,
+    routerIndex,
+    routerNotFound,
+    routerMiddleware
   } = merge(
     {
-      i18n_init: 'zh_tw',
-      i18n_fallback: 'en',
-      master_component: null,
-      router_index: '/',
-      router_notFound: null
+      i18nInit: 'zh_tw',
+      i18nFallback: 'en',
+      masterComponent: null,
+      routerIndex: '/',
+      routerNotFound: null,
+      routerMiddleware: null
     },
     setting
   );
 
+  /* 預設的路由處理 */
+  const routerDefaultMiddleware = () => render => render();
+
+  /* 路由邏輯 */
+  const routerLogic = Wrapper => {
+    const middleware =
+      routerMiddleware === null ? routerDefaultMiddleware : routerMiddleware;
+    const renderHandler = routerProps => () =>
+      createFactory(Wrapper)(routerProps);
+    const redirectHandler = prevPath => path => (
+      <Redirect to={{ pathname: path, state: { from: prevPath } }} />
+    );
+
+    return (store, routerParams) => routerProps =>
+      middleware(store, routerParams)(
+        renderHandler(routerProps),
+        redirectHandler(routerParams.path)
+      );
+  };
+
   const routes = (
     <Switch>
-      {RootRoutes.map((attr, index) => (
-        <Route key={`root-route-${index}`} {...attr} />
+      {RootRoutes.map(({ path, component: Wrapper, ...others }, index) => (
+        <Route
+          key={`root-route-${index}`}
+          path={path}
+          render={routerLogic(Wrapper)(store.getState(), { path, ...others })}
+        />
       ))}
-      <Redirect exact path="/" to={router_index} />
-      <Redirect path="*" to={router_notFound || router_index} />
+      <Redirect exact path="/" to={routerIndex} />
+      <Redirect path="*" to={routerNotFound || routerIndex} />
     </Switch>
   );
 
@@ -53,8 +80,8 @@ export default (setting = {}) => {
       <div>
         <I18n
           translations={Locales}
-          initialLang={i18n_init}
-          fallbackLang={i18n_fallback}>
+          initialLang={i18nInit}
+          fallbackLang={i18nFallback}>
           <ConnectedRouter history={history}>
             {Master ? <Master history={history} children={routes} /> : routes}
           </ConnectedRouter>
