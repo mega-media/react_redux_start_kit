@@ -113,7 +113,9 @@ export default class Doc extends PureComponent {
     return (
       <div styleName="container">
         <div styleName="page-header">
-          <h1>React Redux Start Kit</h1>
+          <h1>
+            React Redux Start Kit <small>v.{VERSION}</small>
+          </h1>
         </div>
         <div styleName="row">
           <div styleName="col-sm-4">

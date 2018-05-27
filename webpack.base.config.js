@@ -80,6 +80,9 @@ module.exports = {
       statsOptions: null,
       logLevel: 'info'
     }),
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(require('./package.json').version)
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new LodashModuleReplacementPlugin({
