@@ -192,12 +192,6 @@ function(store, routerParams) {
               </li>
               <li>
                 <label>redirectTo</label>：導向某個路由的函式
-                <div style={{ lineHeight: '16px' }}>
-                  使用此函式導向可在新頁面中從{' '}
-                  <label>this.props.location.state.from</label>{' '}
-                  拿到上一頁的路由; 若 this.props.location.state 為 undefined
-                  則表示沒有上一頁
-                </div>
               </li>
             </ul>
           </div>

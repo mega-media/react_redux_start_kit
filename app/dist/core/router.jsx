@@ -50,14 +50,12 @@ export default (setting = {}) => {
       routerMiddleware === null ? routerDefaultMiddleware : routerMiddleware;
     const renderHandler = routerProps => () =>
       createFactory(Wrapper)(routerProps);
-    const redirectHandler = prevPath => path => (
-      <Redirect to={{ pathname: path, state: { from: prevPath } }} />
-    );
+    const redirectHandler = path => <Redirect to={path} />;
 
     return (store, routerParams) => routerProps =>
       middleware(store, routerParams)(
         renderHandler(routerProps),
-        redirectHandler(routerParams.path)
+        redirectHandler
       );
   };
 
@@ -77,17 +75,21 @@ export default (setting = {}) => {
 
   return (
     <Provider store={store}>
-      <div>
-        <I18n
-          translations={Locales}
-          initialLang={i18nInit}
-          fallbackLang={i18nFallback}>
-          <ConnectedRouter history={history}>
-            {Master ? <Master history={history} children={routes} /> : routes}
-          </ConnectedRouter>
-        </I18n>
-        {DevTools ? <DevTools /> : null}
-      </div>
+      <I18n
+        translations={Locales}
+        initialLang={i18nInit}
+        fallbackLang={i18nFallback}>
+        <ConnectedRouter history={history}>
+          {Master ? (
+            <Master history={history}>
+              {routes}
+              {DevTools ? <DevTools /> : null}
+            </Master>
+          ) : (
+            routes
+          )}
+        </ConnectedRouter>
+      </I18n>
     </Provider>
   );
 };
