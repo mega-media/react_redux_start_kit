@@ -1,4 +1,3 @@
-/* @flow */
 /* redux */
 import { createStore, applyMiddleware, compose } from 'redux';
 
@@ -9,15 +8,19 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 
 /* 系統設定 */
 import { RootReducer, RootRoutes } from '../roots';
-import { promiseMiddleware, multiDispatchMiddleware } from './middleware';
-import { BASE_PATH } from 'Config';
+import { BASE_PATH, ENABLE_DEV_TOOLS } from 'Config';
+
+/* middleware */
+import {
+  promiseMiddleware,
+  multipleActionsMiddleware,
+  sagaMiddleware
+} from './middleware';
 
 /* saga */
 import createSagaMiddleware from 'redux-saga';
-import sagaFlow from '../saga';
 
-/* saga */
-const sagaMiddleware = createSagaMiddleware();
+const sagaCreator = createSagaMiddleware();
 
 /**
  * Router setting
@@ -26,32 +29,32 @@ const history = createHistory({ basename: BASE_PATH });
 const routeMiddleware = routerMiddleware(history);
 let store = {};
 let DevTools = null;
-if (process.env.NODE_ENV === 'development') {
+if (ENABLE_DEV_TOOLS) {
   DevTools = require('../libraries/devTools');
   store = createStore(
     RootReducer,
-    (compose(
+    compose(
       applyMiddleware(
         routeMiddleware,
-        multiDispatchMiddleware,
+        multipleActionsMiddleware,
         promiseMiddleware,
-        sagaMiddleware
+        sagaCreator
       ),
       DevTools.instrument()
-    ): any)
+    )
   );
 } else {
   store = createStore(
     RootReducer,
     applyMiddleware(
       routeMiddleware,
-      multiDispatchMiddleware,
+      multipleActionsMiddleware,
       promiseMiddleware,
-      sagaMiddleware
+      sagaCreator
     )
   );
 }
 /* 執行 saga 監聽 */
-sagaMiddleware.run(sagaFlow);
+sagaCreator.run(sagaMiddleware);
 
 export { store, history, DevTools };
