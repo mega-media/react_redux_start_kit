@@ -11,10 +11,14 @@ const PROJECT_PATH = '/';
 /* 資源路徑 */
 const ASSETS_PATH = 'assets/';
 
+/* 是否啟用 redux-devtools */
+const ENABLE_DEV_TOOLS = true;
+
 module.exports = {
   PROJECT_NAME,
   PROJECT_HOST,
   PROJECT_PORT,
   PROJECT_PATH,
-  ASSETS_PATH
+  ASSETS_PATH,
+  ENABLE_DEV_TOOLS
 };

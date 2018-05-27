@@ -8,7 +8,8 @@ const {
   PROJECT_HOST,
   PROJECT_PORT,
   PROJECT_PATH,
-  ASSETS_PATH
+  ASSETS_PATH,
+  ENABLE_DEV_TOOLS
 } = Config;
 
 const SITE_URL = `http://${PROJECT_HOST}${
@@ -23,5 +24,6 @@ module.exports = {
   BASE_URL: url.resolve(SITE_URL, PROJECT_PATH),
   BASE_PATH: PROJECT_PATH,
   ASSETS_URL: url.resolve(SITE_URL, ASSETS_PATH),
-  ASSETS_PATH
+  ASSETS_PATH,
+  ENABLE_DEV_TOOLS
 };
