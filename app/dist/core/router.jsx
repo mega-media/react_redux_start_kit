@@ -52,8 +52,8 @@ export default (setting = {}) => {
       createFactory(Wrapper)(routerProps);
     const redirectHandler = path => <Redirect to={path} />;
 
-    return (store, routerParams) => routerProps =>
-      middleware(store, routerParams)(
+    return routerParams => routerProps =>
+      middleware(store.getState(), routerParams)(
         renderHandler(routerProps),
         redirectHandler
       );
@@ -65,7 +65,7 @@ export default (setting = {}) => {
         <Route
           key={`root-route-${index}`}
           path={path}
-          render={routerLogic(Wrapper)(store.getState(), { path, ...others })}
+          render={routerLogic(Wrapper)({ path, ...others })}
         />
       ))}
       <Redirect exact path="/" to={routerIndex} />
@@ -86,7 +86,10 @@ export default (setting = {}) => {
               {DevTools ? <DevTools /> : null}
             </Master>
           ) : (
-            routes
+            <div>
+              {routes}
+              {DevTools ? <DevTools /> : null}
+            </div>
           )}
         </ConnectedRouter>
       </I18n>
