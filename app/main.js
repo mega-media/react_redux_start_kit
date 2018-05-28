@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import router from '~/core/router';
-
-// Doc
+// 以下為動態資料，依需求修改 ====================================
+// 外層主框架
 import Doc from '~/containers/_doc';
 
 render(
