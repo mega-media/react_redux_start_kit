@@ -6,9 +6,9 @@ import style from './assets/style.scss';
 @applyStyles(style)
 export default class Doc extends PureComponent {
   state = {
-    activePage: '/intro',
-    samplePage: false
+    activePage: '/intro'
   };
+
   pageArray = [
     {
       route: '/intro',
@@ -64,28 +64,35 @@ export default class Doc extends PureComponent {
       route: '/saga',
       title: '10. Saga effects',
       file: 'Saga.jsx'
-    },
-    {
-      route: '/api',
-      title: '11. Fetch API',
-      file: 'Api.jsx'
     }
   ];
 
   sampleArray = [
     {
+      route: '/extension',
+      title: 'Core extensions',
+      file: null
+    },
+    {
+      route: '/api',
+      title: 'Extension saga - fetchApi',
+      file: 'Api.jsx'
+    },
+    {
       route: '/todo',
-      title: 'TODO (use recompose)'
+      title: 'TODO (use recompose)',
+      file: null
     }
   ];
 
   checkRouteLegal = activePage => {
-    const isSample = this.sampleArray.some(obj => obj.route === activePage);
-    const isLegal = this.pageArray.some(obj => obj.route === activePage);
     this.setState(
       ({ activePage: initPage }) => ({
-        activePage: isLegal || isSample ? activePage : initPage,
-        samplePage: isSample
+        activePage: [...this.pageArray, ...this.sampleArray].some(
+          obj => obj.route === activePage
+        )
+          ? activePage
+          : initPage
       }),
       () => {
         PR.prettyPrint();
@@ -108,13 +115,21 @@ export default class Doc extends PureComponent {
 
   render() {
     const { children } = this.props;
-    const { activePage, samplePage } = this.state;
+    const { activePage } = this.state;
+    const { route, title, file } = [
+      ...this.pageArray,
+      ...this.sampleArray
+    ].find(obj => obj.route === activePage);
+
+    let docFile = {};
+    if (file) docFile = require('./docs/' + file);
 
     return (
       <div styleName="container">
         <div styleName="page-header">
           <h1>
-            React Redux Start Kit <small>v.{VERSION}</small>
+            React Redux Start Kit
+            <small> v.{VERSION}</small>
           </h1>
         </div>
         <div styleName="row">
@@ -146,51 +161,30 @@ export default class Doc extends PureComponent {
             </ul>
           </div>
           <div styleName="col-sm-8">
-            {(() => {
-              if (!samplePage) {
-                const activeObj = this.pageArray.find(
-                  obj => obj.route === activePage
-                );
-                const { target, desc } = require('./docs/' + activeObj.file);
-                return (
-                  <div>
-                    <div styleName="panel panel-default">
-                      <div styleName="panel-heading">
-                        <h3 styleName="panel-title">{activeObj.title}</h3>
-                      </div>
-                      <div styleName="panel-body">{children}</div>
-                    </div>
-                    {target ? (
-                      <div styleName="panel panel-default">
-                        <div styleName="panel-heading">
-                          <h3 styleName="panel-title">學習指標</h3>
-                        </div>
-                        <div styleName="panel-body doc">{target}</div>
-                      </div>
-                    ) : null}
-                    {desc ? (
-                      <div styleName="panel panel-default">
-                        <div styleName="panel-heading">
-                          <h3 styleName="panel-title">相關應用與說明</h3>
-                        </div>
-                        <div styleName="panel-body doc">{desc}</div>
-                      </div>
-                    ) : null}
+            <div>
+              <div styleName="panel panel-default">
+                <div styleName="panel-heading">
+                  <h3 styleName="panel-title">{title}</h3>
+                </div>
+                <div styleName="panel-body">{children}</div>
+              </div>
+              {docFile.target ? (
+                <div styleName="panel panel-default">
+                  <div styleName="panel-heading">
+                    <h3 styleName="panel-title">學習指標</h3>
                   </div>
-                );
-              } else {
-                const { title = 'unknown' } =
-                  this.sampleArray.find(obj => obj.route === activePage) || {};
-                return (
-                  <div styleName="panel panel-default">
-                    <div styleName="panel-heading">
-                      <h3 styleName="panel-title">{title}</h3>
-                    </div>
-                    {children}
+                  <div styleName="panel-body doc">{docFile.target}</div>
+                </div>
+              ) : null}
+              {docFile.desc ? (
+                <div styleName="panel panel-default">
+                  <div styleName="panel-heading">
+                    <h3 styleName="panel-title">相關應用與說明</h3>
                   </div>
-                );
-              }
-            })()}
+                  <div styleName="panel-body doc">{docFile.desc}</div>
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

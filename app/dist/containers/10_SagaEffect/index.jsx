@@ -192,88 +192,6 @@ dispatch([
 dispatch(emit(TYPE_A))
 `}</pre>
     </div>
-    <h4 id="fetchAPI">
-      <a href="#fetchAPI" style={{ color: '#000' }}>
-        # fetchAPI(api_code, opts)
-      </a>
-    </h4>
-    <div style={{ padding: '5px 10px 20px' }}>
-      <p>
-        發送一個 api request，目前支援 json 格式的串接，詳細說明參閱{' '}
-        <Link to="/api">11. Fetch API </Link>
-      </p>
-      <div styleName="panel panel-default">
-        <div styleName="panel-heading">
-          <b>api_code</b>
-        </div>
-        <div styleName="panel-body">
-          Type: <label>string</label> <br />
-          API 別名，作為發送(request)與(response)行為之間的聯繫
-        </div>
-      </div>
-      <div styleName="panel panel-default">
-        <div styleName="panel-heading">
-          <b>opts</b>
-        </div>
-        <div styleName="panel-body">
-          Type: <label>Object</label>
-          <div styleName="panel panel-default">
-            <div styleName="panel-heading">
-              <b>body</b>
-            </div>
-            <div styleName="panel-body">
-              Type: <label>string</label> | <label>FormData</label> <br />
-              加到 request 中的內容資料。當 method 為 get、head 時不使用這個值。
-            </div>
-          </div>
-          <div styleName="panel panel-default">
-            <div styleName="panel-heading">
-              <b>method</b>
-            </div>
-            <div styleName="panel-body">
-              Type: <label>string</label> <br />
-              request 的方法，包含：GET、POST、PUT、DELETE、HEAD
-            </div>
-          </div>
-          <div styleName="panel panel-default">
-            <div styleName="panel-heading">
-              <b>middleware</b>
-            </div>
-            <div styleName="panel-body">
-              Type: <label>{`Function | Array<Function>`}</label> <br />
-              非必填，放在 response.json() 後執行的中介函式，
-            </div>
-          </div>
-          <div styleName="panel panel-default">
-            <div styleName="panel-heading">
-              <b>url</b>
-            </div>
-            <div styleName="panel-body">
-              Type: <label>string</label> <br />
-              請求的網址
-            </div>
-          </div>
-        </div>
-      </div>
-      <pre className="prettyprint">{`dispatch(fetchAPI(GET_USER_LIST, { method: 'get', path: '/user' }))`}</pre>
-    </div>
-    <h4 id="lock">
-      <a href="#lock" style={{ color: '#000' }}>
-        # lock()
-      </a>
-    </h4>
-    <div style={{ padding: '5px 10px 20px' }}>
-      <p>
-        鎖定所有 effects 並取消所有執行中的 effects，期間不處理任何 effects 事件
-      </p>
-      <pre className="prettyprint">{`dispatch([
-  delay(5000, { type: 'TYPE_A' }),
-  lock(),
-  fetchAPI(GET_USER_LIST),
-  polling(5000, { type: 'TYPE_B' }),
-])
-//TYPE_A 會被取消，後續呼叫的 effect 不會有反應`}</pre>
-    </div>
     <h4 id="polling">
       <a href="#polling" style={{ color: '#000' }}>
         # polling(interval, action)
@@ -301,15 +219,6 @@ dispatch(emit(TYPE_A))
       </div>
       <pre className="prettyprint">{`dispatch(polling(1000, { type: 'TYPE_A' }))
 //每隔 1 秒，dispatch 一次 TYPE_A`}</pre>
-    </div>
-    <h4 id="unlock">
-      <a href="#unlock" style={{ color: '#000' }}>
-        # unlock()
-      </a>
-    </h4>
-    <div style={{ padding: '5px 10px 0' }}>
-      <p>解除所有 effects 的鎖定</p>
-      <pre className="prettyprint">{`dispatch(unlock())`}</pre>
     </div>
   </div>
 );

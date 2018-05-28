@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { fetchAPI, emit } from '~/core/action/effects';
+import { fetchApi, emit } from '~/core/action/effects';
 import { APPEND_ITEM, API_FETCH_LIST } from '~/containers/sample_todo/constant';
 import { compose, withDispatch, withStyle } from '../../core/container';
 import { withHandlers, withStateHandlers, setDisplayName } from 'recompose';
@@ -18,7 +18,7 @@ export const states = withStateHandlers(
 export const handlers = withHandlers({
   loadTodoList: ({ dispatch }) => () => {
     dispatch(
-      fetchAPI(API_FETCH_LIST, {
+      fetchApi(API_FETCH_LIST, {
         url: 'http://jsonplaceholder.typicode.com/todos?userId=1'
       })
     );

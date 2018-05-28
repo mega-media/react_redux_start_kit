@@ -64,7 +64,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       '~': path.resolve(__dirname, 'app/dist'),
-      '@': path.resolve(__dirname, 'app/assets')
+      '@': path.resolve(__dirname, 'app/assets'),
+      ext: path.resolve(__dirname, 'app/extensions')
     }
   },
   externals: {

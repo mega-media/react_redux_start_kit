@@ -2,7 +2,7 @@ import React from 'react';
 import { spy } from 'sinon';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { fetchAPI } from '!/effects';
+import { fetchApi } from '!/effects';
 import { Input, states, handlers } from '../input';
 
 describe('sample-todo input testing', () => {
@@ -67,7 +67,7 @@ describe('sample-todo input testing', () => {
         const loadTodoList = wrapper.prop('loadTodoList');
         loadTodoList();
         expect(
-          fetchAPI('API_FETCH_LIST', {
+          fetchApi('API_FETCH_LIST', {
             url: 'http://jsonplaceholder.typicode.com/todos?userId=1'
           })(dispatchSpy.getCall(0).args[0])
         ).to.be.true;
