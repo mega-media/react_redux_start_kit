@@ -23,7 +23,7 @@ module.exports = {
       <div>
         <ol>
           <li>
-            專案啟動時，Sagas 開始監聽定義的 effects type，fetchAPI type 為{' '}
+            專案啟動時，Sagas 開始監聽定義的 effects type，fetchApi type 為{' '}
             <label>SAGA_ASYNC</label>
           </li>
           <li>
@@ -58,9 +58,9 @@ module.exports = {
             綁入的訂閱(subscribe)，找尋 key 值為<label>API_USERS_LIST</label>的回傳處理
           </li>
           <li>
-            <b>Request</b> : 使用 action effect - fetchAPI
+            <b>Request</b> : 使用 extensions effect - fetchApi
             <pre className="prettyprint">{`//action.js
-export function fetchAction = fetchAPI('API_USERS_LIST', {
+export function fetchAction = fetchApi('API_USERS_LIST', {
   url: 'http://jsonplaceholder.typicode.com/users'
 });
 
