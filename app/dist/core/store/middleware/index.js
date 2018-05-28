@@ -1,4 +1,3 @@
-export { default as loggerMiddleware } from './logger';
-export { default as promiseMiddleware } from './promise';
-export { default as multipleActionsMiddleware } from './multiple-actions';
-export { default as sagaMiddleware } from './saga';
+export { default as multipleActions } from './multiple-actions.js';
+export { default as promise } from './promise.js';
+export { default as saga } from './saga';
