@@ -12,7 +12,7 @@ import { values } from 'ramda';
 import createSagaMiddleware from 'redux-saga';
 
 /* 系統設定 */
-import { RootReducer, RootRoutes } from '../roots';
+import { rootReducer } from '../roots';
 import { BASE_PATH, ENABLE_DEV_TOOLS } from 'Config';
 
 /* middleware */
@@ -43,7 +43,7 @@ const sagaCreator = {
       DevTools = require('../libraries/dev-tools');
       return () =>
         createStore(
-          RootReducer,
+          rootReducer,
           compose(
             applyMiddleware(
               routeMiddleware,
@@ -58,7 +58,7 @@ const sagaCreator = {
     } else {
       return () =>
         createStore(
-          RootReducer,
+          rootReducer,
           applyMiddleware(
             routeMiddleware,
             multipleActionsMiddleware,

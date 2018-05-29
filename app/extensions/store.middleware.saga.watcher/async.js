@@ -1,11 +1,38 @@
 import { take, call, fork, all } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
-/* helper */
-import { pipeP, apply, identity, has } from 'ramda';
-/* 包好的 config.subscribe */
-import { RootSagas } from '~/core/roots';
 /* 任務管理 */
 import taskManager from '~/core/store/middleware/saga/task-manager';
+/* helper */
+import { pipeP, apply, has, reduce, head, keys, append, map } from 'ramda';
+/* 這個函式是用來拿 config.js 中字定義的參數 */
+import { findCombineConfig } from '~/core/roots';
+
+/* 從 config 中拿 subscribe */
+const flattenSaga = reduce(
+  (sagaSet, saga) => {
+    const key = head(keys(saga));
+    if (!has(key, sagaSet)) {
+      sagaSet[key] = [];
+    }
+    sagaSet[key] = append(saga[key], sagaSet[key]);
+    return sagaSet;
+  },
+  {},
+  findCombineConfig('subscribe')
+);
+
+/* 將 saga 轉成想要的格式 */
+const rootSagas = reduce(
+  (obj, key) => {
+    obj[key] = response =>
+      function*() {
+        yield all(map(sagaFunc => call(sagaFunc, response), flattenSaga[key]));
+      };
+    return obj;
+  },
+  {},
+  keys(flattenSaga)
+);
 
 /* 任務事件 */
 export function* asyncTask(payload) {
@@ -37,7 +64,7 @@ export function subscribe({ apiCode, stream, middleware }) {
       /* 重頭戲 */
       .then(res => {
         /* 呼叫定義好的處理 */
-        if (has(apiCode, RootSagas)) emit(RootSagas[apiCode](res));
+        if (has(apiCode, rootSagas)) emit(rootSagas[apiCode](res));
 
         /* 處理完畢，結束這回合 */
         emit(END);

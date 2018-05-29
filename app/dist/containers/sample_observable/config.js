@@ -1,12 +1,13 @@
+/* @flow */
+import { pingEpic } from './epic';
 import Reducer from './reducer';
 import Index from './';
-import Saga from './saga';
 
 export default {
   router: {
-    path: '/todo',
+    path: '/observable',
     component: Index
   },
   reducer: Reducer,
-  subscribe: Saga
+  epic: pingEpic
 };

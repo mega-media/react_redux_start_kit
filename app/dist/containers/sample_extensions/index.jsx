@@ -26,8 +26,9 @@ export default class Extension extends Component {
             {'    '}∟ fetch-api.js <small>[2]</small>
             <br />
             {'  '}⊢ store.middleware <br />
-            {'    '}∟ _logger.js <small>[3]</small>
+            {'    '}⊢ _logger.js <small>[3]</small>
             <br />
+            {'    '}∟ redux-observable.js<br />
             {'  '}∟ store.middleware.saga.watcher<br />
             {'    '}∟ async.js<br />
           </pre>

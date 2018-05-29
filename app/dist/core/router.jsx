@@ -8,7 +8,7 @@ import Locales from '~/locales';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 /* 系統設定 */
-import { RootRoutes } from './roots';
+import { rootRoutes } from './roots';
 import { sagaCreator, history, DevTools } from './store';
 /* helper */
 import { merge } from 'ramda';
@@ -66,7 +66,7 @@ export default (setting = {}) => {
 
   const routes = (
     <Switch>
-      {RootRoutes.map(({ path, component: Wrapper, ...others }, index) => (
+      {rootRoutes.map(({ path, component: Wrapper, ...others }, index) => (
         <Route
           key={`root-route-${index}`}
           path={path}
