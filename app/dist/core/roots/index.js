@@ -1,27 +1,20 @@
-import { call, all } from 'redux-saga/effects';
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { i18nState } from 'redux-i18n';
-import { combineStructor } from './combine';
+import { combineStructor, validReducer } from './combine';
 import buildModules from './build';
 
-const { reducer, router, subscribe } = combineStructor.apply(
+const { router, reducer, ...others } = combineStructor.apply(
   null,
   buildModules
 );
 
-export const RootReducer = combineReducers({
-  ...reducer,
+export const rootReducer = combineReducers({
+  ...validReducer(reducer),
   routing: routerReducer,
   i18nState
 });
 
-export const RootRoutes = router.sort((a, b) => b.path.length - a.path.length);
+export const rootRoutes = router.sort((a, b) => b.path.length - a.path.length);
 
-export const RootSagas = Object.keys(subscribe).reduce((obj, key) => {
-  obj[key] = response =>
-    function*() {
-      yield all(subscribe[key].map(sagaFunc => call(sagaFunc, response)));
-    };
-  return obj;
-}, {});
+export const findCombineConfig = keyName => others[keyName];
