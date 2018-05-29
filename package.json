@@ -1,6 +1,6 @@
 {
   "name": "mega",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -99,7 +99,10 @@
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-i18n": "^1.5.3",
+    "redux-observable": "^0.18.0",
     "redux-saga": "^0.15.6",
+    "rxjs": "^6.2.0",
+    "rxjs-compat": "^6.2.0",
     "whatwg-fetch": "^2.0.3"
   },
   "lint-staged": {
