@@ -3,18 +3,29 @@ import { eventChannel, END } from 'redux-saga';
 /* 任務管理 */
 import taskManager from '~/core/store/middleware/saga/task-manager';
 /* helper */
-import { pipeP, apply, has, reduce, head, keys, append, map } from 'ramda';
+import {
+  pipeP,
+  apply,
+  has,
+  reduce,
+  head,
+  keys,
+  append,
+  map,
+  forEach,
+  keysIn
+} from 'ramda';
 /* 這個函式是用來拿 config.js 中字定義的參數 */
 import { findCombineConfig } from '~/core/roots';
 
 /* 從 config 中拿 subscribe */
 const flattenSaga = reduce(
   (sagaSet, saga) => {
-    const key = head(keys(saga));
-    if (!has(key, sagaSet)) {
-      sagaSet[key] = [];
-    }
-    sagaSet[key] = append(saga[key], sagaSet[key]);
+    forEach(key => {
+      if (!has(key, sagaSet)) sagaSet[key] = [];
+
+      sagaSet[key] = append(saga[key], sagaSet[key]);
+    }, keysIn(saga));
     return sagaSet;
   },
   {},
