@@ -6,4 +6,4 @@ flow-typed/npm/
 .DS_Store
 .nyc_output/
 coverage/
-app/dist/build/
+app/dist/core/roots/build.js

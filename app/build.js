@@ -1,45 +1,46 @@
 const path = require('path');
 const fs = require('fs');
 
-function requireFiles(directory, filename) {
-  return function requireLoop(root = './') {
+function requireDirectoriesFiles(dirName) {
+  function requireLoop(directory, root = './') {
     let content = [];
     const dirs = fs.readdirSync(
       path.resolve(__dirname, `./dist/${directory}/`, root)
     );
     for (const i in dirs) {
+      const moduleName = directory === 'containers' ? 'index' : directory;
       const rootDir = path.join(root, dirs[i]);
       const dirPath = path.resolve(__dirname, `./dist/${directory}/`, rootDir);
-      if (rootDir === `${filename}.js`) {
-        content.push(`require('../${directory}/${filename}').default`);
+      if (rootDir === `config.js`) {
+        content.push(`require('~/${directory}/config').default`);
       } else {
         if (!fs.statSync(dirPath).isDirectory()) {
           continue;
         }
-        if (fs.existsSync(dirPath + `/${filename}.js`)) {
-          content.push(
-            `require('../${directory}/${rootDir}/${filename}').default`
-          );
+        if (fs.existsSync(dirPath + '/config.js')) {
+          content.push(`require('~/${directory}/${rootDir}/config').default`);
         }
-        const subConfigs = requireLoop(rootDir);
+        const subConfigs = requireLoop(directory, rootDir);
         content = [...content, ...subConfigs];
       }
     }
     return content;
-  };
+  }
+
+  return dirName.reduce(function(content, directory) {
+    return content.concat(requireLoop(directory));
+  }, []);
 }
 
-function writeRequire(filename, contentStream) {
-  const dir = path.resolve(__dirname, './dist/build');
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
+function writeConfigRequiredBy(...dirName) {
+  const dir = path.resolve(__dirname, './dist/core/roots');
+
   fs.writeFile(
-    path.join(dir, filename),
-    'export default [' + contentStream() + ']',
+    path.join(dir, 'build.js'),
+    'export default [' + requireDirectoriesFiles(dirName) + ']',
     function(err) {
       if (err) {
-        console.log('[fs]', 'writeRequire 檔案寫入失敗！');
+        console.log('[fs]', 'writeRequiredBy 檔案寫入失敗！');
         return false;
       }
     }
@@ -123,5 +124,5 @@ function writeExtensionsRequire() {
   }
 }
 
-writeRequire('containers.js', requireFiles('containers', 'config'));
+writeConfigRequiredBy('containers');
 writeExtensionsRequire();

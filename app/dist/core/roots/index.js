@@ -3,9 +3,12 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { i18nState } from 'redux-i18n';
 import { combineStructor } from './combine';
-import containers from '~/build/containers';
+import buildModules from './build';
 
-const { reducer, router, subscribe } = combineStructor.apply(null, containers);
+const { reducer, router, subscribe } = combineStructor.apply(
+  null,
+  buildModules
+);
 
 export const RootReducer = combineReducers({
   ...reducer,
