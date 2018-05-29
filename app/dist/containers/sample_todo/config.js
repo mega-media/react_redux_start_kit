@@ -1,4 +1,3 @@
-import React from 'react';
 import Reducer from './reducer';
 import Index from './';
 import Saga from './saga';

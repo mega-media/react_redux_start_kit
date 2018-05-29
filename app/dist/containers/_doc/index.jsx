@@ -79,6 +79,11 @@ export default class Doc extends PureComponent {
       file: 'Api.jsx'
     },
     {
+      route: '/observable',
+      title: 'Extension middleware - redux-observable',
+      file: null
+    },
+    {
       route: '/todo',
       title: 'TODO (use recompose)',
       file: null
