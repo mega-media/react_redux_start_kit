@@ -48,6 +48,12 @@ function writeConfigRequiredBy(...dirName) {
 }
 
 function writeExtensionsRequire() {
+  /* 沒有擴充資料夾就不用擴充囉 */
+  const isHasExtension = fs.existsSync(path.resolve(__dirname, './extensions'));
+  if (!isHasExtension) {
+    return false;
+  }
+
   const THESE_DIRECTORIES_COULD_NOT_BEEN_COVER = ['roots', 'store'];
 
   const fileRename = filename =>
