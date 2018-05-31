@@ -7,15 +7,13 @@ const baseConfig = require('./webpack.base.config');
 const {
   PROJECT_NAME,
   PROJECT_HOST,
-  PROJECT_PORT,
-  BASE_PATH
+  PROJECT_PORT
 } = require('./config/global-constants');
 
 module.exports = Object.assign(baseConfig, {
   output: {
     path: path.resolve(__dirname, 'output/development'),
-    filename: '[name].js',
-    publicPath: BASE_PATH
+    filename: '[name].js'
   },
   devServer: {
     host: PROJECT_HOST,

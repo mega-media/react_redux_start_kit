@@ -5,7 +5,6 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const globalConstants = require('./config/global-constants');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
-const { ASSETS_PATH } = globalConstants;
 
 module.exports = {
   cache: true,
@@ -26,7 +25,7 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          `url-loader?limit=10000&name=${ASSETS_PATH}images/[hash].[ext]`,
+          `url-loader?limit=10000&name=images/[hash].[ext]`,
           'img-loader?progressive=true'
         ],
         exclude: /node_modules/,
@@ -34,27 +33,25 @@ module.exports = {
       },
       {
         test: /\.ico$/i,
-        loader: `file-loader?name=${ASSETS_PATH}images/[name].[ext]`,
+        loader: `file-loader?name=images/[name].[ext]`,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.(mp4|swf)$/,
-        loader: `file-loader?name=${ASSETS_PATH}media/[name].[ext]`,
+        loader: `file-loader?name=media/[name].[ext]`,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=${
-          ASSETS_PATH
-        }fonts/[name].[ext]`,
+        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]`,
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `file-loader?name=${ASSETS_PATH}fonts/[name].[ext]`,
+        loader: `file-loader?name=fonts/[name].[ext]`,
         exclude: /node_modules/,
         include: path.join(__dirname, 'app/assets/fonts')
       }
