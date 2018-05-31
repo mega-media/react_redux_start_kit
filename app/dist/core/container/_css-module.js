@@ -1,12 +1,5 @@
-/* @flow */
-import CSSModules from 'react-css-modules';
-import Bootstrap from '@/css/bootstrap.min.css';
-import FontAwesome from '@/css/font-awesome.min.css';
-import Shared from '@/css/shared.css';
+import styleSheets from './_assets';
+import { reduce, merge, concat } from 'ramda';
 
-export const styleCombine = (...styles: Array<Object>) => ({
-  ...Bootstrap,
-  ...FontAwesome,
-  ...Shared,
-  ...styles.reduce((obj, style) => ({ ...obj, ...style }), {})
-});
+export const styleCombine = (...styles: Array<Object>) =>
+  reduce(merge, {}, concat(styleSheets, styles));

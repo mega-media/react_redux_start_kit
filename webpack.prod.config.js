@@ -4,15 +4,15 @@ const webpack = require('webpack');
 const baseConfig = require('./webpack.base.config');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractCSS = new ExtractTextPlugin('styles.css');
-const ExtractPublic = new ExtractTextPlugin('public.css');
-const { PROJECT_NAME, BASE_PATH } = require('./config/global-constants');
+const ExtractCSS = new ExtractTextPlugin('css/styles.css');
+const ExtractPublic = new ExtractTextPlugin('css/public.css');
+const { PROJECT_NAME } = require('./config/global-constants');
 
 module.exports = Object.assign(baseConfig, {
   output: {
     path: path.resolve(__dirname, 'output/production'),
     filename: '[name].js',
-    publicPath: BASE_PATH
+    publicPath: '../'
   },
   module: {
     loaders: baseConfig.module.loaders.concat([
