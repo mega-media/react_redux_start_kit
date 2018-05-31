@@ -13,7 +13,7 @@ import createSagaMiddleware from 'redux-saga';
 
 /* 系統設定 */
 import { rootReducer } from '../roots';
-import { BASE_PATH, ENABLE_DEV_TOOLS } from 'Config';
+import { ROUTE_BASE, ENABLE_DEV_TOOLS } from 'Config';
 
 /* middleware */
 import * as storeMiddleware from './middleware';
@@ -31,7 +31,7 @@ const {
 /**
  * Router setting
  */
-const history = createHistory({ basename: BASE_PATH });
+const history = createHistory({ basename: ROUTE_BASE });
 const routeMiddleware = routerMiddleware(history);
 
 let DevTools = null;
