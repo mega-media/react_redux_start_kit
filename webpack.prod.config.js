@@ -11,7 +11,7 @@ const { PROJECT_NAME } = require('./config/global-constants');
 module.exports = Object.assign(baseConfig, {
   output: {
     path: path.resolve(__dirname, 'output/production'),
-    filename: '[name].js',
+    filename: 'js/[name].js',
     publicPath: '../'
   },
   module: {

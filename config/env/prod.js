@@ -5,6 +5,9 @@ const PROJECT_NAME = 'React Redux Start Kit';
 const PROJECT_HOST = '0.0.0.0';
 const PROJECT_PORT = 80;
 
+/* 路由根目錄 */
+const ROUTE_BASE = '/startkit/';
+
 /* 要引入的共用資源，withStyle 預設樣式 */
 const INCLUDE_ASSETS = 'css';
 
@@ -18,6 +21,7 @@ module.exports = {
   PROJECT_NAME,
   PROJECT_HOST,
   PROJECT_PORT,
+  ROUTE_BASE,
   INCLUDE_ASSETS,
   BUILD_DIRECTORIES,
   ENABLE_DEV_TOOLS
