@@ -1,5 +1,5 @@
 declare module 'mockReducer' {
-  declare var exports: (
+  declare module.exports: (
     initState: any,
     Reducer: (s: any, a: any) => any
   ) => any;
