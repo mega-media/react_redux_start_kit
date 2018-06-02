@@ -9,7 +9,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 /* 系統設定 */
 import { rootRoutes } from './roots';
-import { sagaCreator, history, DevTools } from './store';
+import { storeCreator, history, DevTools } from './store';
 /* helper */
 import { merge } from 'ramda';
 
@@ -42,9 +42,9 @@ export default (setting = {}) => {
   );
 
   /* store */
-  const store = sagaCreator.create();
-  /* 開始啟用 saga */
-  sagaCreator.run();
+  const store = storeCreator.create();
+  /* 開始啟用 middleware */
+  storeCreator.run();
 
   /* 預設的路由處理 */
   const routerDefaultMiddleware = () => render => render();

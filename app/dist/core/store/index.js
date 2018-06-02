@@ -8,9 +8,6 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 /* helper */
 import { values } from 'ramda';
 
-/* saga */
-import createSagaMiddleware from 'redux-saga';
-
 /* 系統設定 */
 import { rootReducer } from '../roots';
 import { ROUTE_BASE, ENABLE_DEV_TOOLS } from 'Config';
@@ -18,11 +15,8 @@ import { ROUTE_BASE, ENABLE_DEV_TOOLS } from 'Config';
 /* middleware */
 import * as storeMiddleware from './middleware';
 
-const sagaMiddleware = createSagaMiddleware();
-
 /* find storeMiddleware */
 const {
-  saga: sagaWatcherMiddleware,
   promise: promiseMiddleware,
   multipleActions: multipleActionsMiddleware,
   ...othersMiddleware
@@ -37,7 +31,7 @@ const routeMiddleware = routerMiddleware(history);
 let DevTools = null;
 
 /* store creator */
-const sagaCreator = {
+const storeCreator = {
   create: (() => {
     if (ENABLE_DEV_TOOLS) {
       DevTools = require('../libraries/dev-tools');
@@ -49,7 +43,6 @@ const sagaCreator = {
               routeMiddleware,
               multipleActionsMiddleware,
               promiseMiddleware,
-              sagaMiddleware,
               ...values(othersMiddleware)
             ),
             DevTools.instrument()
@@ -63,15 +56,16 @@ const sagaCreator = {
             routeMiddleware,
             multipleActionsMiddleware,
             promiseMiddleware,
-            sagaMiddleware,
             ...values(othersMiddleware)
           )
         );
     }
   })(),
   run: () => {
-    sagaMiddleware.run(sagaWatcherMiddleware);
+    values(othersMiddleware).map(middleware => {
+      middleware.__run__ && middleware.__run__();
+    });
   }
 };
 
-export { sagaCreator, history, DevTools };
+export { storeCreator, history, DevTools };
