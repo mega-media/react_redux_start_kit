@@ -5,6 +5,16 @@ import { withStyle } from '../../core/container';
 
 export const sagaIntro = () => (
   <div>
+    這是擴充檔案 app/extensions/store.middleware/redux-saga/ 的使用範例。
+    <br />
+    <br />
+    <b styleName="text-danger">
+      若使用的話需連同 app/extensions/action.effects/ 檔案一起擴充
+    </b>
+    <br />
+    <br />
+    <pre>需要安裝的模組：redux-saga</pre>
+    <hr />
     <h4 id="call">
       <a href="#call" style={{ color: '#000' }}>
         # call(function [, arg1, arg2, ...])
@@ -159,38 +169,6 @@ dispatch([
       </div>
       <pre className="prettyprint">{`dispatch(delay(5000, { type: 'TYPE_A' }))
 //5 秒後 dispatch TYPE_A`}</pre>
-    </div>
-    <h4 id="emit">
-      <a href="#emit" style={{ color: '#000' }}>
-        # emit(type[, payload])
-      </a>
-    </h4>
-    <div style={{ padding: '5px 10px 20px' }}>
-      <p>執行一個 action</p>
-      <div styleName="panel panel-default">
-        <div styleName="panel-heading">
-          <b>type</b>
-        </div>
-        <div styleName="panel-body">
-          Type: <label>string</label> <br />
-          action 物件的 type 屬性
-        </div>
-      </div>
-      <div styleName="panel panel-default">
-        <div styleName="panel-heading">
-          <b>payload</b>
-        </div>
-        <div styleName="panel-body">
-          Type: <label>any</label> <br />
-          action 物件的 payload 屬性
-        </div>
-      </div>
-      <pre className="prettyprint">{`dispatch(emit(TYPE_A, { data: []}))
-//就等於 dispatch({ type: TYPE_A, payload:{ data: []}})
-
-//沒有 payload 時允許空值：
-dispatch(emit(TYPE_A))
-`}</pre>
     </div>
     <h4 id="polling">
       <a href="#polling" style={{ color: '#000' }}>

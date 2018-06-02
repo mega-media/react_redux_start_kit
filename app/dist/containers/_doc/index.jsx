@@ -59,11 +59,6 @@ export default class Doc extends PureComponent {
       route: '/hoc',
       title: '9. Container HOC',
       file: 'Hoc.jsx'
-    },
-    {
-      route: '/saga',
-      title: '10. Saga effects',
-      file: 'Saga.jsx'
     }
   ];
 
@@ -74,19 +69,14 @@ export default class Doc extends PureComponent {
       file: null
     },
     {
-      route: '/api',
-      title: 'Extension saga - fetchApi',
-      file: 'Api.jsx'
+      route: '/saga',
+      title: 'Extension middleware - redux-saga',
+      file: 'Saga.jsx'
     },
     {
       route: '/observable',
       title: 'Extension middleware - redux-observable',
-      file: null
-    },
-    {
-      route: '/todo',
-      title: 'TODO (use recompose)',
-      file: null
+      file: 'Observable.jsx'
     }
   ];
 

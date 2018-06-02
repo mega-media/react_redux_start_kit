@@ -4,6 +4,7 @@ module.exports = {
   target: (
     <div>
       <h5>☆ 套用系統樣式檔</h5>
+      <h5>☆ Action 其他格式</h5>
       <h5>☆ 使用 Constant 定義參數值</h5>
       <h5>☆ 認識 Store 支援的存取格式 </h5>
     </div>
@@ -67,6 +68,26 @@ export default compose(
 `}</pre>
             </li>
           </ol>
+        </li>
+      </ul>
+      <h5>☆ Action 其他格式</h5>
+      <ul>
+        <li>
+          除了 type 之外，另一個允許的格式為 <label>payload</label>
+        </li>
+        <li>
+          需要傳遞的參數皆放置在 <label>payload</label> 之下
+        </li>
+        <li>
+          core/action/effect 提供 <label>emit</label> 函式，建立一個 Action
+          Object
+          <pre className="prettyprint">{`emit(TYPE_A, { data: [1, 2, 3] });
+//就等於 { type: TYPE_A, payload: { data: [ 1, 2, 3 ] }}
+
+//沒有 payload 時允許空值：
+emit(TYPE_A);
+//等於 { type: TYPE_A }
+`}</pre>
         </li>
       </ul>
     </div>

@@ -28,6 +28,7 @@ class Observable extends Component {
         <br />
         <br />
         <pre>需要安裝的模組：redux-observable、rxjs、rxjs-compat</pre>
+        <hr />
         <h1>is pinging: {isPinging.toString()}</h1>
         <br />
         <button onClick={this.ping}>Start PING</button>

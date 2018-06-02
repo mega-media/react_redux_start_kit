@@ -73,7 +73,9 @@ export default withI18n(Component) `}
 
 export default compose(withDispatch, withI18n)(YOUR_COMPONENT)`}</pre>
           </li>
-          <li>this.props.dispatch(setLanguage('en'))，即可切換語系</li>
+          <li>
+            <label>this.props.dispatch(setLanguage('en'))</label> 即可切換語系
+          </li>
         </ul>
       </div>
     </div>

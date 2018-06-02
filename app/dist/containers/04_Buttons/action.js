@@ -1,3 +1,4 @@
+import { emit } from '~/core/action/effects';
 import { BUTTON_CLICK, BUTTON_RESET } from './constant';
 
 /**
@@ -6,6 +7,10 @@ import { BUTTON_CLICK, BUTTON_RESET } from './constant';
  * @returns {{type, payload: {btnStyle: *}}}
  */
 export function click(btnStyle) {
+  /**
+   * 使用 action/effects emit 的寫法：
+   * return emit(BUTTON_CLICK, { btnStyle });
+   */
   return {
     type: BUTTON_CLICK,
     payload: {
@@ -15,6 +20,10 @@ export function click(btnStyle) {
 }
 
 export function reset() {
+  /**
+   * 使用 action/effects emit 的寫法：
+   * return emit(BUTTON_RESET);
+   */
   return {
     type: BUTTON_RESET
   };
