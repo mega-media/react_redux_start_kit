@@ -69,11 +69,7 @@ function writeConfigRequiredBy() {
 /* 掃描擴充資料夾檔案 */
 function writeExtensionsRequire() {
   /* 不能擴充的路徑名稱 */
-  const THESE_DIRECTORIES_COULD_NOT_BEEN_COVER = [
-    'roots',
-    'store',
-    'store.middleware.saga'
-  ];
+  const THESE_DIRECTORIES_COULD_NOT_BEEN_COVER = ['roots', 'store'];
 
   /* 變更檔名 */
   const fileRename = filename =>
