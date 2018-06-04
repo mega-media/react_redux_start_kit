@@ -10,11 +10,13 @@ const { router, reducer, ...others } = combineStructor.apply(
 );
 
 export const rootReducer = combineReducers({
-  ...validReducer(reducer),
+  ...(!!reducer ? validReducer(reducer) : {}),
   routing: routerReducer,
   i18nState
 });
 
-export const rootRoutes = router.sort((a, b) => b.path.length - a.path.length);
+export const rootRoutes = !!router
+  ? router.sort((a, b) => b.path.length - a.path.length)
+  : [];
 
 export const findCombineConfig = keyName => others[keyName];
