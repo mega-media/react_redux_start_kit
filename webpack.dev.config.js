@@ -11,9 +11,11 @@ const {
 } = require('./config/global-constants');
 
 module.exports = Object.assign(baseConfig, {
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'output/development'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/'
   },
   devServer: {
     host: PROJECT_HOST,
@@ -23,16 +25,20 @@ module.exports = Object.assign(baseConfig, {
     historyApiFallback: true
   },
   module: {
-    loaders: baseConfig.module.loaders.concat([
+    rules: baseConfig.module.rules.concat([
       {
         test: /\.(s)?css$/,
-        loaders: [
+        use: [
           'style-loader',
-          'css-loader' +
-            '?modules' +
-            '&importLoaders=1' +
-            '&localIdentName=[path][name]/[local]/[hash:base64:5]' +
-            '&-autoprefixer',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[path][name]/[local]/[hash:base64:5]',
+              autoprefixer: true
+            }
+          },
           'postcss-loader',
           'sass-loader'
         ],
@@ -41,22 +47,13 @@ module.exports = Object.assign(baseConfig, {
       }
     ])
   },
+  optimization: {
+    splitChunks: { chunks: 'all' },
+    runtimeChunk: true
+  },
   plugins: baseConfig.plugins.concat([
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new WebpackNotifierPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(
-        process.env.NODE_ENV || 'development'
-      )
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: module => /node_modules/.test(module.resource)
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'buffer'
-    }),
     new HtmlWebpackPlugin({
       title: PROJECT_NAME,
       hash: true,

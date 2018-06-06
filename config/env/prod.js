@@ -6,7 +6,7 @@ const PROJECT_HOST = '0.0.0.0';
 const PROJECT_PORT = 80;
 
 /* 路由根目錄 */
-const ROUTE_BASE = '/startkit/';
+const ROUTE_BASE = '/';
 
 /* 要引入的共用資源，withStyle 預設樣式 */
 const INCLUDE_ASSETS = 'css';

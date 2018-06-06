@@ -9,51 +9,89 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 module.exports = {
   cache: true,
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel-loader?cacheDirectory=true'],
-        exclude: /node_modules/,
-        include: path.resolve(__dirname, 'app')
-      },
-      {
-        test: /\.json$/,
-        loaders: ['json-loader'],
-        exclude: /node_modules/,
-        include: path.resolve(__dirname, 'app')
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          `url-loader?limit=10000&name=images/[hash].[ext]`,
-          'img-loader?progressive=true'
+        type: 'javascript/auto',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true
+            }
+          }
         ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
-        test: /\.ico$/i,
-        loader: `file-loader?name=images/[name].[ext]`,
+        test: /\.json$$/,
+        type: 'javascript/auto',
+        use: [
+          {
+            loader: 'json-loader'
+          }
+        ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
-        test: /\.(mp4|swf)$/,
-        loader: `file-loader?name=media/[name].[ext]`,
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: 'images/[hash].[ext]'
+            }
+          },
+          {
+            loader: 'img-loader'
+          }
+        ],
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
+      },
+      {
+        test: /\.(mp4|swf)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'media/[name].[ext]'
+            }
+          }
+        ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]`,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff',
+              name: 'fonts/[name].[ext]'
+            }
+          }
+        ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `file-loader?name=fonts/[name].[ext]`,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[ext]'
+            }
+          }
+        ],
         exclude: /node_modules/,
-        include: path.join(__dirname, 'app/assets/fonts')
+        include: path.resolve(__dirname, 'app/assets/fonts')
       }
     ]
   },
@@ -81,8 +119,6 @@ module.exports = {
     new webpack.DefinePlugin({
       VERSION: JSON.stringify(require('./package.json').version)
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new LodashModuleReplacementPlugin({
       shorthands: true,
       collections: true
@@ -90,7 +126,6 @@ module.exports = {
   ],
   entry: {
     bundle: [
-      'babel-polyfill',
       'es6-promise',
       'whatwg-fetch',
       path.resolve(__dirname, 'app/main.js')

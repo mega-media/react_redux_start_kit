@@ -1,23 +1,22 @@
 {
   "presets": [
-    "react",
-    "es2015",
-    "stage-0",
-    "env"
+    "@babel/react",
+    "@babel/preset-env",
+    ["@babel/preset-stage-0",{ "decoratorsLegacy": true }]
   ],
   "plugins": [
     "lodash",
-    "transform-class-properties",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose" : true }],
     "syntax-flow",
-    "transform-flow-strip-types",
-    "transform-runtime",
-    "transform-decorators-legacy"
+    "@babel/plugin-transform-flow-strip-types",
+    "@babel/transform-runtime"
   ],
   "env": {
     "production": {
       "plugins": [
-        "transform-react-constant-elements",
-        "transform-react-inline-elements"
+        "@babel/transform-react-constant-elements",
+        "@babel/transform-react-inline-elements"
       ]
     },
     "test": {
@@ -28,7 +27,8 @@
           {
             "config": "webpack.test.config.js"
           }
-        ]
+        ],
+        "@babel/transform-runtime"
       ]
     }
   }
