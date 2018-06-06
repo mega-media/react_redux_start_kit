@@ -27,9 +27,11 @@ class Buttons extends PureComponent {
       <div>
         <div>
           You click :{' '}
-          {pipe(pickBy((val, key) => val), keys, join(', '))(
-            this.props.storeData
-          )}
+          {pipe(
+            pickBy((val, key) => val),
+            keys,
+            join(', ')
+          )(this.props.storeData)}
         </div>
         <br />
         <div styleName="btn-toolbar">
@@ -66,4 +68,7 @@ class Buttons extends PureComponent {
   }
 }
 
-export default compose(withDispatch, withStore(STORE_KEY))(Buttons);
+export default compose(
+  withDispatch,
+  withStore(STORE_KEY)
+)(Buttons);

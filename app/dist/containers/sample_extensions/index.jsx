@@ -7,8 +7,7 @@ export default class Extension extends Component {
       <div>
         <h4>核心檔的擴充</h4>
         <div style={{ padding: '5px 10px 20px', lineHeight: '30px' }}>
-          核心檔隨時會進行更新，為了保持程式乾淨與更新方便，不應去更動到核心檔案。<br
-          />
+          核心檔隨時會進行更新，為了保持程式乾淨與更新方便，不應去更動到核心檔案。<br />
           而在專案開發的過程中，不同專案類型會有不同的需求，當專案提供的
           container hoc 、 saga action effect
           無法滿足開發使用，則可自行添加擴充檔案。
@@ -16,8 +15,7 @@ export default class Extension extends Component {
         </div>
         <h4>如何擴充</h4>
         <div style={{ padding: '5px 10px 20px' }}>
-          找到目錄資料夾：<label>app/extensions</label>，這是放置擴充檔案的地方，檔案深度只允許兩層。<br
-          />
+          找到目錄資料夾：<label>app/extensions</label>，這是放置擴充檔案的地方，檔案深度只允許兩層。<br />
           在裡面已有檔案範例:
           <pre style={{ lineHeight: '22px' }}>
             extensions<br />

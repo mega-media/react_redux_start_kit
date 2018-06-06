@@ -46,4 +46,7 @@ export class I18N extends PureComponent<any, void> {
   }
 }
 
-export default compose(withDispatch, withI18n)(I18N);
+export default compose(
+  withDispatch,
+  withI18n
+)(I18N);

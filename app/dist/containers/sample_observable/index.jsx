@@ -10,7 +10,9 @@ class Observable extends Component {
   };
 
   render() {
-    const { storeData: { isPinging } } = this.props;
+    const {
+      storeData: { isPinging }
+    } = this.props;
     return (
       <div>
         這是擴充檔案 app/extensions/store.middleware/redux-observable.js
@@ -37,4 +39,7 @@ class Observable extends Component {
   }
 }
 
-export default compose(withDispatch, withStore(STORE_KEY))(Observable);
+export default compose(
+  withDispatch,
+  withStore(STORE_KEY)
+)(Observable);

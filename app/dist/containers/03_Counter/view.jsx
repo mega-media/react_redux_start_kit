@@ -40,4 +40,7 @@ class Counter extends PureComponent {
 /**
  * containers hoc 元件的順序並不影響最終結果
  */
-export default compose(withDispatch, withStore('counterStore'))(Counter);
+export default compose(
+  withDispatch,
+  withStore('counterStore')
+)(Counter);

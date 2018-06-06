@@ -20,7 +20,7 @@ export default class Style extends PureComponent {
       <div styleName="row">
         <div styleName="col-sm-6">
           圖片：
-          <div styleName="myImg">
+          <div styleName="my-img">
             <img styleName="img-responsive img-thumbnail" src={image} />
           </div>
         </div>
@@ -30,8 +30,8 @@ export default class Style extends PureComponent {
             {`http://a.singlediv.com/`}
           </a>
           )
-          <div styleName="myDiv">
-            <div styleName="marioMushroom" />
+          <div styleName="my-div">
+            <div styleName="mario-mushroom" />
           </div>
         </div>
       </div>

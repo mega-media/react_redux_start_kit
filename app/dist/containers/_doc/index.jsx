@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { applyStyles } from '~/core/container';
 import style from './assets/style.scss';
 
 @applyStyles(style)
-export default class Doc extends PureComponent {
+export default class Doc extends Component {
   state = {
     activePage: '/intro'
   };
@@ -102,10 +102,6 @@ export default class Doc extends PureComponent {
   componentWillMount() {
     const { activePage } = this.state;
     this.checkRouteLegal(activePage);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.activePage !== nextState.activePage;
   }
 
   render() {

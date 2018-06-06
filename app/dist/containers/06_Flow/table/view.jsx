@@ -70,4 +70,7 @@ class Table extends PureComponent<Props, void> {
   }
 }
 
-export default compose(withDispatch, withStore(STORE_KEY))(Table);
+export default compose(
+  withDispatch,
+  withStore(STORE_KEY)
+)(Table);
