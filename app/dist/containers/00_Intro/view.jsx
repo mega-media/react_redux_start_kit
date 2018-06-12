@@ -59,9 +59,7 @@ render(
             </li>
             <li>在所有子元件的外層</li>
             <li>當子元件透過路由系統變化的時候，主框架不會受影響</li>
-            <li>
-              適合放置不受路由影響的元件，如：「跳轉動畫元件」、「系統提示訊息元件」等
-            </li>
+            <li>適合放置不受路由影響的元件，如：「跳轉動畫元件」、「系統提示訊息元件」等</li>
           </ul>
           <h5>☆ 路由系統</h5>
           <ul style={{ lineHeight: '30px' }}>
@@ -69,8 +67,8 @@ render(
               <b>routerIndex</b>: 字串，必填。系統一進入的初始頁面路徑
             </li>
             <li>
-              <b>routerNotFound</b>: 字串，選填，預設值為 <label>null</label>。
-              找不到路由的導向路徑， null 時導向預設頁面路徑
+              <b>routerNotFound</b>: 字串，選填，預設值為 <label>null</label>。 找不到路由的導向路徑，
+              null 時導向預設頁面路徑
             </li>
             <li>
               <b>routerMiddleware</b>: 函式，選填，預設值為 <label>null</label>。路由系統要處理的
@@ -84,8 +82,7 @@ render(
           <small>react-router</small>
         </h4>
         <div style={{ padding: '5px 10px 20px' }}>
-          各個模組的路由設定記錄在 <label>config.js</label> 中，路由參數需包含{' '}
-          <label>path</label>、<label>component</label>。
+          各個模組的路由設定記錄在 <label>config.js</label> 中，路由參數需包含 <label>path</label>、<label>component</label>。
           <br />
           以下一章節的 <Link to="/hello">1. Hello World !</Link> 路由設定為例：
           <pre className="prettyprint">{`//config.js
@@ -167,8 +164,8 @@ function(store, routerParams) {
                 <Link to="/counter">3. Click counter.</Link>
               </li>
               <li>
-                <label>routerParams</label>： 在 <label>config.js</label>{' '}
-                中，路由參數除了 <label>path</label>、<label>component</label>，可再額外附加需要的參數
+                <label>routerParams</label>： 在 <label>config.js</label> 中，路由參數除了{' '}
+                <label>path</label>、<label>component</label>，可再額外附加需要的參數
                 <pre className="prettyprint">{`//config.js
 {
   router: {
@@ -198,9 +195,7 @@ function(store, routerParams) {
           <div style={{ padding: '5px 10px 20px' }}>
             <h5>☆ 使用時機</h5>
             <div>
-              因為 routerMiddleware 會在進入畫面之前執行，因此適合做如「<label>
-                登入驗證導向
-              </label>」、「<label>瀏覽權限</label>」的判斷
+              因為 routerMiddleware 會在進入畫面之前執行，因此適合做如「<label>登入驗證導向</label>」、「<label>瀏覽權限</label>」的判斷
               <div>
                 <pre className="prettyprint">{`//登入驗證導向
 {
@@ -215,6 +210,50 @@ function(store, routerParams) {
 
     //已登入？直接渲染畫面：導向登入頁
     return isLoggedIn ? render() : redirectTo('/login');
+  }
+}`}</pre>
+              </div>
+              <div>
+                <pre className="prettyprint">{`//需請求 api 的登入驗證導向
+{
+  routerMiddleware: (store, routerParams) => (render, redirectTo, asyncRedirectTo) => {
+    // 從 routerParams 拿路徑名稱判斷是否在登入頁
+    if( routerParams.path === '/login' ) {
+      //是的話就直接渲染畫面
+      return render();
+    }
+
+    //不是登入頁，從 store.account 中取得已登入的狀態
+    const isLoggedIn = store['account'].isLoggedIn;
+
+    //已登入，渲染畫面
+    if( isLoggedIn ) return render();
+
+    //未登入，發送 api
+    fetch('http://API_REMOTE_URL/auth')
+      .then(res => res.json())
+      .then(data => {
+        /* api說已經登入了 */
+        if( data.isLoggedIn ) {
+          /* 紀錄登入資訊之類的處理 */
+          ....
+          /* 導向目前頁面 */
+          asyncRedirectTo(routerParams.path);
+        }
+        else
+        {
+          /* api說沒登入，導向登入頁 */
+          asyncRedirectTo('/login');
+        }
+      })
+      .catch(err => {
+        /* 錯誤處理 */
+        asyncRedirectTo('/error');
+      });
+
+    // 等待ajax回傳的時候要顯示的內容，沒有就回傳null(為了防止頁面跳錯)
+    return null;
+  }
 }`}</pre>
               </div>
               <div>
