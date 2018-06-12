@@ -218,6 +218,49 @@ function(store, routerParams) {
 }`}</pre>
               </div>
               <div>
+                <pre className="prettyprint">{`//需請求 api 的登入驗證導向
+{
+  routerMiddleware: (store, routerParams) => (render, redirectTo, asyncRedirectTo) => {
+    // 從 routerParams 拿路徑名稱判斷是否在登入頁
+    if( routerParams.path === '/login' ) {
+      //是的話就直接渲染畫面
+      return render();
+    }
+
+    //不是登入頁，從 store.account 中取得已登入的狀態
+    const isLoggedIn = store['account'].isLoggedIn;
+
+    //已登入，渲染畫面
+    if( isLoggedIn ) return render();
+
+    //未登入，發送 api
+    fetch('http://API_REMOTE_URL/auth')
+      .then(res => res.json())
+      .then(data => {
+        /* api說已經登入了 */
+        if( data.isLoggedIn ) {
+          /* 紀錄登入資訊之類的處理 */
+          ....
+          /* 導向目前頁面 */
+          asyncRedirectTo(routerParams.path);
+        }
+        else
+        {
+          /* api說沒登入，導向登入頁 */
+          asyncRedirectTo('/login');
+        }
+      })
+      .catch(err => {
+        /* 錯誤處理 */
+        asyncRedirectTo('/error');
+      });
+
+    // 等待ajax回傳的時候要顯示的內容，沒有就回傳null(為了防止頁面跳錯)
+    return null;
+  }
+}`}</pre>
+              </div>
+              <div>
                 <pre className="prettyprint">{`//瀏覽權限
 {
   routerMiddleware: (store, routerParams) => (render, redirectTo) => {
