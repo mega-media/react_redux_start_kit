@@ -58,29 +58,29 @@ export default (setting = {}) => {
     const redirectHandler = path => <Redirect to={path} />;
     const asyncRedirectHandler = path => store.dispatch(replace(path));
 
-    return routerParams => routerProps => middleware(store.getState(), routerParams)(renderHandler(routerProps), redirectHandler, asyncRedirectHandler);
+    return routerParams => routerProps => middleware(store.getState(), routerParams)(renderHandler(routerProps), redirectHandler);
   };
 
-  const routes = <Switch>
-      {rootRoutes.map(({ path, component: Wrapper, ...others }, index) => (
+  const routes =<Switch>
+      {rootRoutes.map(({ path, component: Wrapper, ...others }, index) => ( ( (
         <Route
           key={`root-route-${index}`}
           path={path}
           render={routerLogic(Wrapper)({ path, ...others })}
         />
-      ))}
+      ))))}
       <Redirect exact path="/" to={routerIndex} />
       <Redirect path="*" to={routerNotFound || routerIndex} />
     </Switch>;
 
   return <Provider store={store}>
       <I18n translations={Locales} initialLang={i18nInit} fallbackLang={i18nFallback}>
-        <ConnectedRouter history={histor{Master ? <Master history={history}>
+        <ConnectedRouter history={history}>{Master ? <Master history={history}>
               {routes}
-              {DevTools ? <DevTools  /> : null}
-            </Master>v>    {routes}
-              {DevTools ? <DevTools  /> : null}
-       </div>}
+          {DevTools ? <DevTools /> : null}
+          </Master> : <div>
+            {routes}   {DevTools ? <DevTools /> : null}
+          </div>}
         </ConnectedRouter>
       </I18n>
     </Provider>;

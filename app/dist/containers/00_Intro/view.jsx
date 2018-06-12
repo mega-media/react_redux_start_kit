@@ -7,15 +7,14 @@ export default class Intro extends Component {
         <h4>INTRODUCE</h4>
   <div style={{ padding: '5px 10px 20px' }}>
           這是介紹頁面，在接下來的章節裡，將循序漸進的介紹系統中各個角色。 在此區塊會有章節的程式執行結果，建議打開程式檔案搭配著看，註解的部分也不要遺漏了唷！！
-          <br />
-          <br />
+          <br /><br />
           開始之前，先瞭解一下專案的設定，包含：語系、路由、主框架等等如何修改。
-        </div>
+  </div>
         <h4>
           專案入口
           <small>app/main.js</small>
         </h4>
-        <div style={{ padding: '5px 10px 20px' }}>
+  <div style={{ padding: '5px 10px 20px' }}>
           <pre className="prettyprint">{`/* app/main.js */
 import React from 'react';
 import { render } from 'react-dom';
@@ -48,7 +47,17 @@ render(
             <li>
               多國語系詳細使用說明請參考 <Link to="/locale">
                 
+                
+                
+                
+                
+                
+                
+                
                 7. Locales.
+              
+              
+              
               
               </Link>
             </li>
@@ -56,30 +65,39 @@ render(
           <h5>☆ 主框架</h5>
           <ul style={{ lineHeight: '30px' }}>
             <li>
-              <b>masterComponent</b>: 資料格式為元件(Component)，選填，預設值為<label><label>
-                null
-                null 
+              <b>masterComponent</b>: 資料格式為元件(Component)，選填，預設值為  <lab
+              el>
+                 <lab
+              
+              el>
+                null null 
               表示沒有主框架
             </li>
-            <li>在所有子元件的外層</li>
-            <li>當子元件透過路由系統變化的時候，主框架不會受影響</li>
+            <li>在所有子元件的外層
+            </li>
             <li>
-              適合放置不受路由影響的元件，如：「跳轉動畫元件」、「系統提示訊息元件」等
+              當子元件透過路由系統變化的時候，主框架不會受影響</li>
+            <li> 
+                
+                適合放置不受路由影響的元件，如：「跳轉動畫元件」、「系統提示訊息元件」等
+            
+            
+            
+            
+            
+            
             </li>
           </ul>
-          <h5>☆ 路由系統</h5>
-          <ul style={{ lineHeight: '30px' }}>
+          <h5>☆ 路由系統</h5> style={{ lineHeight: '30px' }}>
             <li>
-              <b>routerIndex</b>: 字串，必填。系統一進入的初始頁面路徑
+              <b>routerIndex</b>: 字串，必填。系統一進入的初始頁面路徑          <li>
+              <b>routerNotFound</b>: 字串，選填，預設值為 <label>  
+                
+                nu l l </
+              label>。 找不到路由的導向路徑， null 時導向預設頁面路徑
             </li>
             <li>
-              <b>routerNotFound</b>: 
-                字串，選填，預設值為            </label>。     null
-              </label>。 找不到路由的導向路徑， null 時導向預設頁面路徑
-            </li>
-            <li>
-              <b>routerMiddleware</b>: 函式，選填，預設值為 <label>
-                null
+              <b>routerMiddleware</b>: 函式，選填，預設值為 <label>   null
               </label>。路由系統要處理的 middleware
             </li>
             <li>路由相關在下一節進行說明</li>
@@ -90,10 +108,9 @@ render(
           <small>react-router</small>
         </h4>
         <div style={{ padding: '5px 10px 20px' }}>
-          各個模組的路由設定記錄在 <label>config.js</label> 中，路由參數需包含<label><label>
+          各個模組的路由設定記錄在 <label>config.js</label> 中，路由參數需包含 <label>
             path
-            、<lab
-          el>component</label>。
+          </label>、<label>component</label>。
           <br />
           以下一章節的 <Link to="/hello">
             1. Hello World !
@@ -144,15 +161,9 @@ export default {
   }]
 };
 //若路徑名稱(path)重複，則後面設定的頁面不會導向到(永遠看不到 ViewB)
-`}</pre>
-            </li>
-          </ul>
-          <br />
-          <div style={{ padding: '5px 10px 20px' }}>
-            <h5>
-              ☆ 回頭來講一下 <label>routerMiddleware...</label>
-            </h5> <label>routerMiddleware</label> 會執行在 <i>進入畫面之前</i>
-            </b> 的階段，執行函式格式如下：
+`}</pre>  <br />
+          <div style={{ padding: '5px 10px  <h5>   ☆ 回頭來講一下 <label>routerMiddleware...</label> </h5> <label>routerMiddleware</label> 會執行在 <i>進入畫面之前</i>
+  的階段，執行函式格式如下：
             <pre className="prettyprint">{`/**
 * @param store {Object} [系統中儲存的資料(state)]
 * @param routerParams {Object} [config.router 除了component之外的參數]
@@ -168,18 +179,27 @@ function(store, routerParams) {
     return render(); // or redirectTo('/path')
   }
 }`}</pre>
-            <ul style={{ lineHeight: '30px' }}>
-       <label>store</label>： 系統中儲存的資料。概念說明可參閱 <Link to="/counter
-                ">
+            <ul style={{ lineHeight: '30px    stor
+                e</label>： 系統中儲存的資料。概念說明可參閱 <Link to="/counter
+         
                   
                   3. Click counter.
-                </Link>
+                
+                
+                
+                
+                
+                
+                
+                
+     </Link>
               </li>
               <li>
-                <label>routerParams</label>： 在 <label>config.js</label>   中，路由
-                參數除了 <label>
+                  rout
+                erParams</label>： 在 <label>config.js</label> 中，路由參數除了 <label>
                   path
-                </label>、<label>component</label>，可再額外附加需要的參數
+                  、<lab
+                el>component</label>，可再額外附加需要的參數
                 <pre className="prettyprint">{`//config.js
 {
   router: {
@@ -199,10 +219,14 @@ function(store, routerParams) {
 `}</pre>
               </li>
               <li>
-                <label>render</label>：直接渲染 config.router.component
+                <label>
+                render<
+              /label>：直接渲染 config.router.component
               </li>
               <li>
-                <label>redirectTo</label>：導向某個路由的函式
+                <label>
+                redirec
+              tTo</label>：導向某個路由的函式
               </li>
             </ul>
           </div>
@@ -211,7 +235,9 @@ function(store, routerParams) {
             <div>
               因為 routerMiddleware 會在進入畫面之前執行，因此適合做如「<label>
                 登入驗證導向
-              </label>」、「<label>瀏覽權限</label>」的判斷
+              </label>」、「<label>
+                瀏覽權限</
+              label>」的判斷
               <div>
                 <pre className="prettyprint">{`//登入驗證導向
 {
@@ -230,7 +256,6 @@ function(store, routerParams) {
 }`}</pre>
               </div>
               <div>
-            
                 <pre className="prettyprint">{`//需請求 api 的登入驗證導向
 {
   routerMiddleware: (store, routerParams) => (render, redirectTo, asyncRedirectTo) => {
@@ -272,9 +297,7 @@ function(store, routerParams) {
     return null;
   }
 }`}</pre>
-              </div>
-              <div>
-                <pre className="prettyprint">{`//瀏覽權限
+              </div>          <div>    <pre className="prettyprint">{`//瀏覽權限
 {
   routerMiddleware: (store, routerParams) => (render, redirectTo) => {
     //從 store.account 中取得會員等級
@@ -292,9 +315,6 @@ function(store, routerParams) {
         return render();
     }
 }`}</pre>
-              </div>        </div>
-          </div>
-        </div>
-      </div>;
+              </div>    </div>  </div>    </div>  </div>;
   }
 }
