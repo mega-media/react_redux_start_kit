@@ -76,10 +76,12 @@ export default (setting = {}) => {
   return <Provider store={store}>
       <I18n translations={Locales} initialLang={i18nInit} fallbackLang={i18nFallback}>
         <ConnectedRouter history={history}>{Master ? <Master history={history}>
-            {routes}
+          {routes}
+          {DevTools ? <DevTools /> : null}
+          </Master> : <div>
+            {routes}   
             {DevTools ? <DevTools /> : null}
-        </Master> : <div>
-            {routes} {DevTools ? <DevTools /> : null} </div>}
+          </div>}
         </ConnectedRouter>
       </I18n>
     </Provider>;
