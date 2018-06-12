@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "development": "npm run build; NODE_ENV=development webpack --config ./webpack.dev.config.js",
-    "production": "npm run build; NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
+    "development": "NODE_ENV=development npm run build; NODE_ENV=development webpack --config ./webpack.dev.config.js",
+    "production": "NODE_ENV=production npm run build; NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
     "build": "node app/build.js || exit",
-    "start": "npm run build; NODE_ENV=development webpack-dev-server --devtool eval --progress --colors --config ./webpack.dev.config.js --open",
+    "start": "NODE_ENV=development npm run build; NODE_ENV=development webpack-dev-server --devtool eval --progress --colors --config ./webpack.dev.config.js --open",
     "test": "NODE_ENV=test nyc mocha --opts ./.mochaopts",
     "coverage-report": "NODE_ENV=test nyc report --reporter=lcov --reporter=text --reporter=text-summary",
     "flow-install": "flow-typed install --overwrite",
