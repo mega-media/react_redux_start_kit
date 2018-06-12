@@ -58,7 +58,7 @@ export default (setting = {}) => {
     const redirectHandler = path => <Redirect to={path} />;
     const asyncRedirectHandler = path => store.dispatch(replace(path));
 
-    return routerParams => routerProps => middleware(store.getState(), routerParams)(renderHandler(routerProps), redirectHandler);
+    return routerParams => routerProps => middleware(store.getState(), routerParams)(renderHandler(routerProps), redirectHandler, asyncRedirectHandler);
   };
 
   const routes =<Switch>
@@ -76,11 +76,10 @@ export default (setting = {}) => {
   return <Provider store={store}>
       <I18n translations={Locales} initialLang={i18nInit} fallbackLang={i18nFallback}>
         <ConnectedRouter history={history}>{Master ? <Master history={history}>
-              {routes}
-          {DevTools ? <DevTools /> : null}
-          </Master> : <div>
-            {routes}   {DevTools ? <DevTools /> : null}
-          </div>}
+            {routes}
+            {DevTools ? <DevTools /> : null}
+        </Master> : <div>
+            {routes} {DevTools ? <DevTools /> : null} </div>}
         </ConnectedRouter>
       </I18n>
     </Provider>;
