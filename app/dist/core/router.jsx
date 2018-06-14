@@ -6,7 +6,7 @@ import I18n from 'redux-i18n';
 import Locales from '~/locales';
 /* router */
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { ConnectedRouter, replace } from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 /* 系統設定 */
 import { rootRoutes } from './roots';
 import { sagaCreator, history, DevTools } from './store';
@@ -56,33 +56,46 @@ export default (setting = {}) => {
     const renderHandler = routerProps => () =>
       createFactory(Wrapper)(routerProps);
     const redirectHandler = path => <Redirect to={path} />;
-    const asyncRedirectHandler = path => store.dispatch(replace(path));
 
-    return routerParams => routerProps => middleware(store.getState(), routerParams)(renderHandler(routerProps), redirectHandler, asyncRedirectHandler);
+    return routerParams => routerProps =>
+      middleware(store.getState(), routerParams)(
+        renderHandler(routerProps),
+        redirectHandler
+      );
   };
 
-  const routes =<Switch>
-      {rootRoutes.map(({ path, component: Wrapper, ...others }, index) => ( ( (
+  const routes = (
+    <Switch>
+      {rootRoutes.map(({ path, component: Wrapper, ...others }, index) =>
         <Route
           key={`root-route-${index}`}
           path={path}
           render={routerLogic(Wrapper)({ path, ...others })}
         />
-      ))))}
+      )}
       <Redirect exact path="/" to={routerIndex} />
       <Redirect path="*" to={routerNotFound || routerIndex} />
-    </Switch>;
+    </Switch>
+  );
 
-  return <Provider store={store}>
-      <I18n translations={Locales} initialLang={i18nInit} fallbackLang={i18nFallback}>
-        <ConnectedRouter history={history}>{Master ? <Master history={history}>
-          {routes}
-          {DevTools ? <DevTools /> : null}
-          </Master> : <div>
-            {routes}   
-            {DevTools ? <DevTools /> : null}
-          </div>}
+  return (
+    <Provider store={store}>
+      <I18n
+        translations={Locales}
+        initialLang={i18nInit}
+        fallbackLang={i18nFallback}>
+        <ConnectedRouter history={history}>
+          {Master
+            ? <Master history={history}>
+                {routes}
+                {DevTools ? <DevTools /> : null}
+              </Master>
+            : <div>
+                {routes}
+                {DevTools ? <DevTools /> : null}
+              </div>}
         </ConnectedRouter>
       </I18n>
-    </Provider>;
+    </Provider>
+  );
 };
