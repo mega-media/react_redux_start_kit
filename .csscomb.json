@@ -33,6 +33,7 @@
         "$include"
     ],  
     [
+      "content",
       "position",
       "top",
       "right",
@@ -254,7 +255,6 @@
       "list-style-type",
       "list-style-image",
       "quotes",
-      "content",
       "counter-increment",
       "counter-reset",
       "-ms-writing-mode",
