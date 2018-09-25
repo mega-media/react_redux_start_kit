@@ -6,4 +6,13 @@ flow-typed/npm/
 .DS_Store
 .nyc_output/
 coverage/
-app/dist/core/roots/build.js
+jsconfig.json
+app/core/roots/_*.js
+app/core/container/_assets.js
+app/core/container/index.js
+app/core/action/effects/index.js
+app/core/action/index.js
+app/core/helpers/index.js
+app/core/libraries/index.js
+app/core/reducer/index.js
+app/core/store/middleware/index.js

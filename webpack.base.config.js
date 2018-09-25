@@ -2,9 +2,13 @@ const path = require('path');
 const url = require('url');
 const webpack = require('webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const globalConstants = require('./config/global-constants');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+/* config */
+const configEnv = require('./config/env');
+const configLocale = require('./config/locale');
+const configRemote = require('./config/remote');
+const configRoutes = require('./config/routes');
 
 module.exports = {
   cache: true,
@@ -98,13 +102,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '~': path.resolve(__dirname, 'app/dist'),
-      '@': path.resolve(__dirname, 'app/assets'),
-      ext: path.resolve(__dirname, 'app/extensions')
+      '@assets': path.resolve(__dirname, 'app/assets'),
+      '@core': path.resolve(__dirname, 'app/core'),
+      '@src': path.resolve(__dirname, 'app/src'),
+      '@ext': path.resolve(__dirname, 'app/extensions')
     }
-  },
-  externals: {
-    Config: JSON.stringify(globalConstants)
   },
   plugins: [
     new BundleAnalyzerPlugin({
@@ -117,7 +119,14 @@ module.exports = {
       logLevel: 'info'
     }),
     new webpack.DefinePlugin({
-      VERSION: JSON.stringify(require('./package.json').version)
+      VERSION: JSON.stringify(require('./package.json').version),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      CONFIG: {
+        ENV: JSON.stringify(configEnv),
+        LOCALE: JSON.stringify(configLocale),
+        REMOTE: JSON.stringify(configRemote),
+        ROUTE: JSON.stringify(configRoutes)
+      }
     }),
     new LodashModuleReplacementPlugin({
       shorthands: true,
@@ -126,6 +135,7 @@ module.exports = {
   ],
   entry: {
     bundle: [
+      '@babel/polyfill',
       'es6-promise',
       'whatwg-fetch',
       path.resolve(__dirname, 'app/main.js')

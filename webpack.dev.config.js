@@ -4,11 +4,7 @@ const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
-const {
-  PROJECT_NAME,
-  PROJECT_HOST,
-  PROJECT_PORT
-} = require('./config/global-constants');
+const { PROJECT_HOST, PROJECT_PORT, PROJECT_NAME } = require('./config/env');
 
 module.exports = Object.assign(baseConfig, {
   mode: 'development',

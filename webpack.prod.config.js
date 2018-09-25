@@ -5,7 +5,6 @@ const baseConfig = require('./webpack.base.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { PROJECT_NAME } = require('./config/global-constants');
 
 module.exports = Object.assign(baseConfig, {
   mode: 'production',
@@ -25,7 +24,7 @@ module.exports = Object.assign(baseConfig, {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[local]-[hash:base64:5]',
+              localIdentName: '[hash:base64:7]',
               autoprefixer: true
             }
           },
@@ -77,17 +76,6 @@ module.exports = Object.assign(baseConfig, {
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
     }),
-    new OptimizeCSSAssetsPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new HtmlWebpackPlugin({
-      title: PROJECT_NAME,
-      hash: true,
-      cache: false,
-      filename: 'index.html',
-      favicon: 'app/assets/images/favicon.ico',
-      template: 'entrance/index.html'
-    })
+    new OptimizeCSSAssetsPlugin()
   ])
 });
