@@ -12,7 +12,7 @@
 模組化程式，開發者僅需維護自己負責的 container
 
 - 簡化的配置：
-定義設定檔(config.js)快速定義 reducer、router 與 API
+快速綁定 reducer、router
 
 ## 開始使用
 
@@ -34,7 +34,7 @@ npm start
 ````
 
 開啟你常用的瀏覽器，並前往 http://127.0.0.1:8888 即可看到執行成果
-> `npm start`預設執行的模式為develop，假如port 8888已被使用，可至`./config/env/dev.js`變更
+> `npm start`預設執行的模式為develop，假如port 8888已被使用，可至`./config/env.js`變更
 
 
 ### production 版本

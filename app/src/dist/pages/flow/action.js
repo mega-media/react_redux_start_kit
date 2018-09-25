@@ -28,7 +28,7 @@ export function add(payload: MemberClass): InsertAction {
 /**
  * 修改資料
  * @param payload
- * @returns {{type: FLOW_INSERT, payload: MemberClass}}
+ * @returns {{type: FLOW_UPDATE, payload: MemberClass}}
  */
 export function update(payload: MemberClass): UpdateAction {
   return {

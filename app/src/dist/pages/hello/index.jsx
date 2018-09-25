@@ -12,7 +12,7 @@ import React, { Component, PureComponent } from 'react';
  * 將類別 extends 自 React.Component，透過 React 底下 render 方法渲染畫面
  * 即可建構一個基本的 React 元件
  */
-export default class Hello extends Component {
+class Hello extends Component {
   render() {
     return <div>Hello World!</div>;
   }
@@ -27,7 +27,7 @@ export default class Hello extends Component {
  * !!需注意的是，PureComponent 進行的 props 與 state 資料比較為「淺比較」，
  * 意指無法進行過於複雜的結構比對
  */
-export class HelloPure extends PureComponent {
+class HelloPure extends PureComponent {
   render() {
     return <div>Hello World!</div>;
   }
@@ -37,4 +37,6 @@ export class HelloPure extends PureComponent {
  * 3. Stateless Functional Component
  * 這種寫法沒有 state，也不能使用 component lifecycle，透過相同的 props 傳入，產出相同的結果
  */
-export const HelloFunctional = props => <div>Hello World!</div>;
+const HelloFunctional = props => <div>Hello World!</div>;
+
+export default Hello;

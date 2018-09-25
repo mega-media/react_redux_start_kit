@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import router from '@core/router';
-import { routerReducer } from 'react-router-redux';
-import { i18nState } from 'redux-i18n';
 
 render(
   router({
@@ -19,7 +17,10 @@ render(
     routerNotFound: null,
 
     /* 路由要處理的 middleware */
-    routerMiddleware: null
+    routerMiddleware: null,
+
+    /* reducer middleware */
+    reducerMiddleware: reducer => (state, action) => reducer(state, action)
   }),
   document.getElementById('container')
 );

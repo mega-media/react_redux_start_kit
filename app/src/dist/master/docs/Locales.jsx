@@ -19,7 +19,7 @@ module.exports = {
         <ul>
           <li>
             語系檔路徑：
-            <label>./app/dist/locales/</label>
+            <label>app/src/locales</label>
           </li>
           <li styleName="text-danger">語系參數僅支援字串</li>
         </ul>

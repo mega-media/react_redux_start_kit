@@ -22,7 +22,7 @@ module.exports = {
       <div>
         <ul>
           <li>
-            以 RxJS 5 為基礎的 middleware(入坑之前建議先摸一下{' '}
+            以 RxJS 6 為基礎的 middleware(入坑之前建議先摸一下{' '}
             <a href="https://github.com/ReactiveX/rxjs" target="_blank">
               RxJS
             </a>
@@ -48,18 +48,19 @@ module.exports = {
       <div>
         <ul>
           <li>
-            在專案模組下的 config.js 中使用
-            <label>epic</label>
-            將寫好的 epics 綁定即可
-            <pre className="prettyprint">{`//config.js
-export default {
-  router: {
-    path: '/observable',
-    component: Index
-  },
-  reducer: Reducer,
-  epic: pingEpic // 可使用陣列格式寫入多組：[pingEpic, pongEpic]
-};
+            在專案模組位置 app/src/storage/epics/ 新增 epic 檔案
+            <pre className="prettyprint">{`//app/src/storage/epics/observable.js
+import { delay, mapTo } from 'rxjs/operators';
+
+export const pingEpic = action$ =>
+  action$.ofType('PING').pipe(
+    delay(1000),
+    mapTo({ type: 'PONG' })
+  );
+
+/* 最後輸出使用陣列格式 */
+export default [pingEpic];
+
 `}</pre>
           </li>
         </ul>

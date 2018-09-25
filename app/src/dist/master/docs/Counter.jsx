@@ -70,7 +70,13 @@ module.exports = {
       </ul>
       <h5>☆ Reducer 的設定</h5>
       <ul>
-        <li>與 Router 設定一同寫在 config.js 中</li>
+        <li>
+          新增在路徑 <b>app/src/storage/reducers/</b> 底下
+        </li>
+        <li>系統讀取檔案名稱做為 redux store 鍵值</li>
+        <li>
+          為了識別方便暫不支援資料夾格式，也就是用資料夾包起來的一律被略過
+        </li>
       </ul>
       <h5>☆ Container HOC </h5>
       <ul>
