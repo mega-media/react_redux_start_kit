@@ -1,6 +1,6 @@
 import { put, take, call, fork, actionChannel } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
-import { requestInterval } from '~/core/helpers/raf-timer';
+import { requestInterval } from '@core/helpers/raf-timer';
 import taskManager from '../task-manager';
 
 export function* pollingTask(payload) {

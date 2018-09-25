@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "development": "NODE_ENV=development npm run build; NODE_ENV=development webpack --config ./webpack.dev.config.js",
-    "production": "NODE_ENV=production npm run build; NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
-    "build": "node app/build.js || exit",
-    "start": "NODE_ENV=development npm run build; NODE_ENV=development webpack-dev-server --devtool eval --progress --colors --config ./webpack.dev.config.js --open",
-    "test": "NODE_ENV=test nyc mocha --opts ./.mochaopts",
+    "development": "better-npm-run release",
+    "production": "better-npm-run output",
+    "start": "better-npm-run start",
+    "test": "better-npm-run test",
+    "build": "NODE_ENV=development better-npm-run build",
     "coverage-report": "NODE_ENV=test nyc report --reporter=lcov --reporter=text --reporter=text-summary",
     "flow-install": "flow-typed install --overwrite",
     "flow-test": "flow || notify -t 'Flow Type' -m 'something mistake'",
@@ -16,19 +16,59 @@
     "mocha-test:watch": "NODE_ENV=test mocha --watch --opts ./.mochaopts",
     "precommit": "lint-staged"
   },
+  "betterScripts": {
+    "output": {
+      "command": "better-npm-run build; webpack -p --config ./webpack.prod.config.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "release": {
+      "command": "better-npm-run build; webpack -p --config ./webpack.dev.config.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "start": {
+      "command": "better-npm-run build; webpack-dev-server --devtool eval --progress --colors --config ./webpack.dev.config.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build": "node app/core/_build/index.js",
+    "test": {
+      "command": "better-npm-run build; nyc mocha --opts ./.mochaopts",
+      "env": {
+        "NODE_ENV": "test"
+      }
+    }
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.49",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
-    "@babel/plugin-proposal-decorators": "^7.0.0-beta.49",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
     "@babel/plugin-transform-flow-strip-types": "^7.0.0-beta.49",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0-beta.49",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0-beta.49",
     "@babel/plugin-transform-runtime": "^7.0.0-beta.49",
     "@babel/preset-env": "^7.0.0-beta.49",
     "@babel/preset-react": "^7.0.0-beta.49",
-    "@babel/preset-stage-0": "^7.0.0-beta.49",
     "@babel/register": "^7.0.0-beta.49",
     "@babel/runtime": "^7.0.0-beta.49",
     "ajv": "^6.5.0",
@@ -39,6 +79,7 @@
     "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-webpack-alias": "^2.1.2",
+    "better-npm-run": "^0.1.1",
     "chai": "^4.1.0",
     "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
@@ -82,10 +123,11 @@
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-cli": "^3.0.2",
     "webpack-dev-server": "^3.1.4",
-    "webpack-notifier": "^1.3.1"
+    "webpack-notifier": "^1.3.1",
+    "@babel/preset-flow": "^7.0.0"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
+    "@babel/polyfill": "^7.0.0",
     "es6-promise": "^3.2.1",
     "events": "^1.1.1",
     "history": "^4.6.3",
@@ -107,7 +149,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,css,scss,sass}": [
-      "prettier",
+      "prettier --write",
       "git add"
     ]
   }

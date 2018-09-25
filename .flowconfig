@@ -1,3 +1,6 @@
+[include]
+./app/dist/.*
+
 [ignore]
 .*/node_modules/.*
 ./output/.*
@@ -7,11 +10,14 @@
 ./flow-ignore
 
 [options]
-module.name_mapper='^~' -> '<PROJECT_ROOT>/app/dist'
-module.name_mapper='.*\.\(s?css\|jpe?g\|png\|gif\|svg\|ico\|mp4\|swf\)$' -> 'IgnoreModule'
+module.name_mapper='.*\.\(s?css\|jpe?g\|png\|gif\|svg\|ico\|mp4\|mp3\|swf\)$' -> 'IgnoreModule'
+module.name_mapper='^@assets' -> '<PROJECT_ROOT>/app/assets'
+module.name_mapper='^@core' -> '<PROJECT_ROOT>/app/core'
+module.name_mapper='^@src' -> '<PROJECT_ROOT>/app/src'
 module.name_mapper='redux-saga/effects' -> 'redux-saga/lib/effects'
 module.system=haste
 module.ignore_non_literal_requires=true
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
+
