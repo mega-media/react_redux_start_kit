@@ -16,6 +16,13 @@
 
 ## 開始使用
 
+### 線上看
+[第四版](https://github.com/mega-media/react_redux_start_kit/tree/4.0.0-beta)-
+[文件](http://arshown.mega99.net:8080/startkit/v4)
+
+[第三版](https://github.com/mega-media/react_redux_start_kit)-
+[文件](http://arshown.mega99.net:8080/startkit/v3)
+
 ### 下載專案
 
 ````
