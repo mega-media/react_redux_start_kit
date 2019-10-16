@@ -25,10 +25,10 @@ class Table extends PureComponent<Props, void> {
   };
 
   render() {
-    const { title, storeData } = this.props;
+    const { title, flow } = this.props;
     const dataRow: any =
-      storeData.length > 0 ? (
-        storeData.map((item: MemberClass, index: number) => {
+      flow.length > 0 ? (
+        flow.map((item: MemberClass, index: number) => {
           const { uid, name, gender, married } = item;
           return (
             <TableItem
