@@ -31,3 +31,7 @@ export type withStore = <Enhanced>(
 export type withStyle = <Enhanced>(
   ...styles: Array<Object>
 ) => HOC<Enhanced, Enhanced>;
+
+export type withMount = <Enhanced>(
+  didMount: (Object) => void | (Object => void)
+) => HOC<Enhanced, Enhanced>;
