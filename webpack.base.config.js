@@ -2,71 +2,111 @@ const path = require('path');
 const url = require('url');
 const webpack = require('webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const globalConstants = require('./config/global-constants');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+/* config */
+const configEnv = require('./config/env');
+const configLocale = require('./config/locale');
+const configRemote = require('./config/remote');
+const configRoutes = require('./config/routes');
 
 module.exports = {
   cache: true,
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel-loader?cacheDirectory=true'],
-        exclude: /node_modules/,
-        include: path.resolve(__dirname, 'app')
-      },
-      {
-        test: /\.json$/,
-        loaders: ['json-loader'],
-        exclude: /node_modules/,
-        include: path.resolve(__dirname, 'app')
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
-          `url-loader?limit=10000&name=images/[hash].[ext]`,
-          'img-loader?progressive=true'
+        type: 'javascript/auto',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true
+            }
+          }
         ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
-        test: /\.ico$/i,
-        loader: `file-loader?name=images/[name].[ext]`,
+        test: /\.json$$/,
+        type: 'javascript/auto',
+        use: [
+          {
+            loader: 'json-loader'
+          }
+        ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
-        test: /\.(mp4|swf)$/,
-        loader: `file-loader?name=media/[name].[ext]`,
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: 'images/[hash].[ext]'
+            }
+          },
+          {
+            loader: 'img-loader'
+          }
+        ],
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
+      },
+      {
+        test: /\.(mp4|swf)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'media/[name].[ext]'
+            }
+          }
+        ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]`,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff',
+              name: 'fonts/[name].[ext]'
+            }
+          }
+        ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: `file-loader?name=fonts/[name].[ext]`,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[ext]'
+            }
+          }
+        ],
         exclude: /node_modules/,
-        include: path.join(__dirname, 'app/assets/fonts')
+        include: path.resolve(__dirname, 'app/assets/fonts')
       }
     ]
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '~': path.resolve(__dirname, 'app/dist'),
-      '@': path.resolve(__dirname, 'app/assets'),
-      ext: path.resolve(__dirname, 'app/extensions')
+      '@assets': path.resolve(__dirname, 'app/assets'),
+      '@core': path.resolve(__dirname, 'app/core'),
+      '@src': path.resolve(__dirname, 'app/src'),
+      '@ext': path.resolve(__dirname, 'app/extensions')
     }
-  },
-  externals: {
-    Config: JSON.stringify(globalConstants)
   },
   plugins: [
     new BundleAnalyzerPlugin({
@@ -79,10 +119,15 @@ module.exports = {
       logLevel: 'info'
     }),
     new webpack.DefinePlugin({
-      VERSION: JSON.stringify(require('./package.json').version)
+      VERSION: JSON.stringify(require('./package.json').version),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      CONFIG: {
+        ENV: JSON.stringify(configEnv),
+        LOCALE: JSON.stringify(configLocale),
+        REMOTE: JSON.stringify(configRemote),
+        ROUTE: JSON.stringify(configRoutes)
+      }
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new LodashModuleReplacementPlugin({
       shorthands: true,
       collections: true
@@ -90,7 +135,7 @@ module.exports = {
   ],
   entry: {
     bundle: [
-      'babel-polyfill',
+      '@babel/polyfill',
       'es6-promise',
       'whatwg-fetch',
       path.resolve(__dirname, 'app/main.js')
