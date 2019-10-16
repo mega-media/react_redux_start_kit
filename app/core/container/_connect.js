@@ -1,5 +1,18 @@
 import { connect as reduxConnect } from 'react-redux';
-import { pipe, split, path, __, toPairs, keys, head, join } from 'ramda';
+import {
+  pipe,
+  split,
+  path,
+  __,
+  toPairs,
+  keys,
+  head,
+  join,
+  reduce,
+  assoc,
+  is,
+  all
+} from 'ramda';
 
 export const resolveStoreKey = (store: Object) => (
   storeKey: string | Object
@@ -24,25 +37,64 @@ export const resolveStoreKey = (store: Object) => (
 export const _connect1 = (storeKey?: Array<string>) =>
   reduxConnect(
     state => {
-      let response = null;
+      let response = {};
       if (storeKey) {
         switch (storeKey.length) {
           case 0:
-            response = null;
+            //withStore()
+            console.warn('withStore 沒有綁定的鍵值');
+            response = {};
             break;
           case 1:
-            response = resolveStoreKey(state)(storeKey[0]);
+            const [inputKeyOrKeys] = storeKey;
+            switch (typeof inputKeyOrKeys) {
+              case 'string':
+                //withStore("")
+                response = {
+                  [inputKeyOrKeys]: resolveStoreKey(state)(inputKeyOrKeys)
+                };
+                break;
+              case 'object':
+                if (inputKeyOrKeys instanceof Array) {
+                  //withStore([])
+                  response = reduce(
+                    (obj, key) => assoc(key, resolveStoreKey(state)(key), obj),
+                    {},
+                    inputKeyOrKeys
+                  );
+                } else {
+                  //withStore({})
+                  response = reduce(
+                    (returnObj, key) =>
+                      assoc(
+                        inputKeyOrKeys[key],
+                        resolveStoreKey(state)(key),
+                        returnObj
+                      ),
+                    {},
+                    keys(inputKeyOrKeys)
+                  );
+                }
+                break;
+            }
             break;
           default:
-            const resolveFunc = resolveStoreKey(state);
-            response = storeKey.reduce((returnObj, key) => {
-              returnObj[key] = resolveFunc(key);
-              return returnObj;
-            }, {});
+            // 只允許全字串，當中塞其他格式就彈錯
+            if (!all(is(String), storeKey)) {
+              throw 'withStore 傳入多筆參數，僅支援字串格式，請檢查程式中使用方式';
+              break;
+            }
+            //withStore("","")
+            response = reduce(
+              (returnObj, key) =>
+                assoc(key, resolveStoreKey(state)(key), returnObj),
+              {},
+              storeKey
+            );
             break;
         }
       }
-      return { CONNECT_RES: response };
+      return response;
     },
     null,
     (stateProps, dispatchProps, ownProps) => ({

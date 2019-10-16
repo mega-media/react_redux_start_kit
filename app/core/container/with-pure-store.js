@@ -13,9 +13,9 @@ export const pureStoreHoc: HocType = (...storeKey) => WrapperComponent => {
     }
 
     render() {
-      const { CONNECT_RES, ...others } = this.props;
+      const { response, ...others } = this.props;
       return factory({
-        storeData: CONNECT_RES,
+        ...response,
         ...others
       });
     }

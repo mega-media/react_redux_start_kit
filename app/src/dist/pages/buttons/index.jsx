@@ -30,7 +30,7 @@ class Buttons extends PureComponent {
             pickBy((val, key) => val),
             keys,
             join(', ')
-          )(this.props.storeData)}
+          )(this.props.buttons)}
         </div>
         <br />
         <div styleName="btn-toolbar">

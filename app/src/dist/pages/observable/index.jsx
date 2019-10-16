@@ -10,7 +10,7 @@ class Observable extends Component {
 
   render() {
     const {
-      storeData: { isPinging }
+      observable: { isPinging }
     } = this.props;
     return (
       <div>

@@ -22,9 +22,9 @@ class Counter extends PureComponent {
 
   render() {
     /**
-     * 使用 props.storeData 將與 Container 綁定的 state 內容取出
+     * 使用 props.counter 將與 Container 綁定的 state 內容取出
      */
-    const counterState = this.props.storeData;
+    const counterState = this.props.counter;
     return (
       <div>
         <div>Clicks : {counterState}</div>

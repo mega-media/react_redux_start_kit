@@ -176,19 +176,79 @@ console.log(C); // true
     </div>
     <h4 id="withStore">
       <a href="#withStore" style={{ color: '#000' }}>
-        # withStore(...storeKeys)(component)
+        # withStore(storeKeysOrObject)(component)
       </a>
     </h4>
     <div style={{ padding: '5px 10px 20px' }}>
       <p>綁定 store 資料用，以監聽 store 資料變化</p>
       <div styleName="panel panel-default">
         <div styleName="panel-heading">
-          <b>storeKeys</b>
+          <b>storeKeysOrObject</b>
+        </div>
+        <div styleName="panel-body">
+          store 資料的 key，支援多筆，回傳的資料為 Object
         </div>
         <div styleName="panel-body">
           Type: <label>string</label>
           <br />
-          store 資料的 key，支援多筆。當監聽的值為多筆，回傳的資料為 Object
+          使用綁定的字串做為鍵值
+          <pre className="prettyprint">
+            //綁定單筆資料
+            <br />
+            withStore("myKey")
+            <br />
+            //然後你會拿到 {`{ myKey: [data] }`}
+            <br />
+            <br />
+            //也可直接指向路徑
+            <br />
+            withStore("myStore.field.0.key")
+            <br />
+            //會拿到 {`{ 'myStore.field.0.key': [data] }`}
+            <br />
+            <br />
+            //綁定多筆資料，只有格式為字串才允許這樣綁
+            <br />
+            withStore("myKeyA", "myKeyB")
+            <br />
+            //結果為 {`{ myKeyA: [data], myKeyB: [data] }`}
+          </pre>
+        </div>
+        <div styleName="panel-body">
+          Type: <label>Object</label>
+          <br />
+          將綁定的鍵值做更名
+          <pre className="prettyprint">
+            {`withStore({ "myKey": "renameKey" })`}
+            <br />
+            // {`{ renameKey: [data] }`}
+            <br />
+            <br />
+            {`withStore({ "myStore.field.0.key": "newKey" })`}
+            <br />
+            // {`{ newKey: [data] }`}
+            <br />
+            <br />
+            {`withStore({`}
+            <br />
+            {`  "myStore.field.0.key": "newKey"`}
+            <br />
+            {`  "myStore.another.key": "anotherKey"`}
+            <br />
+            {`})`}
+            <br />
+            // {`{ newKey: [data], anotherKey: [data] }`}
+          </pre>
+        </div>
+        <div styleName="panel-body">
+          Type: <label>Array</label>
+          <br />
+          <pre className="prettyprint">
+            {`withStore(["myKeyA", "myKeyB"])`}
+            <br />
+            //
+            {`{ myKeyA: [data], myKeyB: [data] }`}
+          </pre>
         </div>
       </div>
       <div styleName="panel panel-default">
@@ -202,50 +262,8 @@ console.log(C); // true
         </div>
       </div>
       <pre className="prettyprint">
-        export default withStore(keyA, keyB, keyC)(YourComponent);
+        export default withStore(storeKeysOrObject)(YourComponent);
       </pre>
-      <b>props：</b>
-      <div styleName="panel panel-default">
-        <div styleName="panel-heading">
-          <b>storeData</b>
-        </div>
-        <div styleName="panel-body">
-          Type: <label>any</label>
-          <br />
-          監聽的 store 資料，依照監聽的 storeKeys 會有不同的格式。
-          <pre className="prettyprint">{`//假設 store 長這樣
-store = {
-  keyA: [1, 2, 3],
-  keyB: {
-    foo: 100,
-    bar: 200
-  },
-  keyC: true,
-  keyD: { baz: [{ qux: 300 }] }
-}
-
-/* 綁定單一個 store */
-//Store(keyA)(YourComponent)
-const { storeData } = this.props;
-console.log(storeData); // [1, 2, 3]
-
-/* 綁定多個 store */
-//Store(keyA, keyC)(YourComponent)
-const { storeData } = this.props;
-console.log(storeData); // { keyA: [1, 2, 3], keyC: true }
-
-/* 取得某個物件屬性 */
-//Store('keyB.foo')(YourComponent)
-const { storeData } = this.props;
-console.log(storeData); // 100
-
-/* 綁定多個 store */
-//Store('keyB.foo', keyC, 'keyD.baz.0.qux')(YourComponent)
-const { storeData } = this.props;
-console.log(storeData); // { 'keyB.foo': 100, keyC: true, 'keyD.baz.0.qux': 300 }
-`}</pre>
-        </div>
-      </div>
     </div>
     <h4 id="withPureStore">
       <a href="#withPureStore" style={{ color: '#000' }}>

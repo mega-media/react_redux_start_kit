@@ -1,7 +1,7 @@
 /**
  * @flow
  */
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { applyStyles } from '@core/container';
 import MemberClass from '@src/storage/schema/member';
 import type { Props, State } from './type';
@@ -17,9 +17,8 @@ export default class TableItem extends PureComponent<Props, State> {
 
   changeHandler = ({ target: { type, name, value } }: Object) => {
     this.setState(({ data }) => {
-      const member = new MemberClass();
       return {
-        data: Object.assign(member, {
+        data: Object.assign(new MemberClass(), {
           ...data,
           [name]: name === 'married' ? value === 'true' : value
         })
@@ -54,16 +53,11 @@ export default class TableItem extends PureComponent<Props, State> {
     const { removeHandler, updateHandler } = this.props;
     removeModify && removeHandler();
     updateModify && updateHandler(data);
+    this.setState({
+      removeModify: false,
+      updateModify: false
+    });
   };
-
-  componentWillReceiveProps({ row }: Props) {
-    this.setState(
-      {
-        data: row
-      },
-      this.toolsToggle
-    );
-  }
 
   render() {
     const { index } = this.props;
@@ -75,75 +69,71 @@ export default class TableItem extends PureComponent<Props, State> {
 
     return (
       <tr>
-        {updateModify
-          ? [
-              <td key={`index-edit-${index}`}>{index}</td>,
-              <td key={`name-edit-${index}`}>
+        {updateModify ? (
+          <Fragment>
+            <td>{index}</td>
+            <td>
+              <input
+                type="text"
+                value={name}
+                name="name"
+                onChange={this.changeHandler}
+                styleName="form-control"
+              />
+            </td>
+            <td>
+              <label styleName="radio-inline">
                 <input
-                  type="text"
-                  value={name}
-                  name="name"
+                  type="radio"
                   onChange={this.changeHandler}
-                  styleName="form-control"
+                  name="gender"
+                  value="male"
+                  checked={gender === 'male'}
                 />
-              </td>,
-              <td key={`gender-edit-${index}`}>
-                <label styleName="radio-inline">
-                  <input
-                    type="radio"
-                    onChange={this.changeHandler}
-                    name="gender"
-                    value="male"
-                    checked={gender === 'male'}
-                  />
-                  Male
-                </label>
-                <label styleName="radio-inline">
-                  <input
-                    type="radio"
-                    onChange={this.changeHandler}
-                    name="gender"
-                    checked={gender === 'female'}
-                    value="female"
-                  />
-                  Female
-                </label>
-              </td>,
-              <td key={`married-edit-${index}`}>
-                <label styleName="radio-inline">
-                  <input
-                    type="radio"
-                    onChange={this.changeHandler}
-                    name="married"
-                    value="false"
-                    checked={!married}
-                  />
-                  Unmarried
-                </label>
-                <label styleName="radio-inline">
-                  <input
-                    type="radio"
-                    onChange={this.changeHandler}
-                    name="married"
-                    value="true"
-                    checked={married}
-                  />
-                  Married
-                </label>
-              </td>
-            ]
-          : [
-              <td key={`index-${index}`}>{index}</td>,
-              <td key={`name-${index}`} onClick={this.updateToolToggle}>
-                {name}
-              </td>,
-              <td key={`gender-${index}`} onClick={this.updateToolToggle}>
-                {gender === 'female' ? 'F' : 'M'}
-              </td>,
-              <td key={`married-${index}`} onClick={this.updateToolToggle}>
-                {married ? 'YES' : 'NO'}
-              </td>
-            ]}
+                Male
+              </label>
+              <label styleName="radio-inline">
+                <input
+                  type="radio"
+                  onChange={this.changeHandler}
+                  name="gender"
+                  checked={gender === 'female'}
+                  value="female"
+                />
+                Female
+              </label>
+            </td>
+            <td>
+              <label styleName="radio-inline">
+                <input
+                  type="radio"
+                  onChange={this.changeHandler}
+                  name="married"
+                  value="false"
+                  checked={!married}
+                />
+                Unmarried
+              </label>
+              <label styleName="radio-inline">
+                <input
+                  type="radio"
+                  onChange={this.changeHandler}
+                  name="married"
+                  value="true"
+                  checked={married}
+                />
+                Married
+              </label>
+            </td>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <td>{index}</td>
+            <td>{name}</td>
+            <td>{gender === 'female' ? 'F' : 'M'}</td>
+            <td>{married ? 'YES' : 'NO'}</td>
+          </Fragment>
+        )}
         <td>
           {updateModify || removeModify ? (
             <div>
