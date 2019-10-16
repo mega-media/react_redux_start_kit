@@ -305,6 +305,59 @@ console.log(C); // true
       </div>
       <pre className="prettyprint">{`import scssA from './scss-a.scss';\nimport scssB from './scss-b.scss';\nimport scssC from './scss-c.scss';\n\nexport default withStyle(scssA, scssB, scssC)(YourComponent);`}</pre>
     </div>
+    <h4 id="withMount">
+      <a href="#withMount" style={{ color: '#000' }}>
+        # withMount(didMount)(component)
+      </a>
+    </h4>
+    <div style={{ padding: '5px 10px 20px' }}>
+      <p>簡化生命週期 componentDidMount、componentWillUnmount 的使用</p>
+      <div styleName="panel panel-default">
+        <div styleName="panel-heading">
+          <b>didMount</b>
+        </div>
+        <div styleName="panel-body">
+          Type:{' '}
+          <label>
+            Function(props:Object) => void | (props:Object) => void{' '}
+          </label>
+          <br />
+          componentDidMount 邏輯，可以沒有回傳值。若有回傳值需為方法格式，將在
+          componentWillUnmount 時呼叫。
+        </div>
+      </div>
+      <div styleName="panel panel-default">
+        <div styleName="panel-heading">
+          <b>component</b>
+        </div>
+        <div styleName="panel-body">
+          Type: <label>Component</label>
+          <br />
+          元件，React.Component 或者 Stateless Functional Component
+        </div>
+      </div>
+      <pre className="prettyprint">
+        {`const unMount = props => {`}
+        <br />
+        {`  //componentWillUnmount logic`}
+        <br />
+        {`}`}
+        <br />
+        <br />
+        {`const didMount = props => {`}
+        <br />
+        {`  //do something when component did mount`}
+        <br />
+        {`  return unMount;`}
+        <br />
+        {`  //return unMount; //若不需要處理離開事件，也可以不要回傳值`}
+        <br />
+        {`}`}
+        <br />
+        <br />
+        {`export default withMount(didMount)(YourComponent);`}
+      </pre>
+    </div>
   </div>
 );
 
