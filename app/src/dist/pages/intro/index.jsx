@@ -1,9 +1,5 @@
 import React from 'react';
+import MarkdownToHtml from '../../shared/markdown-to-html';
 import introMd from './intro.md';
 
-export default () => (
-  <div
-    style={{ lineHeight: '2.5rem' }}
-    dangerouslySetInnerHTML={{ __html: introMd }}
-  />
-);
+export default () => <MarkdownToHtml>{introMd}</MarkdownToHtml>;
