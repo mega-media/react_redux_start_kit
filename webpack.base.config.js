@@ -24,6 +24,8 @@ module.exports = {
           {
             loader: 'markdown-it-loader',
             options: {
+              html: true,
+              breaks: true,
               highlight: function(str, lang) {
                 if (lang && hljs.getLanguage(lang)) {
                   try {
