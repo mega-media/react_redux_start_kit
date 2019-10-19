@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import router from '@core/router';
+/* highlight style */
+import 'highlight.js/scss/railscasts.scss';
 
 render(
   router({

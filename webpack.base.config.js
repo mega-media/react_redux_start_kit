@@ -9,11 +9,44 @@ const configEnv = require('./config/env');
 const configLocale = require('./config/locale');
 const configRemote = require('./config/remote');
 const configRoutes = require('./config/routes');
+const hljs = require('highlight.js');
 
 module.exports = {
   cache: true,
   module: {
     rules: [
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'html-loader'
+          },
+          {
+            loader: 'markdown-it-loader',
+            options: {
+              html: true,
+              breaks: true,
+              highlight: function(str, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                  try {
+                    return (
+                      '<pre class="hljs"><code class="language-' +
+                      lang +
+                      '">' +
+                      hljs.highlight(lang, str, true).value +
+                      '</code></pre>'
+                    );
+                  } catch (__) {}
+                }
+
+                return '';
+              }
+            }
+          }
+        ],
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, 'app')
+      },
       {
         test: /\.jsx?$/,
         type: 'javascript/auto',

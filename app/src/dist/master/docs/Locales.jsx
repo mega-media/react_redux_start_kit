@@ -1,4 +1,6 @@
 import React from 'react';
+import MarkdownToHtml from '../../shared/markdown-to-html';
+import localeMd from './locales.md';
 
 module.exports = {
   target: (
@@ -7,78 +9,5 @@ module.exports = {
       <h5>☆ 語系切換操作</h5>
     </div>
   ),
-  desc: (
-    <div>
-      <h5>
-        ☆ 多國語系套件:{' '}
-        <a href="https://github.com/APSL/redux-i18n" target="_blank">
-          redux-i18n
-        </a>
-      </h5>
-      <div>
-        <ul>
-          <li>
-            語系檔路徑：
-            <label>app/src/locales</label>
-          </li>
-          <li styleName="text-danger">語系參數僅支援字串</li>
-        </ul>
-      </div>
-      <h5>
-        ☆ container hoc - <a href="/hoc#withI18n">withI18n</a>
-      </h5>
-      <div>
-        <ul>
-          <li>
-            使用 hoc 將語系函式以 props 方式傳入 component
-            <pre className="prettyprint">
-              {`import { withI18n } from '@core/container';
-export default withI18n(Component) `}
-            </pre>
-          </li>
-          <li>
-            舉例
-            <pre className="prettyprint">
-              {`//語系檔`}
-              <br />
-              {`en: { 'hello': "Hello" }`}
-              <br />
-              <br />
-              {`//component`}
-              <br />
-              {`this.props.i18nText('hello') // === "Hello" `}
-            </pre>
-          </li>
-          <li>
-            動態參數
-            <pre className="prettyprint">
-              {`//語系檔`}
-              <br />
-              {`zh_tw: { 'number less': "輸入數值不能超過 {max}" }`}
-              <br />
-              <br />
-              {`//component`}
-              <br />
-              {`this.props.i18nText('number less', { max: 5 }) // === "輸入數值不能超過 5" `}
-            </pre>
-          </li>
-        </ul>
-      </div>
-      <h5>☆ setLanguage</h5>
-      <div>
-        <ul>
-          <li>redux-i18n 模組提供的切換語系 action</li>
-          <li>
-            需要與 withDispatch hoc 元件，搭配使用
-            <pre className="prettyprint">{`import { compose, withDispatch, withI18n } from '@core/container/hoc';
-
-export default compose(withDispatch, withI18n)(YOUR_COMPONENT)`}</pre>
-          </li>
-          <li>
-            <label>this.props.dispatch(setLanguage('en'))</label> 即可切換語系
-          </li>
-        </ul>
-      </div>
-    </div>
-  )
+  desc: <MarkdownToHtml>{localeMd}</MarkdownToHtml>
 };

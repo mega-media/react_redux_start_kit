@@ -13,7 +13,7 @@ export default class Doc extends Component {
     {
       route: '/intro',
       title: '0. Intro',
-      file: 'Intro.jsx'
+      file: null
     },
     {
       route: '/hello',
@@ -81,18 +81,13 @@ export default class Doc extends Component {
   ];
 
   checkRouteLegal = activePage => {
-    this.setState(
-      ({ activePage: initPage }) => ({
-        activePage: [...this.pageArray, ...this.sampleArray].some(
-          obj => obj.route === activePage
-        )
-          ? activePage
-          : initPage
-      }),
-      () => {
-        PR.prettyPrint();
-      }
-    );
+    this.setState(({ activePage: initPage }) => ({
+      activePage: [...this.pageArray, ...this.sampleArray].some(
+        obj => obj.route === activePage
+      )
+        ? activePage
+        : initPage
+    }));
   };
 
   componentWillReceiveProps(nextProps) {

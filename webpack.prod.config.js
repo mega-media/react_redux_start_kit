@@ -33,6 +33,25 @@ module.exports = Object.assign(baseConfig, {
         ],
         exclude: /node_modules/,
         include: path.resolve(__dirname, 'app')
+      },
+      {
+        test: /\.(s)?css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[local]',
+              autoprefixer: true
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ],
+        include: /node_modules/,
+        exclude: path.resolve(__dirname, 'app')
       }
     ])
   },
@@ -50,7 +69,7 @@ module.exports = Object.assign(baseConfig, {
         // Customer vendor
         vendors: {
           chunks: 'initial',
-          name: 'vendors',
+          name: 'vendor',
           test: m => /node_modules/.test(m.context)
         },
         publicStyles: {
