@@ -13,7 +13,7 @@ export default class Doc extends Component {
     {
       route: '/intro',
       title: '0. Intro',
-      file: 'Intro.jsx'
+      file: null
     },
     {
       route: '/hello',
