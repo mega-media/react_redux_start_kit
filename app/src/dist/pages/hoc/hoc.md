@@ -154,7 +154,7 @@ export default withStyle(scssA, scssB, scssC)(YourComponent);
 
 ---
 
-### **withMount(didMoun)**
+### **withMount(didMount)**
 簡化生命週期 `componentDidMount`、`componentWillUnmount` 的使用
 
 #### **didMount**
@@ -173,4 +173,31 @@ const didMount = props => }
 }
 
 export default withMount(didMount)(YourComponent);
+```
+
+---
+
+### **withContext(initialContext)**
+設定 context 內容，搭配子孫元件 **getContext** 拿取資料內容，減少中間元件使用 props 方式傳遞，提升維護性。
+
+#### **initialContext**
+`Object | Function(props:Object) => Object`
+context 值，可使用方法函式透過 props 轉換成要記錄的資料。
+
+``` js
+export default withContext({ theme: 'light' })(FatherComponent);
+```
+
+---
+
+### **getContext**
+拿取祖父元件使用 **withContext** 設定的資料內容。
+
+``` js
+/* father.jsx */
+withContext({ theme: 'light' })(FatherComponent);
+
+/* child.jsx */
+export default getContext(props => <div>{props.theme}</div>);
+// <div>light</div>
 ```

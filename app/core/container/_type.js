@@ -35,3 +35,10 @@ export type withStyle = <Enhanced>(
 export type withMount = <Enhanced>(
   didMount: (Object) => void | (Object => void)
 ) => HOC<Enhanced, Enhanced>;
+
+export type withContext = <Enhanced>(
+  initialContext: Object | ((props: Object) => Object)
+) => HOC<Enhanced, Enhanced>;
+export type getContext = <Enhanced>(
+  a: ComponentType<Enhanced>
+) => ComponentType<Enhanced>;
