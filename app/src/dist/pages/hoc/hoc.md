@@ -94,7 +94,7 @@ export default withDispatch(MyLocale);
 
 ---
 
-### **withStore(storeKeysOrObjec)**
+### **withStore(storeKeysOrObject)**
 綁定 store 資料用，以監聽 store 資料變化
 **storeKeysOrObject** 允許使用 `string` 、 `Object` 、 `Array`，不同格式的綁定方式與說明如下：
 
@@ -140,7 +140,7 @@ withStore(["myKeyA", "myKeyB"])
 
 ---
 
-### **withStyle(...cs)**
+### **withStyle(...css)**
 樣式檔嵌入用，預設樣式包含：Bootstrap(v3.3.7)、Font Awesome(v4.6.3)
 **css**: 元件要套用的樣式檔，支援多筆。需注意的是，若命名相同的類別名稱，後面引入的樣式檔案會蓋掉前者。
 
@@ -154,7 +154,7 @@ export default withStyle(scssA, scssB, scssC)(YourComponent);
 
 ---
 
-### **withMount(didMoun)**
+### **withMount(didMount)**
 簡化生命週期 `componentDidMount`、`componentWillUnmount` 的使用
 
 #### **didMount**
@@ -173,4 +173,31 @@ const didMount = props => }
 }
 
 export default withMount(didMount)(YourComponent);
+```
+
+---
+
+### **withContext(initialContext)**
+設定 context 內容，搭配子孫元件 **getContext** 拿取資料內容，減少中間元件使用 props 方式傳遞，提升維護性。
+
+#### **initialContext**
+`Object | Function(props:Object) => Object`
+context 值，可使用方法函式透過 props 轉換成要記錄的資料。
+
+``` js
+export default withContext({ theme: 'light' })(FatherComponent);
+```
+
+---
+
+### **getContext**
+拿取祖父元件使用 **withContext** 設定的資料內容。
+
+``` js
+/* father.jsx */
+withContext({ theme: 'light' })(FatherComponent);
+
+/* child.jsx */
+export default getContext(props => <div>{props.theme}</div>);
+// <div>light</div>
 ```
