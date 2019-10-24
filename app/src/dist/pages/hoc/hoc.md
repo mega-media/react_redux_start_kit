@@ -94,7 +94,7 @@ export default withDispatch(MyLocale);
 
 ---
 
-### **withStore(storeKeysOrObjec)**
+### **withStore(storeKeysOrObject)**
 綁定 store 資料用，以監聽 store 資料變化
 **storeKeysOrObject** 允許使用 `string` 、 `Object` 、 `Array`，不同格式的綁定方式與說明如下：
 
@@ -140,7 +140,7 @@ withStore(["myKeyA", "myKeyB"])
 
 ---
 
-### **withStyle(...cs)**
+### **withStyle(...css)**
 樣式檔嵌入用，預設樣式包含：Bootstrap(v3.3.7)、Font Awesome(v4.6.3)
 **css**: 元件要套用的樣式檔，支援多筆。需注意的是，若命名相同的類別名稱，後面引入的樣式檔案會蓋掉前者。
 
