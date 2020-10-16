@@ -17,7 +17,7 @@
 ## 開始使用
 
 ### 線上看
-[文件](http://arshown.mega99.net:8080/startkit/v4)
+[文件](https://arshown.github.io/react_redux_start_kit)
 
 ### 下載專案
 
