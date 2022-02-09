@@ -103,7 +103,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "mocha": "^3.4.2",
     "node-notifier-cli": "^1.0.1",
-    "node-sass": "^4.5.3",
+    "node-sass": "^7.0.0",
     "nyc": "^11.1.0",
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "postcss-loader": "^2.1.5",
